@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 const dashboardItems = [
+  ["New-user automation", "/dashboard/new-user"],
   ["Profile README", "/dashboard/profile-readme"],
   ["GitHub Pages", "/dashboard/pages"],
   ["Cards", "/dashboard/cards"],
@@ -26,4 +27,3 @@ export default function DashboardPage() {
     </main>
   );
 }
-

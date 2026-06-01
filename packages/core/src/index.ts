@@ -5,4 +5,4 @@ export * from "./privacy";
 export * from "./templates";
 export * from "./fixtures";
 export * from "./acceptance";
-
+export * from "./new-user";
