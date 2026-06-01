@@ -19,6 +19,9 @@ export default function TemplatesPage() {
       </section>
       <section className="mt-10">
         <h2 className="text-2xl font-semibold">Theme presets</h2>
+        <p className="mt-2 text-slate-600">
+          Every theme can be exported as JSON, imported back into the editor, and shared through a stable link.
+        </p>
         <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {builtinThemePresets.map((theme) => (
             <div key={theme.key} className="rounded-lg border bg-white p-4">
@@ -35,4 +38,3 @@ export default function TemplatesPage() {
     </main>
   );
 }
-

@@ -6,3 +6,4 @@ export * from "./templates";
 export * from "./fixtures";
 export * from "./acceptance";
 export * from "./new-user";
+export * from "./theme-io";

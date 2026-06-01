@@ -5,3 +5,4 @@ export * from "./readme-compatibility";
 export * from "./pages-sections";
 export * from "./pages-compatibility";
 export * from "./actions";
+export * from "./import-readme";
