@@ -1,5 +1,6 @@
 import type { GeneratedReadme, ProfileStudioConfig } from "@gps/core";
 import { localize, localeNumber } from "@gps/core";
+import { checkReadmeCompatibility } from "./readme-compatibility";
 
 const moduleLabels = {
   intro: { en: "Introduction", zh: "个人介绍" },
@@ -23,7 +24,10 @@ export function generateReadme(config: ProfileStudioConfig): GeneratedReadme {
       label: moduleLabels[id as keyof typeof moduleLabels] ?? { en: id, zh: id },
       acceptanceIds: mapReadmeAcceptance(id)
     })),
-    warnings: buildReadmeWarnings(config)
+    warnings: [
+      ...buildReadmeWarnings(config),
+      ...checkReadmeCompatibility(sections.join("\n\n"), config).map((issue) => issue.message)
+    ]
   };
 }
 
@@ -136,4 +140,3 @@ function mapReadmeAcceptance(id: string): string[] {
   };
   return map[id] ?? [];
 }
-
