@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+    "allowJs": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@gps/core": ["packages/core/src/index.ts"],
+      "@gps/core/*": ["packages/core/src/*"],
+      "@gps/github": ["packages/github/src/index.ts"],
+      "@gps/github/*": ["packages/github/src/*"],
+      "@gps/generators": ["packages/generators/src/index.ts"],
+      "@gps/generators/*": ["packages/generators/src/*"],
+      "@gps/cards": ["packages/cards/src/index.ts"],
+      "@gps/cards/*": ["packages/cards/src/*"],
+      "@gps/achievements": ["packages/achievements/src/index.ts"],
+      "@gps/achievements/*": ["packages/achievements/src/*"],
+      "@gps/db": ["packages/db/src/index.ts"]
+    }
+  }
+}
+

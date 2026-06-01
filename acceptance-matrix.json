@@ -1,0 +1,2770 @@
+{
+  "generatedAt": "2026-06-01T14:16:30.958Z",
+  "items": [
+    {
+      "id": "01-001",
+      "title": "产品可以生成 GitHub Profile README",
+      "standard": "产品可以生成 GitHub Profile README、GitHub Pages 主页、动态卡片和成就墙",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "01-002",
+      "title": "未登录用户可以输入 username、查看公开数据、生成",
+      "standard": "未登录用户可以输入 username、查看公开数据、生成并复制内容",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "01-003",
+      "title": "登录用户可以保存配置、提交仓库、创建仓库、创建 Acti",
+      "standard": "登录用户可以保存配置、提交仓库、创建仓库、创建 Actions、回滚版本",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "01-004",
+      "title": "README Markdown、SVG 卡片、HTML",
+      "standard": "README Markdown、SVG 卡片、HTML 页面均兼容 GitHub",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "01-005",
+      "title": "从 username 输入、数据读取、编辑预览、导出、提",
+      "standard": "从 username 输入、数据读取、编辑预览、导出、提交、自动更新均可完成",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "01-006",
+      "title": "完整需求中的所有功能均已实现，不保留 MVP 缺口",
+      "standard": "完整需求中的所有功能均已实现，不保留 MVP 缺口",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-001",
+      "title": "username 输入",
+      "standard": "username 输入",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-002",
+      "title": "GitHub Profile URL 自动提取 user",
+      "standard": "GitHub Profile URL 自动提取 username",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-003",
+      "title": "仓库 URL 自动识别 owner 与 repo",
+      "standard": "仓库 URL 自动识别 owner 与 repo",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-004",
+      "title": "用户存在检测",
+      "standard": "用户存在检测",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-005",
+      "title": "User 与 Organization 区分",
+      "standard": "User 与 Organization 区分",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-006",
+      "title": "头像、名称、bio、company、location、b",
+      "standard": "头像、名称、bio、company、location、blog、email 获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-007",
+      "title": "followers、following、public r",
+      "standard": "followers、following、public repos、public gists 获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-008",
+      "title": "account age 计算",
+      "standard": "account age 计算",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-009",
+      "title": "`username` 仓库检测",
+      "standard": "`username` 仓库检测",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-010",
+      "title": "`username` 仓库 public 检测",
+      "standard": "`username` 仓库 public 检测",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-011",
+      "title": "`username` README 检测",
+      "standard": "`username` README 检测",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-012",
+      "title": "`username.github.io` 仓库检测",
+      "standard": "`username.github.io` 仓库检测",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-013",
+      "title": "GitHub Pages 是否启用检测",
+      "standard": "GitHub Pages 是否启用检测",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-014",
+      "title": "Pages 发布分支与目录检测",
+      "standard": "Pages 发布分支与目录检测",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-015",
+      "title": "检测结果状态卡片",
+      "standard": "检测结果状态卡片",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "02-016",
+      "title": "根据检测结果推荐下一步操作",
+      "standard": "根据检测结果推荐下一步操作",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-001",
+      "title": "用户基础数据完整采集",
+      "standard": "用户基础数据完整采集",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-002",
+      "title": "仓库列表完整获取",
+      "standard": "仓库列表完整获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-003",
+      "title": "仓库 description、homepage、lang",
+      "standard": "仓库 description、homepage、language、topics、license 获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-004",
+      "title": "仓库 created、updated、pushed、si",
+      "standard": "仓库 created、updated、pushed、size 获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-005",
+      "title": "仓库 star、fork、watcher、subscri",
+      "standard": "仓库 star、fork、watcher、subscriber、open issues 获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-006",
+      "title": "正确区分 starred 用户数与真正 watchers",
+      "standard": "正确区分 starred 用户数与真正 watchers/subscribers",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-007",
+      "title": "仓库 archived、fork、template、vi",
+      "standard": "仓库 archived、fork、template、visibility、Pages 状态获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-008",
+      "title": "release、latest release、relea",
+      "standard": "release、latest release、release asset 下载量获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-009",
+      "title": "contributors、repo languages、",
+      "standard": "contributors、repo languages、README 摘要获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-010",
+      "title": "总贡献、最近一年贡献、每日贡献获取",
+      "standard": "总贡献、最近一年贡献、每日贡献获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-011",
+      "title": "当前 streak 与最长 streak 计算",
+      "standard": "当前 streak 与最长 streak 计算",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-012",
+      "title": "commit、issue、PR、review contr",
+      "standard": "commit、issue、PR、review contribution 获取",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-013",
+      "title": "monthly、weekly、hourly contri",
+      "standard": "monthly、weekly、hourly contribution stats 计算",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-014",
+      "title": "贡献热力图数据生成",
+      "standard": "贡献热力图数据生成",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-015",
+      "title": "总 Star、仓库 Star 排名、7/30/90/36",
+      "standard": "总 Star、仓库 Star 排名、7/30/90/365 天新增 Star 统计",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-016",
+      "title": "仓库 Star 曲线、用户总 Star 曲线、增长最快仓",
+      "standard": "仓库 Star 曲线、用户总 Star 曲线、增长最快仓库、里程碑计算",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-017",
+      "title": "首次使用前 Star 历史尽量回溯，首次使用后快照记录",
+      "standard": "首次使用前 Star 历史尽量回溯，首次使用后快照记录",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-018",
+      "title": "总 Fork、Fork 排名、最近一年新增 Fork、F",
+      "standard": "总 Fork、Fork 排名、最近一年新增 Fork、Fork 趋势计算",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-019",
+      "title": "社区影响力评分生成",
+      "standard": "社区影响力评分生成",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-020",
+      "title": "PR 总数、merged PR、closed PR、re",
+      "standard": "PR 总数、merged PR、closed PR、review PR 统计",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-021",
+      "title": "issue 总数、closed issue、最近一年 i",
+      "standard": "issue 总数、closed issue、最近一年 issue 统计",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-022",
+      "title": "PR 合并率、Issue 关闭率、外部贡献仓库和组织数计",
+      "standard": "PR 合并率、Issue 关闭率、外部贡献仓库和组织数计算",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-023",
+      "title": "主语言分布、代码字节语言分布、最近一年语言分布计算",
+      "standard": "主语言分布、代码字节语言分布、最近一年语言分布计算",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-024",
+      "title": "Star/Fork 加权语言分布计算",
+      "standard": "Star/Fork 加权语言分布计算",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-025",
+      "title": "topics、README、package 文件技术栈识",
+      "standard": "topics、README、package 文件技术栈识别",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "03-026",
+      "title": "前端、后端、数据库、DevOps、测试、云服务识别",
+      "standard": "前端、后端、数据库、DevOps、测试、云服务识别",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-001",
+      "title": "模块面板、编辑区域、实时预览、Markdown 源码视图",
+      "standard": "模块面板、编辑区域、实时预览、Markdown 源码视图完整可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-002",
+      "title": "结构视图、拖拽排序、模块开关、复制、删除可用",
+      "standard": "结构视图、拖拽排序、模块开关、复制、删除可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-003",
+      "title": "每个模块可配置参数，整体主题可配置",
+      "standard": "每个模块可配置参数，整体主题可配置",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-004",
+      "title": "GitHub 风格预览、深色/浅色预览可用",
+      "standard": "GitHub 风格预览、深色/浅色预览可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-005",
+      "title": "导入现有 README、Markdown 格式化、兼容性",
+      "standard": "导入现有 README、Markdown 格式化、兼容性提示可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-006",
+      "title": "个人介绍模块完整",
+      "standard": "个人介绍模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-007",
+      "title": "GitHub 总览模块完整",
+      "standard": "GitHub 总览模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-008",
+      "title": "Streak 模块完整",
+      "standard": "Streak 模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-009",
+      "title": "贡献热力图模块完整",
+      "standard": "贡献热力图模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-010",
+      "title": "语言统计模块完整",
+      "standard": "语言统计模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-011",
+      "title": "热门仓库模块完整",
+      "standard": "热门仓库模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-012",
+      "title": "Star 增长模块完整",
+      "standard": "Star 增长模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-013",
+      "title": "PR / Issue 模块完整",
+      "standard": "PR / Issue 模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-014",
+      "title": "技术栈模块完整",
+      "standard": "技术栈模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-015",
+      "title": "成就墙模块完整",
+      "standard": "成就墙模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-016",
+      "title": "社交与联系模块完整",
+      "standard": "社交与联系模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-017",
+      "title": "博客文章模块完整",
+      "standard": "博客文章模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-018",
+      "title": "访客统计模块完整",
+      "standard": "访客统计模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-019",
+      "title": "自定义模块完整",
+      "standard": "自定义模块完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-020",
+      "title": "复制完整 Markdown 可用",
+      "standard": "复制完整 Markdown 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-021",
+      "title": "下载 README.md 可用",
+      "standard": "下载 README.md 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-022",
+      "title": "复制单模块 Markdown 和动态卡片链接可用",
+      "standard": "复制单模块 Markdown 和动态卡片链接可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-023",
+      "title": "OAuth 提交到 `username` 仓库可用",
+      "standard": "OAuth 提交到 `username` 仓库可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-024",
+      "title": "提交前 diff、旧 README 备份、回滚可用",
+      "standard": "提交前 diff、旧 README 备份、回滚可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "04-025",
+      "title": "README 自动更新 workflow 生成可用",
+      "standard": "README 自动更新 workflow 生成可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-001",
+      "title": "单页个人主页、开源成就墙、作品集、技术简历、数据仪表盘、",
+      "standard": "单页个人主页、开源成就墙、作品集、技术简历、数据仪表盘、项目展示页、博客入口页、链接聚合页均可生成",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-002",
+      "title": "Hero、简介、统计、热力图、Star 趋势、热门仓库、",
+      "standard": "Hero、简介、统计、热力图、Star 趋势、热门仓库、代表项目、PR/Issue、技术栈、成就墙、时间线、博客、社交、联系、页脚区块可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-003",
+      "title": "主题切换、语言切换、返回顶部可用",
+      "standard": "主题切换、语言切换、返回顶部可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-004",
+      "title": "响应式设计通过手机、平板、桌面测试",
+      "standard": "响应式设计通过手机、平板、桌面测试",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-005",
+      "title": "深色、浅色、系统主题跟随可用",
+      "standard": "深色、浅色、系统主题跟随可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-006",
+      "title": "自定义主色、字体、背景、动画可用",
+      "standard": "自定义主色、字体、背景、动画可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-007",
+      "title": "内置 15 套页面模板可用",
+      "standard": "内置 15 套页面模板可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-008",
+      "title": "复制 HTML、下载完整静态站点可用",
+      "standard": "复制 HTML、下载完整静态站点可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-009",
+      "title": "导出 index.html、style.css、scri",
+      "standard": "导出 index.html、style.css、script.js、assets、README、404、sitemap、robots 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-010",
+      "title": "GitHub Pages 部署说明生成可用",
+      "standard": "GitHub Pages 部署说明生成可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-011",
+      "title": "OAuth 提交到 `username.github.i",
+      "standard": "OAuth 提交到 `username.github.io` 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-012",
+      "title": "自动启用 Pages 或配置发布源可用",
+      "standard": "自动启用 Pages 或配置发布源可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "05-013",
+      "title": "提交前 diff 与回滚可用",
+      "standard": "提交前 diff 与回滚可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-001",
+      "title": "Profile Overview Card 可用",
+      "standard": "Profile Overview Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-002",
+      "title": "GitHub Stats Card 可用",
+      "standard": "GitHub Stats Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-003",
+      "title": "GitHub Streak Card 可用",
+      "standard": "GitHub Streak Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-004",
+      "title": "Contribution Calendar Card 可",
+      "standard": "Contribution Calendar Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-005",
+      "title": "Top Languages Card 可用",
+      "standard": "Top Languages Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-006",
+      "title": "Repository Card 可用",
+      "standard": "Repository Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-007",
+      "title": "Star Growth Card 可用",
+      "standard": "Star Growth Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-008",
+      "title": "Fork Growth Card 可用",
+      "standard": "Fork Growth Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-009",
+      "title": "PR / Issue Card 可用",
+      "standard": "PR / Issue Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-010",
+      "title": "Achievement Card 可用",
+      "standard": "Achievement Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-011",
+      "title": "Trophy Card 可用",
+      "standard": "Trophy Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-012",
+      "title": "Tech Stack Card 可用",
+      "standard": "Tech Stack Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-013",
+      "title": "Activity Graph Card 可用",
+      "standard": "Activity Graph Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-014",
+      "title": "Repo Ranking Card 可用",
+      "standard": "Repo Ranking Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-015",
+      "title": "Followers Card 可用",
+      "standard": "Followers Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-016",
+      "title": "Account Age Card 可用",
+      "standard": "Account Age Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-017",
+      "title": "Open Source Impact Card 可用",
+      "standard": "Open Source Impact Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-018",
+      "title": "Year in Review Card 可用",
+      "standard": "Year in Review Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-019",
+      "title": "Monthly Activity Card 可用",
+      "standard": "Monthly Activity Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-020",
+      "title": "Custom Composite Card 可用",
+      "standard": "Custom Composite Card 可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-021",
+      "title": "所有卡片支持 user、theme、layout、hid",
+      "standard": "所有卡片支持 user、theme、layout、hide_border、border_radius、bg_color、title_color、text_color、icon_color、locale、width、height、show_icons、hide、include、period、repo、format、cache_seconds、animation 参数",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-022",
+      "title": "支持 SVG、PNG、JSON 输出",
+      "standard": "支持 SVG、PNG、JSON 输出",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-023",
+      "title": "支持复制 Markdown 图片链接、HTML img、",
+      "standard": "支持复制 Markdown 图片链接、HTML img、纯 URL、iframe、OG 图片",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-024",
+      "title": "支持下载图片",
+      "standard": "支持下载图片",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-025",
+      "title": "卡片在 GitHub README 中可正常显示",
+      "standard": "卡片在 GitHub README 中可正常显示",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "06-026",
+      "title": "卡片生成器支持类型选择、参数调整、实时预览、复制、下载、",
+      "standard": "卡片生成器支持类型选择、参数调整、实时预览、复制、下载、保存、分享、导入第三方卡片、转换本站卡片",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "07-001",
+      "title": "贡献类、Star 类、Fork 类、PR 类、Issue",
+      "standard": "贡献类、Star 类、Fork 类、PR 类、Issue 类、语言类、仓库类、连续活跃类、社区协作类、时间资历类、增长趋势类、稀有成就、隐藏成就、季度成就、年度成就均存在",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "07-002",
+      "title": "First Commit、Weekly Builder、",
+      "standard": "First Commit、Weekly Builder、Monthly Grinder、Streak Master、Contribution Legend 可解锁",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "07-003",
+      "title": "First Star、Star Collector、St",
+      "standard": "First Star、Star Collector、Star Legend、Viral Repo、Rising Star 可解锁",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "07-004",
+      "title": "First PR、PR Hero、Review Help",
+      "standard": "First PR、PR Hero、Review Helper、Issue Reporter、Collaboration Master 可解锁",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "07-005",
+      "title": "First Repo、Repo Builder、Mult",
+      "standard": "First Repo、Repo Builder、Multi-language Dev、Release Publisher、Open Source Portfolio 可解锁",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "07-006",
+      "title": "每个成就有名称、图标、描述、解锁状态、解锁时间、当前进度",
+      "standard": "每个成就有名称、图标、描述、解锁状态、解锁时间、当前进度、下一等级要求、稀有度、分类、分数",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "07-007",
+      "title": "成就可分享、可嵌入 README、可嵌入 Pages、可",
+      "standard": "成就可分享、可嵌入 README、可嵌入 Pages、可下载图片、可生成年度总结图",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-001",
+      "title": "可粘贴 README Markdown",
+      "standard": "可粘贴 README Markdown",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-002",
+      "title": "可上传 README.md",
+      "standard": "可上传 README.md",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-003",
+      "title": "可通过仓库 URL 读取 README",
+      "standard": "可通过仓库 URL 读取 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-004",
+      "title": "可通过 OAuth 读取自己的 README",
+      "standard": "可通过 OAuth 读取自己的 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-005",
+      "title": "可读取 `username` 仓库 README",
+      "standard": "可读取 `username` 仓库 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-006",
+      "title": "可读取任意公开仓库 README",
+      "standard": "可读取任意公开仓库 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-007",
+      "title": "可识别标题、个人介绍、badge、stats、strea",
+      "standard": "可识别标题、个人介绍、badge、stats、streak、top languages、trophy、activity graph、visitor counter、技术栈图标、社交链接、项目列表、博客文章、自定义 HTML、图片、表格、注释、GitHub Actions 标记",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-008",
+      "title": "可解析 GitHub Readme Stats、GitH",
+      "standard": "可解析 GitHub Readme Stats、GitHub Readme Streak Stats、GitHub Profile Trophy、Activity Graph、Shields.io、Visitor Badge、Skill Icons、Devicons、WakaTime、Typing SVG、Metrics、Snake Contribution Graph",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-009",
+      "title": "可提供样式统一建议、重复模块提示、失效链接检测、图片加载",
+      "standard": "可提供样式统一建议、重复模块提示、失效链接检测、图片加载失败检测、主题转换、结构优化、兼容性检查、长度建议、排序建议",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-010",
+      "title": "优化后保留用户自定义内容",
+      "standard": "优化后保留用户自定义内容",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "08-011",
+      "title": "可展示新旧版本差异并导出新版 README",
+      "standard": "可展示新旧版本差异并导出新版 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "09-001",
+      "title": "README、Pages、卡片、成就墙、项目展示、简历、",
+      "standard": "README、Pages、卡片、成就墙、项目展示、简历、Dashboard、社交名片、年度总结、自定义模板可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "09-002",
+      "title": "内置 GitHub Native、Minimal Lig",
+      "standard": "内置 GitHub Native、Minimal Light、Minimal Dark、Cyber Neon、Terminal Green、Glassmorphism、Bento Grid、Academic、Developer Portfolio、Open Source Hero、Pixel Art、Apple Clean、Dashboard Pro、Ocean Blue、Sunset Gradient 风格",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "09-003",
+      "title": "可自定义主色、辅色、背景、文本、边框、图标、字体、圆角、",
+      "standard": "可自定义主色、辅色、背景、文本、边框、图标、字体、圆角、阴影、间距、布局密度、深浅色、渐变、动画",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "09-004",
+      "title": "可保存主题、导入主题 JSON、导出主题 JSON、分享",
+      "standard": "可保存主题、导入主题 JSON、导出主题 JSON、分享主题链接",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "09-005",
+      "title": "主题可应用到 README、Pages、卡片",
+      "standard": "主题可应用到 README、Pages、卡片",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-001",
+      "title": "GitHub OAuth 登录可用",
+      "standard": "GitHub OAuth 登录可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-002",
+      "title": "授权前明确展示权限且使用最小权限",
+      "standard": "授权前明确展示权限且使用最小权限",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-003",
+      "title": "登录后可识别当前用户和仓库列表",
+      "standard": "登录后可识别当前用户和仓库列表",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-004",
+      "title": "未授权只提供复制和下载，授权后提供一键提交",
+      "standard": "未授权只提供复制和下载，授权后提供一键提交",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-005",
+      "title": "支持退出登录、撤销授权提示、Token 加密、Token",
+      "standard": "支持退出登录、撤销授权提示、Token 加密、Token 过期处理、权限不足提示",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-006",
+      "title": "可创建 `username` 仓库",
+      "standard": "可创建 `username` 仓库",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-007",
+      "title": "可创建 `username.github.io` 仓库",
+      "standard": "可创建 `username.github.io` 仓库",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-008",
+      "title": "可更新 README、index.html、CSS、JS",
+      "standard": "可更新 README、index.html、CSS、JS、assets、workflows",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-009",
+      "title": "可创建 commit 和 pull request",
+      "standard": "可创建 commit 和 pull request",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-010",
+      "title": "支持直接提交和 PR 模式",
+      "standard": "支持直接提交和 PR 模式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "10-011",
+      "title": "支持冲突检测、提交前 diff、旧文件备份、回滚、失败重",
+      "standard": "支持冲突检测、提交前 diff、旧文件备份、回滚、失败重试、操作日志",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "11-001",
+      "title": "可自动更新 README 动态数据",
+      "standard": "可自动更新 README 动态数据",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "11-002",
+      "title": "可自动更新 Pages 静态 JSON",
+      "standard": "可自动更新 Pages 静态 JSON",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "11-003",
+      "title": "可记录 Star 与 Fork 快照",
+      "standard": "可记录 Star 与 Fork 快照",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "11-004",
+      "title": "可更新贡献统计、博客文章、成就状态、年度总结、SVG 卡",
+      "standard": "可更新贡献统计、博客文章、成就状态、年度总结、SVG 卡片缓存、项目排行榜",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "11-005",
+      "title": "可生成每日更新、每周更新、手动触发 workflow",
+      "standard": "可生成每日更新、每周更新、手动触发 workflow",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "11-006",
+      "title": "可生成 README、Pages、Blog、成就、Sta",
+      "standard": "可生成 README、Pages、Blog、成就、Star 快照、缓存清理、错误通知 workflow",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "11-007",
+      "title": "用户可配置更新时间、更新频率、更新模块、commit m",
+      "standard": "用户可配置更新时间、更新频率、更新模块、commit message、跳过空更新、历史快照、日志、失败通知、手动触发、目标分支",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "12-001",
+      "title": "首页包含产品标题、一句话介绍、username 输入框、",
+      "standard": "首页包含产品标题、一句话介绍、username 输入框、快速生成按钮、示例用户名、示例效果图、功能亮点、模板预览、成就墙预览、动态卡片预览、Pages 预览、FAQ、开源地址、登录入口",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "12-002",
+      "title": "工作台包含顶部导航、当前 username、当前目标类型",
+      "standard": "工作台包含顶部导航、当前 username、当前目标类型、数据检测状态、模块选择区、配置面板、实时预览区、源码区、导出区、一键提交区、错误提示区、保存配置、历史版本、分享链接",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "12-003",
+      "title": "预览支持 README、GitHub Profile、P",
+      "standard": "预览支持 README、GitHub Profile、Pages、移动端、桌面端、深色、浅色、卡片、成就墙、图表交互",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "12-004",
+      "title": "导出界面支持复制 Markdown、HTML、卡片 UR",
+      "standard": "导出界面支持复制 Markdown、HTML、卡片 URL、下载 README、下载静态站点、下载主题配置、下载 Actions、一键提交、创建 PR、查看部署说明",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-001",
+      "title": "支持中文和英文界面",
+      "standard": "支持中文和英文界面",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-002",
+      "title": "README、卡片、成就可选择语言",
+      "standard": "README、卡片、成就可选择语言",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-003",
+      "title": "日期、数字、时区可本地化",
+      "standard": "日期、数字、时区可本地化",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-004",
+      "title": "用户可自定义模板文案",
+      "standard": "用户可自定义模板文案",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-005",
+      "title": "GitHub API、SVG 卡片、仓库统计、贡献数据均",
+      "standard": "GitHub API、SVG 卡片、仓库统计、贡献数据均有缓存",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-006",
+      "title": "支持手动刷新、缓存过期、队列、rate limit 提示",
+      "standard": "支持手动刷新、缓存过期、队列、rate limit 提示、降级展示",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-007",
+      "title": "首页、编辑器、图表、模板、预览、图片、SVG、移动端性能",
+      "standard": "首页、编辑器、图表、模板、预览、图片、SVG、移动端性能达标",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-008",
+      "title": "默认只读公开数据，私有数据不默认展示",
+      "standard": "默认只读公开数据，私有数据不默认展示",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-009",
+      "title": "Token 加密，前端不暴露敏感 token",
+      "standard": "Token 加密，前端不暴露敏感 token",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-010",
+      "title": "用户可删除保存配置并撤销授权",
+      "standard": "用户可删除保存配置并撤销授权",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-011",
+      "title": "具备 XSS、Markdown 注入、HTML 注入、自",
+      "standard": "具备 XSS、Markdown 注入、HTML 注入、自定义脚本风险控制、API 防滥用和 rate limit 防护",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "13-012",
+      "title": "username 不存在、API 限制、网络失败、仓库不",
+      "standard": "username 不存在、API 限制、网络失败、仓库不存在、仓库非 public、README 不存在、Pages 未启用、OAuth 失败、权限不足、Token 过期、提交冲突、分支不存在、workflow 写入失败、第三方卡片无效、README 解析失败、SVG/HTML 生成失败、下载失败、缓存失效、自动更新失败均有明确错误提示和解决方案",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "14-001",
+      "title": "UserProfile、Repository、Contr",
+      "standard": "UserProfile、Repository、ContributionStats、RepositoryTrend、Achievement、GeneratedProfile、Theme 数据模型完整",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "14-002",
+      "title": "公共页面路由 `/`、`/generate`、`/tem",
+      "standard": "公共页面路由 `/`、`/generate`、`/templates`、`/cards`、`/achievements`、`/docs`、`/examples`、`/pricing`、`/login`、`/privacy`、`/terms` 可访问",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "14-003",
+      "title": "工作台路由 `/dashboard`、`/dashboa",
+      "standard": "工作台路由 `/dashboard`、`/dashboard/profile-readme`、`/dashboard/pages`、`/dashboard/cards`、`/dashboard/achievements`、`/dashboard/import`、`/dashboard/settings`、`/dashboard/history` 可访问",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "14-004",
+      "title": "GitHub、cards、generate、import",
+      "standard": "GitHub、cards、generate、import、oauth、deploy API 路由可用",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "14-005",
+      "title": "README 导出包包含 README.md、asset",
+      "standard": "README 导出包包含 README.md、assets、update-readme.yml、profile-studio.config.json",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "14-006",
+      "title": "Pages 导出包包含 index.html、style",
+      "standard": "Pages 导出包包含 index.html、style.css、script.js、assets、data/github.json、README.md、404.html、robots.txt、sitemap.xml、update-pages.yml",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "14-007",
+      "title": "配置导出包含模块配置、主题配置、卡片配置、成就配置、数据",
+      "standard": "配置导出包含模块配置、主题配置、卡片配置、成就配置、数据更新时间、模板版本、用户自定义内容",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "15-001",
+      "title": "未登录用户输入 username 后可查看公开数据、生成",
+      "standard": "未登录用户输入 username 后可查看公开数据、生成 README、复制 Markdown、生成卡片、生成 Pages 并下载",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "15-002",
+      "title": "登录用户可 GitHub OAuth 登录、检测仓库、创",
+      "standard": "登录用户可 GitHub OAuth 登录、检测仓库、创建缺失仓库、生成 README、提交 README、生成 Pages、提交 Pages、启用 Pages、创建 Actions、验证自动更新、回滚版本",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "15-003",
+      "title": "用户可导入旧 README、识别模块、获得优化建议、统一",
+      "standard": "用户可导入旧 README、识别模块、获得优化建议、统一主题、保留自定义内容、导出新版 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "15-004",
+      "title": "系统可根据真实 GitHub 数据计算成就、展示已解锁和",
+      "standard": "系统可根据真实 GitHub 数据计算成就、展示已解锁和未解锁成就、显示进度、嵌入 README、嵌入 Pages、生成分享图片",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-ENTRY-001",
+      "title": "新用户模式识别",
+      "standard": "系统能识别公开仓库、commit、star、PR、issue 较少的用户",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-ENTRY-002",
+      "title": "新用户模式推荐",
+      "standard": "GitHub 数据较少时，系统推荐新用户自动化模式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-ENTRY-003",
+      "title": "手动选择模式",
+      "standard": "用户可以手动选择新用户自动化模式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-ENTRY-004",
+      "title": "混合模式",
+      "standard": "用户可以同时使用填写信息和已有 GitHub 数据",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-ENTRY-005",
+      "title": "数据增强模式切换",
+      "standard": "用户可以从新用户模式切换到数据增强模式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-ENTRY-006",
+      "title": "空数据友好提示",
+      "standard": "数据不足时不显示尴尬空模块，而是提示填写个人信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-001",
+      "title": "基础信息",
+      "standard": "用户可填写显示名称、昵称、头像、一句话介绍、身份、所在地、邮箱、网站、博客、简历、社交链接",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-002",
+      "title": "教育背景",
+      "standard": "用户可填写学校、学院、专业、学历、入学年份、毕业年份、年级、课程、荣誉、论文方向",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-003",
+      "title": "学习方向",
+      "standard": "用户可选择前端、后端、全栈、AI、数据科学、网络安全、算法竞赛等学习方向",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-004",
+      "title": "编程语言",
+      "standard": "用户可选择 Python、JavaScript、TypeScript、Java、C/C++、Go、Rust、SQL、HTML、CSS 等语言",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-005",
+      "title": "语言熟练度",
+      "standard": "每种语言可设置熟练度、学习中状态、常用状态和主要语言标记",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-006",
+      "title": "技能栈",
+      "standard": "用户可选择前端、后端、数据库、AI、DevOps、工具等技能",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-007",
+      "title": "技能展示控制",
+      "standard": "每项技能可设置图标、badge、排序、熟练度和展示位置",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-008",
+      "title": "手动项目",
+      "standard": "用户即使没有 GitHub 仓库，也可以手动填写项目",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-009",
+      "title": "项目信息完整性",
+      "standard": "手动项目支持名称、简介、类型、状态、技术栈、亮点、职责、时间、链接、截图",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-010",
+      "title": "学习计划",
+      "standard": "用户可填写正在学习内容、课程、书籍、项目、近期目标、长期目标",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-011",
+      "title": "个人亮点",
+      "standard": "用户可填写擅长方向、兴趣、获奖、竞赛、证书、实习、社团、个人标签",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-012",
+      "title": "联系方式",
+      "standard": "用户可填写 Email、GitHub、LinkedIn、X、Telegram、Discord、Bilibili、知乎、CSDN、掘金、博客等",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-013",
+      "title": "展示开关",
+      "standard": "每类信息都支持是否展示在 README 与 GitHub Pages",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-014",
+      "title": "表单分步骤",
+      "standard": "表单以分步骤方式呈现，用户可以跳过非必填项",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-FORM-015",
+      "title": "表单保存",
+      "standard": "登录用户可以保存填写信息并继续编辑",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-001",
+      "title": "零贡献可生成",
+      "standard": "用户没有 commit 记录也能生成完整 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-002",
+      "title": "零仓库可生成",
+      "standard": "用户没有公开仓库也能生成完整 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-003",
+      "title": "顶部欢迎区",
+      "standard": "README 包含欢迎标题、个性化打招呼和一句话介绍",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-004",
+      "title": "当前身份展示",
+      "standard": "README 能展示学生、求职者、学习者、开源新人等身份",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-005",
+      "title": "教育背景展示",
+      "standard": "README 能展示学校、学历、专业、课程等教育信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-006",
+      "title": "学习方向展示",
+      "standard": "README 能展示用户选择的学习方向",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-007",
+      "title": "主要语言展示",
+      "standard": "README 能展示用户选择的主要编程语言",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-008",
+      "title": "技能栈展示",
+      "standard": "README 能以 badge、图标、技能云或列表展示技能",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-009",
+      "title": "学习计划展示",
+      "standard": "README 能展示当前学习计划和目标",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-010",
+      "title": "项目作品展示",
+      "standard": "README 能展示手动填写项目和已有 GitHub 仓库项目",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-011",
+      "title": "未来计划展示",
+      "standard": "README 能展示未来目标和开源计划",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-012",
+      "title": "联系方式展示",
+      "standard": "README 能展示用户选择公开的联系方式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-013",
+      "title": "空数据替代",
+      "standard": "没有 GitHub 数据时自动使用学习计划、技能、项目计划替代",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-014",
+      "title": "隐藏空模块",
+      "standard": "commit、star、PR、issue 为空时不会强行展示空模块",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-015",
+      "title": "可选 GitHub 统计",
+      "standard": "用户可选择是否展示 GitHub 统计卡片",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-016",
+      "title": "可选贡献热力图",
+      "standard": "用户可选择是否展示贡献热力图",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-017",
+      "title": "可选访客统计",
+      "standard": "用户可选择是否展示访客统计",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-018",
+      "title": "可选打字机动画",
+      "standard": "用户可选择是否展示打字机动画",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-019",
+      "title": "实时预览",
+      "standard": "新用户 README 支持实时 Markdown 预览",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-020",
+      "title": "复制 Markdown",
+      "standard": "新用户 README 可一键复制完整 Markdown",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-021",
+      "title": "下载 README",
+      "standard": "新用户 README 可下载 README.md",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-README-022",
+      "title": "提交 username 仓库",
+      "standard": "登录用户可一键提交到 `username` 仓库",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-001",
+      "title": "学生开发者模板",
+      "standard": "可生成学生开发者 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-002",
+      "title": "计算机专业学生模板",
+      "standard": "可生成计算机专业学生 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-003",
+      "title": "非科班转码模板",
+      "standard": "可生成非科班转码 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-004",
+      "title": "前端学习者模板",
+      "standard": "可生成前端学习者 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-005",
+      "title": "后端学习者模板",
+      "standard": "可生成后端学习者 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-006",
+      "title": "全栈学习者模板",
+      "standard": "可生成全栈学习者 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-007",
+      "title": "AI / 数据科学模板",
+      "standard": "可生成 AI 或数据科学学习者 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-008",
+      "title": "算法竞赛模板",
+      "standard": "可生成算法竞赛方向 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-009",
+      "title": "求职准备模板",
+      "standard": "可生成求职导向 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-010",
+      "title": "实习申请模板",
+      "standard": "可生成实习申请导向 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-011",
+      "title": "课程项目模板",
+      "standard": "可生成课程项目展示 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-012",
+      "title": "开源新人模板",
+      "standard": "可生成开源新人 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-013",
+      "title": "极简个人介绍模板",
+      "standard": "可生成极简 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-014",
+      "title": "技术简历模板",
+      "standard": "可生成技术简历风 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-RT-015",
+      "title": "中英文双语模板",
+      "standard": "可生成双语 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-001",
+      "title": "中文自我介绍",
+      "standard": "根据表单生成自然中文自我介绍",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-002",
+      "title": "英文自我介绍",
+      "standard": "根据表单生成自然英文自我介绍",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-003",
+      "title": "当前学习状态",
+      "standard": "自动生成当前学习状态描述",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-004",
+      "title": "教育背景文案",
+      "standard": "自动生成教育背景描述",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-005",
+      "title": "技能栈文案",
+      "standard": "自动生成技能栈描述",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-006",
+      "title": "项目介绍文案",
+      "standard": "自动生成项目介绍文案",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-007",
+      "title": "学习目标文案",
+      "standard": "自动生成学习目标描述",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-008",
+      "title": "开源目标文案",
+      "standard": "自动生成开源目标描述",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-009",
+      "title": "求职目标文案",
+      "standard": "自动生成求职目标描述",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-010",
+      "title": "空数据替代文案",
+      "standard": "GitHub 数据不足时生成合理替代文案",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-011",
+      "title": "语气切换",
+      "standard": "支持正式、活泼、极简、求职、学术语气",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-012",
+      "title": "文案编辑",
+      "standard": "用户可手动编辑生成文案",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-013",
+      "title": "重新生成",
+      "standard": "用户可重新生成指定段落文案",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-014",
+      "title": "锁定文案",
+      "standard": "用户可锁定段落，重新生成时不覆盖",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-015",
+      "title": "中英文互译",
+      "standard": "支持中文、英文、双语生成和互译",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-TEXT-016",
+      "title": "保留人工修改",
+      "standard": "后续更新不会覆盖用户锁定或手动修改内容",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-001",
+      "title": "零仓库可生成网站",
+      "standard": "用户没有公开仓库也能生成完整个人网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-002",
+      "title": "首页 Hero",
+      "standard": "个人网站包含 Hero、头像、姓名、身份、简介和按钮",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-003",
+      "title": "个人简介区",
+      "standard": "网站能展示个人简介",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-004",
+      "title": "教育背景区",
+      "standard": "网站能展示学校、学历、专业、课程等信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-005",
+      "title": "技能栈区",
+      "standard": "网站能展示技能图标、badge、分类和熟练度",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-006",
+      "title": "编程语言区",
+      "standard": "网站能展示主要编程语言",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-007",
+      "title": "学习方向区",
+      "standard": "网站能展示学习方向",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-008",
+      "title": "学习计划区",
+      "standard": "网站能展示当前学习计划",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-009",
+      "title": "项目作品区",
+      "standard": "网站能展示手动项目、课程项目、竞赛项目和 GitHub 仓库",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-010",
+      "title": "时间线",
+      "standard": "网站能展示学习或成长时间线",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-011",
+      "title": "成长路线",
+      "standard": "网站能展示成长路线或技能地图",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-012",
+      "title": "GitHub 数据概览",
+      "standard": "网站可选择展示已有 GitHub 数据",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-013",
+      "title": "未来目标",
+      "standard": "网站能展示未来目标",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-014",
+      "title": "联系方式",
+      "standard": "网站能展示用户选择公开的联系方式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-015",
+      "title": "简历下载入口",
+      "standard": "网站支持简历下载或简历链接按钮",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-016",
+      "title": "博客入口",
+      "standard": "网站支持博客入口",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-017",
+      "title": "深浅色切换",
+      "standard": "网站支持深浅色切换",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PAGE-018",
+      "title": "响应式导航",
+      "standard": "网站在手机、平板、桌面均可正常导航",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-001",
+      "title": "学生作品集模板",
+      "standard": "可生成学生作品集网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-002",
+      "title": "求职简历模板",
+      "standard": "可生成求职简历网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-003",
+      "title": "学习成长主页模板",
+      "standard": "可生成学习成长主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-004",
+      "title": "课程项目展示模板",
+      "standard": "可生成课程项目展示网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-005",
+      "title": "AI 学习者模板",
+      "standard": "可生成 AI 学习者网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-006",
+      "title": "前端开发者模板",
+      "standard": "可生成前端开发者网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-007",
+      "title": "后端开发者模板",
+      "standard": "可生成后端开发者网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-008",
+      "title": "全栈开发者模板",
+      "standard": "可生成全栈开发者网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-009",
+      "title": "极简名片模板",
+      "standard": "可生成极简名片网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-010",
+      "title": "个人品牌主页模板",
+      "standard": "可生成个人品牌主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-011",
+      "title": "双语主页模板",
+      "standard": "可生成中英文双语主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-012",
+      "title": "Bento Grid 学生主页",
+      "standard": "可生成 Bento Grid 风格学生主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-013",
+      "title": "时间线成长主页",
+      "standard": "可生成时间线成长主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-014",
+      "title": "技能地图主页",
+      "standard": "可生成技能地图主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PT-015",
+      "title": "开源新人主页",
+      "standard": "可生成开源新人主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-001",
+      "title": "教育信息自动布局",
+      "standard": "填写学校后自动展示教育背景区",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-002",
+      "title": "课程自动布局",
+      "standard": "填写课程后自动展示课程区",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-003",
+      "title": "项目数量布局",
+      "standard": "项目少于 3 个使用大卡片，多于 3 个使用网格",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-004",
+      "title": "学习计划布局",
+      "standard": "填写学习计划后自动展示成长路线",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-005",
+      "title": "求职状态布局",
+      "standard": "选择求职状态后突出简历和联系方式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-006",
+      "title": "学习状态布局",
+      "standard": "选择学习状态后突出学习路线和技能进度",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-007",
+      "title": "开源新人布局",
+      "standard": "选择开源新人后突出开源计划和 GitHub 目标",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-008",
+      "title": "GitHub 数据弱化",
+      "standard": "GitHub 数据较少时降低数据图表权重",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-009",
+      "title": "默认头像",
+      "standard": "缺少头像时使用 GitHub 头像或默认头像",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-010",
+      "title": "默认项目封面",
+      "standard": "缺少项目图片时生成默认项目封面",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-LAYOUT-011",
+      "title": "文案补全",
+      "standard": "缺少文案时自动补全",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-001",
+      "title": "主页风格配置",
+      "standard": "用户可选择主页风格",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-002",
+      "title": "主色配置",
+      "standard": "用户可配置主色",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-003",
+      "title": "字体配置",
+      "standard": "用户可配置字体",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-004",
+      "title": "背景配置",
+      "standard": "用户可配置背景",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-005",
+      "title": "Hero 布局配置",
+      "standard": "用户可配置 Hero 布局",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-006",
+      "title": "卡片风格配置",
+      "standard": "用户可配置卡片风格",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-007",
+      "title": "技能图标风格",
+      "standard": "用户可配置技能图标风格",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-008",
+      "title": "项目卡片风格",
+      "standard": "用户可配置项目卡片风格",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-009",
+      "title": "SEO 信息",
+      "standard": "可生成并编辑 SEO 标题和描述",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-010",
+      "title": "Open Graph 图",
+      "standard": "可生成 Open Graph 分享图",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PVIS-011",
+      "title": "favicon",
+      "standard": "可生成或配置 favicon",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-001",
+      "title": "index.html",
+      "standard": "可生成 index.html",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-002",
+      "title": "style.css",
+      "standard": "可生成 style.css",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-003",
+      "title": "script.js",
+      "standard": "可生成 script.js",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-004",
+      "title": "个人信息 JSON",
+      "standard": "可生成个人信息 JSON",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-005",
+      "title": "项目 JSON",
+      "standard": "可生成项目 JSON",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-006",
+      "title": "技能 JSON",
+      "standard": "可生成技能 JSON",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-007",
+      "title": "静态资源",
+      "standard": "可生成完整静态资源",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-008",
+      "title": "下载站点包",
+      "standard": "可下载完整站点包",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-009",
+      "title": "提交 Pages 仓库",
+      "standard": "登录用户可一键提交到 `username.github.io`",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-010",
+      "title": "创建 Pages 仓库",
+      "standard": "登录用户可自动创建 `username.github.io` 仓库",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-011",
+      "title": "启用 GitHub Pages",
+      "standard": "授权足够时可自动启用 GitHub Pages",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-012",
+      "title": "手动部署教程",
+      "standard": "可生成手动部署教程",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-013",
+      "title": "自定义域名说明",
+      "standard": "可生成自定义域名配置说明",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-POUT-014",
+      "title": "自动更新配置",
+      "standard": "可生成 GitHub Actions 自动更新配置",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-SAVE-001",
+      "title": "保存基础信息",
+      "standard": "登录用户可保存基础信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-SAVE-002",
+      "title": "保存教育背景",
+      "standard": "登录用户可保存教育背景",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-SAVE-003",
+      "title": "保存技能栈",
+      "standard": "登录用户可保存技能栈",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-SAVE-004",
+      "title": "保存学习方向",
+      "standard": "登录用户可保存学习方向",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-SAVE-005",
+      "title": "保存项目信息",
+      "standard": "登录用户可保存项目信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-SAVE-006",
+      "title": "保存学习计划",
+      "standard": "登录用户可保存学习计划",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-SAVE-007",
+      "title": "保存联系方式",
+      "standard": "登录用户可保存联系方式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-SAVE-008",
+      "title": "保存模板主题",
+      "standard": "登录用户可保存模板、主题、语言、文案语气配置",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-SAVE-009",
+      "title": "历史版本",
+      "standard": "登录用户可查看并回滚历史版本",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-001",
+      "title": "新仓库推荐",
+      "standard": "用户新增 GitHub 仓库后，系统推荐加入项目区",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-002",
+      "title": "commit 增长推荐",
+      "standard": "commit 增加后，系统推荐开启 GitHub 数据卡片",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-003",
+      "title": "star 增长推荐",
+      "standard": "star 增加后，系统推荐开启影响力模块",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-004",
+      "title": "PR / issue 增长推荐",
+      "standard": "PR 或 issue 增加后，系统推荐开启协作模块",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-005",
+      "title": "技能更新",
+      "standard": "用户技能变化后可更新技能区",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-006",
+      "title": "教育状态更新",
+      "standard": "学校、学历、毕业年份变化后可更新教育区",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-007",
+      "title": "求职状态更新",
+      "standard": "求职状态变化后可调整主页重点",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-008",
+      "title": "月度成长总结",
+      "standard": "系统可生成月度成长总结",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-009",
+      "title": "年度总结",
+      "standard": "系统可生成年度 GitHub 成长总结",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-GROW-010",
+      "title": "自动优化建议",
+      "standard": "系统可提示 README 和 Pages 可优化项",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-IMP-001",
+      "title": "从 README 导入",
+      "standard": "可从已有 README 导入个人信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-IMP-002",
+      "title": "从简历文本导入",
+      "standard": "可从用户粘贴的简历文本提取信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-IMP-003",
+      "title": "从项目 README 导入",
+      "standard": "可从项目 README 提取项目信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-IMP-004",
+      "title": "批量导入项目",
+      "standard": "用户可批量导入项目",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-IMP-005",
+      "title": "批量导入技能",
+      "standard": "用户可批量导入技能",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-IMP-006",
+      "title": "导出个人配置",
+      "standard": "用户可导出个人信息配置",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-IMP-007",
+      "title": "导入个人配置",
+      "standard": "用户可导入个人信息配置",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-REC-001",
+      "title": "README 模板推荐",
+      "standard": "系统能推荐适合的新用户 README 模板",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-REC-002",
+      "title": "README 模块推荐",
+      "standard": "系统能推荐展示和隐藏的 README 模块",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-REC-003",
+      "title": "技能排序推荐",
+      "standard": "系统能推荐技能展示排序",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-REC-004",
+      "title": "项目排序推荐",
+      "standard": "系统能推荐项目展示排序",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-REC-005",
+      "title": "Pages 模板推荐",
+      "standard": "系统能推荐适合的新用户个人网站模板",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-REC-006",
+      "title": "首页区块顺序推荐",
+      "standard": "系统能推荐个人网站区块顺序",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-REC-007",
+      "title": "SEO 推荐",
+      "standard": "系统能推荐 SEO 标题和描述",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-REC-008",
+      "title": "主题色推荐",
+      "standard": "系统能根据方向和模板推荐主题色",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-REC-009",
+      "title": "成长建议",
+      "standard": "系统能生成项目、技能、学习路线、开源贡献、求职主页优化建议",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-001",
+      "title": "仓库数阈值",
+      "standard": "公开仓库数达到阈值后提示升级",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-002",
+      "title": "commit 阈值",
+      "standard": "commit 数达到阈值后提示升级",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-003",
+      "title": "贡献数阈值",
+      "standard": "最近一年贡献数达到阈值后提示升级",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-004",
+      "title": "Star 阈值",
+      "standard": "Star 达到阈值后提示升级",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-005",
+      "title": "PR / issue 阈值",
+      "standard": "出现 PR 或 issue 数据后提示开启协作模块",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-006",
+      "title": "保留个人信息",
+      "standard": "升级时保留手动填写的基础信息、教育、技能、联系方式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-007",
+      "title": "手动项目合并",
+      "standard": "升级时手动项目与 GitHub 仓库项目可合并",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-008",
+      "title": "diff 预览",
+      "standard": "升级前展示新旧版本 diff",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-009",
+      "title": "回滚新用户模式",
+      "standard": "用户可回滚到新用户模式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-UP-010",
+      "title": "长期混合模式",
+      "standard": "用户可长期使用混合模式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-001",
+      "title": "真实姓名控制",
+      "standard": "用户可控制是否展示真实姓名",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-002",
+      "title": "学校控制",
+      "standard": "用户可控制是否展示学校",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-003",
+      "title": "专业控制",
+      "standard": "用户可控制是否展示专业",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-004",
+      "title": "学历控制",
+      "standard": "用户可控制是否展示学历",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-005",
+      "title": "GPA 控制",
+      "standard": "用户可控制是否展示 GPA",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-006",
+      "title": "毕业年份控制",
+      "standard": "用户可控制是否展示毕业年份",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-007",
+      "title": "邮箱控制",
+      "standard": "用户可控制是否展示邮箱",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-008",
+      "title": "简历链接控制",
+      "standard": "用户可控制是否展示简历链接",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-009",
+      "title": "城市控制",
+      "standard": "用户可控制是否展示城市",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-010",
+      "title": "社交账号控制",
+      "standard": "用户可控制是否展示社交账号",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-011",
+      "title": "求职状态控制",
+      "standard": "用户可控制是否展示求职状态",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-012",
+      "title": "README / Pages 分别控制",
+      "standard": "README 与 Pages 可分别控制展示信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-013",
+      "title": "提交前隐私检查",
+      "standard": "提交前系统检查学校、邮箱、简历、GPA 等信息是否将公开",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-014",
+      "title": "一键隐藏敏感信息",
+      "standard": "用户可一键隐藏敏感信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-015",
+      "title": "模糊化文案",
+      "standard": "支持使用 “Computer Science Student” 等模糊化描述",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-016",
+      "title": "邮箱保护",
+      "standard": "支持联系按钮替代明文邮箱",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-PRIV-017",
+      "title": "删除个人信息",
+      "standard": "用户可删除平台保存的新用户个人信息",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-001",
+      "title": "零 commit 用户生成 README",
+      "standard": "一个没有 commit 的用户只填写基础信息、学校、学历、语言、技能后，可生成完整 README",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-002",
+      "title": "零仓库用户生成 Pages",
+      "standard": "一个没有公开仓库的用户只填写基础信息和技能后，可生成完整 `username.github.io` 网站",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-003",
+      "title": "学生用户链路",
+      "standard": "学生填写学校、专业、课程、技能、项目计划后，可生成学生 README 和学生主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-004",
+      "title": "求职用户链路",
+      "standard": "求职用户填写技能、项目、简历、联系方式后，可生成求职 README 和求职主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-005",
+      "title": "开源新人链路",
+      "standard": "开源新人填写学习方向和开源计划后，可生成开源新人 README 和主页",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-006",
+      "title": "复制与下载",
+      "standard": "新用户可复制 README、下载 README、下载网站包",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-007",
+      "title": "一键提交",
+      "standard": "登录新用户可提交 README 到 `username` 仓库，提交网站到 `username.github.io` 仓库",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-008",
+      "title": "后续升级",
+      "standard": "用户后续产生仓库、commit、star 后，系统能推荐升级到数据增强或混合模式",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-009",
+      "title": "隐私检查",
+      "standard": "新用户提交前能看到学校、邮箱、简历等公开信息提醒",
+      "status": "未开始",
+      "evidence": []
+    },
+    {
+      "id": "N-E2E-010",
+      "title": "无空白模块",
+      "standard": "生成的 README 和网站不得出现空白区块、空统计卡片或无意义占位",
+      "status": "未开始",
+      "evidence": []
+    }
+  ]
+}

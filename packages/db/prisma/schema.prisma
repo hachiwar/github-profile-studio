@@ -1,0 +1,625 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum GenerationMode {
+  NEW_USER
+  DATA_ENHANCED
+  HYBRID
+  MANUAL
+}
+
+enum TargetType {
+  README
+  PAGES
+  CARD
+  ACHIEVEMENT
+}
+
+enum Locale {
+  EN_US
+  ZH_CN
+  BILINGUAL
+}
+
+model User {
+  id              String           @id @default(cuid())
+  email           String?          @unique
+  name            String?
+  image           String?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  githubAccounts  GitHubAccount[]
+  profile         UserProfile?
+  generated       GeneratedProfile[]
+  themes          Theme[]
+  templates       Template[]
+  cardConfigs     CardConfig[]
+  deployments     DeploymentLog[]
+  versions        VersionHistory[]
+  imports         ImportHistory[]
+  privacySettings PrivacySetting[]
+}
+
+model GitHubAccount {
+  id              String       @id @default(cuid())
+  userId          String
+  githubId        BigInt       @unique
+  username        String       @unique
+  type            String
+  avatarUrl       String?
+  accessTokens    OAuthToken[]
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  user            User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  profile         UserProfile?
+}
+
+model OAuthToken {
+  id              String        @id @default(cuid())
+  accountId       String
+  encryptedToken  String
+  scopes          String[]
+  expiresAt       DateTime?
+  revokedAt       DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  account         GitHubAccount @relation(fields: [accountId], references: [id], onDelete: Cascade)
+
+  @@index([accountId])
+}
+
+model UserProfile {
+  id                String           @id @default(cuid())
+  userId            String?          @unique
+  githubAccountId   String?          @unique
+  githubUsername    String           @unique
+  githubId          BigInt?
+  displayName       String?
+  avatarUrl         String?
+  bio               String?
+  company           String?
+  location          String?
+  blog              String?
+  email             String?
+  followers         Int              @default(0)
+  following         Int              @default(0)
+  publicRepos       Int              @default(0)
+  publicGists       Int              @default(0)
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  lastFetchedAt     DateTime?
+  user              User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  githubAccount     GitHubAccount?   @relation(fields: [githubAccountId], references: [id], onDelete: SetNull)
+  newUserForm       NewUserProfileForm?
+  repositories      Repository[]
+  contributionStats ContributionStats[]
+  generatedProfiles GeneratedProfile[]
+  achievements      UserAchievement[]
+}
+
+model NewUserProfileForm {
+  id                 String            @id @default(cuid())
+  profileId          String            @unique
+  locale             Locale            @default(EN_US)
+  currentRole        String?
+  status             String?
+  introductionTone   String            @default("formal")
+  lockedCopyBlocks   Json              @default("{}")
+  learningDirections String[]
+  highlights         Json              @default("{}")
+  contactSettings    Json              @default("{}")
+  createdAt          DateTime          @default(now())
+  updatedAt          DateTime          @updatedAt
+  profile            UserProfile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  education          Education[]
+  skills             Skill[]
+  languages          ProgrammingLanguage[]
+  learningPlans      LearningPlan[]
+  manualProjects     ManualProject[]
+}
+
+model Education {
+  id             String             @id @default(cuid())
+  formId         String
+  school         String?
+  department     String?
+  major          String?
+  degree         String?
+  startYear      Int?
+  graduationYear Int?
+  grade          String?
+  gpa            String?
+  honors         String[]
+  courses        String[]
+  showInReadme   Boolean            @default(true)
+  showInPages    Boolean            @default(true)
+  form           NewUserProfileForm @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@index([formId])
+}
+
+model Skill {
+  id            String             @id @default(cuid())
+  formId        String
+  name          String
+  category      String
+  proficiency   Int                @default(0)
+  status        String
+  showIcon      Boolean            @default(true)
+  showBadge     Boolean            @default(true)
+  sortOrder     Int                @default(0)
+  showInReadme  Boolean            @default(true)
+  showInPages   Boolean            @default(true)
+  form          NewUserProfileForm @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@index([formId, category])
+}
+
+model ProgrammingLanguage {
+  id            String             @id @default(cuid())
+  formId        String
+  name          String
+  proficiency   Int                @default(0)
+  isLearning    Boolean            @default(true)
+  isDailyUse    Boolean            @default(false)
+  isPrimary     Boolean            @default(false)
+  showIcon      Boolean            @default(true)
+  showProgress  Boolean            @default(true)
+  showBadge     Boolean            @default(true)
+  showSkillCloud Boolean           @default(false)
+  showInReadme  Boolean            @default(true)
+  showInPages   Boolean            @default(true)
+  form          NewUserProfileForm @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@index([formId])
+}
+
+model LearningPlan {
+  id               String             @id @default(cuid())
+  formId           String
+  currentFocus     String[]
+  books            String[]
+  courses          String[]
+  currentProjects  String[]
+  shortTermGoals   String[]
+  longTermGoals    String[]
+  weeklyPlan       String?
+  openSourcePlan   String?
+  jobPlan          String?
+  blogPlan         String?
+  algorithmPlan    String?
+  showInReadme     Boolean            @default(true)
+  showInPages      Boolean            @default(true)
+  form             NewUserProfileForm @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@index([formId])
+}
+
+model ManualProject {
+  id              String             @id @default(cuid())
+  formId          String
+  name            String
+  summary         String
+  type            String
+  status          String
+  techStack       String[]
+  highlights      String[]
+  role            String?
+  startDate       DateTime?
+  endDate         DateTime?
+  repoUrl         String?
+  demoUrl         String?
+  imageUrl        String?
+  videoUrl        String?
+  isCourseProject Boolean            @default(false)
+  isCompetition   Boolean            @default(false)
+  isTeamProject   Boolean            @default(false)
+  featured        Boolean            @default(false)
+  showInReadme    Boolean            @default(true)
+  showInPages     Boolean            @default(true)
+  form            NewUserProfileForm @relation(fields: [formId], references: [id], onDelete: Cascade)
+
+  @@index([formId, featured])
+}
+
+model Repository {
+  id               String               @id @default(cuid())
+  profileId        String
+  githubRepoId     BigInt               @unique
+  owner            String
+  name             String
+  fullName         String               @unique
+  description      String?
+  homepage         String?
+  language         String?
+  topics           String[]
+  license          String?
+  stars            Int                  @default(0)
+  forks            Int                  @default(0)
+  watchers         Int                  @default(0)
+  subscribers      Int                  @default(0)
+  openIssues       Int                  @default(0)
+  size             Int                  @default(0)
+  defaultBranch    String               @default("main")
+  isFork           Boolean              @default(false)
+  isArchived       Boolean              @default(false)
+  isPrivate        Boolean              @default(false)
+  hasPages         Boolean              @default(false)
+  hasWiki          Boolean              @default(false)
+  hasDiscussions   Boolean              @default(false)
+  latestReleaseAt  DateTime?
+  releaseDownloads Int                  @default(0)
+  readmeSummary    String?
+  createdAt        DateTime             @default(now())
+  updatedAt        DateTime             @updatedAt
+  pushedAt         DateTime?
+  lastFetchedAt    DateTime?
+  profile          UserProfile          @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  languages        RepositoryLanguage[]
+  trends           RepositoryTrend[]
+  starSnapshots    StarSnapshot[]
+  forkSnapshots    ForkSnapshot[]
+
+  @@index([profileId])
+  @@index([owner, name])
+  @@index([stars])
+  @@index([forks])
+}
+
+model RepositoryLanguage {
+  id           String     @id @default(cuid())
+  repositoryId String
+  language     String
+  bytes        Int        @default(0)
+  percentage   Float      @default(0)
+  repository   Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@unique([repositoryId, language])
+}
+
+model ContributionStats {
+  id                       String            @id @default(cuid())
+  profileId                String
+  username                 String
+  year                     Int
+  totalContributions       Int               @default(0)
+  commitContributions      Int               @default(0)
+  issueContributions       Int               @default(0)
+  pullRequestContributions Int               @default(0)
+  reviewContributions      Int               @default(0)
+  restrictedContributions  Int               @default(0)
+  currentStreak            Int               @default(0)
+  longestStreak            Int               @default(0)
+  contributionCalendar     Json              @default("{}")
+  monthlyStats             Json              @default("{}")
+  weeklyStats              Json              @default("{}")
+  hourlyStats              Json              @default("{}")
+  lastFetchedAt            DateTime?
+  profile                  UserProfile       @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  days                     ContributionDay[]
+
+  @@unique([profileId, year])
+}
+
+model ContributionDay {
+  id                  String            @id @default(cuid())
+  contributionStatsId String
+  date                DateTime
+  count               Int               @default(0)
+  level               Int               @default(0)
+  stats               ContributionStats @relation(fields: [contributionStatsId], references: [id], onDelete: Cascade)
+
+  @@unique([contributionStatsId, date])
+}
+
+model RepositoryTrend {
+  id               String     @id @default(cuid())
+  repositoryId     String
+  repoFullName     String
+  date             DateTime
+  stars            Int        @default(0)
+  forks            Int        @default(0)
+  issues           Int        @default(0)
+  watchers         Int        @default(0)
+  subscribers      Int        @default(0)
+  contributors     Int        @default(0)
+  releaseDownloads Int        @default(0)
+  snapshotSource   String
+  repository       Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@unique([repositoryId, date])
+}
+
+model StarSnapshot {
+  id           String     @id @default(cuid())
+  repositoryId String
+  count        Int
+  capturedAt   DateTime   @default(now())
+  repository   Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@index([repositoryId, capturedAt])
+}
+
+model ForkSnapshot {
+  id           String     @id @default(cuid())
+  repositoryId String
+  count        Int
+  capturedAt   DateTime   @default(now())
+  repository   Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  @@index([repositoryId, capturedAt])
+}
+
+model PullRequestStats {
+  id                    String   @id @default(cuid())
+  username              String
+  total                 Int      @default(0)
+  merged                Int      @default(0)
+  closed                Int      @default(0)
+  reviewed              Int      @default(0)
+  recentYear            Int      @default(0)
+  mergeRate             Float    @default(0)
+  averageResponseHours  Float?
+  externalRepositories  Int      @default(0)
+  organizations         Int      @default(0)
+  activeRepositories    String[]
+  commonLanguages       String[]
+  lastFetchedAt         DateTime?
+
+  @@index([username])
+}
+
+model IssueStats {
+  id                   String   @id @default(cuid())
+  username             String
+  total                Int      @default(0)
+  closed               Int      @default(0)
+  recentYear           Int      @default(0)
+  closeRate            Float    @default(0)
+  averageResponseHours Float?
+  participantCount     Int      @default(0)
+  activeRepositories   String[]
+  lastFetchedAt        DateTime?
+
+  @@index([username])
+}
+
+model Achievement {
+  id          String            @id @default(cuid())
+  key         String            @unique
+  name        Json
+  description Json
+  category    String
+  icon        String
+  level       String
+  rarity      String
+  condition   Json
+  score       Int               @default(0)
+  target      Int               @default(0)
+  isHidden    Boolean           @default(false)
+  users       UserAchievement[]
+
+  @@index([category])
+}
+
+model UserAchievement {
+  id            String       @id @default(cuid())
+  profileId     String
+  achievementId String
+  unlockedAt    DateTime?
+  progress      Int          @default(0)
+  target        Int          @default(0)
+  score         Int          @default(0)
+  metadata      Json         @default("{}")
+  profile       UserProfile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+  achievement   Achievement  @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+
+  @@unique([profileId, achievementId])
+}
+
+model GeneratedProfile {
+  id             String             @id @default(cuid())
+  userId         String?
+  profileId      String?
+  username       String
+  targetType     TargetType
+  mode           GenerationMode
+  locale         Locale             @default(EN_US)
+  templateId     String?
+  themeId        String?
+  modules        Json               @default("[]")
+  markdownContent String?
+  htmlContent    String?
+  cssContent     String?
+  jsContent      String?
+  actionsContent String?
+  config         Json               @default("{}")
+  version        Int                @default(1)
+  shareId        String?            @unique
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  user           User?              @relation(fields: [userId], references: [id], onDelete: SetNull)
+  profile        UserProfile?       @relation(fields: [profileId], references: [id], onDelete: SetNull)
+  readme         GeneratedReadme?
+  page           GeneratedPage?
+  versions       VersionHistory[]
+
+  @@index([username, targetType])
+}
+
+model GeneratedReadme {
+  id                 String           @id @default(cuid())
+  generatedProfileId String           @unique
+  markdown           String
+  assets             Json             @default("[]")
+  workflowYaml       String?
+  compatibility      Json             @default("{}")
+  privacyWarnings    Json             @default("[]")
+  generatedProfile   GeneratedProfile @relation(fields: [generatedProfileId], references: [id], onDelete: Cascade)
+}
+
+model GeneratedPage {
+  id                 String           @id @default(cuid())
+  generatedProfileId String           @unique
+  indexHtml          String
+  styleCss           String
+  scriptJs           String
+  assets             Json             @default("[]")
+  dataJson           Json             @default("{}")
+  seo                Json             @default("{}")
+  openGraph          Json             @default("{}")
+  workflowYaml       String?
+  generatedProfile   GeneratedProfile @relation(fields: [generatedProfileId], references: [id], onDelete: Cascade)
+}
+
+model Theme {
+  id          String   @id @default(cuid())
+  name        Json
+  type        String
+  colors      Json
+  typography  Json
+  borderRadius String?
+  shadow      String?
+  spacing     Json
+  background  Json
+  animation   Json
+  customCss   String?
+  createdById String?
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([type, isPublic])
+}
+
+model Template {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  type        String
+  name        Json
+  description Json
+  schema      Json
+  content     Json
+  version     Int      @default(1)
+  createdById String?
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   User?    @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([type, isPublic])
+}
+
+model CardConfig {
+  id        String   @id @default(cuid())
+  userId    String?
+  type      String
+  username  String
+  params    Json
+  themeId   String?
+  shareId   String?  @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([username, type])
+}
+
+model DeploymentLog {
+  id             String   @id @default(cuid())
+  userId         String?
+  username       String
+  targetRepo     String
+  targetType     TargetType
+  action         String
+  status         String
+  commitSha      String?
+  pullRequestUrl String?
+  diff           Json?
+  backupRef      String?
+  errorCode      String?
+  errorMessage   String?
+  createdAt      DateTime @default(now())
+  user           User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([username, targetType, createdAt])
+}
+
+model VersionHistory {
+  id                 String            @id @default(cuid())
+  userId             String?
+  generatedProfileId String?
+  username           String
+  targetType         TargetType
+  version            Int
+  snapshot           Json
+  markdownContent    String?
+  htmlContent        String?
+  commitSha          String?
+  createdAt          DateTime          @default(now())
+  user               User?             @relation(fields: [userId], references: [id], onDelete: SetNull)
+  generatedProfile   GeneratedProfile? @relation(fields: [generatedProfileId], references: [id], onDelete: SetNull)
+
+  @@unique([username, targetType, version])
+}
+
+model ImportHistory {
+  id              String   @id @default(cuid())
+  userId          String?
+  sourceType      String
+  sourceUrl       String?
+  originalContent String
+  parsedModules   Json     @default("[]")
+  thirdPartyCards Json     @default("[]")
+  suggestions     Json     @default("[]")
+  diff             Json?
+  createdAt        DateTime @default(now())
+  user             User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([sourceType, createdAt])
+}
+
+model WorkflowConfig {
+  id                 String   @id @default(cuid())
+  username           String
+  repository         String
+  updateFrequency    String
+  updateTime         String?
+  enabledModules     String[]
+  commitMessage      String
+  skipEmptyUpdates   Boolean  @default(true)
+  keepSnapshots      Boolean  @default(true)
+  generateLogs       Boolean  @default(true)
+  failureNotification Boolean @default(false)
+  manualTrigger      Boolean  @default(true)
+  targetBranch       String   @default("main")
+  yaml               String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@index([username, repository])
+}
+
+model PrivacySetting {
+  id              String   @id @default(cuid())
+  userId          String?
+  key             String
+  label           Json
+  sensitive       Boolean  @default(false)
+  visibleInReadme Boolean  @default(true)
+  visibleInPages  Boolean  @default(true)
+  obfuscation     String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, key])
+}
+
