@@ -1,5 +1,6 @@
 import type { PageSiteBundle, ProfileStudioConfig } from "@gps/core";
 import { builtinThemePresets, localize } from "@gps/core";
+import { checkPagesCompatibility } from "./pages-compatibility";
 
 export function generatePagesSite(config: ProfileStudioConfig): PageSiteBundle {
   const theme = builtinThemePresets.find((item) => item.key === config.themeKey) ?? builtinThemePresets[0];
@@ -15,7 +16,7 @@ export function generatePagesSite(config: ProfileStudioConfig): PageSiteBundle {
     2
   );
 
-  return {
+  const bundle: PageSiteBundle = {
     sections: config.enabledPageSections,
     warnings: [],
     files: {
@@ -30,13 +31,19 @@ export function generatePagesSite(config: ProfileStudioConfig): PageSiteBundle {
       ".github/workflows/update-pages.yml": renderPagesWorkflow()
     }
   };
+
+  bundle.warnings = checkPagesCompatibility(bundle).map((issue) => issue.message);
+  return bundle;
 }
 
 function renderHtml(config: ProfileStudioConfig): string {
   const name = config.profile.displayName || config.targetUsername;
   const projectCards = config.manualProjects
     .filter((project) => project.showInPages)
-    .map((project) => `<article class="card"><h3>${escapeHtml(project.name)}</h3><p>${escapeHtml(project.summary)}</p><p>${project.techStack.map(escapeHtml).join(" / ")}</p></article>`)
+    .map(
+      (project) =>
+        `<article class="card"><h3>${escapeHtml(project.name)}</h3><p>${escapeHtml(project.summary)}</p><p>${project.techStack.map(escapeHtml).join(" / ")}</p></article>`
+    )
     .join("");
   const skillBadges = config.skills
     .filter((skill) => skill.showInPages)
@@ -52,25 +59,25 @@ function renderHtml(config: ProfileStudioConfig): string {
   <meta property="og:title" content="${escapeHtml(name)}" />
   <meta property="og:description" content="${escapeHtml(config.profile.bio ?? "Developer profile")}" />
   <title>${escapeHtml(name)}</title>
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><text y='48' font-size='48'>✨</text></svg>" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230969da'/%3E%3Ctext x='10' y='40' font-size='18' fill='white' font-family='Arial'%3EGPS%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <nav class="nav"><a href="#about">${localize({ en: "About", zh: "关于" }, config.locale)}</a><a href="#projects">${localize({ en: "Projects", zh: "项目" }, config.locale)}</a><button id="theme-toggle">Theme</button></nav>
+  <nav class="nav"><a href="#about">${localize({ en: "About", zh: "About" }, config.locale)}</a><a href="#projects">${localize({ en: "Projects", zh: "Projects" }, config.locale)}</a><button id="theme-toggle">Theme</button></nav>
   <main>
     <section class="hero">
       <img class="avatar" src="${config.profile.avatarUrl ?? `https://github.com/${config.targetUsername}.png`}" alt="${escapeHtml(name)}" />
       <div>
         <h1>${escapeHtml(name)}</h1>
         <p>${escapeHtml(config.profile.bio ?? "Learning, building, and sharing progress on GitHub.")}</p>
-        <div class="actions"><a href="https://github.com/${config.targetUsername}">GitHub</a><a href="#contact">${localize({ en: "Contact", zh: "联系" }, config.locale)}</a></div>
+        <div class="actions"><a href="https://github.com/${config.targetUsername}">GitHub</a><a href="#contact">${localize({ en: "Contact", zh: "Contact" }, config.locale)}</a></div>
       </div>
     </section>
-    <section id="about"><h2>${localize({ en: "About", zh: "关于我" }, config.locale)}</h2><p>${escapeHtml(config.profile.status ?? "Building projects and learning in public.")}</p></section>
-    <section id="skills"><h2>${localize({ en: "Skills", zh: "技能" }, config.locale)}</h2><div class="badges">${skillBadges}</div></section>
-    <section id="projects"><h2>${localize({ en: "Projects", zh: "项目" }, config.locale)}</h2><div class="grid">${projectCards}</div></section>
+    <section id="about"><h2>${localize({ en: "About", zh: "About" }, config.locale)}</h2><p>${escapeHtml(config.profile.status ?? "Building projects and learning in public.")}</p></section>
+    <section id="skills"><h2>${localize({ en: "Skills", zh: "Skills" }, config.locale)}</h2><div class="badges">${skillBadges}</div></section>
+    <section id="projects"><h2>${localize({ en: "Projects", zh: "Projects" }, config.locale)}</h2><div class="grid">${projectCards}</div></section>
     <section id="github"><h2>GitHub</h2><div class="stats"><span>${config.github?.contributions.totalContributions ?? 0} contributions</span><span>${config.github?.totalStars ?? 0} stars</span><span>${config.github?.totalForks ?? 0} forks</span></div></section>
-    <section id="contact"><h2>${localize({ en: "Contact", zh: "联系" }, config.locale)}</h2><p>${config.socialLinks.map((link) => `<a href="${link.url}">${escapeHtml(link.label)}</a>`).join(" ")}</p></section>
+    <section id="contact"><h2>${localize({ en: "Contact", zh: "Contact" }, config.locale)}</h2><p>${config.socialLinks.map((link) => `<a href="${link.url}">${escapeHtml(link.label)}</a>`).join(" ")}</p></section>
   </main>
   <script src="./script.js"></script>
 </body>
