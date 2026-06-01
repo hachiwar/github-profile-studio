@@ -1,5 +1,6 @@
 import type { CardRequest, LocalizedText } from "@gps/core";
 import { localeNumber } from "@gps/core";
+export * from "./embeds";
 
 export type CardDefinition = {
   type: string;
@@ -72,4 +73,3 @@ export function renderErrorSvg(message: string): string {
 function escapeXml(value: string): string {
   return value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
 }
-
