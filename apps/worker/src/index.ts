@@ -1,11 +1,4 @@
-const jobs = [
-  "daily-readme-update",
-  "weekly-pages-data-update",
-  "star-fork-snapshot",
-  "achievement-refresh",
-  "card-cache-cleanup",
-  "blog-rss-refresh"
-];
+import { workerJobs } from "./jobs";
 
-console.log("GitHub Profile Studio worker ready", { jobs });
+console.log("GitHub Profile Studio worker ready", { jobs: workerJobs });
 
