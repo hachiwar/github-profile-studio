@@ -24,9 +24,9 @@ npm run build
 npm run test
 npm run lint
 npm run acceptance:matrix
+npm run acceptance:report
 ```
 
 ## Acceptance Policy
 
 Every implementation task is tied to requirement sections and acceptance checklist IDs. Final delivery requires a complete pass through `github_profile_studio_acceptance_checklist.md`, with evidence attached for each passing item.
-

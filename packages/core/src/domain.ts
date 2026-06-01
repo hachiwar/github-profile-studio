@@ -125,9 +125,18 @@ export type Repository = {
   isFork: boolean;
   isArchived: boolean;
   isPrivate: boolean;
+  isTemplate?: boolean;
+  isDisabled?: boolean;
+  visibility?: "public" | "private" | "internal";
   hasPages: boolean;
   hasWiki: boolean;
   hasDiscussions: boolean;
+  contributors?: number;
+  languages?: Record<string, number>;
+  readmeSummary?: string;
+  releaseCount?: number;
+  latestReleaseAt?: string;
+  releaseDownloads?: number;
   createdAt?: string;
   updatedAt?: string;
   pushedAt?: string;
@@ -295,4 +304,3 @@ export type AchievementResult = {
   };
   readmeBadgeMarkdown: string;
 };
-

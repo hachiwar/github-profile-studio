@@ -44,6 +44,14 @@ export function normalizeRepository(payload: GitHubRepoResponse): Repository {
     isFork: Boolean(payload.fork),
     isArchived: Boolean(payload.archived),
     isPrivate: Boolean(payload.private),
+    isTemplate: Boolean(payload.is_template),
+    isDisabled: Boolean(payload.disabled),
+    visibility:
+      payload.visibility === "private" || payload.visibility === "internal" || payload.visibility === "public"
+        ? payload.visibility
+        : Boolean(payload.private)
+          ? "private"
+          : "public",
     hasPages: Boolean(payload.has_pages),
     hasWiki: Boolean(payload.has_wiki),
     hasDiscussions: Boolean(payload.has_discussions),
@@ -66,4 +74,3 @@ function normalizeUrl(value: string | undefined): string | undefined {
   if (value.startsWith("http://") || value.startsWith("https://")) return value;
   return `https://${value}`;
 }
-

@@ -3,3 +3,5 @@ export * from "./client";
 export * from "./normalize";
 export * from "./oauth";
 export * from "./deploy";
+export * from "./cache";
+export * from "./stats";
