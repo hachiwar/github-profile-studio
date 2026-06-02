@@ -115,14 +115,13 @@ export class GitHubClient {
   }
 
   async listRepositories(username: string): Promise<Repository[]> {
-    const response = await this.rest.repos.listForUser({
+    const repositories = await this.rest.paginate(this.rest.repos.listForUser, {
       username,
       per_page: 100,
       sort: "updated",
       type: "owner"
     });
-    this.rememberRateLimit(response.headers);
-    return response.data.map((repo) => normalizeRepository(repo as unknown as Record<string, unknown>));
+    return repositories.map((repo) => normalizeRepository(repo as unknown as Record<string, unknown>));
   }
 
   async getDataset(username: string, options: GitHubDatasetOptions = {}): Promise<GitHubDatasetResult> {

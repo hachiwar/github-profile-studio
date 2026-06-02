@@ -34,6 +34,10 @@ describe("GitHub normalizers", () => {
       forks_count: 2,
       open_issues_count: 1,
       default_branch: "main",
+      archived: false,
+      fork: true,
+      is_template: true,
+      visibility: "public",
       has_pages: true,
       has_wiki: true,
       has_discussions: false
@@ -42,6 +46,9 @@ describe("GitHub normalizers", () => {
     expect(repo.stars).toBe(8);
     expect(repo.watchers).toBe(8);
     expect(repo.subscribers).toBe(3);
+    expect(repo.isFork).toBe(true);
+    expect(repo.isTemplate).toBe(true);
+    expect(repo.visibility).toBe("public");
     expect(repo.hasPages).toBe(true);
   });
 });

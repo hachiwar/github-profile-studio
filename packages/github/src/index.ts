@@ -5,3 +5,4 @@ export * from "./oauth";
 export * from "./deploy";
 export * from "./cache";
 export * from "./stats";
+export * from "./analytics";

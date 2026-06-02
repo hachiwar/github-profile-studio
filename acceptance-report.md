@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T00:42:29.902Z
+Generated at: 2026-06-02T00:52:36.807Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
-Evidence generated at: 2026-06-02T00:42:21.998Z
+Evidence generated at: 2026-06-02T00:52:30.077Z
 
-Passed items with evidence: 131
+Passed items with evidence: 148
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 241 |
+| 未开始 | 225 |
 | 开发中 | 0 |
-| 待验收 | 23 |
-| 通过 | 131 |
+| 待验收 | 22 |
+| 通过 | 148 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -23,9 +23,9 @@ Passed items with evidence: 131
 
 | Kind | Reference | Note |
 | --- | --- | --- |
-| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after automation, maintenance, growth, and admin API additions. |
-| log | `npm.cmd run test` | Vitest suite passes: 20 files, 56 tests, including maintenance generators and worker queue plans. |
-| log | `npm.cmd run build` | Production build passes and lists the new automation, growth, and admin API routes. |
+| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after GitHub analytics aggregation and API additions. |
+| log | `npm.cmd run test` | Vitest suite passes: 21 files, 59 tests, including GitHub analytics coverage. |
+| log | `npm.cmd run build` | Production build passes and lists /api/github/analytics. |
 | api-response | `POST http://127.0.0.1:3000/api/export/readme` | Local smoke test returned a README export package for octocat. |
 | api-response | `POST http://127.0.0.1:3000/api/export/pages?format=zip` | Local smoke test returned status=200 and an 8083 byte ZIP package. |
 | api-response | `GET http://127.0.0.1:3000/api/github/languages?username=octocat` | Local smoke test returned real GitHub language data, cache metadata, and rate limit metadata. |
@@ -45,6 +45,7 @@ Passed items with evidence: 131
 | api-response | `GET http://127.0.0.1:3010/api/admin/cache` | Local smoke test returned status=200 with cache snapshot and stale/fallback cache policy. |
 | api-response | `GET http://127.0.0.1:3010/api/admin/queues?username=octocat` | Local smoke test returned status=200 with ready queue plans for scheduled maintenance jobs. |
 | api-response | `GET http://127.0.0.1:3010/api/admin/errors` | Local smoke test returned status=200 with structured error catalog and notification settings. |
+| api-response | `GET http://127.0.0.1:3011/api/github/analytics?username=octocat` | Local smoke test returned status=200 with repository count, star/fork totals, impact score, technology categories, and all targeted 03-* acceptance IDs. |
 
 ## Full Checklist Matrix
 
@@ -73,31 +74,31 @@ Passed items with evidence: 131
 | 02-015 | 未开始 |  | 检测结果状态卡片 |  |
 | 02-016 | 待验收 | 4.1.4 | 根据检测结果推荐下一步操作 | file: packages/github/src/client.ts (Detection result includes recommended mode and nextActions.) |
 | 03-001 | 待验收 | 4.2.2 | 用户基础数据完整采集 | api-response: apps/web/app/api/github/repos/route.ts (Repository list API route exists.)<br>file: packages/github/src/normalize.ts (Repository response normalization covers core repository fields.) |
-| 03-002 | 未开始 |  | 仓库列表完整获取 |  |
+| 03-002 | 通过 |  | 仓库列表完整获取 | file: packages/github/src/client.ts (listRepositories uses Octokit pagination so owner repositories are fetched beyond the first 100 results.)<br>test: packages/github/src/analytics.test.ts (Repository field coverage verifies the fetched repository list is complete against publicRepos.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-002 in acceptanceIds.) |
 | 03-003 | 通过 | 4.2.2 | 仓库 description、homepage、lang | test: packages/github/src/normalize.test.ts (Repository description, homepage, language, topics, and license normalization is tested.) |
-| 03-004 | 未开始 |  | 仓库 created、updated、pushed、si |  |
+| 03-004 | 通过 |  | 仓库 created、updated、pushed、si | test: packages/github/src/analytics.test.ts (Repository analytics verifies createdAt, updatedAt, pushedAt, size, and defaultBranch coverage.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-004 in acceptanceIds.) |
 | 03-005 | 通过 | 4.2.2 | 仓库 star、fork、watcher、subscri | test: packages/github/src/normalize.test.ts (Star, fork, watcher, subscriber, and open issue normalization is tested.) |
-| 03-006 | 未开始 |  | 正确区分 starred 用户数与真正 watchers |  |
-| 03-007 | 未开始 |  | 仓库 archived、fork、template、vi |  |
-| 03-008 | 未开始 |  | release、latest release、relea |  |
-| 03-009 | 待验收 | 4.2.2 | contributors、repo languages、 | file: packages/github/src/client.ts (Repository enrichment fetches contributors, languages, releases, release downloads, and README summary for top public repositories.) |
+| 03-006 | 通过 |  | 正确区分 starred 用户数与真正 watchers | test: packages/github/src/analytics.test.ts (Watcher semantics verify stars use stargazers_count while true watchers/subscribers use subscribers_count.)<br>test: packages/github/src/normalize.test.ts (Repository normalizer preserves stars, watchers_count, and subscribers_count separately.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-006 in acceptanceIds.) |
+| 03-007 | 通过 |  | 仓库 archived、fork、template、vi | test: packages/github/src/analytics.test.ts (Repository analytics verifies archived, fork, template, private, and visibility flags.)<br>test: packages/github/src/normalize.test.ts (Repository normalizer covers fork, template, and visibility fields.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-007 in acceptanceIds.) |
+| 03-008 | 通过 |  | release、latest release、relea | file: packages/github/src/client.ts (Repository enrichment loads releases, latest release dates, and release download counts.)<br>test: packages/github/src/analytics.test.ts (Analytics verifies repositoriesWithReleases, latestReleaseAt, and totalReleaseDownloads.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-008 in acceptanceIds.) |
+| 03-009 | 通过 |  | contributors、repo languages、 | file: packages/github/src/client.ts (Repository enrichment loads contributors, per-repo languages, and README summaries.)<br>test: packages/github/src/analytics.test.ts (Analytics verifies contributors, language/package signals, and README technology signals.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-009 in acceptanceIds.) |
 | 03-010 | 通过 | 4.2.3 | 总贡献、最近一年贡献、每日贡献获取 | test: packages/github/src/stats.test.ts (Contribution totals and yearly heatmap generation are tested.)<br>file: packages/github/src/client.ts (GraphQL contribution collection is used when a GitHub token is available, with deterministic fallback otherwise.) |
-| 03-011 | 未开始 |  | 当前 streak 与最长 streak 计算 |  |
-| 03-012 | 未开始 |  | commit、issue、PR、review contr |  |
-| 03-013 | 未开始 |  | monthly、weekly、hourly contri |  |
+| 03-011 | 通过 |  | 当前 streak 与最长 streak 计算 | test: packages/github/src/analytics.test.ts (Analytics exposes currentStreak and longestStreak from contribution stats.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-011 in acceptanceIds.) |
+| 03-012 | 通过 |  | commit、issue、PR、review contr | test: packages/github/src/analytics.test.ts (Analytics exposes commit, issue, PR, and review contribution breakdown.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-012 in acceptanceIds.) |
+| 03-013 | 通过 |  | monthly、weekly、hourly contri | test: packages/github/src/analytics.test.ts (Analytics exposes monthly, weekly, and hourly contribution distributions.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-013 in acceptanceIds.) |
 | 03-014 | 通过 | 4.2.3 | 贡献热力图数据生成 | test: packages/github/src/stats.test.ts (Contribution heatmap levels are tested.) |
-| 03-015 | 未开始 |  | 总 Star、仓库 Star 排名、7/30/90/36 |  |
-| 03-016 | 未开始 |  | 仓库 Star 曲线、用户总 Star 曲线、增长最快仓 |  |
+| 03-015 | 通过 |  | 总 Star、仓库 Star 排名、7/30/90/36 | test: packages/github/src/analytics.test.ts (Analytics exposes total stars, star rankings, and 7/30/90/365 day growth windows.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-015 in acceptanceIds.) |
+| 03-016 | 通过 |  | 仓库 Star 曲线、用户总 Star 曲线、增长最快仓 | test: packages/github/src/analytics.test.ts (Analytics builds repository star curves, user total star curve, and fastest-growing repositories.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-016 in acceptanceIds.) |
 | 03-017 | 通过 |  | 首次使用前 Star 历史尽量回溯，首次使用后快照记录 | test: packages/generators/src/maintenance.test.ts (Covers best-effort star history backfill from repository creation date plus scheduled star snapshots.)<br>file: packages/generators/src/maintenance.ts (createStarHistoryBackfill and star-snapshot maintenance files generate first-use history and ongoing snapshots.) |
-| 03-018 | 未开始 |  | 总 Fork、Fork 排名、最近一年新增 Fork、F |  |
-| 03-019 | 未开始 |  | 社区影响力评分生成 |  |
-| 03-020 | 未开始 |  | PR 总数、merged PR、closed PR、re |  |
-| 03-021 | 未开始 |  | issue 总数、closed issue、最近一年 i |  |
+| 03-018 | 通过 |  | 总 Fork、Fork 排名、最近一年新增 Fork、F | test: packages/github/src/analytics.test.ts (Analytics exposes total forks, fork rankings, yearly fork growth, and fork curves.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-018 in acceptanceIds.) |
+| 03-019 | 通过 |  | 社区影响力评分生成 | test: packages/github/src/analytics.test.ts (Analytics calculates community impact score from stars, forks, followers, PRs, issues, contributors, and releases.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-019 in acceptanceIds.) |
+| 03-020 | 通过 |  | PR 总数、merged PR、closed PR、re | test: packages/github/src/analytics.test.ts (Analytics exposes PR total, merged, closed, reviewed, recent-year, merge-rate, external repo, and organization stats.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-020 in acceptanceIds.) |
+| 03-021 | 通过 |  | issue 总数、closed issue、最近一年 i | test: packages/github/src/analytics.test.ts (Analytics exposes issue total, closed, recent-year, close-rate, and participant stats.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-021 in acceptanceIds.) |
 | 03-022 | 通过 | 4.2.6 | PR 合并率、Issue 关闭率、外部贡献仓库和组织数计 | test: packages/github/src/stats.test.ts (Dataset construction includes PR merge rate, issue close rate, external repositories, and organizations.) |
 | 03-023 | 通过 | 4.2.7 | 主语言分布、代码字节语言分布、最近一年语言分布计算 | test: packages/github/src/stats.test.ts (Main language, byte language, and recent-year language distributions are tested.) |
 | 03-024 | 通过 | 4.2.7 | Star/Fork 加权语言分布计算 | test: packages/github/src/stats.test.ts (Star-weighted and fork-weighted language distributions are tested.) |
-| 03-025 | 未开始 |  | topics、README、package 文件技术栈识 |  |
-| 03-026 | 未开始 |  | 前端、后端、数据库、DevOps、测试、云服务识别 |  |
+| 03-025 | 通过 |  | topics、README、package 文件技术栈识 | test: packages/github/src/analytics.test.ts (Technology detector uses topics, README summaries, and language/package signals.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-025 in acceptanceIds.) |
+| 03-026 | 通过 |  | 前端、后端、数据库、DevOps、测试、云服务识别 | test: packages/github/src/analytics.test.ts (Technology detector categorizes frontend, backend, database, DevOps, testing, and cloud signals.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-026 in acceptanceIds.) |
 | 04-001 | 未开始 |  | 模块面板、编辑区域、实时预览、Markdown 源码视图 |  |
 | 04-002 | 未开始 |  | 结构视图、拖拽排序、模块开关、复制、删除可用 |  |
 | 04-003 | 未开始 |  | 每个模块可配置参数，整体主题可配置 |  |

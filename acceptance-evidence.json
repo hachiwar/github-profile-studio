@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-06-02T00:42:21.998Z",
+  "generatedAt": "2026-06-02T00:52:30.077Z",
   "verificationCommands": [
     {
       "kind": "log",
       "reference": "npm.cmd run typecheck",
-      "note": "Workspace TypeScript typecheck passes after automation, maintenance, growth, and admin API additions."
+      "note": "Workspace TypeScript typecheck passes after GitHub analytics aggregation and API additions."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run test",
-      "note": "Vitest suite passes: 20 files, 56 tests, including maintenance generators and worker queue plans."
+      "note": "Vitest suite passes: 21 files, 59 tests, including GitHub analytics coverage."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run build",
-      "note": "Production build passes and lists the new automation, growth, and admin API routes."
+      "note": "Production build passes and lists /api/github/analytics."
     },
     {
       "kind": "api-response",
@@ -110,6 +110,11 @@
       "kind": "api-response",
       "reference": "GET http://127.0.0.1:3010/api/admin/errors",
       "note": "Local smoke test returned status=200 with structured error catalog and notification settings."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+      "note": "Local smoke test returned status=200 with repository count, star/fork totals, impact score, technology categories, and all targeted 03-* acceptance IDs."
     }
   ],
   "items": {
@@ -365,15 +370,22 @@
       ]
     },
     "03-009": {
-      "status": "待验收",
-      "requirementRefs": [
-        "4.2.2"
-      ],
+      "status": "通过",
       "evidence": [
         {
           "kind": "file",
           "reference": "packages/github/src/client.ts",
-          "note": "Repository enrichment fetches contributors, languages, releases, release downloads, and README summary for top public repositories."
+          "note": "Repository enrichment loads contributors, per-repo languages, and README summaries."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics verifies contributors, language/package signals, and README technology signals."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-009 in acceptanceIds."
         }
       ]
     },
@@ -2323,6 +2335,266 @@
           "kind": "api-response",
           "reference": "GET /api/growth/recommendations",
           "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "03-002": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "listRepositories uses Octokit pagination so owner repositories are fetched beyond the first 100 results."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Repository field coverage verifies the fetched repository list is complete against publicRepos."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-002 in acceptanceIds."
+        }
+      ]
+    },
+    "03-004": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Repository analytics verifies createdAt, updatedAt, pushedAt, size, and defaultBranch coverage."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-004 in acceptanceIds."
+        }
+      ]
+    },
+    "03-006": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Watcher semantics verify stars use stargazers_count while true watchers/subscribers use subscribers_count."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/normalize.test.ts",
+          "note": "Repository normalizer preserves stars, watchers_count, and subscribers_count separately."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-006 in acceptanceIds."
+        }
+      ]
+    },
+    "03-007": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Repository analytics verifies archived, fork, template, private, and visibility flags."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/normalize.test.ts",
+          "note": "Repository normalizer covers fork, template, and visibility fields."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-007 in acceptanceIds."
+        }
+      ]
+    },
+    "03-008": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "Repository enrichment loads releases, latest release dates, and release download counts."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics verifies repositoriesWithReleases, latestReleaseAt, and totalReleaseDownloads."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-008 in acceptanceIds."
+        }
+      ]
+    },
+    "03-011": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics exposes currentStreak and longestStreak from contribution stats."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-011 in acceptanceIds."
+        }
+      ]
+    },
+    "03-012": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics exposes commit, issue, PR, and review contribution breakdown."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-012 in acceptanceIds."
+        }
+      ]
+    },
+    "03-013": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics exposes monthly, weekly, and hourly contribution distributions."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-013 in acceptanceIds."
+        }
+      ]
+    },
+    "03-015": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics exposes total stars, star rankings, and 7/30/90/365 day growth windows."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-015 in acceptanceIds."
+        }
+      ]
+    },
+    "03-016": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics builds repository star curves, user total star curve, and fastest-growing repositories."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-016 in acceptanceIds."
+        }
+      ]
+    },
+    "03-018": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics exposes total forks, fork rankings, yearly fork growth, and fork curves."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-018 in acceptanceIds."
+        }
+      ]
+    },
+    "03-019": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics calculates community impact score from stars, forks, followers, PRs, issues, contributors, and releases."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-019 in acceptanceIds."
+        }
+      ]
+    },
+    "03-020": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics exposes PR total, merged, closed, reviewed, recent-year, merge-rate, external repo, and organization stats."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-020 in acceptanceIds."
+        }
+      ]
+    },
+    "03-021": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Analytics exposes issue total, closed, recent-year, close-rate, and participant stats."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-021 in acceptanceIds."
+        }
+      ]
+    },
+    "03-025": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Technology detector uses topics, README summaries, and language/package signals."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-025 in acceptanceIds."
+        }
+      ]
+    },
+    "03-026": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/analytics.test.ts",
+          "note": "Technology detector categorizes frontend, backend, database, DevOps, testing, and cloud signals."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned status=200 and included 03-026 in acceptanceIds."
         }
       ]
     }
