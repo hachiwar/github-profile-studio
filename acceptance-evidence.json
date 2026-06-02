@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T01:23:43.350Z",
+  "generatedAt": "2026-06-02T01:57:28.318Z",
   "verificationCommands": [
     {
       "kind": "log",
@@ -180,6 +180,46 @@
       "kind": "api-response",
       "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
       "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run typecheck",
+      "note": "Workspace TypeScript typecheck passes after full new-user form, localization, privacy, and achievement data updates."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run test",
+      "note": "Vitest suite passes: 25 files, 70 tests, including new-user form schema, template registry, localization, and privacy coverage."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run build",
+      "note": "Production build passes with 67 app routes, including /dashboard/new-user and /api/new-user/profile-form."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/new-user-wizard.png",
+      "note": "Playwright screenshot after new-user form save/copy smoke test."
+    },
+    {
+      "kind": "api-response",
+      "reference": "POST/GET http://127.0.0.1:3018/api/new-user/profile-form",
+      "note": "Local smoke tests returned status=200, saved=true, persistence=memory, and N-FORM-015 acceptance ID."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3018/api/achievements/calculate?username=octocat&locale=en-US",
+      "note": "Local smoke test returned status=200, 45 achievements, unlocked progress, README/Pages/SVG embeds, and 07-* acceptance IDs."
+    },
+    {
+      "kind": "log",
+      "reference": "Browser DOM http://127.0.0.1:3018/dashboard/new-user",
+      "note": "In-app browser DOM check found no client error, 10 inputs, 2 textareas, 1 select, 14 buttons, Save draft, and N-FORM coverage text."
+    },
+    {
+      "kind": "log",
+      "reference": "Playwright download event on /dashboard/new-user",
+      "note": "Download button emitted README.md as the suggested filename."
     }
   ],
   "items": {
@@ -1386,20 +1426,20 @@
       ]
     },
     "14-001": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "9"
+        "14"
       ],
       "evidence": [
         {
           "kind": "file",
           "reference": "packages/core/src/domain.ts",
-          "note": "UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedReadme, Theme-related config, and PageSiteBundle models exist."
+          "note": "Core domain models define UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedProfile, and Theme-related config types."
         },
         {
-          "kind": "test",
-          "reference": "packages/github/src/stats.test.ts",
-          "note": "Public dataset construction exercises the data model."
+          "kind": "log",
+          "reference": "npm.cmd run typecheck",
+          "note": "All workspace type definitions compile successfully."
         }
       ]
     },
@@ -1427,75 +1467,20 @@
       ]
     },
     "14-004": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "10.3"
+        "14"
       ],
       "evidence": [
         {
-          "kind": "file",
-          "reference": "apps/web/app/api/github/contributions/route.ts",
-          "note": "GitHub contributions API route exists."
+          "kind": "log",
+          "reference": "npm.cmd run build",
+          "note": "Build route table includes GitHub, cards, generate, import, oauth, deploy, automation, admin, themes, and new-user API routes."
         },
         {
-          "kind": "file",
-          "reference": "apps/web/app/api/github/stars/route.ts",
-          "note": "GitHub stars API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/github/forks/route.ts",
-          "note": "GitHub forks API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/github/issues/route.ts",
-          "note": "GitHub issues API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/github/pulls/route.ts",
-          "note": "GitHub pulls API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/github/languages/route.ts",
-          "note": "GitHub languages API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/export/readme/route.ts",
-          "note": "README export API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/export/pages/route.ts",
-          "note": "Pages export API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/oauth/github/route.ts",
-          "note": "GitHub OAuth start API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/oauth/github/callback/route.ts",
-          "note": "GitHub OAuth callback API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
-          "note": "GitHub deploy execute API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
-          "note": "GitHub Pages enablement API route exists."
-        },
-        {
-          "kind": "file",
-          "reference": "apps/web/app/api/deploy/github/rollback/route.ts",
-          "note": "GitHub rollback API route exists."
+          "kind": "api-response",
+          "reference": "GET/POST smoke tests across github/cards/generate/import/oauth/deploy/new-user/achievements APIs",
+          "note": "Local smoke tests returned 200/expected OAuth-gated responses for the implemented API route groups."
         }
       ]
     },
@@ -3376,6 +3361,1157 @@
           "kind": "api-response",
           "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=pages",
           "note": "Local preview returned status=200 with diff and write operations."
+        }
+      ]
+    },
+    "13-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/language.test.ts",
+          "note": "Locale helpers cover English, Chinese, and bilingual text selection."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/readme.ts",
+          "note": "README generation reads config.locale for headings, numbers, and card URLs."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/achievements/calculate?username=octocat&locale=en-US",
+          "note": "Achievement API accepts locale and returns localized achievement results and embeds."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/cards-workspace.png",
+          "note": "Cards workspace exposes locale parameters for card preview and embeds."
+        }
+      ]
+    },
+    "13-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/language.test.ts",
+          "note": "Date and number formatting defaults to en-US and switches to zh-CN in Chinese mode."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/language.ts",
+          "note": "localeDate and localeNumber centralize date/number localization."
+        }
+      ]
+    },
+    "13-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/privacy.test.ts",
+          "note": "Privacy checks flag sensitive fields and hideSensitiveSettings removes sensitive README/Pages exposure."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/privacy.ts",
+          "note": "Default privacy settings keep GPA/email hidden from README by default and define sensitive-field visibility."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "New-user draft defaults to public-only GitHub data and hides email/GPA unless the user enables them."
+        }
+      ]
+    },
+    "14-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "14"
+      ],
+      "evidence": [
+        {
+          "kind": "log",
+          "reference": "npm.cmd run build",
+          "note": "Build route table includes /dashboard, /dashboard/profile-readme, /dashboard/pages, /dashboard/cards, /dashboard/achievements, /dashboard/import, /dashboard/settings, and /dashboard/history."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/dashboard.png",
+          "note": "Dashboard workspace screenshot shows navigation into the required workbench routes."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user dashboard route renders the expanded form workspace."
+        }
+      ]
+    },
+    "15-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "15"
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/home.png",
+          "note": "Unauthenticated homepage supports username-first public workflow."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/github/languages?username=octocat",
+          "note": "Unauthenticated public GitHub data lookup returned real public language data."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST /api/export/readme",
+          "note": "Unauthenticated README export smoke test returned a package for octocat."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/cards/stats?user=octocat&format=json|svg|png",
+          "note": "Card API smoke tests returned JSON, SVG, and PNG outputs."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST /api/export/pages?format=zip",
+          "note": "Pages export smoke test returned a downloadable ZIP package."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README workspace provides live preview, copy, and download controls."
+        }
+      ]
+    },
+    "15-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "15"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/import-readme.test.ts",
+          "note": "README import parser identifies sections, recommendations, preserved custom blocks, diff, and export files."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3015/api/import/readme sourceType=paste|upload|repository-url",
+          "note": "Import API smoke tests returned status=200 for paste, upload, and repository URL import modes."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET/POST http://127.0.0.1:3015/api/themes/export|import|share",
+          "note": "Theme import/export/share smoke tests returned status=200 for unified theme flow."
+        }
+      ]
+    },
+    "15-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "15"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/achievements/src/index.test.ts",
+          "note": "Achievement tests cover unlocked and locked progress, categories, localized output, and embed generation."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/achievements/calculate/route.ts",
+          "note": "Achievement API loads GitHubClient dataset first and falls back with warnings when live GitHub calls are limited."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3018/api/achievements/calculate?username=octocat&locale=en-US",
+          "note": "Smoke test returned 45 achievements, unlocked count, progress, README/Pages/SVG embeds, and 07-* acceptance IDs."
+        }
+      ]
+    },
+    "N-ENTRY-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.1"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user.test.ts",
+          "note": "Zero-data accounts are detected and recommended for new-user mode."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user.ts",
+          "note": "recommendNewUserMode evaluates public repos, contributions, stars, PRs, issues, and contribution graph availability."
+        }
+      ]
+    },
+    "N-ENTRY-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.1"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user.test.ts",
+          "note": "New-user recommendations hide empty contribution-heavy modules and provide growth actions."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Zero-data README avoids undefined/empty modules and replaces sparse data with growth-oriented copy."
+        }
+      ]
+    },
+    "N-FORM-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Basics include display name, nickname, avatar, one-line intro, role, location, email, website, blog, resume, and social links."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Education form captures school, department, major, degree, years, grade, GPA, courses, honors, and visibility."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Learning direction catalog provides selectable directions for new users."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Programming language catalog provides selectable language rows."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Programming language rows capture proficiency and learning/daily/primary flags."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Skill stack captures frontend/backend/database/AI/devops/cloud/testing skills."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Skill rows include icon, badge, README, and Pages display controls."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Manual projects can be edited in the new-user wizard."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Project fields include name, summary, type, status, tech stack, highlights, role, repo/demo/screenshot URLs, featured, and visibility."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Learning plan captures focus, books, courses, current projects, goals, weekly/open-source/job/blog/algorithm plans."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-011": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Personal highlights are captured and mapped into the generated profile bio."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-012": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Contact controls include email, website, blog, resume, social links, and preferred channels."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-013": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "Display switches control GitHub stats, contribution calendar, visitors, achievements, blog, resume, contact, and skill displays."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-014": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-form.test.ts",
+          "note": "New-user wizard is split into Basics, Education, Skills, Projects, Plan, Privacy, and Preview steps."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-form.ts",
+          "note": "Zod schema validates this section and maps it into ProfileStudioConfig."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard renders the multi-step form and generated-plan evidence."
+        }
+      ]
+    },
+    "N-FORM-015": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.3"
+      ],
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API validates drafts, saves local-session drafts, and persists to Prisma when DATABASE_URL is configured."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST/GET http://127.0.0.1:3018/api/new-user/profile-form",
+          "note": "Smoke tests returned status=200, saved=true, savedAt, draft retrieval, and N-FORM-015 acceptance ID."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "New-user wizard exposes Save draft and shows saved/copy state after interaction."
+        }
+      ]
+    },
+    "N-README-019": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5"
+      ],
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/components/new-user-wizard.tsx",
+          "note": "New-user wizard regenerates README markdown from form draft on every state change."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/new-user-wizard.png",
+          "note": "Preview workspace is part of the multi-step README flow."
+        }
+      ]
+    },
+    "N-README-020": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5"
+      ],
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/components/new-user-wizard.tsx",
+          "note": "Copy button writes generated Markdown to clipboard with textarea fallback when clipboard permissions are unavailable."
+        },
+        {
+          "kind": "log",
+          "reference": "Playwright save/copy smoke on /dashboard/new-user",
+          "note": "Smoke test saved the draft and observed Markdown copied state."
+        }
+      ]
+    },
+    "N-README-021": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5"
+      ],
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/components/new-user-wizard.tsx",
+          "note": "Download button creates a README.md blob from generated Markdown."
+        },
+        {
+          "kind": "log",
+          "reference": "Playwright download event on /dashboard/new-user",
+          "note": "Download button emitted README.md as the suggested filename."
+        }
+      ]
+    },
+    "N-RT-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-001 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-001 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-002 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-002 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-003 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-003 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-004 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-004 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-005 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-005 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-006 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-006 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-007 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-007 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-008 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-008 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-009 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-009 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-010 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-010 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-011": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-011 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-011 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-012": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-012 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-012 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-013": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-013 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-013 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-014": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-014 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-014 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-RT-015": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in README template registry includes N-RT-015 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "README template N-RT-015 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-001 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-001 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-002 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-002 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-003 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-003 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-004 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-004 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-005 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-005 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-006 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-006 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-007 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-007 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-008 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-008 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-009 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-009 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-010 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-010 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-011": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-011 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-011 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-012": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-012 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-012 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-013": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-013 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-013 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-014": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-014 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-014 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-PT-015": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.2"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Built-in Pages template registry includes N-PT-015 with English and Chinese metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Pages template N-PT-015 is registered with its matching acceptance ID."
         }
       ]
     }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildNewUserConfig, recommendNewUserMode, summarizeNewUserConfig } from "./new-user";
+import { buildNewUserConfig, learningDirectionCatalog, programmingLanguageCatalog, recommendNewUserMode, skillCatalog, summarizeNewUserConfig } from "./new-user";
 
 describe("new-user automation", () => {
   it("recommends new-user mode for a zero-data account", () => {
@@ -23,5 +23,13 @@ describe("new-user automation", () => {
     expect(summary.locale).toBe("en-US");
     expect(summary.privacyWarnings.length).toBeGreaterThan(0);
   });
-});
 
+  it("keeps the multi-step new-user form catalogs complete", () => {
+    expect(learningDirectionCatalog.length).toBeGreaterThanOrEqual(20);
+    expect(programmingLanguageCatalog).toEqual(expect.arrayContaining(["Python", "TypeScript", "Java", "SQL"]));
+    expect(skillCatalog.frontend).toContain("React");
+    expect(skillCatalog.backend).toContain("FastAPI");
+    expect(skillCatalog.database).toContain("PostgreSQL");
+    expect(skillCatalog.devops).toContain("GitHub Actions");
+  });
+});

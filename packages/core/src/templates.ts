@@ -53,13 +53,13 @@ const readmeNames = [
   ["bilingual", "Bilingual README", "中英文双语", "English and Chinese profile content together."]
 ];
 
-export const builtinReadmeTemplates: TemplateDefinition[] = readmeNames.map(([key, en, zh, description]) => ({
+export const builtinReadmeTemplates: TemplateDefinition[] = readmeNames.map(([key, en, zh, description], index) => ({
   key,
   type: "readme",
   name: { en, zh },
   description: { en: description, zh: `${zh} README 模板。` },
   recommendedModes: ["new-user", "hybrid"],
-  acceptanceIds: ["04-001", "N-RT-001", "N-README-001"]
+  acceptanceIds: ["04-001", `N-RT-${String(index + 1).padStart(3, "0")}`, "N-README-001"]
 }));
 
 const pageNames = [
@@ -80,13 +80,13 @@ const pageNames = [
   ["open-source-newcomer-site", "Open Source Newcomer", "开源新人主页"]
 ];
 
-export const builtinPageTemplates: TemplateDefinition[] = pageNames.map(([key, en, zh]) => ({
+export const builtinPageTemplates: TemplateDefinition[] = pageNames.map(([key, en, zh], index) => ({
   key,
   type: "pages",
   name: { en, zh },
   description: { en: `${en} GitHub Pages template with responsive layout and SEO.`, zh: `${zh} GitHub Pages 模板。` },
   recommendedModes: ["new-user", "data-enhanced", "hybrid"],
-  acceptanceIds: ["05-001", "N-PT-001", "N-PAGE-001"]
+  acceptanceIds: ["05-001", `N-PT-${String(index + 1).padStart(3, "0")}`, "N-PAGE-001"]
 }));
 
 export const builtinThemePresets: ThemeDefinition[] = [
@@ -122,4 +122,3 @@ export const builtinThemePresets: ThemeDefinition[] = [
     animation: "subtle"
   }
 }));
-

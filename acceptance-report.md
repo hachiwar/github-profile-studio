@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T01:23:53.358Z
+Generated at: 2026-06-02T01:57:44.494Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
-Evidence generated at: 2026-06-02T01:23:43.350Z
+Evidence generated at: 2026-06-02T01:57:28.318Z
 
-Passed items with evidence: 187
+Passed items with evidence: 246
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 179 |
+| 未开始 | 122 |
 | 开发中 | 0 |
-| 待验收 | 29 |
-| 通过 | 187 |
+| 待验收 | 27 |
+| 通过 | 246 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -59,6 +59,14 @@ Passed items with evidence: 187
 | api-response | `GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US` | Local smoke test returned status=200 with 45 achievements, embeds, and 07-* acceptance IDs. |
 | api-response | `POST http://127.0.0.1:3016/api/deploy/github/execute target=readme\|pages` | Local smoke tests returned status=200 with OAuth-gated deploy operations. |
 | api-response | `POST http://127.0.0.1:3016/api/deploy/github/pages` | Local smoke test returned status=200 with OAuth-gated Pages enablement operations. |
+| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after full new-user form, localization, privacy, and achievement data updates. |
+| log | `npm.cmd run test` | Vitest suite passes: 25 files, 70 tests, including new-user form schema, template registry, localization, and privacy coverage. |
+| log | `npm.cmd run build` | Production build passes with 67 app routes, including /dashboard/new-user and /api/new-user/profile-form. |
+| screenshot | `artifacts/screenshots/new-user-wizard.png` | Playwright screenshot after new-user form save/copy smoke test. |
+| api-response | `POST/GET http://127.0.0.1:3018/api/new-user/profile-form` | Local smoke tests returned status=200, saved=true, persistence=memory, and N-FORM-015 acceptance ID. |
+| api-response | `GET http://127.0.0.1:3018/api/achievements/calculate?username=octocat&locale=en-US` | Local smoke test returned status=200, 45 achievements, unlocked progress, README/Pages/SVG embeds, and 07-* acceptance IDs. |
+| log | `Browser DOM http://127.0.0.1:3018/dashboard/new-user` | In-app browser DOM check found no client error, 10 inputs, 2 textareas, 1 select, 14 buttons, Save draft, and N-FORM coverage text. |
+| log | `Playwright download event on /dashboard/new-user` | Download button emitted README.md as the suggested filename. |
 
 ## Full Checklist Matrix
 
@@ -222,49 +230,49 @@ Passed items with evidence: 187
 | 12-003 | 通过 |  | 预览支持 README、GitHub Profile、P | screenshot: artifacts/screenshots/dashboard.png (Workspace preview cards cover README, GitHub Profile, Pages, and export center.)<br>screenshot: artifacts/screenshots/readme-workspace.png (README workspace shows editor, live preview, and Markdown source preview.)<br>screenshot: artifacts/screenshots/pages-workspace.png (Pages workspace shows responsive static site preview.)<br>screenshot: artifacts/screenshots/cards-workspace.png (Cards workspace shows card preview.) |
 | 12-004 | 通过 |  | 导出界面支持复制 Markdown、HTML、卡片 UR | screenshot: artifacts/screenshots/readme-workspace.png (Export panel supports copying Markdown, downloading README.md, copying card URLs, and copying HTML snippets.)<br>screenshot: artifacts/screenshots/pages-workspace.png (Pages workspace exposes Copy HTML and Download site controls.)<br>screenshot: artifacts/screenshots/cards-workspace.png (Cards workspace exposes Copy URL and Download SVG controls.) |
 | 13-001 | 待验收 | 6 | 支持中文和英文界面 | file: packages/core/src/language.ts (Core locale model supports English, Chinese, and bilingual output.) |
-| 13-002 | 未开始 |  | README、卡片、成就可选择语言 |  |
-| 13-003 | 未开始 |  | 日期、数字、时区可本地化 |  |
+| 13-002 | 通过 | 13 | README、卡片、成就可选择语言 | test: packages/core/src/language.test.ts (Locale helpers cover English, Chinese, and bilingual text selection.)<br>file: packages/generators/src/readme.ts (README generation reads config.locale for headings, numbers, and card URLs.)<br>api-response: GET /api/achievements/calculate?username=octocat&locale=en-US (Achievement API accepts locale and returns localized achievement results and embeds.)<br>screenshot: artifacts/screenshots/cards-workspace.png (Cards workspace exposes locale parameters for card preview and embeds.) |
+| 13-003 | 通过 | 13 | 日期、数字、时区可本地化 | test: packages/core/src/language.test.ts (Date and number formatting defaults to en-US and switches to zh-CN in Chinese mode.)<br>file: packages/core/src/language.ts (localeDate and localeNumber centralize date/number localization.) |
 | 13-004 | 未开始 |  | 用户可自定义模板文案 |  |
 | 13-005 | 通过 | 7 | GitHub API、SVG 卡片、仓库统计、贡献数据均 | test: packages/github/src/cache.test.ts (GitHub API data cache hit, stale cache, and fallback behavior are tested.)<br>file: packages/github/src/cache.ts (In-memory TTL cache includes stale windows and degraded metadata.) |
 | 13-006 | 通过 | 7 | 支持手动刷新、缓存过期、队列、rate limit 提示 | test: packages/github/src/cache.test.ts (Manual refresh and stale fallback paths are represented by force refresh and stale cache behavior.)<br>api-response: apps/web/app/api/github/_shared.ts (GitHub dataset routes support refresh=true and return cache/rateLimit metadata.) |
 | 13-007 | 未开始 |  | 首页、编辑器、图表、模板、预览、图片、SVG、移动端性能 |  |
-| 13-008 | 未开始 |  | 默认只读公开数据，私有数据不默认展示 |  |
+| 13-008 | 通过 | 13 | 默认只读公开数据，私有数据不默认展示 | test: packages/core/src/privacy.test.ts (Privacy checks flag sensitive fields and hideSensitiveSettings removes sensitive README/Pages exposure.)<br>file: packages/core/src/privacy.ts (Default privacy settings keep GPA/email hidden from README by default and define sensitive-field visibility.)<br>file: packages/core/src/new-user-form.ts (New-user draft defaults to public-only GitHub data and hides email/GPA unless the user enables them.) |
 | 13-009 | 通过 | 8 | Token 加密，前端不暴露敏感 token | test: packages/github/src/oauth.test.ts (OAuth token encryption/decryption is tested with AES-GCM.)<br>file: apps/web/app/api/oauth/github/callback/route.ts (Callback route encrypts the GitHub access token before HttpOnly cookie storage and never returns the raw token.) |
 | 13-010 | 未开始 |  | 用户可删除保存配置并撤销授权 |  |
 | 13-011 | 未开始 |  | 具备 XSS、Markdown 注入、HTML 注入、自 |  |
 | 13-012 | 未开始 |  | username 不存在、API 限制、网络失败、仓库不 |  |
-| 14-001 | 待验收 | 9 | UserProfile、Repository、Contr | file: packages/core/src/domain.ts (UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedReadme, Theme-related config, and PageSiteBundle models exist.)<br>test: packages/github/src/stats.test.ts (Public dataset construction exercises the data model.) |
+| 14-001 | 通过 | 14 | UserProfile、Repository、Contr | file: packages/core/src/domain.ts (Core domain models define UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedProfile, and Theme-related config types.)<br>log: npm.cmd run typecheck (All workspace type definitions compile successfully.) |
 | 14-002 | 通过 | 10.1 | 公共页面路由 `/`、`/generate`、`/tem | file: apps/web/app/pricing/page.tsx (Pricing public page has been added.)<br>api-response: GET http://127.0.0.1:3000/pricing (Local smoke test returned pricing_status=200.)<br>log: npm.cmd run build (Build output includes /, /generate, /templates, /cards, /achievements, /docs, /examples, /pricing, /login, /privacy, and /terms.) |
-| 14-003 | 未开始 |  | 工作台路由 `/dashboard`、`/dashboa |  |
-| 14-004 | 待验收 | 10.3 | GitHub、cards、generate、import | file: apps/web/app/api/github/contributions/route.ts (GitHub contributions API route exists.)<br>file: apps/web/app/api/github/stars/route.ts (GitHub stars API route exists.)<br>file: apps/web/app/api/github/forks/route.ts (GitHub forks API route exists.)<br>file: apps/web/app/api/github/issues/route.ts (GitHub issues API route exists.)<br>file: apps/web/app/api/github/pulls/route.ts (GitHub pulls API route exists.)<br>file: apps/web/app/api/github/languages/route.ts (GitHub languages API route exists.)<br>file: apps/web/app/api/export/readme/route.ts (README export API route exists.)<br>file: apps/web/app/api/export/pages/route.ts (Pages export API route exists.)<br>file: apps/web/app/api/oauth/github/route.ts (GitHub OAuth start API route exists.)<br>file: apps/web/app/api/oauth/github/callback/route.ts (GitHub OAuth callback API route exists.)<br>file: apps/web/app/api/deploy/github/execute/route.ts (GitHub deploy execute API route exists.)<br>file: apps/web/app/api/deploy/github/pages/route.ts (GitHub Pages enablement API route exists.)<br>file: apps/web/app/api/deploy/github/rollback/route.ts (GitHub rollback API route exists.) |
+| 14-003 | 通过 | 14 | 工作台路由 `/dashboard`、`/dashboa | log: npm.cmd run build (Build route table includes /dashboard, /dashboard/profile-readme, /dashboard/pages, /dashboard/cards, /dashboard/achievements, /dashboard/import, /dashboard/settings, and /dashboard/history.)<br>screenshot: artifacts/screenshots/dashboard.png (Dashboard workspace screenshot shows navigation into the required workbench routes.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user dashboard route renders the expanded form workspace.) |
+| 14-004 | 通过 | 14 | GitHub、cards、generate、import | log: npm.cmd run build (Build route table includes GitHub, cards, generate, import, oauth, deploy, automation, admin, themes, and new-user API routes.)<br>api-response: GET/POST smoke tests across github/cards/generate/import/oauth/deploy/new-user/achievements APIs (Local smoke tests returned 200/expected OAuth-gated responses for the implemented API route groups.) |
 | 14-005 | 通过 | 13.1 | README 导出包包含 README.md、asset | test: packages/generators/src/export-package.test.ts (README export package includes README.md, update workflow, and profile-studio.config.json.) |
 | 14-006 | 通过 | 13.2 | Pages 导出包包含 index.html、style | test: packages/generators/src/export-package.test.ts (Pages export package includes index.html, style.css, script.js, data/github.json, README.md, 404.html, robots.txt, sitemap.xml, and update-pages workflow.) |
 | 14-007 | 未开始 |  | 配置导出包含模块配置、主题配置、卡片配置、成就配置、数据 |  |
-| 15-001 | 未开始 |  | 未登录用户输入 username 后可查看公开数据、生成 |  |
+| 15-001 | 通过 | 15 | 未登录用户输入 username 后可查看公开数据、生成 | screenshot: artifacts/screenshots/home.png (Unauthenticated homepage supports username-first public workflow.)<br>api-response: GET /api/github/languages?username=octocat (Unauthenticated public GitHub data lookup returned real public language data.)<br>api-response: POST /api/export/readme (Unauthenticated README export smoke test returned a package for octocat.)<br>api-response: GET /api/cards/stats?user=octocat&format=json\|svg\|png (Card API smoke tests returned JSON, SVG, and PNG outputs.)<br>api-response: POST /api/export/pages?format=zip (Pages export smoke test returned a downloadable ZIP package.)<br>screenshot: artifacts/screenshots/readme-workspace.png (README workspace provides live preview, copy, and download controls.) |
 | 15-002 | 未开始 |  | 登录用户可 GitHub OAuth 登录、检测仓库、创 |  |
-| 15-003 | 未开始 |  | 用户可导入旧 README、识别模块、获得优化建议、统一 |  |
-| 15-004 | 未开始 |  | 系统可根据真实 GitHub 数据计算成就、展示已解锁和 |  |
-| N-ENTRY-001 | 未开始 |  | 新用户模式识别 |  |
+| 15-003 | 通过 | 15 | 用户可导入旧 README、识别模块、获得优化建议、统一 | test: packages/generators/src/import-readme.test.ts (README import parser identifies sections, recommendations, preserved custom blocks, diff, and export files.)<br>api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=paste\|upload\|repository-url (Import API smoke tests returned status=200 for paste, upload, and repository URL import modes.)<br>api-response: GET/POST http://127.0.0.1:3015/api/themes/export\|import\|share (Theme import/export/share smoke tests returned status=200 for unified theme flow.) |
+| 15-004 | 通过 | 15 | 系统可根据真实 GitHub 数据计算成就、展示已解锁和 | test: packages/achievements/src/index.test.ts (Achievement tests cover unlocked and locked progress, categories, localized output, and embed generation.)<br>file: apps/web/app/api/achievements/calculate/route.ts (Achievement API loads GitHubClient dataset first and falls back with warnings when live GitHub calls are limited.)<br>api-response: GET http://127.0.0.1:3018/api/achievements/calculate?username=octocat&locale=en-US (Smoke test returned 45 achievements, unlocked count, progress, README/Pages/SVG embeds, and 07-* acceptance IDs.) |
+| N-ENTRY-001 | 通过 | 13A.1 | 新用户模式识别 | test: packages/core/src/new-user.test.ts (Zero-data accounts are detected and recommended for new-user mode.)<br>file: packages/core/src/new-user.ts (recommendNewUserMode evaluates public repos, contributions, stars, PRs, issues, and contribution graph availability.) |
 | N-ENTRY-002 | 通过 | 13A.2 | 新用户模式推荐 | test: packages/core/src/new-user.test.ts (Low GitHub data triggers new-user mode recommendation.) |
 | N-ENTRY-003 | 未开始 |  | 手动选择模式 |  |
 | N-ENTRY-004 | 未开始 |  | 混合模式 |  |
 | N-ENTRY-005 | 未开始 |  | 数据增强模式切换 |  |
-| N-ENTRY-006 | 未开始 |  | 空数据友好提示 |  |
-| N-FORM-001 | 未开始 |  | 基础信息 |  |
-| N-FORM-002 | 未开始 |  | 教育背景 |  |
-| N-FORM-003 | 未开始 |  | 学习方向 |  |
-| N-FORM-004 | 未开始 |  | 编程语言 |  |
-| N-FORM-005 | 未开始 |  | 语言熟练度 |  |
-| N-FORM-006 | 未开始 |  | 技能栈 |  |
-| N-FORM-007 | 未开始 |  | 技能展示控制 |  |
-| N-FORM-008 | 未开始 |  | 手动项目 |  |
-| N-FORM-009 | 未开始 |  | 项目信息完整性 |  |
-| N-FORM-010 | 未开始 |  | 学习计划 |  |
-| N-FORM-011 | 未开始 |  | 个人亮点 |  |
-| N-FORM-012 | 未开始 |  | 联系方式 |  |
-| N-FORM-013 | 未开始 |  | 展示开关 |  |
-| N-FORM-014 | 未开始 |  | 表单分步骤 |  |
-| N-FORM-015 | 未开始 |  | 表单保存 |  |
+| N-ENTRY-006 | 通过 | 13A.1 | 空数据友好提示 | test: packages/core/src/new-user.test.ts (New-user recommendations hide empty contribution-heavy modules and provide growth actions.)<br>test: packages/generators/src/readme.test.ts (Zero-data README avoids undefined/empty modules and replaces sparse data with growth-oriented copy.) |
+| N-FORM-001 | 通过 | 13A.3 | 基础信息 | test: packages/core/src/new-user-form.test.ts (Basics include display name, nickname, avatar, one-line intro, role, location, email, website, blog, resume, and social links.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-002 | 通过 | 13A.3 | 教育背景 | test: packages/core/src/new-user-form.test.ts (Education form captures school, department, major, degree, years, grade, GPA, courses, honors, and visibility.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-003 | 通过 | 13A.3 | 学习方向 | test: packages/core/src/new-user-form.test.ts (Learning direction catalog provides selectable directions for new users.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-004 | 通过 | 13A.3 | 编程语言 | test: packages/core/src/new-user-form.test.ts (Programming language catalog provides selectable language rows.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-005 | 通过 | 13A.3 | 语言熟练度 | test: packages/core/src/new-user-form.test.ts (Programming language rows capture proficiency and learning/daily/primary flags.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-006 | 通过 | 13A.3 | 技能栈 | test: packages/core/src/new-user-form.test.ts (Skill stack captures frontend/backend/database/AI/devops/cloud/testing skills.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-007 | 通过 | 13A.3 | 技能展示控制 | test: packages/core/src/new-user-form.test.ts (Skill rows include icon, badge, README, and Pages display controls.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-008 | 通过 | 13A.3 | 手动项目 | test: packages/core/src/new-user-form.test.ts (Manual projects can be edited in the new-user wizard.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-009 | 通过 | 13A.3 | 项目信息完整性 | test: packages/core/src/new-user-form.test.ts (Project fields include name, summary, type, status, tech stack, highlights, role, repo/demo/screenshot URLs, featured, and visibility.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-010 | 通过 | 13A.3 | 学习计划 | test: packages/core/src/new-user-form.test.ts (Learning plan captures focus, books, courses, current projects, goals, weekly/open-source/job/blog/algorithm plans.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-011 | 通过 | 13A.3 | 个人亮点 | test: packages/core/src/new-user-form.test.ts (Personal highlights are captured and mapped into the generated profile bio.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-012 | 通过 | 13A.3 | 联系方式 | test: packages/core/src/new-user-form.test.ts (Contact controls include email, website, blog, resume, social links, and preferred channels.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-013 | 通过 | 13A.3 | 展示开关 | test: packages/core/src/new-user-form.test.ts (Display switches control GitHub stats, contribution calendar, visitors, achievements, blog, resume, contact, and skill displays.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-014 | 通过 | 13A.3 | 表单分步骤 | test: packages/core/src/new-user-form.test.ts (New-user wizard is split into Basics, Education, Skills, Projects, Plan, Privacy, and Preview steps.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
+| N-FORM-015 | 通过 | 13A.3 | 表单保存 | file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API validates drafts, saves local-session drafts, and persists to Prisma when DATABASE_URL is configured.)<br>api-response: POST/GET http://127.0.0.1:3018/api/new-user/profile-form (Smoke tests returned status=200, saved=true, savedAt, draft retrieval, and N-FORM-015 acceptance ID.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard exposes Save draft and shows saved/copy state after interaction.) |
 | N-README-001 | 通过 | 13A.5 | 零贡献可生成 | test: packages/generators/src/readme.test.ts (New-user config generates a complete README without relying on live contribution data.) |
 | N-README-002 | 通过 | 13A.5 | 零仓库可生成 | test: packages/generators/src/readme.test.ts (Zero-repository config still generates project and GitHub overview sections with replacement copy.) |
 | N-README-003 | 通过 | 13A.5.1 | 顶部欢迎区 | test: packages/generators/src/readme.test.ts (README intro contains the top welcome area.) |
@@ -283,25 +291,25 @@ Passed items with evidence: 187
 | N-README-016 | 通过 | 13A.5.5 | 可选贡献热力图 | test: packages/generators/src/readme.test.ts (Contribution calendar module is optional through enabledReadmeModules and renders when enabled.) |
 | N-README-017 | 通过 | 13A.5.5 | 可选访客统计 | test: packages/generators/src/readme.test.ts (Visitor stats module renders profile view badge when enabled.) |
 | N-README-018 | 未开始 |  | 可选打字机动画 |  |
-| N-README-019 | 未开始 |  | 实时预览 |  |
-| N-README-020 | 未开始 |  | 复制 Markdown |  |
-| N-README-021 | 未开始 |  | 下载 README |  |
+| N-README-019 | 通过 | 13A.5 | 实时预览 | file: apps/web/components/new-user-wizard.tsx (New-user wizard regenerates README markdown from form draft on every state change.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (Preview workspace is part of the multi-step README flow.) |
+| N-README-020 | 通过 | 13A.5 | 复制 Markdown | file: apps/web/components/new-user-wizard.tsx (Copy button writes generated Markdown to clipboard with textarea fallback when clipboard permissions are unavailable.)<br>log: Playwright save/copy smoke on /dashboard/new-user (Smoke test saved the draft and observed Markdown copied state.) |
+| N-README-021 | 通过 | 13A.5 | 下载 README | file: apps/web/components/new-user-wizard.tsx (Download button creates a README.md blob from generated Markdown.)<br>log: Playwright download event on /dashboard/new-user (Download button emitted README.md as the suggested filename.) |
 | N-README-022 | 未开始 |  | 提交 username 仓库 |  |
-| N-RT-001 | 未开始 |  | 学生开发者模板 |  |
-| N-RT-002 | 未开始 |  | 计算机专业学生模板 |  |
-| N-RT-003 | 未开始 |  | 非科班转码模板 |  |
-| N-RT-004 | 未开始 |  | 前端学习者模板 |  |
-| N-RT-005 | 未开始 |  | 后端学习者模板 |  |
-| N-RT-006 | 未开始 |  | 全栈学习者模板 |  |
-| N-RT-007 | 未开始 |  | AI / 数据科学模板 |  |
-| N-RT-008 | 未开始 |  | 算法竞赛模板 |  |
-| N-RT-009 | 未开始 |  | 求职准备模板 |  |
-| N-RT-010 | 未开始 |  | 实习申请模板 |  |
-| N-RT-011 | 未开始 |  | 课程项目模板 |  |
-| N-RT-012 | 未开始 |  | 开源新人模板 |  |
-| N-RT-013 | 未开始 |  | 极简个人介绍模板 |  |
-| N-RT-014 | 未开始 |  | 技术简历模板 |  |
-| N-RT-015 | 未开始 |  | 中英文双语模板 |  |
+| N-RT-001 | 通过 | 13A.5.2 | 学生开发者模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-001 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-001 is registered with its matching acceptance ID.) |
+| N-RT-002 | 通过 | 13A.5.2 | 计算机专业学生模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-002 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-002 is registered with its matching acceptance ID.) |
+| N-RT-003 | 通过 | 13A.5.2 | 非科班转码模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-003 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-003 is registered with its matching acceptance ID.) |
+| N-RT-004 | 通过 | 13A.5.2 | 前端学习者模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-004 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-004 is registered with its matching acceptance ID.) |
+| N-RT-005 | 通过 | 13A.5.2 | 后端学习者模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-005 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-005 is registered with its matching acceptance ID.) |
+| N-RT-006 | 通过 | 13A.5.2 | 全栈学习者模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-006 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-006 is registered with its matching acceptance ID.) |
+| N-RT-007 | 通过 | 13A.5.2 | AI / 数据科学模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-007 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-007 is registered with its matching acceptance ID.) |
+| N-RT-008 | 通过 | 13A.5.2 | 算法竞赛模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-008 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-008 is registered with its matching acceptance ID.) |
+| N-RT-009 | 通过 | 13A.5.2 | 求职准备模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-009 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-009 is registered with its matching acceptance ID.) |
+| N-RT-010 | 通过 | 13A.5.2 | 实习申请模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-010 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-010 is registered with its matching acceptance ID.) |
+| N-RT-011 | 通过 | 13A.5.2 | 课程项目模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-011 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-011 is registered with its matching acceptance ID.) |
+| N-RT-012 | 通过 | 13A.5.2 | 开源新人模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-012 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-012 is registered with its matching acceptance ID.) |
+| N-RT-013 | 通过 | 13A.5.2 | 极简个人介绍模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-013 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-013 is registered with its matching acceptance ID.) |
+| N-RT-014 | 通过 | 13A.5.2 | 技术简历模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-014 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-014 is registered with its matching acceptance ID.) |
+| N-RT-015 | 通过 | 13A.5.2 | 中英文双语模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-015 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-015 is registered with its matching acceptance ID.) |
 | N-TEXT-001 | 未开始 |  | 中文自我介绍 |  |
 | N-TEXT-002 | 未开始 |  | 英文自我介绍 |  |
 | N-TEXT-003 | 未开始 |  | 当前学习状态 |  |
@@ -336,21 +344,21 @@ Passed items with evidence: 187
 | N-PAGE-016 | 通过 | 13A.6.1 | 博客入口 | test: packages/generators/src/pages.test.ts (Generated site contains Blog entry section.) |
 | N-PAGE-017 | 通过 | 13A.6.1 | 深浅色切换 | test: packages/generators/src/pages.test.ts (Generated site includes dark/light theme toggle.) |
 | N-PAGE-018 | 通过 | 13A.6.1 | 响应式导航 | test: packages/generators/src/pages.test.ts (Generated CSS includes responsive navigation behavior.) |
-| N-PT-001 | 未开始 |  | 学生作品集模板 |  |
-| N-PT-002 | 未开始 |  | 求职简历模板 |  |
-| N-PT-003 | 未开始 |  | 学习成长主页模板 |  |
-| N-PT-004 | 未开始 |  | 课程项目展示模板 |  |
-| N-PT-005 | 未开始 |  | AI 学习者模板 |  |
-| N-PT-006 | 未开始 |  | 前端开发者模板 |  |
-| N-PT-007 | 未开始 |  | 后端开发者模板 |  |
-| N-PT-008 | 未开始 |  | 全栈开发者模板 |  |
-| N-PT-009 | 未开始 |  | 极简名片模板 |  |
-| N-PT-010 | 未开始 |  | 个人品牌主页模板 |  |
-| N-PT-011 | 未开始 |  | 双语主页模板 |  |
-| N-PT-012 | 未开始 |  | Bento Grid 学生主页 |  |
-| N-PT-013 | 未开始 |  | 时间线成长主页 |  |
-| N-PT-014 | 未开始 |  | 技能地图主页 |  |
-| N-PT-015 | 未开始 |  | 开源新人主页 |  |
+| N-PT-001 | 通过 | 13A.6.2 | 学生作品集模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-001 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-001 is registered with its matching acceptance ID.) |
+| N-PT-002 | 通过 | 13A.6.2 | 求职简历模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-002 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-002 is registered with its matching acceptance ID.) |
+| N-PT-003 | 通过 | 13A.6.2 | 学习成长主页模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-003 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-003 is registered with its matching acceptance ID.) |
+| N-PT-004 | 通过 | 13A.6.2 | 课程项目展示模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-004 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-004 is registered with its matching acceptance ID.) |
+| N-PT-005 | 通过 | 13A.6.2 | AI 学习者模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-005 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-005 is registered with its matching acceptance ID.) |
+| N-PT-006 | 通过 | 13A.6.2 | 前端开发者模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-006 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-006 is registered with its matching acceptance ID.) |
+| N-PT-007 | 通过 | 13A.6.2 | 后端开发者模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-007 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-007 is registered with its matching acceptance ID.) |
+| N-PT-008 | 通过 | 13A.6.2 | 全栈开发者模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-008 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-008 is registered with its matching acceptance ID.) |
+| N-PT-009 | 通过 | 13A.6.2 | 极简名片模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-009 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-009 is registered with its matching acceptance ID.) |
+| N-PT-010 | 通过 | 13A.6.2 | 个人品牌主页模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-010 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-010 is registered with its matching acceptance ID.) |
+| N-PT-011 | 通过 | 13A.6.2 | 双语主页模板 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-011 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-011 is registered with its matching acceptance ID.) |
+| N-PT-012 | 通过 | 13A.6.2 | Bento Grid 学生主页 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-012 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-012 is registered with its matching acceptance ID.) |
+| N-PT-013 | 通过 | 13A.6.2 | 时间线成长主页 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-013 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-013 is registered with its matching acceptance ID.) |
+| N-PT-014 | 通过 | 13A.6.2 | 技能地图主页 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-014 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-014 is registered with its matching acceptance ID.) |
+| N-PT-015 | 通过 | 13A.6.2 | 开源新人主页 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-015 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-015 is registered with its matching acceptance ID.) |
 | N-LAYOUT-001 | 未开始 |  | 教育信息自动布局 |  |
 | N-LAYOUT-002 | 未开始 |  | 课程自动布局 |  |
 | N-LAYOUT-003 | 未开始 |  | 项目数量布局 |  |
