@@ -7,3 +7,5 @@ export * from "./pages-compatibility";
 export * from "./actions";
 export * from "./import-readme";
 export * from "./export-package";
+export * from "./maintenance";
+export * from "./automation";

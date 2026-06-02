@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T00:23:36.883Z
+Generated at: 2026-06-02T00:42:29.902Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
-Evidence generated at: 2026-06-02T00:00:00.000Z
+Evidence generated at: 2026-06-02T00:42:21.998Z
 
-Passed items with evidence: 114
+Passed items with evidence: 131
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 258 |
+| 未开始 | 241 |
 | 开发中 | 0 |
 | 待验收 | 23 |
-| 通过 | 114 |
+| 通过 | 131 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -23,9 +23,9 @@ Passed items with evidence: 114
 
 | Kind | Reference | Note |
 | --- | --- | --- |
-| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes. |
-| log | `npm.cmd run test` | Vitest suite covers parser, GitHub stats/cache, README/Pages generators, cards, achievements, OAuth, deployment planning, actions, import, and theme IO. |
-| log | `npm.cmd run build` | Next production build completed and listed all public routes, dashboard routes, GitHub APIs, card APIs, and export APIs. |
+| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after automation, maintenance, growth, and admin API additions. |
+| log | `npm.cmd run test` | Vitest suite passes: 20 files, 56 tests, including maintenance generators and worker queue plans. |
+| log | `npm.cmd run build` | Production build passes and lists the new automation, growth, and admin API routes. |
 | api-response | `POST http://127.0.0.1:3000/api/export/readme` | Local smoke test returned a README export package for octocat. |
 | api-response | `POST http://127.0.0.1:3000/api/export/pages?format=zip` | Local smoke test returned status=200 and an 8083 byte ZIP package. |
 | api-response | `GET http://127.0.0.1:3000/api/github/languages?username=octocat` | Local smoke test returned real GitHub language data, cache metadata, and rate limit metadata. |
@@ -38,6 +38,13 @@ Passed items with evidence: 114
 | api-response | `POST http://127.0.0.1:3000/api/deploy/github/execute` | Local smoke test returned deploy_execute_status=200 with OAuth-gated deployment operations. |
 | api-response | `POST http://127.0.0.1:3000/api/deploy/github/pages` | Local smoke test returned pages_enable_status=200. |
 | api-response | `POST http://127.0.0.1:3000/api/deploy/github/rollback` | Local smoke test returned rollback_status=200. |
+| api-response | `GET http://127.0.0.1:3010/api/automation/jobs?username=octocat` | Local smoke test returned status=200 with 11-001, 11-002, 11-003, 11-004, 11-005, and 11-007 acceptance IDs. |
+| api-response | `POST http://127.0.0.1:3010/api/automation/run` | Local smoke test returned status=200 with generated README, Pages data, snapshots, achievements, year review, card cache, ranking, workflow, and N-GROW outputs. |
+| api-response | `GET http://127.0.0.1:3010/api/growth/recommendations?username=octocat&locale=en-US` | Local smoke test returned status=200 with all N-GROW-001 through N-GROW-010 recommendations. |
+| api-response | `GET http://127.0.0.1:3010/api/admin/metrics` | Local smoke test returned status=200 with product, generation, GitHub API, deployment, automation, template, card, and locale metrics. |
+| api-response | `GET http://127.0.0.1:3010/api/admin/cache` | Local smoke test returned status=200 with cache snapshot and stale/fallback cache policy. |
+| api-response | `GET http://127.0.0.1:3010/api/admin/queues?username=octocat` | Local smoke test returned status=200 with ready queue plans for scheduled maintenance jobs. |
+| api-response | `GET http://127.0.0.1:3010/api/admin/errors` | Local smoke test returned status=200 with structured error catalog and notification settings. |
 
 ## Full Checklist Matrix
 
@@ -81,7 +88,7 @@ Passed items with evidence: 114
 | 03-014 | 通过 | 4.2.3 | 贡献热力图数据生成 | test: packages/github/src/stats.test.ts (Contribution heatmap levels are tested.) |
 | 03-015 | 未开始 |  | 总 Star、仓库 Star 排名、7/30/90/36 |  |
 | 03-016 | 未开始 |  | 仓库 Star 曲线、用户总 Star 曲线、增长最快仓 |  |
-| 03-017 | 未开始 |  | 首次使用前 Star 历史尽量回溯，首次使用后快照记录 |  |
+| 03-017 | 通过 |  | 首次使用前 Star 历史尽量回溯，首次使用后快照记录 | test: packages/generators/src/maintenance.test.ts (Covers best-effort star history backfill from repository creation date plus scheduled star snapshots.)<br>file: packages/generators/src/maintenance.ts (createStarHistoryBackfill and star-snapshot maintenance files generate first-use history and ongoing snapshots.) |
 | 03-018 | 未开始 |  | 总 Fork、Fork 排名、最近一年新增 Fork、F |  |
 | 03-019 | 未开始 |  | 社区影响力评分生成 |  |
 | 03-020 | 未开始 |  | PR 总数、merged PR、closed PR、re |  |
@@ -189,13 +196,13 @@ Passed items with evidence: 114
 | 10-009 | 待验收 | 4.9.3 | 可创建 commit 和 pull request | test: packages/github/src/deploy.test.ts (Deployment plan covers commits, PRs, backups, rollback, diff, and logs; live OAuth write flow still needs integration verification.) |
 | 10-010 | 通过 | 4.9.3 | 支持直接提交和 PR 模式 | test: packages/github/src/deploy.test.ts (Deployment plans support pull-request and direct-commit modes.) |
 | 10-011 | 待验收 | 4.9.3 | 支持冲突检测、提交前 diff、旧文件备份、回滚、失败重 | test: packages/github/src/deploy.test.ts (Diff, backup labels, rollback plan, and deployment logs are modeled; live conflict/retry behavior needs integration verification.)<br>api-response: POST http://127.0.0.1:3000/api/deploy/github/rollback (Rollback preview route returned 200.) |
-| 11-001 | 未开始 |  | 可自动更新 README 动态数据 |  |
-| 11-002 | 未开始 |  | 可自动更新 Pages 静态 JSON |  |
-| 11-003 | 未开始 |  | 可记录 Star 与 Fork 快照 |  |
-| 11-004 | 未开始 |  | 可更新贡献统计、博客文章、成就状态、年度总结、SVG 卡 |  |
-| 11-005 | 未开始 |  | 可生成每日更新、每周更新、手动触发 workflow |  |
+| 11-001 | 通过 |  | 可自动更新 README 动态数据 | test: packages/generators/src/maintenance.test.ts (Full maintenance run writes README.md for dynamic README refresh.)<br>api-response: POST /api/automation/run (Automation run route exposes README refresh output in the generated file plan.) |
+| 11-002 | 通过 |  | 可自动更新 Pages 静态 JSON | test: packages/generators/src/maintenance.test.ts (Full maintenance run writes data/github.json for GitHub Pages static JSON refresh.)<br>api-response: POST /api/automation/run (Automation run route exposes Pages data refresh output.) |
+| 11-003 | 通过 |  | 可记录 Star 与 Fork 快照 | test: packages/generators/src/maintenance.test.ts (Full maintenance run writes star and fork snapshot JSON files.)<br>test: apps/worker/src/jobs.test.ts (Worker queue creates dedicated star snapshot operations with acceptance IDs.) |
+| 11-004 | 通过 |  | 可更新贡献统计、博客文章、成就状态、年度总结、SVG 卡 | test: packages/generators/src/maintenance.test.ts (Full maintenance run writes contribution, blog, achievement, annual summary, card cache, and project ranking outputs.)<br>api-response: GET /api/admin/queues (Admin queue route reports modules and operations for contribution, blog, achievements, annual summary, card cache, ranking, and errors.) |
+| 11-005 | 通过 |  | 可生成每日更新、每周更新、手动触发 workflow | test: packages/generators/src/actions.test.ts (Default workflow configs generate daily, weekly, and manual GitHub Actions triggers.)<br>test: apps/worker/src/jobs.test.ts (Worker queue maps scheduled jobs to executable maintenance operations.) |
 | 11-006 | 通过 | 4.10.2 | 可生成 README、Pages、Blog、成就、Sta | test: packages/generators/src/actions.test.ts (README, Pages data, blog, achievements, star snapshot, cache cleanup, and error notification workflow modules are generated.) |
-| 11-007 | 未开始 |  | 用户可配置更新时间、更新频率、更新模块、commit m |  |
+| 11-007 | 通过 |  | 用户可配置更新时间、更新频率、更新模块、commit m | test: packages/generators/src/maintenance.test.ts (Maintenance run writes configurable workflow YAML with frequency, modules, target branch, and commit message.)<br>file: apps/web/app/api/automation/_shared.ts (Automation request parser accepts cron, frequency, modules, targetBranch, and commitMessage overrides.) |
 | 12-001 | 未开始 |  | 首页包含产品标题、一句话介绍、username 输入框、 |  |
 | 12-002 | 未开始 |  | 工作台包含顶部导航、当前 username、当前目标类型 |  |
 | 12-003 | 未开始 |  | 预览支持 README、GitHub Profile、P |  |
@@ -375,16 +382,16 @@ Passed items with evidence: 114
 | N-SAVE-007 | 未开始 |  | 保存联系方式 |  |
 | N-SAVE-008 | 未开始 |  | 保存模板主题 |  |
 | N-SAVE-009 | 未开始 |  | 历史版本 |  |
-| N-GROW-001 | 未开始 |  | 新仓库推荐 |  |
-| N-GROW-002 | 未开始 |  | commit 增长推荐 |  |
-| N-GROW-003 | 未开始 |  | star 增长推荐 |  |
-| N-GROW-004 | 未开始 |  | PR / issue 增长推荐 |  |
-| N-GROW-005 | 未开始 |  | 技能更新 |  |
-| N-GROW-006 | 未开始 |  | 教育状态更新 |  |
-| N-GROW-007 | 未开始 |  | 求职状态更新 |  |
-| N-GROW-008 | 未开始 |  | 月度成长总结 |  |
-| N-GROW-009 | 未开始 |  | 年度总结 |  |
-| N-GROW-010 | 未开始 |  | 自动优化建议 |  |
+| N-GROW-001 | 通过 |  | 新仓库推荐 | test: packages/generators/src/maintenance.test.ts (New repository recommendation generated with evidence and actions.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
+| N-GROW-002 | 通过 |  | commit 增长推荐 | test: packages/generators/src/maintenance.test.ts (Commit growth recommendation generated from contribution totals and deltas.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
+| N-GROW-003 | 通过 |  | star 增长推荐 | test: packages/generators/src/maintenance.test.ts (Star growth recommendation generated from repo ranking and star deltas.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
+| N-GROW-004 | 通过 |  | PR / issue 增长推荐 | test: packages/generators/src/maintenance.test.ts (PR and issue growth recommendation generated from collaboration stats.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
+| N-GROW-005 | 通过 |  | 技能更新 | test: packages/generators/src/maintenance.test.ts (Skill update recommendation generated from language and technology tags.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
+| N-GROW-006 | 通过 |  | 教育状态更新 | test: packages/generators/src/maintenance.test.ts (Education status recommendation generated from education visibility fields.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
+| N-GROW-007 | 通过 |  | 求职状态更新 | test: packages/generators/src/maintenance.test.ts (Job status recommendation generated from learning plan and privacy-safe career fields.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
+| N-GROW-008 | 通过 |  | 月度成长总结 | test: packages/generators/src/maintenance.test.ts (Monthly growth summary generated with contributions, stars, forks, and active repos.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
+| N-GROW-009 | 通过 |  | 年度总结 | test: packages/generators/src/maintenance.test.ts (Annual summary generated with year-in-review markdown and JSON.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
+| N-GROW-010 | 通过 |  | 自动优化建议 | test: packages/generators/src/maintenance.test.ts (Automatic optimization recommendation generated for module priority, privacy, and compatibility.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
 | N-IMP-001 | 未开始 |  | 从 README 导入 |  |
 | N-IMP-002 | 未开始 |  | 从简历文本导入 |  |
 | N-IMP-003 | 未开始 |  | 从项目 README 导入 |  |

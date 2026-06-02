@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@gps/core": "*",
+    "@gps/generators": "*",
     "@gps/github": "*"
   }
 }
-

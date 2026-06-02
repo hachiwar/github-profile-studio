@@ -11,7 +11,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@gps/achievements": "*",
     "@gps/core": "*"
   }
 }
-

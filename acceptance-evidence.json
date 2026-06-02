@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-06-02T00:00:00.000Z",
+  "generatedAt": "2026-06-02T00:42:21.998Z",
   "verificationCommands": [
     {
       "kind": "log",
       "reference": "npm.cmd run typecheck",
-      "note": "Workspace TypeScript typecheck passes."
+      "note": "Workspace TypeScript typecheck passes after automation, maintenance, growth, and admin API additions."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run test",
-      "note": "Vitest suite covers parser, GitHub stats/cache, README/Pages generators, cards, achievements, OAuth, deployment planning, actions, import, and theme IO."
+      "note": "Vitest suite passes: 20 files, 56 tests, including maintenance generators and worker queue plans."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run build",
-      "note": "Next production build completed and listed all public routes, dashboard routes, GitHub APIs, card APIs, and export APIs."
+      "note": "Production build passes and lists the new automation, growth, and admin API routes."
     },
     {
       "kind": "api-response",
@@ -75,1001 +75,2255 @@
       "kind": "api-response",
       "reference": "POST http://127.0.0.1:3000/api/deploy/github/rollback",
       "note": "Local smoke test returned rollback_status=200."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3010/api/automation/jobs?username=octocat",
+      "note": "Local smoke test returned status=200 with 11-001, 11-002, 11-003, 11-004, 11-005, and 11-007 acceptance IDs."
+    },
+    {
+      "kind": "api-response",
+      "reference": "POST http://127.0.0.1:3010/api/automation/run",
+      "note": "Local smoke test returned status=200 with generated README, Pages data, snapshots, achievements, year review, card cache, ranking, workflow, and N-GROW outputs."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3010/api/growth/recommendations?username=octocat&locale=en-US",
+      "note": "Local smoke test returned status=200 with all N-GROW-001 through N-GROW-010 recommendations."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3010/api/admin/metrics",
+      "note": "Local smoke test returned status=200 with product, generation, GitHub API, deployment, automation, template, card, and locale metrics."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3010/api/admin/cache",
+      "note": "Local smoke test returned status=200 with cache snapshot and stale/fallback cache policy."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3010/api/admin/queues?username=octocat",
+      "note": "Local smoke test returned status=200 with ready queue plans for scheduled maintenance jobs."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3010/api/admin/errors",
+      "note": "Local smoke test returned status=200 with structured error catalog and notification settings."
     }
   ],
   "items": {
     "02-001": {
       "status": "通过",
-      "requirementRefs": ["4.1"],
+      "requirementRefs": [
+        "4.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/parse.test.ts", "note": "Valid username parsing is covered." },
-        { "kind": "file", "reference": "packages/github/src/parse.ts", "note": "Username pattern rejects invalid GitHub names." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/parse.test.ts",
+          "note": "Valid username parsing is covered."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/parse.ts",
+          "note": "Username pattern rejects invalid GitHub names."
+        }
       ]
     },
     "02-002": {
       "status": "通过",
-      "requirementRefs": ["4.1"],
+      "requirementRefs": [
+        "4.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/parse.test.ts", "note": "GitHub profile URL to username extraction is covered." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/parse.test.ts",
+          "note": "GitHub profile URL to username extraction is covered."
+        }
       ]
     },
     "02-003": {
       "status": "通过",
-      "requirementRefs": ["4.1"],
+      "requirementRefs": [
+        "4.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/parse.test.ts", "note": "Repository URL owner/repo parsing is covered." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/parse.test.ts",
+          "note": "Repository URL owner/repo parsing is covered."
+        }
       ]
     },
     "02-004": {
       "status": "待验收",
-      "requirementRefs": ["4.1.2"],
+      "requirementRefs": [
+        "4.1.2"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "GitHubClient.getUser and detect implement public user existence checks." },
-        { "kind": "api-response", "reference": "apps/web/app/api/github/user/route.ts", "note": "User API route is implemented." }
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.getUser and detect implement public user existence checks."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/user/route.ts",
+          "note": "User API route is implemented."
+        }
       ]
     },
     "02-006": {
       "status": "待验收",
-      "requirementRefs": ["4.1.2"],
+      "requirementRefs": [
+        "4.1.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/normalize.test.ts", "note": "GitHub user profile normalization covers identity and contact fields." },
-        { "kind": "file", "reference": "packages/github/src/normalize.ts", "note": "Avatar, name, bio, company, location, blog, and email fields are normalized." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/normalize.test.ts",
+          "note": "GitHub user profile normalization covers identity and contact fields."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/normalize.ts",
+          "note": "Avatar, name, bio, company, location, blog, and email fields are normalized."
+        }
       ]
     },
     "02-007": {
       "status": "通过",
-      "requirementRefs": ["4.1.2"],
+      "requirementRefs": [
+        "4.1.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/normalize.test.ts", "note": "followers, following, public repos, and public gists are normalized." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/normalize.test.ts",
+          "note": "followers, following, public repos, and public gists are normalized."
+        }
       ]
     },
     "02-008": {
       "status": "通过",
-      "requirementRefs": ["4.1.2"],
+      "requirementRefs": [
+        "4.1.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/normalize.test.ts", "note": "Account age days and years are calculated from created_at." },
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json", "note": "Local card JSON smoke response included accountAgeDays and accountAgeYears for octocat." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/normalize.test.ts",
+          "note": "Account age days and years are calculated from created_at."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json",
+          "note": "Local card JSON smoke response included accountAgeDays and accountAgeYears for octocat."
+        }
       ]
     },
     "02-009": {
       "status": "待验收",
-      "requirementRefs": ["4.1.3"],
+      "requirementRefs": [
+        "4.1.3"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "detectRepository checks whether the username repository exists." }
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "detectRepository checks whether the username repository exists."
+        }
       ]
     },
     "02-010": {
       "status": "待验收",
-      "requirementRefs": ["4.1.3"],
+      "requirementRefs": [
+        "4.1.3"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "detectRepository returns isPublic for target repositories." }
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "detectRepository returns isPublic for target repositories."
+        }
       ]
     },
     "02-011": {
       "status": "待验收",
-      "requirementRefs": ["4.1.3"],
+      "requirementRefs": [
+        "4.1.3"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "detectRepository checks README presence." }
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "detectRepository checks README presence."
+        }
       ]
     },
     "02-012": {
       "status": "待验收",
-      "requirementRefs": ["4.1.3"],
+      "requirementRefs": [
+        "4.1.3"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "detectRepository checks the username.github.io repository." }
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "detectRepository checks the username.github.io repository."
+        }
       ]
     },
     "02-013": {
       "status": "待验收",
-      "requirementRefs": ["4.1.3"],
+      "requirementRefs": [
+        "4.1.3"
+      ],
       "evidence": [
-        { "kind": "api-response", "reference": "apps/web/app/api/github/pages-status/route.ts", "note": "Pages status API route exists." },
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "GitHub Pages source branch, path, and URL are captured when available." }
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/pages-status/route.ts",
+          "note": "Pages status API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHub Pages source branch, path, and URL are captured when available."
+        }
       ]
     },
     "02-014": {
       "status": "待验收",
-      "requirementRefs": ["4.1.3"],
+      "requirementRefs": [
+        "4.1.3"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "GitHub Pages source branch and path are captured when the API returns Pages metadata." }
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHub Pages source branch and path are captured when the API returns Pages metadata."
+        }
       ]
     },
     "02-016": {
       "status": "待验收",
-      "requirementRefs": ["4.1.4"],
+      "requirementRefs": [
+        "4.1.4"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "Detection result includes recommended mode and nextActions." }
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "Detection result includes recommended mode and nextActions."
+        }
       ]
     },
     "03-001": {
       "status": "待验收",
-      "requirementRefs": ["4.2.2"],
+      "requirementRefs": [
+        "4.2.2"
+      ],
       "evidence": [
-        { "kind": "api-response", "reference": "apps/web/app/api/github/repos/route.ts", "note": "Repository list API route exists." },
-        { "kind": "file", "reference": "packages/github/src/normalize.ts", "note": "Repository response normalization covers core repository fields." }
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/repos/route.ts",
+          "note": "Repository list API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/normalize.ts",
+          "note": "Repository response normalization covers core repository fields."
+        }
       ]
     },
     "03-003": {
       "status": "通过",
-      "requirementRefs": ["4.2.2"],
+      "requirementRefs": [
+        "4.2.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/normalize.test.ts", "note": "Repository description, homepage, language, topics, and license normalization is tested." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/normalize.test.ts",
+          "note": "Repository description, homepage, language, topics, and license normalization is tested."
+        }
       ]
     },
     "03-005": {
       "status": "通过",
-      "requirementRefs": ["4.2.2"],
+      "requirementRefs": [
+        "4.2.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/normalize.test.ts", "note": "Star, fork, watcher, subscriber, and open issue normalization is tested." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/normalize.test.ts",
+          "note": "Star, fork, watcher, subscriber, and open issue normalization is tested."
+        }
       ]
     },
     "03-009": {
       "status": "待验收",
-      "requirementRefs": ["4.2.2"],
+      "requirementRefs": [
+        "4.2.2"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "Repository enrichment fetches contributors, languages, releases, release downloads, and README summary for top public repositories." }
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "Repository enrichment fetches contributors, languages, releases, release downloads, and README summary for top public repositories."
+        }
       ]
     },
     "03-010": {
       "status": "通过",
-      "requirementRefs": ["4.2.3"],
+      "requirementRefs": [
+        "4.2.3"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/stats.test.ts", "note": "Contribution totals and yearly heatmap generation are tested." },
-        { "kind": "file", "reference": "packages/github/src/client.ts", "note": "GraphQL contribution collection is used when a GitHub token is available, with deterministic fallback otherwise." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/stats.test.ts",
+          "note": "Contribution totals and yearly heatmap generation are tested."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GraphQL contribution collection is used when a GitHub token is available, with deterministic fallback otherwise."
+        }
       ]
     },
     "03-014": {
       "status": "通过",
-      "requirementRefs": ["4.2.3"],
+      "requirementRefs": [
+        "4.2.3"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/stats.test.ts", "note": "Contribution heatmap levels are tested." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/stats.test.ts",
+          "note": "Contribution heatmap levels are tested."
+        }
       ]
     },
     "03-022": {
       "status": "通过",
-      "requirementRefs": ["4.2.6"],
+      "requirementRefs": [
+        "4.2.6"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/stats.test.ts", "note": "Dataset construction includes PR merge rate, issue close rate, external repositories, and organizations." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/stats.test.ts",
+          "note": "Dataset construction includes PR merge rate, issue close rate, external repositories, and organizations."
+        }
       ]
     },
     "03-023": {
       "status": "通过",
-      "requirementRefs": ["4.2.7"],
+      "requirementRefs": [
+        "4.2.7"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/stats.test.ts", "note": "Main language, byte language, and recent-year language distributions are tested." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/stats.test.ts",
+          "note": "Main language, byte language, and recent-year language distributions are tested."
+        }
       ]
     },
     "03-024": {
       "status": "通过",
-      "requirementRefs": ["4.2.7"],
+      "requirementRefs": [
+        "4.2.7"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/stats.test.ts", "note": "Star-weighted and fork-weighted language distributions are tested." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/stats.test.ts",
+          "note": "Star-weighted and fork-weighted language distributions are tested."
+        }
       ]
     },
     "04-006": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "README intro module renders welcome, role, status, and GitHub link." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "README intro module renders welcome, role, status, and GitHub link."
+        }
       ]
     },
     "04-007": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "GitHub overview module renders contributions, commits, PRs, issues, stars, forks, followers, account age, and impact score." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "GitHub overview module renders contributions, commits, PRs, issues, stars, forks, followers, account age, and impact score."
+        }
       ]
     },
     "04-008": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "GitHub streak module renders streak card and current/longest streak metrics." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "GitHub streak module renders streak card and current/longest streak metrics."
+        }
       ]
     },
     "04-009": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Contribution calendar module renders dynamic card link and level summary." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Contribution calendar module renders dynamic card link and level summary."
+        }
       ]
     },
     "04-010": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Language stats module renders top language card and byte percentages." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Language stats module renders top language card and byte percentages."
+        }
       ]
     },
     "04-011": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Projects module renders manual projects and top public repositories." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Projects module renders manual projects and top public repositories."
+        }
       ]
     },
     "04-012": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Star growth module renders star-growth card and top starred repositories." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Star growth module renders star-growth card and top starred repositories."
+        }
       ]
     },
     "04-013": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "PR / Issue collaboration module renders PR, review, issue, close-rate, and external repository stats." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "PR / Issue collaboration module renders PR, review, issue, close-rate, and external repository stats."
+        }
       ]
     },
     "04-014": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Tech stack module renders badges and primary skill status." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Tech stack module renders badges and primary skill status."
+        }
       ]
     },
     "04-015": {
       "status": "通过",
-      "requirementRefs": ["4.3.2", "4.4.2"],
+      "requirementRefs": [
+        "4.3.2",
+        "4.4.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Achievement wall module renders achievement card embed." },
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Pages site includes achievement wall section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Achievement wall module renders achievement card embed."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Pages site includes achievement wall section."
+        }
       ]
     },
     "04-016": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Social/contact module renders visible social links." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Social/contact module renders visible social links."
+        }
       ]
     },
     "04-017": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Blog module renders blog link or RSS-ready placeholder." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Blog module renders blog link or RSS-ready placeholder."
+        }
       ]
     },
     "04-018": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Visitor stats module renders profile view badge." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Visitor stats module renders profile view badge."
+        }
       ]
     },
     "04-019": {
       "status": "通过",
-      "requirementRefs": ["4.3.2"],
+      "requirementRefs": [
+        "4.3.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Custom Markdown module renders guarded custom content block." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Custom Markdown module renders guarded custom content block."
+        }
       ]
     },
     "04-020": {
       "status": "待验收",
-      "requirementRefs": ["4.3.4"],
+      "requirementRefs": [
+        "4.3.4"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "apps/web/app/api/generate/readme/route.ts", "note": "README generation API returns full Markdown; browser copy interaction still needs E2E verification." }
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/generate/readme/route.ts",
+          "note": "README generation API returns full Markdown; browser copy interaction still needs E2E verification."
+        }
       ]
     },
     "05-009": {
       "status": "通过",
-      "requirementRefs": ["4.4.5"],
+      "requirementRefs": [
+        "4.4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages export package includes index.html, CSS, JS, 404, sitemap, robots, and workflow files." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages export package includes index.html, CSS, JS, 404, sitemap, robots, and workflow files."
+        }
       ]
     },
     "05-002": {
       "status": "通过",
-      "requirementRefs": ["4.4.2"],
+      "requirementRefs": [
+        "4.4.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Pages site renders Hero, profile, GitHub data, project, timeline, blog, achievement, and contact sections." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Pages site renders Hero, profile, GitHub data, project, timeline, blog, achievement, and contact sections."
+        }
       ]
     },
     "05-003": {
       "status": "通过",
-      "requirementRefs": ["4.4.2"],
+      "requirementRefs": [
+        "4.4.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Theme toggle, language toggle, and back-to-top controls are generated and wired in script.js." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Theme toggle, language toggle, and back-to-top controls are generated and wired in script.js."
+        }
       ]
     },
     "05-005": {
       "status": "通过",
-      "requirementRefs": ["4.4.3"],
+      "requirementRefs": [
+        "4.4.3"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated CSS and script support light/dark theme switching." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated CSS and script support light/dark theme switching."
+        }
       ]
     },
     "05-010": {
       "status": "通过",
-      "requirementRefs": ["4.4.5"],
+      "requirementRefs": [
+        "4.4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages deployment instructions are generated." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages deployment instructions are generated."
+        }
       ]
     },
     "06-001": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Card catalog renders every card type, including Profile Overview Card." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Card catalog renders every card type, including Profile Overview Card."
+        }
       ]
     },
     "06-002": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "GitHub Stats Card renders and supports the stats alias." },
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json", "note": "Local smoke test returned GitHub Stats Card JSON." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "GitHub Stats Card renders and supports the stats alias."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json",
+          "note": "Local smoke test returned GitHub Stats Card JSON."
+        }
       ]
     },
     "06-003": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "GitHub Streak Card renders and supports the streak alias." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "GitHub Streak Card renders and supports the streak alias."
+        }
       ]
     },
     "06-004": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Contribution Calendar Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Contribution Calendar Card renders from the catalog."
+        }
       ]
     },
     "06-005": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Top Languages Card renders and supports the languages alias." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Top Languages Card renders and supports the languages alias."
+        }
       ]
     },
     "06-006": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Repository Card renders and supports the repo alias." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Repository Card renders and supports the repo alias."
+        }
       ]
     },
     "06-007": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Star Growth Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Star Growth Card renders from the catalog."
+        }
       ]
     },
     "06-008": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Fork Growth Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Fork Growth Card renders from the catalog."
+        }
       ]
     },
     "06-009": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "PR / Issue Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "PR / Issue Card renders from the catalog."
+        }
       ]
     },
     "06-010": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Achievement Card renders and supports the achievements alias." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Achievement Card renders and supports the achievements alias."
+        }
       ]
     },
     "06-011": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Trophy Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Trophy Card renders from the catalog."
+        }
       ]
     },
     "06-012": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Tech Stack Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Tech Stack Card renders from the catalog."
+        }
       ]
     },
     "06-013": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Activity Graph Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Activity Graph Card renders from the catalog."
+        }
       ]
     },
     "06-014": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Repo Ranking Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Repo Ranking Card renders from the catalog."
+        }
       ]
     },
     "06-015": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Followers Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Followers Card renders from the catalog."
+        }
       ]
     },
     "06-016": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Account Age Card renders from the catalog and profile data includes account age." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Account Age Card renders from the catalog and profile data includes account age."
+        }
       ]
     },
     "06-017": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Open Source Impact Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Open Source Impact Card renders from the catalog."
+        }
       ]
     },
     "06-018": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Year in Review Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Year in Review Card renders from the catalog."
+        }
       ]
     },
     "06-019": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Monthly Activity Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Monthly Activity Card renders from the catalog."
+        }
       ]
     },
     "06-020": {
       "status": "通过",
-      "requirementRefs": ["4.5"],
+      "requirementRefs": [
+        "4.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Custom Composite Card renders from the catalog." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Custom Composite Card renders from the catalog."
+        }
       ]
     },
     "06-021": {
       "status": "通过",
-      "requirementRefs": ["4.5.2"],
+      "requirementRefs": [
+        "4.5.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Card rendering supports width, height, hide_border, bg_color, title_color, include, and icons." },
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json&include=stars,forks&hide_border=true&width=720&height=260&cache_seconds=120", "note": "Local smoke test verified parameter parsing and JSON echo for card API." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "Card rendering supports width, height, hide_border, bg_color, title_color, include, and icons."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json&include=stars,forks&hide_border=true&width=720&height=260&cache_seconds=120",
+          "note": "Local smoke test verified parameter parsing and JSON echo for card API."
+        }
       ]
     },
     "06-022": {
       "status": "通过",
-      "requirementRefs": ["4.5.3"],
+      "requirementRefs": [
+        "4.5.3"
+      ],
       "evidence": [
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json", "note": "JSON output returned 200." },
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=svg", "note": "SVG output returned 200 and 1283 bytes." },
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=png", "note": "PNG output returned 200 and 10305 bytes." }
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json",
+          "note": "JSON output returned 200."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=svg",
+          "note": "SVG output returned 200 and 1283 bytes."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=png",
+          "note": "PNG output returned 200 and 10305 bytes."
+        }
       ]
     },
     "06-023": {
       "status": "通过",
-      "requirementRefs": ["4.5.4"],
+      "requirementRefs": [
+        "4.5.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/embeds.test.ts", "note": "Markdown image link, HTML img, iframe, and URL variants are generated." },
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json", "note": "JSON smoke response includes embeds for markdown and HTML." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/embeds.test.ts",
+          "note": "Markdown image link, HTML img, iframe, and URL variants are generated."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json",
+          "note": "JSON smoke response includes embeds for markdown and HTML."
+        }
       ]
     },
     "06-025": {
       "status": "通过",
-      "requirementRefs": ["4.5.4"],
+      "requirementRefs": [
+        "4.5.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/cards/src/embeds.test.ts", "note": "README badge/card embed markdown generation is tested." }
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/embeds.test.ts",
+          "note": "README badge/card embed markdown generation is tested."
+        }
       ]
     },
     "07-001": {
       "status": "通过",
-      "requirementRefs": ["4.6.1"],
+      "requirementRefs": [
+        "4.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/achievements/src/index.test.ts", "note": "Achievement category catalog covers the required categories." }
+        {
+          "kind": "test",
+          "reference": "packages/achievements/src/index.test.ts",
+          "note": "Achievement category catalog covers the required categories."
+        }
       ]
     },
     "07-005": {
       "status": "通过",
-      "requirementRefs": ["4.6.2"],
+      "requirementRefs": [
+        "4.6.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/achievements/src/index.test.ts", "note": "Repository achievement rules are evaluated against the demo dataset." }
+        {
+          "kind": "test",
+          "reference": "packages/achievements/src/index.test.ts",
+          "note": "Repository achievement rules are evaluated against the demo dataset."
+        }
       ]
     },
     "08-007": {
       "status": "通过",
-      "requirementRefs": ["4.7.2"],
+      "requirementRefs": [
+        "4.7.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/import-readme.test.ts", "note": "README import recognizes headings, badges, stats, streaks, languages, trophy, activity graph, images, tables, comments, and workflow markers." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/import-readme.test.ts",
+          "note": "README import recognizes headings, badges, stats, streaks, languages, trophy, activity graph, images, tables, comments, and workflow markers."
+        }
       ]
     },
     "08-008": {
       "status": "通过",
-      "requirementRefs": ["4.7.3"],
+      "requirementRefs": [
+        "4.7.3"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/import-readme.test.ts", "note": "Third-party card provider parsing is covered." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/import-readme.test.ts",
+          "note": "Third-party card provider parsing is covered."
+        }
       ]
     },
     "09-002": {
       "status": "待验收",
-      "requirementRefs": ["4.8.2"],
+      "requirementRefs": [
+        "4.8.2"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/core/src/templates.ts", "note": "Theme/template registries define the built-in style catalog." }
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Theme/template registries define the built-in style catalog."
+        }
       ]
     },
     "10-001": {
       "status": "待验收",
-      "requirementRefs": ["4.9.1"],
+      "requirementRefs": [
+        "4.9.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/oauth.test.ts", "note": "OAuth authorization URL, state, token exchange, and token encryption helpers are tested." },
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/oauth/github?format=json", "note": "OAuth start route exists and returns explicit setup status when env vars are absent; live OAuth requires configured GitHub app." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/oauth.test.ts",
+          "note": "OAuth authorization URL, state, token exchange, and token encryption helpers are tested."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/oauth/github?format=json",
+          "note": "OAuth start route exists and returns explicit setup status when env vars are absent; live OAuth requires configured GitHub app."
+        }
       ]
     },
     "10-002": {
       "status": "通过",
-      "requirementRefs": ["4.9.2"],
+      "requirementRefs": [
+        "4.9.2"
+      ],
       "evidence": [
-        { "kind": "api-response", "reference": "apps/web/app/api/oauth/github/permissions/route.ts", "note": "Permissions route lists minimal required scopes and logged-in/logged-out capabilities." },
-        { "kind": "file", "reference": "packages/github/src/oauth.ts", "note": "minimumOAuthScopes uses read:user, public_repo, and workflow." }
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/oauth/github/permissions/route.ts",
+          "note": "Permissions route lists minimal required scopes and logged-in/logged-out capabilities."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/oauth.ts",
+          "note": "minimumOAuthScopes uses read:user, public_repo, and workflow."
+        }
       ]
     },
     "10-004": {
       "status": "通过",
-      "requirementRefs": ["4.9.2"],
+      "requirementRefs": [
+        "4.9.2"
+      ],
       "evidence": [
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/oauth/github/session", "note": "Session route exposes logged-out generate/copy/download/public-card capabilities and logged-in write capabilities." }
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/oauth/github/session",
+          "note": "Session route exposes logged-out generate/copy/download/public-card capabilities and logged-in write capabilities."
+        }
       ]
     },
     "10-005": {
       "status": "待验收",
-      "requirementRefs": ["4.9.2", "8"],
+      "requirementRefs": [
+        "4.9.2",
+        "8"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/oauth.test.ts", "note": "GitHub token encryption uses AES-256-GCM." },
-        { "kind": "file", "reference": "apps/web/app/api/oauth/github/logout/route.ts", "note": "Logout route clears the HttpOnly token cookie; revocation UX still needs browser verification." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/oauth.test.ts",
+          "note": "GitHub token encryption uses AES-256-GCM."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/logout/route.ts",
+          "note": "Logout route clears the HttpOnly token cookie; revocation UX still needs browser verification."
+        }
       ]
     },
     "10-009": {
       "status": "待验收",
-      "requirementRefs": ["4.9.3"],
+      "requirementRefs": [
+        "4.9.3"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/deploy.test.ts", "note": "Deployment plan covers commits, PRs, backups, rollback, diff, and logs; live OAuth write flow still needs integration verification." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Deployment plan covers commits, PRs, backups, rollback, diff, and logs; live OAuth write flow still needs integration verification."
+        }
       ]
     },
     "10-010": {
       "status": "通过",
-      "requirementRefs": ["4.9.3"],
+      "requirementRefs": [
+        "4.9.3"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/deploy.test.ts", "note": "Deployment plans support pull-request and direct-commit modes." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Deployment plans support pull-request and direct-commit modes."
+        }
       ]
     },
     "10-011": {
       "status": "待验收",
-      "requirementRefs": ["4.9.3"],
+      "requirementRefs": [
+        "4.9.3"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/deploy.test.ts", "note": "Diff, backup labels, rollback plan, and deployment logs are modeled; live conflict/retry behavior needs integration verification." },
-        { "kind": "api-response", "reference": "POST http://127.0.0.1:3000/api/deploy/github/rollback", "note": "Rollback preview route returned 200." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Diff, backup labels, rollback plan, and deployment logs are modeled; live conflict/retry behavior needs integration verification."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3000/api/deploy/github/rollback",
+          "note": "Rollback preview route returned 200."
+        }
       ]
     },
     "11-006": {
       "status": "通过",
-      "requirementRefs": ["4.10.2"],
+      "requirementRefs": [
+        "4.10.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/actions.test.ts", "note": "README, Pages data, blog, achievements, star snapshot, cache cleanup, and error notification workflow modules are generated." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/actions.test.ts",
+          "note": "README, Pages data, blog, achievements, star snapshot, cache cleanup, and error notification workflow modules are generated."
+        }
       ]
     },
     "13-001": {
       "status": "待验收",
-      "requirementRefs": ["6"],
+      "requirementRefs": [
+        "6"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/core/src/language.ts", "note": "Core locale model supports English, Chinese, and bilingual output." }
+        {
+          "kind": "file",
+          "reference": "packages/core/src/language.ts",
+          "note": "Core locale model supports English, Chinese, and bilingual output."
+        }
       ]
     },
     "13-005": {
       "status": "通过",
-      "requirementRefs": ["7"],
+      "requirementRefs": [
+        "7"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/cache.test.ts", "note": "GitHub API data cache hit, stale cache, and fallback behavior are tested." },
-        { "kind": "file", "reference": "packages/github/src/cache.ts", "note": "In-memory TTL cache includes stale windows and degraded metadata." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/cache.test.ts",
+          "note": "GitHub API data cache hit, stale cache, and fallback behavior are tested."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/cache.ts",
+          "note": "In-memory TTL cache includes stale windows and degraded metadata."
+        }
       ]
     },
     "13-006": {
       "status": "通过",
-      "requirementRefs": ["7"],
+      "requirementRefs": [
+        "7"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/cache.test.ts", "note": "Manual refresh and stale fallback paths are represented by force refresh and stale cache behavior." },
-        { "kind": "api-response", "reference": "apps/web/app/api/github/_shared.ts", "note": "GitHub dataset routes support refresh=true and return cache/rateLimit metadata." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/cache.test.ts",
+          "note": "Manual refresh and stale fallback paths are represented by force refresh and stale cache behavior."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/_shared.ts",
+          "note": "GitHub dataset routes support refresh=true and return cache/rateLimit metadata."
+        }
       ]
     },
     "13-009": {
       "status": "通过",
-      "requirementRefs": ["8"],
+      "requirementRefs": [
+        "8"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/github/src/oauth.test.ts", "note": "OAuth token encryption/decryption is tested with AES-GCM." },
-        { "kind": "file", "reference": "apps/web/app/api/oauth/github/callback/route.ts", "note": "Callback route encrypts the GitHub access token before HttpOnly cookie storage and never returns the raw token." }
+        {
+          "kind": "test",
+          "reference": "packages/github/src/oauth.test.ts",
+          "note": "OAuth token encryption/decryption is tested with AES-GCM."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/callback/route.ts",
+          "note": "Callback route encrypts the GitHub access token before HttpOnly cookie storage and never returns the raw token."
+        }
       ]
     },
     "14-001": {
       "status": "待验收",
-      "requirementRefs": ["9"],
+      "requirementRefs": [
+        "9"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/core/src/domain.ts", "note": "UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedReadme, Theme-related config, and PageSiteBundle models exist." },
-        { "kind": "test", "reference": "packages/github/src/stats.test.ts", "note": "Public dataset construction exercises the data model." }
+        {
+          "kind": "file",
+          "reference": "packages/core/src/domain.ts",
+          "note": "UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedReadme, Theme-related config, and PageSiteBundle models exist."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/stats.test.ts",
+          "note": "Public dataset construction exercises the data model."
+        }
       ]
     },
     "14-002": {
       "status": "通过",
-      "requirementRefs": ["10.1"],
+      "requirementRefs": [
+        "10.1"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "apps/web/app/pricing/page.tsx", "note": "Pricing public page has been added." },
-        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/pricing", "note": "Local smoke test returned pricing_status=200." },
-        { "kind": "log", "reference": "npm.cmd run build", "note": "Build output includes /, /generate, /templates, /cards, /achievements, /docs, /examples, /pricing, /login, /privacy, and /terms." }
+        {
+          "kind": "file",
+          "reference": "apps/web/app/pricing/page.tsx",
+          "note": "Pricing public page has been added."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/pricing",
+          "note": "Local smoke test returned pricing_status=200."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run build",
+          "note": "Build output includes /, /generate, /templates, /cards, /achievements, /docs, /examples, /pricing, /login, /privacy, and /terms."
+        }
       ]
     },
     "14-004": {
       "status": "待验收",
-      "requirementRefs": ["10.3"],
+      "requirementRefs": [
+        "10.3"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "apps/web/app/api/github/contributions/route.ts", "note": "GitHub contributions API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/github/stars/route.ts", "note": "GitHub stars API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/github/forks/route.ts", "note": "GitHub forks API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/github/issues/route.ts", "note": "GitHub issues API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/github/pulls/route.ts", "note": "GitHub pulls API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/github/languages/route.ts", "note": "GitHub languages API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/export/readme/route.ts", "note": "README export API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/export/pages/route.ts", "note": "Pages export API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/oauth/github/route.ts", "note": "GitHub OAuth start API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/oauth/github/callback/route.ts", "note": "GitHub OAuth callback API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/deploy/github/execute/route.ts", "note": "GitHub deploy execute API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/deploy/github/pages/route.ts", "note": "GitHub Pages enablement API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/deploy/github/rollback/route.ts", "note": "GitHub rollback API route exists." }
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/github/contributions/route.ts",
+          "note": "GitHub contributions API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/github/stars/route.ts",
+          "note": "GitHub stars API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/github/forks/route.ts",
+          "note": "GitHub forks API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/github/issues/route.ts",
+          "note": "GitHub issues API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/github/pulls/route.ts",
+          "note": "GitHub pulls API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/github/languages/route.ts",
+          "note": "GitHub languages API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/export/readme/route.ts",
+          "note": "README export API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/export/pages/route.ts",
+          "note": "Pages export API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/route.ts",
+          "note": "GitHub OAuth start API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/callback/route.ts",
+          "note": "GitHub OAuth callback API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "GitHub deploy execute API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "GitHub Pages enablement API route exists."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/rollback/route.ts",
+          "note": "GitHub rollback API route exists."
+        }
       ]
     },
     "14-005": {
       "status": "通过",
-      "requirementRefs": ["13.1"],
+      "requirementRefs": [
+        "13.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "README export package includes README.md, update workflow, and profile-studio.config.json." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "README export package includes README.md, update workflow, and profile-studio.config.json."
+        }
       ]
     },
     "14-006": {
       "status": "通过",
-      "requirementRefs": ["13.2"],
+      "requirementRefs": [
+        "13.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages export package includes index.html, style.css, script.js, data/github.json, README.md, 404.html, robots.txt, sitemap.xml, and update-pages workflow." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages export package includes index.html, style.css, script.js, data/github.json, README.md, 404.html, robots.txt, sitemap.xml, and update-pages workflow."
+        }
       ]
     },
     "N-ENTRY-002": {
       "status": "通过",
-      "requirementRefs": ["13A.2"],
+      "requirementRefs": [
+        "13A.2"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/core/src/new-user.test.ts", "note": "Low GitHub data triggers new-user mode recommendation." }
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user.test.ts",
+          "note": "Low GitHub data triggers new-user mode recommendation."
+        }
       ]
     },
     "N-README-001": {
       "status": "通过",
-      "requirementRefs": ["13A.5"],
+      "requirementRefs": [
+        "13A.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "New-user config generates a complete README without relying on live contribution data." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "New-user config generates a complete README without relying on live contribution data."
+        }
       ]
     },
     "N-README-002": {
       "status": "通过",
-      "requirementRefs": ["13A.5"],
+      "requirementRefs": [
+        "13A.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Zero-repository config still generates project and GitHub overview sections with replacement copy." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Zero-repository config still generates project and GitHub overview sections with replacement copy."
+        }
       ]
     },
     "N-README-003": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "README intro contains the top welcome area." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "README intro contains the top welcome area."
+        }
       ]
     },
     "N-README-004": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "README intro contains current role and status." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "README intro contains current role and status."
+        }
       ]
     },
     "N-README-005": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Education module renders visible education records." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Education module renders visible education records."
+        }
       ]
     },
     "N-README-006": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Learning plan module renders current focus as learning direction." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Learning plan module renders current focus as learning direction."
+        }
       ]
     },
     "N-README-007": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Languages module renders primary language information from GitHub or manual skills." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Languages module renders primary language information from GitHub or manual skills."
+        }
       ]
     },
     "N-README-008": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Tech stack module renders skill badges and skill status." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Tech stack module renders skill badges and skill status."
+        }
       ]
     },
     "N-README-009": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Learning plan module renders current focus and goals." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Learning plan module renders current focus and goals."
+        }
       ]
     },
     "N-README-010": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Projects module renders manual projects and GitHub repositories." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Projects module renders manual projects and GitHub repositories."
+        }
       ]
     },
     "N-README-011": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Learning plan module renders long-term direction and open-source plan." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Learning plan module renders long-term direction and open-source plan."
+        }
       ]
     },
     "N-README-012": {
       "status": "通过",
-      "requirementRefs": ["13A.5.1"],
+      "requirementRefs": [
+        "13A.5.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Contact module renders visible social/contact links." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Contact module renders visible social/contact links."
+        }
       ]
     },
     "N-README-013": {
       "status": "通过",
-      "requirementRefs": ["13A.5.4"],
+      "requirementRefs": [
+        "13A.5.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/core/src/new-user.test.ts", "note": "New-user recommendations provide empty-data substitutes." }
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user.test.ts",
+          "note": "New-user recommendations provide empty-data substitutes."
+        }
       ]
     },
     "N-README-014": {
       "status": "通过",
-      "requirementRefs": ["13A.5.4"],
+      "requirementRefs": [
+        "13A.5.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Zero-data README avoids undefined and uses replacement copy instead of empty modules." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Zero-data README avoids undefined and uses replacement copy instead of empty modules."
+        }
       ]
     },
     "N-README-015": {
       "status": "通过",
-      "requirementRefs": ["13A.5.5"],
+      "requirementRefs": [
+        "13A.5.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "GitHub overview module is optional through enabledReadmeModules and renders when enabled." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "GitHub overview module is optional through enabledReadmeModules and renders when enabled."
+        }
       ]
     },
     "N-README-016": {
       "status": "通过",
-      "requirementRefs": ["13A.5.5"],
+      "requirementRefs": [
+        "13A.5.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Contribution calendar module is optional through enabledReadmeModules and renders when enabled." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Contribution calendar module is optional through enabledReadmeModules and renders when enabled."
+        }
       ]
     },
     "N-README-017": {
       "status": "通过",
-      "requirementRefs": ["13A.5.5"],
+      "requirementRefs": [
+        "13A.5.5"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Visitor stats module renders profile view badge when enabled." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Visitor stats module renders profile view badge when enabled."
+        }
       ]
     },
     "N-PAGE-001": {
       "status": "通过",
-      "requirementRefs": ["13A.6"],
+      "requirementRefs": [
+        "13A.6"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Zero-repository users still receive a non-empty generated website." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Zero-repository users still receive a non-empty generated website."
+        }
       ]
     },
     "N-PAGE-002": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Hero section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Hero section."
+        }
       ]
     },
     "N-PAGE-003": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains About section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains About section."
+        }
       ]
     },
     "N-PAGE-004": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Education section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Education section."
+        }
       ]
     },
     "N-PAGE-005": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Skills section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Skills section."
+        }
       ]
     },
     "N-PAGE-006": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Skills section displays programming languages and proficiencies." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Skills section displays programming languages and proficiencies."
+        }
       ]
     },
     "N-PAGE-007": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Learning Directions section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Learning Directions section."
+        }
       ]
     },
     "N-PAGE-008": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Learning Plan section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Learning Plan section."
+        }
       ]
     },
     "N-PAGE-009": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains manual and GitHub project cards." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains manual and GitHub project cards."
+        }
       ]
     },
     "N-PAGE-010": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Timeline section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Timeline section."
+        }
       ]
     },
     "N-PAGE-011": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Growth Roadmap section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Growth Roadmap section."
+        }
       ]
     },
     "N-PAGE-012": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains GitHub data overview section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains GitHub data overview section."
+        }
       ]
     },
     "N-PAGE-013": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Future Goals section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Future Goals section."
+        }
       ]
     },
     "N-PAGE-014": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Contact section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Contact section."
+        }
       ]
     },
     "N-PAGE-015": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Resume entry section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Resume entry section."
+        }
       ]
     },
     "N-PAGE-016": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Blog entry section." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site contains Blog entry section."
+        }
       ]
     },
     "N-PAGE-017": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site includes dark/light theme toggle." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated site includes dark/light theme toggle."
+        }
       ]
     },
     "N-PAGE-018": {
       "status": "通过",
-      "requirementRefs": ["13A.6.1"],
+      "requirementRefs": [
+        "13A.6.1"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated CSS includes responsive navigation behavior." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "Generated CSS includes responsive navigation behavior."
+        }
       ]
     },
     "N-POUT-001": {
       "status": "通过",
-      "requirementRefs": ["13A.6.4"],
+      "requirementRefs": [
+        "13A.6.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages package includes index.html." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages package includes index.html."
+        }
       ]
     },
     "N-POUT-002": {
       "status": "通过",
-      "requirementRefs": ["13A.6.4"],
+      "requirementRefs": [
+        "13A.6.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages package includes style.css." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages package includes style.css."
+        }
       ]
     },
     "N-POUT-003": {
       "status": "通过",
-      "requirementRefs": ["13A.6.4"],
+      "requirementRefs": [
+        "13A.6.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages package includes script.js." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages package includes script.js."
+        }
       ]
     },
     "N-POUT-004": {
       "status": "通过",
-      "requirementRefs": ["13A.6.4"],
+      "requirementRefs": [
+        "13A.6.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages package includes data/github.json containing profile data." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages package includes data/github.json containing profile data."
+        }
       ]
     },
     "N-POUT-005": {
       "status": "通过",
-      "requirementRefs": ["13A.6.4"],
+      "requirementRefs": [
+        "13A.6.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages package data/github.json contains manual project data." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages package data/github.json contains manual project data."
+        }
       ]
     },
     "N-POUT-006": {
       "status": "通过",
-      "requirementRefs": ["13A.6.4"],
+      "requirementRefs": [
+        "13A.6.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages package data/github.json contains skill data." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages package data/github.json contains skill data."
+        }
       ]
     },
     "N-POUT-008": {
       "status": "待验收",
-      "requirementRefs": ["13A.6.4"],
+      "requirementRefs": [
+        "13A.6.4"
+      ],
       "evidence": [
-        { "kind": "api-response", "reference": "apps/web/app/api/export/pages/route.ts", "note": "Pages export API can return ZIP packages; browser download evidence still required." }
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/export/pages/route.ts",
+          "note": "Pages export API can return ZIP packages; browser download evidence still required."
+        }
       ]
     },
     "N-POUT-012": {
       "status": "通过",
-      "requirementRefs": ["13A.6.4"],
+      "requirementRefs": [
+        "13A.6.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages package includes a manual deployment guide." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages package includes a manual deployment guide."
+        }
       ]
     },
     "N-POUT-014": {
       "status": "通过",
-      "requirementRefs": ["13A.6.4"],
+      "requirementRefs": [
+        "13A.6.4"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages package includes GitHub Actions update workflow." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages package includes GitHub Actions update workflow."
+        }
       ]
     },
     "N-REC-009": {
       "status": "通过",
-      "requirementRefs": ["13A.8.3"],
+      "requirementRefs": [
+        "13A.8.3"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/core/src/new-user.test.ts", "note": "Recommendation engine returns project, skill, learning, open-source, and profile improvement suggestions." }
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user.test.ts",
+          "note": "Recommendation engine returns project, skill, learning, open-source, and profile improvement suggestions."
+        }
       ]
     },
     "N-UP-003": {
       "status": "待验收",
-      "requirementRefs": ["13A.9"],
+      "requirementRefs": [
+        "13A.9"
+      ],
       "evidence": [
-        { "kind": "file", "reference": "packages/core/src/new-user.ts", "note": "Upgrade recommendation logic includes contribution growth thresholds." }
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user.ts",
+          "note": "Upgrade recommendation logic includes contribution growth thresholds."
+        }
       ]
     },
     "N-E2E-001": {
       "status": "待验收",
-      "requirementRefs": ["13A.11"],
+      "requirementRefs": [
+        "13A.11"
+      ],
       "evidence": [
-        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Unit-level evidence exists for zero-commit README generation; browser E2E evidence still required before final pass." }
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "Unit-level evidence exists for zero-commit README generation; browser E2E evidence still required before final pass."
+        }
+      ]
+    },
+    "03-017": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Covers best-effort star history backfill from repository creation date plus scheduled star snapshots."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/maintenance.ts",
+          "note": "createStarHistoryBackfill and star-snapshot maintenance files generate first-use history and ongoing snapshots."
+        }
+      ]
+    },
+    "11-001": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Full maintenance run writes README.md for dynamic README refresh."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST /api/automation/run",
+          "note": "Automation run route exposes README refresh output in the generated file plan."
+        }
+      ]
+    },
+    "11-002": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Full maintenance run writes data/github.json for GitHub Pages static JSON refresh."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST /api/automation/run",
+          "note": "Automation run route exposes Pages data refresh output."
+        }
+      ]
+    },
+    "11-003": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Full maintenance run writes star and fork snapshot JSON files."
+        },
+        {
+          "kind": "test",
+          "reference": "apps/worker/src/jobs.test.ts",
+          "note": "Worker queue creates dedicated star snapshot operations with acceptance IDs."
+        }
+      ]
+    },
+    "11-004": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Full maintenance run writes contribution, blog, achievement, annual summary, card cache, and project ranking outputs."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/admin/queues",
+          "note": "Admin queue route reports modules and operations for contribution, blog, achievements, annual summary, card cache, ranking, and errors."
+        }
+      ]
+    },
+    "11-005": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/actions.test.ts",
+          "note": "Default workflow configs generate daily, weekly, and manual GitHub Actions triggers."
+        },
+        {
+          "kind": "test",
+          "reference": "apps/worker/src/jobs.test.ts",
+          "note": "Worker queue maps scheduled jobs to executable maintenance operations."
+        }
+      ]
+    },
+    "11-007": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Maintenance run writes configurable workflow YAML with frequency, modules, target branch, and commit message."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/automation/_shared.ts",
+          "note": "Automation request parser accepts cron, frequency, modules, targetBranch, and commitMessage overrides."
+        }
+      ]
+    },
+    "N-GROW-001": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "New repository recommendation generated with evidence and actions."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "N-GROW-002": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Commit growth recommendation generated from contribution totals and deltas."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "N-GROW-003": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Star growth recommendation generated from repo ranking and star deltas."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "N-GROW-004": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "PR and issue growth recommendation generated from collaboration stats."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "N-GROW-005": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Skill update recommendation generated from language and technology tags."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "N-GROW-006": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Education status recommendation generated from education visibility fields."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "N-GROW-007": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Job status recommendation generated from learning plan and privacy-safe career fields."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "N-GROW-008": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Monthly growth summary generated with contributions, stars, forks, and active repos."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "N-GROW-009": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Annual summary generated with year-in-review markdown and JSON."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
+      ]
+    },
+    "N-GROW-010": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/maintenance.test.ts",
+          "note": "Automatic optimization recommendation generated for module priority, privacy, and compatibility."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET /api/growth/recommendations",
+          "note": "Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations."
+        }
       ]
     }
   }
