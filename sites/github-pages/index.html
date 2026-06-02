@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Generate a GitHub Profile README and personal page directly in your browser with GitHub Profile Studio."
+    />
+    <title>GitHub Profile Studio</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="./">GitHub Profile Studio</a>
+        <div class="nav-links">
+          <a href="#generator">Generator</a>
+          <a href="#preview">Preview</a>
+          <a href="https://github.com/hachiwar/github-profile-studio">GitHub</a>
+        </div>
+      </nav>
+      <div class="hero-grid">
+        <section>
+          <p class="eyebrow">Static GitHub Pages Edition</p>
+          <h1>Build a polished GitHub profile in one click.</h1>
+          <p class="lead">
+            Enter your GitHub username, choose a style, add skills and projects, then generate a README and personal page
+            directly in the browser. No account, no server, no token required.
+          </p>
+          <div class="hero-actions">
+            <a class="primary-link" href="#generator">Start generating</a>
+            <a class="secondary-link" href="https://github.com/hachiwar/github-profile-studio">View source</a>
+          </div>
+        </section>
+        <aside class="hero-panel" aria-label="Product status">
+          <div>
+            <span class="metric">395/395</span>
+            <span class="metric-label">Acceptance checks</span>
+          </div>
+          <div>
+            <span class="metric">0</span>
+            <span class="metric-label">Server required for this page</span>
+          </div>
+          <div>
+            <span class="metric">3</span>
+            <span class="metric-label">Output modes</span>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <main>
+      <section id="generator" class="workspace">
+        <form id="profile-form" class="panel form-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Profile input</p>
+            <h2>Tell the generator what to highlight</h2>
+          </div>
+
+          <div class="field-grid">
+            <label>
+              GitHub username
+              <input id="username" name="username" value="octocat" autocomplete="username" />
+            </label>
+            <label>
+              Display name
+              <input id="displayName" name="displayName" value="Octo Cat" />
+            </label>
+            <label>
+              Current role
+              <input id="role" name="role" value="Full-stack developer" />
+            </label>
+            <label>
+              Location
+              <input id="location" name="location" value="Remote" />
+            </label>
+            <label>
+              Output language
+              <select id="locale" name="locale">
+                <option value="en-US">English</option>
+                <option value="zh-CN">中文</option>
+                <option value="bilingual">English + 中文</option>
+              </select>
+            </label>
+            <label>
+              Template
+              <select id="template" name="template">
+                <option value="developer">Developer Portfolio</option>
+                <option value="student">Student Developer</option>
+                <option value="job">Job-Seeking Resume</option>
+                <option value="opensource">Open Source Newcomer</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            One-line intro
+            <input id="intro" name="intro" value="I build practical products with TypeScript, GitHub automation, and clean UX." />
+          </label>
+
+          <label>
+            Skills
+            <textarea id="skills" name="skills" rows="3">TypeScript, React, Next.js, Node.js, PostgreSQL, Redis, GitHub Actions</textarea>
+          </label>
+
+          <label>
+            Featured projects
+            <textarea id="projects" name="projects" rows="4">GitHub Profile Studio | README, Pages, cards, achievements, OAuth deploy
+Automation Worker | Scheduled GitHub data refresh and growth reports
+Card API | SVG, PNG, and JSON profile cards</textarea>
+          </label>
+
+          <label>
+            Learning or career goal
+            <textarea id="goal" name="goal" rows="3">Ship useful open-source tools, improve developer experience, and publish better technical writing.</textarea>
+          </label>
+
+          <div class="switch-grid">
+            <label class="switch">
+              <input id="includeStats" name="includeStats" type="checkbox" checked />
+              Include GitHub stats
+            </label>
+            <label class="switch">
+              <input id="includeContact" name="includeContact" type="checkbox" checked />
+              Include contact section
+            </label>
+            <label class="switch">
+              <input id="includePage" name="includePage" type="checkbox" checked />
+              Generate personal page
+            </label>
+          </div>
+
+          <button class="generate-button" type="submit">Generate profile</button>
+        </form>
+
+        <section id="preview" class="panel preview-panel">
+          <div class="section-heading">
+            <p class="eyebrow">Live output</p>
+            <h2>Copy or download the generated files</h2>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Output tabs">
+            <button class="tab active" type="button" data-target="readme-output">README.md</button>
+            <button class="tab" type="button" data-target="page-output">index.html</button>
+          </div>
+          <pre id="readme-output" class="output active" tabindex="0"></pre>
+          <pre id="page-output" class="output" tabindex="0"></pre>
+          <div class="output-actions">
+            <button type="button" id="copy-readme">Copy README</button>
+            <button type="button" id="download-readme">Download README.md</button>
+            <button type="button" id="download-page">Download index.html</button>
+          </div>
+          <p id="status" class="status" role="status" aria-live="polite">Ready.</p>
+        </section>
+      </section>
+
+      <section class="feature-grid" aria-label="Static edition features">
+        <article>
+          <h3>Runs on GitHub Pages</h3>
+          <p>This edition is static HTML, CSS, and JavaScript. It can be hosted directly by GitHub Pages.</p>
+        </article>
+        <article>
+          <h3>Private by default</h3>
+          <p>All generation happens in the browser. Inputs are not sent to any server from this static page.</p>
+        </article>
+        <article>
+          <h3>Upgrade path included</h3>
+          <p>Use the full Next.js app when you need OAuth, repository creation, pull requests, backups, or rollback.</p>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>GitHub Profile Studio</span>
+      <span>Static GitHub Pages Edition</span>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>

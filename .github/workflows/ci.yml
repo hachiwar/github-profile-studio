@@ -20,4 +20,5 @@ jobs:
       - run: npm run lint
       - run: npm run test
       - run: npm run build
+      - run: npm run pages:build
       - run: npm run acceptance:report

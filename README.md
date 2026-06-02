@@ -6,6 +6,7 @@
 
 <p align="center">
   <a href="https://github.com/hachiwar/github-profile-studio/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/hachiwar/github-profile-studio/ci.yml?branch=main&label=CI&style=for-the-badge"></a>
+  <a href="https://hachiwar.github.io/github-profile-studio/"><img alt="GitHub Pages" src="https://img.shields.io/badge/GitHub%20Pages-live-0969da?style=for-the-badge&logo=github"></a>
   <img alt="Acceptance" src="https://img.shields.io/badge/acceptance-395%2F395-brightgreen?style=for-the-badge">
   <img alt="Next.js" src="https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js">
   <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5.7-3178c6?style=for-the-badge&logo=typescript&logoColor=white">
@@ -13,6 +14,8 @@
 </p>
 
 <p align="center">
+  <a href="https://hachiwar.github.io/github-profile-studio/">Live Site</a>
+  ·
   <a href="#quick-start">Quick Start</a>
   ·
   <a href="#features">Features</a>
@@ -62,7 +65,25 @@ This repository keeps the verified first release on the `v1` branch. The `main` 
 | --- | --- |
 | ![Home](artifacts/screenshots/final-home.png) | ![New user wizard](artifacts/screenshots/final-new-user.png) |
 
+| GitHub Pages static edition |
+| --- |
+| ![GitHub Pages static edition](artifacts/screenshots/github-pages-static.png) |
+
 More verification screenshots are stored in [`artifacts/screenshots`](artifacts/screenshots).
+
+## Public Website
+
+The repository includes a static GitHub Pages edition at [hachiwar.github.io/github-profile-studio](https://hachiwar.github.io/github-profile-studio/). Users can open the website, enter or select profile information, generate a README and personal page in the browser, then copy or download the generated files.
+
+This static edition sends no profile input to a server and requires no token. OAuth repository writes, backups, pull requests, rollbacks, dynamic APIs, database-backed drafts, and worker jobs remain part of the full Next.js deployment.
+
+Build the GitHub Pages website locally:
+
+```bash
+npm run pages:build
+```
+
+The static output is written to `dist/github-pages`.
 
 ## Features
 
@@ -182,6 +203,12 @@ The worker can be run separately:
 npm run dev --workspace @github-profile-studio/worker
 ```
 
+### GitHub Pages Static Site
+
+The static website is published by `.github/workflows/pages.yml`. On every push to `main`, GitHub Actions installs dependencies, runs `npm run pages:build`, uploads `dist/github-pages` as a Pages artifact, and deploys it with GitHub Pages.
+
+If the repository has never used Pages before, set the repository Pages source to GitHub Actions in the GitHub repository settings.
+
 ## API Examples
 
 Generate a README:
@@ -229,6 +256,9 @@ packages/
 scripts/
   acceptance-matrix.ts
   acceptance-report.ts
+  build-github-pages.ts
+sites/
+  github-pages/ static browser-only generator for GitHub Pages
 ```
 
 ## Quality Gates
@@ -240,6 +270,7 @@ npm run lint
 npm run test
 npm run typecheck
 npm run build
+npm run pages:build
 npm run acceptance:report
 ```
 
@@ -249,6 +280,7 @@ Current verified status:
 - `npm run test`: passing, 39 files and 104 tests
 - `npm run typecheck`: passing across all workspaces
 - `npm run build`: passing, 68 Next.js routes
+- `npm run pages:build`: passing, static GitHub Pages artifact generated
 - `npm run acceptance:report`: 395/395 passing with evidence
 
 ## Acceptance

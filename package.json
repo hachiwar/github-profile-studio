@@ -17,6 +17,7 @@
     "typecheck": "npm run typecheck --workspaces --if-present",
     "db:generate": "prisma generate --schema packages/db/prisma/schema.prisma",
     "db:migrate": "prisma migrate dev --schema packages/db/prisma/schema.prisma",
+    "pages:build": "tsx scripts/build-github-pages.ts",
     "acceptance:matrix": "tsx scripts/acceptance-matrix.ts",
     "acceptance:report": "tsx scripts/acceptance-report.ts"
   },
