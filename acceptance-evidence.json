@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T01:57:28.318Z",
+  "generatedAt": "2026-06-02T02:04:21.478Z",
   "verificationCommands": [
     {
       "kind": "log",
@@ -220,6 +220,21 @@
       "kind": "log",
       "reference": "Playwright download event on /dashboard/new-user",
       "note": "Download button emitted README.md as the suggested filename."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run typecheck",
+      "note": "Workspace TypeScript typecheck passes after new-user copy, layout, and page visual engines."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run test",
+      "note": "Vitest suite passes: 28 files, 77 tests, including N-TEXT, N-LAYOUT, and N-PVIS coverage."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run build",
+      "note": "Production build passes after new-user copy, layout, and page visual engines."
     }
   ],
   "items": {
@@ -4512,6 +4527,708 @@
           "kind": "file",
           "reference": "packages/core/src/templates.ts",
           "note": "Pages template N-PT-015 is registered with its matching acceptance ID."
+        }
+      ]
+    },
+    "N-TEXT-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Chinese introduction block is generated from form identity, role, and focus."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "English introduction block is generated from form identity, role, and focus."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Current learning status block uses status or generated fallback."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Education copy uses school, major, and learning focus."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Skill stack copy summarizes languages and skills."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Project copy summarizes the leading manual project."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Learning goals copy combines short-term and long-term goals."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Open-source goal copy uses the open-source plan."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Job goal copy uses the job plan."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Empty-data copy replaces sparse GitHub metrics with learning/project context."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-011": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Tone switching supports formal, friendly, confident, and concise output."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-012": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Manual copy edits can override generated blocks."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-013": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Regeneration updates unlocked copy blocks."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-014": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Locked copy blocks preserve previous text through regeneration."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-015": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Generated blocks translate between en-US, zh-CN, and bilingual output."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-TEXT-016": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.5.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Manual modifications survive regeneration when locked or explicitly edited."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs."
+        }
+      ]
+    },
+    "N-LAYOUT-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Education records are assigned empty, single-card, or timeline layouts."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Course lists are assigned hidden, tag-list, or grouped-list layouts."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Project count drives empty-state, single-feature, grid, or bento layout."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Learning plan density drives compact, roadmap, or timeline layout."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Job status and resume settings drive career callout layouts."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Learning status is inferred as student, self-taught, career-switcher, or builder."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Low PR/issue counts enable open-source newcomer layout."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Sparse GitHub data switches emphasis to manual-first layout."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Missing avatar receives a deterministic GitHub identicon default."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Missing project covers receive deterministic generated cover metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-LAYOUT-011": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-layout.test.ts",
+          "note": "Missing content fields receive copy-completion suggestions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-layout.ts",
+          "note": "New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions."
+        }
+      ]
+    },
+    "N-PVIS-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Pages style config supports student portfolio, resume, growth, bento, minimal, and brand styles."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Primary and accent colors are configurable."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Font family is configurable."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Background style is configurable."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Hero layout is configurable."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Card style is configurable."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Skill icon/progress style is configurable."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Project card style is configurable."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "SEO title, description, and keywords are generated and configurable."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Open Graph title, description, and image alt metadata are generated."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-PVIS-011": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Favicon SVG metadata is generated from profile initials and colors."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata."
+        }
+      ]
+    },
+    "N-POUT-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.6.5"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/page-visual.test.ts",
+          "note": "Static resource metadata includes index.html, style.css, script.js, config JSON, OG image, and favicon."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/page-visual.ts",
+          "note": "buildPageVisualExport returns static asset entries for Pages export packaging."
         }
       ]
     }

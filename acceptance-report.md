@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T01:57:44.494Z
+Generated at: 2026-06-02T02:04:22.608Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
-Evidence generated at: 2026-06-02T01:57:28.318Z
+Evidence generated at: 2026-06-02T02:04:21.478Z
 
-Passed items with evidence: 246
+Passed items with evidence: 285
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 122 |
+| 未开始 | 83 |
 | 开发中 | 0 |
 | 待验收 | 27 |
-| 通过 | 246 |
+| 通过 | 285 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -67,6 +67,9 @@ Passed items with evidence: 246
 | api-response | `GET http://127.0.0.1:3018/api/achievements/calculate?username=octocat&locale=en-US` | Local smoke test returned status=200, 45 achievements, unlocked progress, README/Pages/SVG embeds, and 07-* acceptance IDs. |
 | log | `Browser DOM http://127.0.0.1:3018/dashboard/new-user` | In-app browser DOM check found no client error, 10 inputs, 2 textareas, 1 select, 14 buttons, Save draft, and N-FORM coverage text. |
 | log | `Playwright download event on /dashboard/new-user` | Download button emitted README.md as the suggested filename. |
+| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after new-user copy, layout, and page visual engines. |
+| log | `npm.cmd run test` | Vitest suite passes: 28 files, 77 tests, including N-TEXT, N-LAYOUT, and N-PVIS coverage. |
+| log | `npm.cmd run build` | Production build passes after new-user copy, layout, and page visual engines. |
 
 ## Full Checklist Matrix
 
@@ -310,22 +313,22 @@ Passed items with evidence: 246
 | N-RT-013 | 通过 | 13A.5.2 | 极简个人介绍模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-013 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-013 is registered with its matching acceptance ID.) |
 | N-RT-014 | 通过 | 13A.5.2 | 技术简历模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-014 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-014 is registered with its matching acceptance ID.) |
 | N-RT-015 | 通过 | 13A.5.2 | 中英文双语模板 | test: packages/core/src/templates.test.ts (Built-in README template registry includes N-RT-015 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (README template N-RT-015 is registered with its matching acceptance ID.) |
-| N-TEXT-001 | 未开始 |  | 中文自我介绍 |  |
-| N-TEXT-002 | 未开始 |  | 英文自我介绍 |  |
-| N-TEXT-003 | 未开始 |  | 当前学习状态 |  |
-| N-TEXT-004 | 未开始 |  | 教育背景文案 |  |
-| N-TEXT-005 | 未开始 |  | 技能栈文案 |  |
-| N-TEXT-006 | 未开始 |  | 项目介绍文案 |  |
-| N-TEXT-007 | 未开始 |  | 学习目标文案 |  |
-| N-TEXT-008 | 未开始 |  | 开源目标文案 |  |
-| N-TEXT-009 | 未开始 |  | 求职目标文案 |  |
-| N-TEXT-010 | 未开始 |  | 空数据替代文案 |  |
-| N-TEXT-011 | 未开始 |  | 语气切换 |  |
-| N-TEXT-012 | 未开始 |  | 文案编辑 |  |
-| N-TEXT-013 | 未开始 |  | 重新生成 |  |
-| N-TEXT-014 | 未开始 |  | 锁定文案 |  |
-| N-TEXT-015 | 未开始 |  | 中英文互译 |  |
-| N-TEXT-016 | 未开始 |  | 保留人工修改 |  |
+| N-TEXT-001 | 通过 | 13A.5.3 | 中文自我介绍 | test: packages/core/src/new-user-copy.test.ts (Chinese introduction block is generated from form identity, role, and focus.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-002 | 通过 | 13A.5.3 | 英文自我介绍 | test: packages/core/src/new-user-copy.test.ts (English introduction block is generated from form identity, role, and focus.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-003 | 通过 | 13A.5.3 | 当前学习状态 | test: packages/core/src/new-user-copy.test.ts (Current learning status block uses status or generated fallback.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-004 | 通过 | 13A.5.3 | 教育背景文案 | test: packages/core/src/new-user-copy.test.ts (Education copy uses school, major, and learning focus.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-005 | 通过 | 13A.5.3 | 技能栈文案 | test: packages/core/src/new-user-copy.test.ts (Skill stack copy summarizes languages and skills.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-006 | 通过 | 13A.5.3 | 项目介绍文案 | test: packages/core/src/new-user-copy.test.ts (Project copy summarizes the leading manual project.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-007 | 通过 | 13A.5.3 | 学习目标文案 | test: packages/core/src/new-user-copy.test.ts (Learning goals copy combines short-term and long-term goals.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-008 | 通过 | 13A.5.3 | 开源目标文案 | test: packages/core/src/new-user-copy.test.ts (Open-source goal copy uses the open-source plan.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-009 | 通过 | 13A.5.3 | 求职目标文案 | test: packages/core/src/new-user-copy.test.ts (Job goal copy uses the job plan.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-010 | 通过 | 13A.5.3 | 空数据替代文案 | test: packages/core/src/new-user-copy.test.ts (Empty-data copy replaces sparse GitHub metrics with learning/project context.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-011 | 通过 | 13A.5.3 | 语气切换 | test: packages/core/src/new-user-copy.test.ts (Tone switching supports formal, friendly, confident, and concise output.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-012 | 通过 | 13A.5.3 | 文案编辑 | test: packages/core/src/new-user-copy.test.ts (Manual copy edits can override generated blocks.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-013 | 通过 | 13A.5.3 | 重新生成 | test: packages/core/src/new-user-copy.test.ts (Regeneration updates unlocked copy blocks.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-014 | 通过 | 13A.5.3 | 锁定文案 | test: packages/core/src/new-user-copy.test.ts (Locked copy blocks preserve previous text through regeneration.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-015 | 通过 | 13A.5.3 | 中英文互译 | test: packages/core/src/new-user-copy.test.ts (Generated blocks translate between en-US, zh-CN, and bilingual output.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
+| N-TEXT-016 | 通过 | 13A.5.3 | 保留人工修改 | test: packages/core/src/new-user-copy.test.ts (Manual modifications survive regeneration when locked or explicitly edited.)<br>file: packages/core/src/new-user-copy.ts (New-user copy engine exposes tone, manual edit, regenerate, lock, and translation APIs.) |
 | N-PAGE-001 | 通过 | 13A.6 | 零仓库可生成网站 | test: packages/generators/src/pages.test.ts (Zero-repository users still receive a non-empty generated website.) |
 | N-PAGE-002 | 通过 | 13A.6.1 | 首页 Hero | test: packages/generators/src/pages.test.ts (Generated site contains Hero section.) |
 | N-PAGE-003 | 通过 | 13A.6.1 | 个人简介区 | test: packages/generators/src/pages.test.ts (Generated site contains About section.) |
@@ -359,35 +362,35 @@ Passed items with evidence: 246
 | N-PT-013 | 通过 | 13A.6.2 | 时间线成长主页 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-013 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-013 is registered with its matching acceptance ID.) |
 | N-PT-014 | 通过 | 13A.6.2 | 技能地图主页 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-014 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-014 is registered with its matching acceptance ID.) |
 | N-PT-015 | 通过 | 13A.6.2 | 开源新人主页 | test: packages/core/src/templates.test.ts (Built-in Pages template registry includes N-PT-015 with English and Chinese metadata.)<br>file: packages/core/src/templates.ts (Pages template N-PT-015 is registered with its matching acceptance ID.) |
-| N-LAYOUT-001 | 未开始 |  | 教育信息自动布局 |  |
-| N-LAYOUT-002 | 未开始 |  | 课程自动布局 |  |
-| N-LAYOUT-003 | 未开始 |  | 项目数量布局 |  |
-| N-LAYOUT-004 | 未开始 |  | 学习计划布局 |  |
-| N-LAYOUT-005 | 未开始 |  | 求职状态布局 |  |
-| N-LAYOUT-006 | 未开始 |  | 学习状态布局 |  |
-| N-LAYOUT-007 | 未开始 |  | 开源新人布局 |  |
-| N-LAYOUT-008 | 未开始 |  | GitHub 数据弱化 |  |
-| N-LAYOUT-009 | 未开始 |  | 默认头像 |  |
-| N-LAYOUT-010 | 未开始 |  | 默认项目封面 |  |
-| N-LAYOUT-011 | 未开始 |  | 文案补全 |  |
-| N-PVIS-001 | 未开始 |  | 主页风格配置 |  |
-| N-PVIS-002 | 未开始 |  | 主色配置 |  |
-| N-PVIS-003 | 未开始 |  | 字体配置 |  |
-| N-PVIS-004 | 未开始 |  | 背景配置 |  |
-| N-PVIS-005 | 未开始 |  | Hero 布局配置 |  |
-| N-PVIS-006 | 未开始 |  | 卡片风格配置 |  |
-| N-PVIS-007 | 未开始 |  | 技能图标风格 |  |
-| N-PVIS-008 | 未开始 |  | 项目卡片风格 |  |
-| N-PVIS-009 | 未开始 |  | SEO 信息 |  |
-| N-PVIS-010 | 未开始 |  | Open Graph 图 |  |
-| N-PVIS-011 | 未开始 |  | favicon |  |
+| N-LAYOUT-001 | 通过 | 13A.6.3 | 教育信息自动布局 | test: packages/core/src/new-user-layout.test.ts (Education records are assigned empty, single-card, or timeline layouts.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-002 | 通过 | 13A.6.3 | 课程自动布局 | test: packages/core/src/new-user-layout.test.ts (Course lists are assigned hidden, tag-list, or grouped-list layouts.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-003 | 通过 | 13A.6.3 | 项目数量布局 | test: packages/core/src/new-user-layout.test.ts (Project count drives empty-state, single-feature, grid, or bento layout.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-004 | 通过 | 13A.6.3 | 学习计划布局 | test: packages/core/src/new-user-layout.test.ts (Learning plan density drives compact, roadmap, or timeline layout.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-005 | 通过 | 13A.6.3 | 求职状态布局 | test: packages/core/src/new-user-layout.test.ts (Job status and resume settings drive career callout layouts.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-006 | 通过 | 13A.6.3 | 学习状态布局 | test: packages/core/src/new-user-layout.test.ts (Learning status is inferred as student, self-taught, career-switcher, or builder.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-007 | 通过 | 13A.6.3 | 开源新人布局 | test: packages/core/src/new-user-layout.test.ts (Low PR/issue counts enable open-source newcomer layout.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-008 | 通过 | 13A.6.3 | GitHub 数据弱化 | test: packages/core/src/new-user-layout.test.ts (Sparse GitHub data switches emphasis to manual-first layout.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-009 | 通过 | 13A.6.3 | 默认头像 | test: packages/core/src/new-user-layout.test.ts (Missing avatar receives a deterministic GitHub identicon default.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-010 | 通过 | 13A.6.3 | 默认项目封面 | test: packages/core/src/new-user-layout.test.ts (Missing project covers receive deterministic generated cover metadata.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-LAYOUT-011 | 通过 | 13A.6.3 | 文案补全 | test: packages/core/src/new-user-layout.test.ts (Missing content fields receive copy-completion suggestions.)<br>file: packages/core/src/new-user-layout.ts (New-user layout planner returns layout, fallback asset, GitHub-emphasis, and copy-completion decisions.) |
+| N-PVIS-001 | 通过 | 13A.6.4 | 主页风格配置 | test: packages/core/src/page-visual.test.ts (Pages style config supports student portfolio, resume, growth, bento, minimal, and brand styles.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-002 | 通过 | 13A.6.4 | 主色配置 | test: packages/core/src/page-visual.test.ts (Primary and accent colors are configurable.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-003 | 通过 | 13A.6.4 | 字体配置 | test: packages/core/src/page-visual.test.ts (Font family is configurable.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-004 | 通过 | 13A.6.4 | 背景配置 | test: packages/core/src/page-visual.test.ts (Background style is configurable.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-005 | 通过 | 13A.6.4 | Hero 布局配置 | test: packages/core/src/page-visual.test.ts (Hero layout is configurable.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-006 | 通过 | 13A.6.4 | 卡片风格配置 | test: packages/core/src/page-visual.test.ts (Card style is configurable.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-007 | 通过 | 13A.6.4 | 技能图标风格 | test: packages/core/src/page-visual.test.ts (Skill icon/progress style is configurable.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-008 | 通过 | 13A.6.4 | 项目卡片风格 | test: packages/core/src/page-visual.test.ts (Project card style is configurable.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-009 | 通过 | 13A.6.4 | SEO 信息 | test: packages/core/src/page-visual.test.ts (SEO title, description, and keywords are generated and configurable.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-010 | 通过 | 13A.6.4 | Open Graph 图 | test: packages/core/src/page-visual.test.ts (Open Graph title, description, and image alt metadata are generated.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
+| N-PVIS-011 | 通过 | 13A.6.4 | favicon | test: packages/core/src/page-visual.test.ts (Favicon SVG metadata is generated from profile initials and colors.)<br>file: packages/core/src/page-visual.ts (Page visual config schema and export builder cover visual, SEO, OG, favicon, and static asset metadata.) |
 | N-POUT-001 | 通过 | 13A.6.4 | index.html | test: packages/generators/src/export-package.test.ts (Pages package includes index.html.) |
 | N-POUT-002 | 通过 | 13A.6.4 | style.css | test: packages/generators/src/export-package.test.ts (Pages package includes style.css.) |
 | N-POUT-003 | 通过 | 13A.6.4 | script.js | test: packages/generators/src/export-package.test.ts (Pages package includes script.js.) |
 | N-POUT-004 | 通过 | 13A.6.4 | 个人信息 JSON | test: packages/generators/src/export-package.test.ts (Pages package includes data/github.json containing profile data.) |
 | N-POUT-005 | 通过 | 13A.6.4 | 项目 JSON | test: packages/generators/src/export-package.test.ts (Pages package data/github.json contains manual project data.) |
 | N-POUT-006 | 通过 | 13A.6.4 | 技能 JSON | test: packages/generators/src/export-package.test.ts (Pages package data/github.json contains skill data.) |
-| N-POUT-007 | 未开始 |  | 静态资源 |  |
+| N-POUT-007 | 通过 | 13A.6.5 | 静态资源 | test: packages/core/src/page-visual.test.ts (Static resource metadata includes index.html, style.css, script.js, config JSON, OG image, and favicon.)<br>file: packages/core/src/page-visual.ts (buildPageVisualExport returns static asset entries for Pages export packaging.) |
 | N-POUT-008 | 待验收 | 13A.6.4 | 下载站点包 | api-response: apps/web/app/api/export/pages/route.ts (Pages export API can return ZIP packages; browser download evidence still required.) |
 | N-POUT-009 | 未开始 |  | 提交 Pages 仓库 |  |
 | N-POUT-010 | 未开始 |  | 创建 Pages 仓库 |  |

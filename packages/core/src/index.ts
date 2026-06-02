@@ -7,4 +7,7 @@ export * from "./fixtures";
 export * from "./acceptance";
 export * from "./new-user";
 export * from "./new-user-form";
+export * from "./new-user-copy";
+export * from "./new-user-layout";
+export * from "./page-visual";
 export * from "./theme-io";
