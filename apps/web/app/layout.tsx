@@ -12,6 +12,7 @@ const navItems = [
   ["Templates", "/templates"],
   ["Cards", "/cards"],
   ["Achievements", "/achievements"],
+  ["Pricing", "/pricing"],
   ["Docs", "/docs"],
   ["Dashboard", "/dashboard"]
 ];
@@ -45,4 +46,3 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     </html>
   );
 }
-

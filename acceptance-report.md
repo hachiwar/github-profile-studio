@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-01T23:55:12.106Z
+Generated at: 2026-06-02T00:05:59.183Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
 Evidence generated at: 2026-06-02T00:00:00.000Z
 
-Passed items with evidence: 35
+Passed items with evidence: 60
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 338 |
+| 未开始 | 315 |
 | 开发中 | 0 |
-| 待验收 | 22 |
-| 通过 | 35 |
+| 待验收 | 20 |
+| 通过 | 60 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -25,9 +25,14 @@ Passed items with evidence: 35
 | --- | --- | --- |
 | log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes. |
 | log | `npm.cmd run test` | Vitest suite covers parser, GitHub stats/cache, README/Pages generators, cards, achievements, OAuth, deployment planning, actions, import, and theme IO. |
+| log | `npm.cmd run build` | Next production build completed and listed all public routes, dashboard routes, GitHub APIs, card APIs, and export APIs. |
 | api-response | `POST http://127.0.0.1:3000/api/export/readme` | Local smoke test returned a README export package for octocat. |
 | api-response | `POST http://127.0.0.1:3000/api/export/pages?format=zip` | Local smoke test returned status=200 and an 8083 byte ZIP package. |
 | api-response | `GET http://127.0.0.1:3000/api/github/languages?username=octocat` | Local smoke test returned real GitHub language data, cache metadata, and rate limit metadata. |
+| api-response | `GET http://127.0.0.1:3000/api/cards/stats?user=octocat&format=json&include=stars,forks&hide_border=true&width=720&height=260&cache_seconds=120` | Local smoke test returned card JSON with real GitHub dataset, parameters, embeds, cache metadata, and rate limit metadata. |
+| api-response | `GET http://127.0.0.1:3000/api/cards/stats?...format=svg` | Local smoke test returned svg_status=200 and 1283 bytes. |
+| api-response | `GET http://127.0.0.1:3000/api/cards/stats?...format=png` | Local smoke test returned png_status=200 and 10305 bytes. |
+| api-response | `GET http://127.0.0.1:3000/pricing` | Local smoke test returned pricing_status=200. |
 
 ## Full Checklist Matrix
 
@@ -46,7 +51,7 @@ Passed items with evidence: 35
 | 02-005 | 未开始 |  | User 与 Organization 区分 |  |
 | 02-006 | 待验收 | 4.1.2 | 头像、名称、bio、company、location、b | test: packages/github/src/normalize.test.ts (GitHub user profile normalization covers identity and contact fields.)<br>file: packages/github/src/normalize.ts (Avatar, name, bio, company, location, blog, and email fields are normalized.) |
 | 02-007 | 通过 | 4.1.2 | followers、following、public r | test: packages/github/src/normalize.test.ts (followers, following, public repos, and public gists are normalized.) |
-| 02-008 | 未开始 |  | account age 计算 |  |
+| 02-008 | 通过 | 4.1.2 | account age 计算 | test: packages/github/src/normalize.test.ts (Account age days and years are calculated from created_at.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json (Local card JSON smoke response included accountAgeDays and accountAgeYears for octocat.) |
 | 02-009 | 待验收 | 4.1.3 | `username` 仓库检测 | file: packages/github/src/client.ts (detectRepository checks whether the username repository exists.) |
 | 02-010 | 待验收 | 4.1.3 | `username` 仓库 public 检测 | file: packages/github/src/client.ts (detectRepository returns isPublic for target repositories.) |
 | 02-011 | 待验收 | 4.1.3 | `username` README 检测 | file: packages/github/src/client.ts (detectRepository checks README presence.) |
@@ -119,29 +124,29 @@ Passed items with evidence: 35
 | 05-011 | 未开始 |  | OAuth 提交到 `username.github.i |  |
 | 05-012 | 未开始 |  | 自动启用 Pages 或配置发布源可用 |  |
 | 05-013 | 未开始 |  | 提交前 diff 与回滚可用 |  |
-| 06-001 | 待验收 | 4.5 | Profile Overview Card 可用 | api-response: apps/web/app/api/cards/[type]/route.ts (Dynamic card API route handles SVG, PNG, and JSON card outputs.) |
-| 06-002 | 未开始 |  | GitHub Stats Card 可用 |  |
-| 06-003 | 未开始 |  | GitHub Streak Card 可用 |  |
-| 06-004 | 未开始 |  | Contribution Calendar Card 可 |  |
-| 06-005 | 未开始 |  | Top Languages Card 可用 |  |
-| 06-006 | 未开始 |  | Repository Card 可用 |  |
-| 06-007 | 未开始 |  | Star Growth Card 可用 |  |
-| 06-008 | 未开始 |  | Fork Growth Card 可用 |  |
-| 06-009 | 未开始 |  | PR / Issue Card 可用 |  |
-| 06-010 | 未开始 |  | Achievement Card 可用 |  |
-| 06-011 | 未开始 |  | Trophy Card 可用 |  |
-| 06-012 | 未开始 |  | Tech Stack Card 可用 |  |
-| 06-013 | 未开始 |  | Activity Graph Card 可用 |  |
-| 06-014 | 未开始 |  | Repo Ranking Card 可用 |  |
-| 06-015 | 未开始 |  | Followers Card 可用 |  |
-| 06-016 | 未开始 |  | Account Age Card 可用 |  |
-| 06-017 | 未开始 |  | Open Source Impact Card 可用 |  |
-| 06-018 | 未开始 |  | Year in Review Card 可用 |  |
-| 06-019 | 未开始 |  | Monthly Activity Card 可用 |  |
-| 06-020 | 未开始 |  | Custom Composite Card 可用 |  |
-| 06-021 | 待验收 | 4.5.2 | 所有卡片支持 user、theme、layout、hid | file: packages/cards/src/index.ts (Card request model includes user, theme, locale, format, repo, and period; remaining visual query parameters still need end-to-end UI/API verification.) |
-| 06-022 | 未开始 |  | 支持 SVG、PNG、JSON 输出 |  |
-| 06-023 | 未开始 |  | 支持复制 Markdown 图片链接、HTML img、 |  |
+| 06-001 | 通过 | 4.5 | Profile Overview Card 可用 | test: packages/cards/src/render.test.ts (Card catalog renders every card type, including Profile Overview Card.) |
+| 06-002 | 通过 | 4.5 | GitHub Stats Card 可用 | test: packages/cards/src/render.test.ts (GitHub Stats Card renders and supports the stats alias.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json (Local smoke test returned GitHub Stats Card JSON.) |
+| 06-003 | 通过 | 4.5 | GitHub Streak Card 可用 | test: packages/cards/src/render.test.ts (GitHub Streak Card renders and supports the streak alias.) |
+| 06-004 | 通过 | 4.5 | Contribution Calendar Card 可 | test: packages/cards/src/render.test.ts (Contribution Calendar Card renders from the catalog.) |
+| 06-005 | 通过 | 4.5 | Top Languages Card 可用 | test: packages/cards/src/render.test.ts (Top Languages Card renders and supports the languages alias.) |
+| 06-006 | 通过 | 4.5 | Repository Card 可用 | test: packages/cards/src/render.test.ts (Repository Card renders and supports the repo alias.) |
+| 06-007 | 通过 | 4.5 | Star Growth Card 可用 | test: packages/cards/src/render.test.ts (Star Growth Card renders from the catalog.) |
+| 06-008 | 通过 | 4.5 | Fork Growth Card 可用 | test: packages/cards/src/render.test.ts (Fork Growth Card renders from the catalog.) |
+| 06-009 | 通过 | 4.5 | PR / Issue Card 可用 | test: packages/cards/src/render.test.ts (PR / Issue Card renders from the catalog.) |
+| 06-010 | 通过 | 4.5 | Achievement Card 可用 | test: packages/cards/src/render.test.ts (Achievement Card renders and supports the achievements alias.) |
+| 06-011 | 通过 | 4.5 | Trophy Card 可用 | test: packages/cards/src/render.test.ts (Trophy Card renders from the catalog.) |
+| 06-012 | 通过 | 4.5 | Tech Stack Card 可用 | test: packages/cards/src/render.test.ts (Tech Stack Card renders from the catalog.) |
+| 06-013 | 通过 | 4.5 | Activity Graph Card 可用 | test: packages/cards/src/render.test.ts (Activity Graph Card renders from the catalog.) |
+| 06-014 | 通过 | 4.5 | Repo Ranking Card 可用 | test: packages/cards/src/render.test.ts (Repo Ranking Card renders from the catalog.) |
+| 06-015 | 通过 | 4.5 | Followers Card 可用 | test: packages/cards/src/render.test.ts (Followers Card renders from the catalog.) |
+| 06-016 | 通过 | 4.5 | Account Age Card 可用 | test: packages/cards/src/render.test.ts (Account Age Card renders from the catalog and profile data includes account age.) |
+| 06-017 | 通过 | 4.5 | Open Source Impact Card 可用 | test: packages/cards/src/render.test.ts (Open Source Impact Card renders from the catalog.) |
+| 06-018 | 通过 | 4.5 | Year in Review Card 可用 | test: packages/cards/src/render.test.ts (Year in Review Card renders from the catalog.) |
+| 06-019 | 通过 | 4.5 | Monthly Activity Card 可用 | test: packages/cards/src/render.test.ts (Monthly Activity Card renders from the catalog.) |
+| 06-020 | 通过 | 4.5 | Custom Composite Card 可用 | test: packages/cards/src/render.test.ts (Custom Composite Card renders from the catalog.) |
+| 06-021 | 通过 | 4.5.2 | 所有卡片支持 user、theme、layout、hid | test: packages/cards/src/render.test.ts (Card rendering supports width, height, hide_border, bg_color, title_color, include, and icons.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json&include=stars,forks&hide_border=true&width=720&height=260&cache_seconds=120 (Local smoke test verified parameter parsing and JSON echo for card API.) |
+| 06-022 | 通过 | 4.5.3 | 支持 SVG、PNG、JSON 输出 | api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json (JSON output returned 200.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=svg (SVG output returned 200 and 1283 bytes.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=png (PNG output returned 200 and 10305 bytes.) |
+| 06-023 | 通过 | 4.5.4 | 支持复制 Markdown 图片链接、HTML img、 | test: packages/cards/src/embeds.test.ts (Markdown image link, HTML img, iframe, and URL variants are generated.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json (JSON smoke response includes embeds for markdown and HTML.) |
 | 06-024 | 未开始 |  | 支持下载图片 |  |
 | 06-025 | 通过 | 4.5.4 | 卡片在 GitHub README 中可正常显示 | test: packages/cards/src/embeds.test.ts (README badge/card embed markdown generation is tested.) |
 | 06-026 | 未开始 |  | 卡片生成器支持类型选择、参数调整、实时预览、复制、下载、 |  |
@@ -203,7 +208,7 @@ Passed items with evidence: 35
 | 13-011 | 未开始 |  | 具备 XSS、Markdown 注入、HTML 注入、自 |  |
 | 13-012 | 未开始 |  | username 不存在、API 限制、网络失败、仓库不 |  |
 | 14-001 | 待验收 | 9 | UserProfile、Repository、Contr | file: packages/core/src/domain.ts (UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedReadme, Theme-related config, and PageSiteBundle models exist.)<br>test: packages/github/src/stats.test.ts (Public dataset construction exercises the data model.) |
-| 14-002 | 未开始 |  | 公共页面路由 `/`、`/generate`、`/tem |  |
+| 14-002 | 通过 | 10.1 | 公共页面路由 `/`、`/generate`、`/tem | file: apps/web/app/pricing/page.tsx (Pricing public page has been added.)<br>api-response: GET http://127.0.0.1:3000/pricing (Local smoke test returned pricing_status=200.)<br>log: npm.cmd run build (Build output includes /, /generate, /templates, /cards, /achievements, /docs, /examples, /pricing, /login, /privacy, and /terms.) |
 | 14-003 | 未开始 |  | 工作台路由 `/dashboard`、`/dashboa |  |
 | 14-004 | 待验收 | 10.3 | GitHub、cards、generate、import | file: apps/web/app/api/github/contributions/route.ts (GitHub contributions API route exists.)<br>file: apps/web/app/api/github/stars/route.ts (GitHub stars API route exists.)<br>file: apps/web/app/api/github/forks/route.ts (GitHub forks API route exists.)<br>file: apps/web/app/api/github/issues/route.ts (GitHub issues API route exists.)<br>file: apps/web/app/api/github/pulls/route.ts (GitHub pulls API route exists.)<br>file: apps/web/app/api/github/languages/route.ts (GitHub languages API route exists.)<br>file: apps/web/app/api/export/readme/route.ts (README export API route exists.)<br>file: apps/web/app/api/export/pages/route.ts (Pages export API route exists.) |
 | 14-005 | 通过 | 13.1 | README 导出包包含 README.md、asset | test: packages/generators/src/export-package.test.ts (README export package includes README.md, update workflow, and profile-studio.config.json.) |

@@ -12,6 +12,11 @@
       "note": "Vitest suite covers parser, GitHub stats/cache, README/Pages generators, cards, achievements, OAuth, deployment planning, actions, import, and theme IO."
     },
     {
+      "kind": "log",
+      "reference": "npm.cmd run build",
+      "note": "Next production build completed and listed all public routes, dashboard routes, GitHub APIs, card APIs, and export APIs."
+    },
+    {
       "kind": "api-response",
       "reference": "POST http://127.0.0.1:3000/api/export/readme",
       "note": "Local smoke test returned a README export package for octocat."
@@ -25,6 +30,26 @@
       "kind": "api-response",
       "reference": "GET http://127.0.0.1:3000/api/github/languages?username=octocat",
       "note": "Local smoke test returned real GitHub language data, cache metadata, and rate limit metadata."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3000/api/cards/stats?user=octocat&format=json&include=stars,forks&hide_border=true&width=720&height=260&cache_seconds=120",
+      "note": "Local smoke test returned card JSON with real GitHub dataset, parameters, embeds, cache metadata, and rate limit metadata."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3000/api/cards/stats?...format=svg",
+      "note": "Local smoke test returned svg_status=200 and 1283 bytes."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3000/api/cards/stats?...format=png",
+      "note": "Local smoke test returned png_status=200 and 10305 bytes."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3000/pricing",
+      "note": "Local smoke test returned pricing_status=200."
     }
   ],
   "items": {
@@ -71,6 +96,14 @@
       "requirementRefs": ["4.1.2"],
       "evidence": [
         { "kind": "test", "reference": "packages/github/src/normalize.test.ts", "note": "followers, following, public repos, and public gists are normalized." }
+      ]
+    },
+    "02-008": {
+      "status": "通过",
+      "requirementRefs": ["4.1.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/github/src/normalize.test.ts", "note": "Account age days and years are calculated from created_at." },
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json", "note": "Local card JSON smoke response included accountAgeDays and accountAgeYears for octocat." }
       ]
     },
     "02-009": {
@@ -210,17 +243,169 @@
       ]
     },
     "06-001": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": ["4.5"],
       "evidence": [
-        { "kind": "api-response", "reference": "apps/web/app/api/cards/[type]/route.ts", "note": "Dynamic card API route handles SVG, PNG, and JSON card outputs." }
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Card catalog renders every card type, including Profile Overview Card." }
+      ]
+    },
+    "06-002": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "GitHub Stats Card renders and supports the stats alias." },
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json", "note": "Local smoke test returned GitHub Stats Card JSON." }
+      ]
+    },
+    "06-003": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "GitHub Streak Card renders and supports the streak alias." }
+      ]
+    },
+    "06-004": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Contribution Calendar Card renders from the catalog." }
+      ]
+    },
+    "06-005": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Top Languages Card renders and supports the languages alias." }
+      ]
+    },
+    "06-006": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Repository Card renders and supports the repo alias." }
+      ]
+    },
+    "06-007": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Star Growth Card renders from the catalog." }
+      ]
+    },
+    "06-008": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Fork Growth Card renders from the catalog." }
+      ]
+    },
+    "06-009": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "PR / Issue Card renders from the catalog." }
+      ]
+    },
+    "06-010": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Achievement Card renders and supports the achievements alias." }
+      ]
+    },
+    "06-011": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Trophy Card renders from the catalog." }
+      ]
+    },
+    "06-012": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Tech Stack Card renders from the catalog." }
+      ]
+    },
+    "06-013": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Activity Graph Card renders from the catalog." }
+      ]
+    },
+    "06-014": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Repo Ranking Card renders from the catalog." }
+      ]
+    },
+    "06-015": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Followers Card renders from the catalog." }
+      ]
+    },
+    "06-016": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Account Age Card renders from the catalog and profile data includes account age." }
+      ]
+    },
+    "06-017": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Open Source Impact Card renders from the catalog." }
+      ]
+    },
+    "06-018": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Year in Review Card renders from the catalog." }
+      ]
+    },
+    "06-019": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Monthly Activity Card renders from the catalog." }
+      ]
+    },
+    "06-020": {
+      "status": "通过",
+      "requirementRefs": ["4.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Custom Composite Card renders from the catalog." }
       ]
     },
     "06-021": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": ["4.5.2"],
       "evidence": [
-        { "kind": "file", "reference": "packages/cards/src/index.ts", "note": "Card request model includes user, theme, locale, format, repo, and period; remaining visual query parameters still need end-to-end UI/API verification." }
+        { "kind": "test", "reference": "packages/cards/src/render.test.ts", "note": "Card rendering supports width, height, hide_border, bg_color, title_color, include, and icons." },
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json&include=stars,forks&hide_border=true&width=720&height=260&cache_seconds=120", "note": "Local smoke test verified parameter parsing and JSON echo for card API." }
+      ]
+    },
+    "06-022": {
+      "status": "通过",
+      "requirementRefs": ["4.5.3"],
+      "evidence": [
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json", "note": "JSON output returned 200." },
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=svg", "note": "SVG output returned 200 and 1283 bytes." },
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=png", "note": "PNG output returned 200 and 10305 bytes." }
+      ]
+    },
+    "06-023": {
+      "status": "通过",
+      "requirementRefs": ["4.5.4"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/cards/src/embeds.test.ts", "note": "Markdown image link, HTML img, iframe, and URL variants are generated." },
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/cards/stats?format=json", "note": "JSON smoke response includes embeds for markdown and HTML." }
       ]
     },
     "06-025": {
@@ -308,6 +493,15 @@
       "evidence": [
         { "kind": "file", "reference": "packages/core/src/domain.ts", "note": "UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedReadme, Theme-related config, and PageSiteBundle models exist." },
         { "kind": "test", "reference": "packages/github/src/stats.test.ts", "note": "Public dataset construction exercises the data model." }
+      ]
+    },
+    "14-002": {
+      "status": "通过",
+      "requirementRefs": ["10.1"],
+      "evidence": [
+        { "kind": "file", "reference": "apps/web/app/pricing/page.tsx", "note": "Pricing public page has been added." },
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/pricing", "note": "Local smoke test returned pricing_status=200." },
+        { "kind": "log", "reference": "npm.cmd run build", "note": "Build output includes /, /generate, /templates, /cards, /achievements, /docs, /examples, /pricing, /login, /privacy, and /terms." }
       ]
     },
     "14-004": {

@@ -1,5 +1,5 @@
-import type { CardRequest, LocalizedText } from "@gps/core";
-import { localeNumber } from "@gps/core";
+import type { CardRequest, LocalizedText, Repository } from "@gps/core";
+import { localeNumber, localize } from "@gps/core";
 export * from "./embeds";
 
 export type CardDefinition = {
@@ -11,28 +11,30 @@ export type CardDefinition = {
   acceptanceId: string;
 };
 
-export const cardCatalog: CardDefinition[] = [
-  ["profile-overview", "Profile Overview Card", "Profile Overview Card 可用", "Profile, followers, repositories, and account age.", "06-001"],
-  ["github-stats", "GitHub Stats Card", "GitHub Stats Card 可用", "Contribution, repository, star, and fork totals.", "06-002"],
-  ["github-streak", "GitHub Streak Card", "GitHub Streak Card 可用", "Current and longest contribution streak.", "06-003"],
-  ["contribution-calendar", "Contribution Calendar Card", "Contribution Calendar Card 可用", "Contribution heatmap for README embedding.", "06-004"],
-  ["top-languages", "Top Languages Card", "Top Languages Card 可用", "Language distribution by bytes, repos, and weighted impact.", "06-005"],
-  ["repository", "Repository Card", "Repository Card 可用", "Single repository summary.", "06-006"],
-  ["star-growth", "Star Growth Card", "Star Growth Card 可用", "Star growth trends and milestones.", "06-007"],
-  ["fork-growth", "Fork Growth Card", "Fork Growth Card 可用", "Fork growth trends.", "06-008"],
-  ["pr-issue", "PR / Issue Card", "PR / Issue Card 可用", "Pull request and issue collaboration stats.", "06-009"],
-  ["achievement", "Achievement Card", "Achievement Card 可用", "Unlocked achievement summary.", "06-010"],
-  ["trophy", "Trophy Card", "Trophy Card 可用", "Trophy-style achievement display.", "06-011"],
-  ["tech-stack", "Tech Stack Card", "Tech Stack Card 可用", "Detected and manual skills.", "06-012"],
-  ["activity-graph", "Activity Graph Card", "Activity Graph Card 可用", "Monthly activity graph.", "06-013"],
-  ["repo-ranking", "Repo Ranking Card", "Repo Ranking Card 可用", "Top repositories by stars, forks, and growth.", "06-014"],
-  ["followers", "Followers Card", "Followers Card 可用", "Followers and following counts.", "06-015"],
-  ["account-age", "Account Age Card", "Account Age Card 可用", "Account age and tenure.", "06-016"],
-  ["open-source-impact", "Open Source Impact Card", "Open Source Impact Card 可用", "Community impact score.", "06-017"],
-  ["year-in-review", "Year in Review Card", "Year in Review Card 可用", "Annual summary.", "06-018"],
-  ["monthly-activity", "Monthly Activity Card", "Monthly Activity Card 可用", "Monthly contribution distribution.", "06-019"],
-  ["custom-composite", "Custom Composite Card", "Custom Composite Card 可用", "User-defined composite card.", "06-020"]
-].map(([type, en, zh, description, acceptanceId]) => ({
+const cardRows = [
+  ["profile-overview", "Profile Overview Card", "个人总览卡片", "Profile, followers, repositories, and account age.", "06-001"],
+  ["github-stats", "GitHub Stats Card", "GitHub 统计卡片", "Contribution, repository, star, and fork totals.", "06-002"],
+  ["github-streak", "GitHub Streak Card", "连续贡献卡片", "Current and longest contribution streak.", "06-003"],
+  ["contribution-calendar", "Contribution Calendar Card", "贡献日历卡片", "Contribution heatmap for README embedding.", "06-004"],
+  ["top-languages", "Top Languages Card", "热门语言卡片", "Language distribution by bytes, repos, and weighted impact.", "06-005"],
+  ["repository", "Repository Card", "仓库卡片", "Single repository summary.", "06-006"],
+  ["star-growth", "Star Growth Card", "Star 增长卡片", "Star growth trends and milestones.", "06-007"],
+  ["fork-growth", "Fork Growth Card", "Fork 增长卡片", "Fork growth trends.", "06-008"],
+  ["pr-issue", "PR / Issue Card", "PR / Issue 卡片", "Pull request and issue collaboration stats.", "06-009"],
+  ["achievement", "Achievement Card", "成就卡片", "Unlocked achievement summary.", "06-010"],
+  ["trophy", "Trophy Card", "奖杯卡片", "Trophy-style achievement display.", "06-011"],
+  ["tech-stack", "Tech Stack Card", "技术栈卡片", "Detected and manual skills.", "06-012"],
+  ["activity-graph", "Activity Graph Card", "活跃图表卡片", "Monthly activity graph.", "06-013"],
+  ["repo-ranking", "Repo Ranking Card", "仓库排行卡片", "Top repositories by stars, forks, and growth.", "06-014"],
+  ["followers", "Followers Card", "关注者卡片", "Followers and following counts.", "06-015"],
+  ["account-age", "Account Age Card", "账号年龄卡片", "Account age and tenure.", "06-016"],
+  ["open-source-impact", "Open Source Impact Card", "开源影响力卡片", "Community impact score.", "06-017"],
+  ["year-in-review", "Year in Review Card", "年度回顾卡片", "Annual summary.", "06-018"],
+  ["monthly-activity", "Monthly Activity Card", "月度活跃卡片", "Monthly contribution distribution.", "06-019"],
+  ["custom-composite", "Custom Composite Card", "自定义组合卡片", "User-defined composite card.", "06-020"]
+] as const;
+
+export const cardCatalog: CardDefinition[] = cardRows.map(([type, en, zh, description, acceptanceId]) => ({
   type,
   name: { en, zh },
   description: { en: description, zh },
@@ -42,32 +44,133 @@ export const cardCatalog: CardDefinition[] = [
 }));
 
 export function renderCardSvg(request: CardRequest): string {
-  const title = cardCatalog.find((card) => card.type === request.type)?.name.en ?? "GitHub Profile Card";
-  const dataset = request.dataset;
-  const stats = [
-    ["Repositories", dataset.profile.publicRepos],
-    ["Stars", dataset.totalStars],
-    ["Forks", dataset.totalForks],
-    ["Contributions", dataset.contributions.totalContributions]
-  ];
+  const definition = resolveCardDefinition(request.type);
+  const title = definition ? localize(definition.name, request.locale) : "GitHub Profile Card";
+  const width = clamp(request.width ?? definition?.defaultWidth ?? 640, 280, 1200);
+  const height = clamp(request.height ?? definition?.defaultHeight ?? 220, 140, 800);
+  const radius = clamp(request.borderRadius ?? 8, 0, 32);
+  const bgColor = request.bgColor ?? "#ffffff";
+  const titleColor = request.titleColor ?? "#0969da";
+  const textColor = request.textColor ?? "#57606a";
+  const iconColor = request.iconColor ?? titleColor;
+  const stats = filterStats(buildStats(request), request);
+  const contentTop = request.layout === "compact" ? 94 : 112;
+  const columns = Math.max(1, Math.min(stats.length, request.layout === "wide" ? 5 : 4));
+  const columnWidth = Math.max(96, (width - 56) / columns);
+  const rows = Math.max(1, Math.ceil(stats.length / columns));
+  const rowHeight = Math.max(54, (height - contentTop - 42) / rows);
+  const animation = request.animation === "pulse" ? `<animate attributeName="opacity" values="0.85;1;0.85" dur="2.8s" repeatCount="indefinite"/>` : "";
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="220" viewBox="0 0 640 220" role="img" aria-label="${escapeXml(title)}">
-  <rect width="640" height="220" rx="8" fill="#ffffff"/>
-  <rect x="0.5" y="0.5" width="639" height="219" rx="8" fill="none" stroke="#d0d7de"/>
-  <text x="28" y="42" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="#0969da">${escapeXml(title)}</text>
-  <text x="28" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="#57606a">@${escapeXml(request.user)} · ${escapeXml(request.locale)}</text>
-  ${stats
-    .map((item, index) => {
-      const x = 28 + index * 150;
-      return `<g transform="translate(${x} 112)"><text font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700" fill="#24292f">${localeNumber(item[1] as number, request.locale)}</text><text y="28" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="#57606a">${escapeXml(item[0] as string)}</text></g>`;
-    })
-    .join("")}
-  <text x="28" y="198" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#6e7781">Generated by GitHub Profile Studio</text>
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeXml(title)}">
+  <rect width="${width}" height="${height}" rx="${radius}" fill="${escapeXml(bgColor)}">${animation}</rect>
+  ${request.hideBorder ? "" : `<rect x="0.5" y="0.5" width="${width - 1}" height="${height - 1}" rx="${radius}" fill="none" stroke="#d0d7de"/>`}
+  <text x="28" y="42" font-family="Segoe UI, Arial, sans-serif" font-size="22" font-weight="700" fill="${escapeXml(titleColor)}">${escapeXml(title)}</text>
+  <text x="28" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="14" fill="${escapeXml(textColor)}">@${escapeXml(request.user)} · ${escapeXml(request.locale)} · ${escapeXml(request.period ?? "all")}</text>
+  ${stats.map((stat, index) => renderStat(stat, index, columns, columnWidth, rowHeight, contentTop, request, iconColor, textColor)).join("")}
+  <text x="28" y="${height - 22}" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#6e7781">Generated by GitHub Profile Studio</text>
 </svg>`;
 }
 
 export function renderErrorSvg(message: string): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="640" height="160" role="img"><rect width="640" height="160" rx="8" fill="#fff1f2"/><text x="24" y="56" font-size="20" font-family="Arial" fill="#be123c">Card generation failed</text><text x="24" y="92" font-size="14" font-family="Arial" fill="#881337">${escapeXml(message)}</text></svg>`;
+}
+
+export function resolveCardDefinition(type: string): CardDefinition | undefined {
+  const aliases: Record<string, string> = {
+    profile: "profile-overview",
+    stats: "github-stats",
+    streak: "github-streak",
+    languages: "top-languages",
+    repo: "repository",
+    achievements: "achievement"
+  };
+  return cardCatalog.find((card) => card.type === (aliases[type] ?? type));
+}
+
+type CardStat = {
+  key: string;
+  label: string;
+  value: string;
+  icon: string;
+};
+
+function renderStat(
+  stat: CardStat,
+  index: number,
+  columns: number,
+  columnWidth: number,
+  rowHeight: number,
+  contentTop: number,
+  request: CardRequest,
+  iconColor: string,
+  textColor: string
+): string {
+  const x = 28 + (index % columns) * columnWidth;
+  const y = contentTop + Math.floor(index / columns) * rowHeight;
+  const icon =
+    request.showIcons === false
+      ? ""
+      : `<text x="-18" y="0" font-family="Segoe UI, Arial, sans-serif" font-size="18" fill="${escapeXml(iconColor)}">${escapeXml(stat.icon)}</text>`;
+  return `<g transform="translate(${Math.round(x)} ${Math.round(y)})">${icon}<text font-family="Segoe UI, Arial, sans-serif" font-size="26" font-weight="700" fill="#24292f">${escapeXml(stat.value)}</text><text y="28" font-family="Segoe UI, Arial, sans-serif" font-size="13" fill="${escapeXml(textColor)}">${escapeXml(stat.label)}</text></g>`;
+}
+
+function buildStats(request: CardRequest): CardStat[] {
+  const dataset = request.dataset;
+  const repo = selectRepository(dataset.repositories, request.repo);
+  const accountAgeYears = dataset.profile.accountAgeYears ?? calculateAccountAgeYears(dataset.profile.createdAt);
+  const topLanguage = Object.keys(dataset.languages.byBytes)[0] ?? repo?.language ?? "Other";
+
+  if ((request.type === "repository" || request.type === "repo") && repo) {
+    return [
+      { key: "stars", label: "Stars", value: localeNumber(repo.stars, request.locale), icon: "S" },
+      { key: "forks", label: "Forks", value: localeNumber(repo.forks, request.locale), icon: "F" },
+      { key: "issues", label: "Open issues", value: localeNumber(repo.openIssues, request.locale), icon: "I" },
+      { key: "language", label: "Language", value: repo.language ?? "Other", icon: "L" }
+    ];
+  }
+
+  return [
+    { key: "repositories", label: "Repositories", value: localeNumber(dataset.profile.publicRepos, request.locale), icon: "R" },
+    { key: "stars", label: "Stars", value: localeNumber(dataset.totalStars, request.locale), icon: "S" },
+    { key: "forks", label: "Forks", value: localeNumber(dataset.totalForks, request.locale), icon: "F" },
+    { key: "contributions", label: "Contributions", value: localeNumber(dataset.contributions.totalContributions, request.locale), icon: "C" },
+    { key: "streak", label: "Current streak", value: `${localeNumber(dataset.contributions.currentStreak, request.locale)}d`, icon: "T" },
+    { key: "languages", label: "Top language", value: topLanguage, icon: "L" },
+    { key: "pulls", label: "Pull requests", value: localeNumber(dataset.pullRequests.total, request.locale), icon: "P" },
+    { key: "issues", label: "Issues", value: localeNumber(dataset.issues.total, request.locale), icon: "I" },
+    { key: "followers", label: "Followers", value: localeNumber(dataset.profile.followers, request.locale), icon: "U" },
+    { key: "account_age", label: "Account age", value: accountAgeYears ? `${accountAgeYears.toFixed(1)}y` : "New", icon: "A" }
+  ];
+}
+
+function filterStats(stats: CardStat[], request: CardRequest): CardStat[] {
+  const include = new Set((request.include ?? []).map(normalizeStatKey));
+  const hide = new Set((request.hide ?? []).map(normalizeStatKey));
+  return stats
+    .filter((stat) => (include.size > 0 ? include.has(normalizeStatKey(stat.key)) : !hide.has(normalizeStatKey(stat.key))))
+    .slice(0, request.layout === "compact" ? 4 : 10);
+}
+
+function selectRepository(repositories: Repository[], repoFullName?: string): Repository | undefined {
+  if (!repoFullName) return repositories[0];
+  const normalized = repoFullName.toLowerCase();
+  return repositories.find((repo) => repo.fullName.toLowerCase() === normalized || repo.name.toLowerCase() === normalized) ?? repositories[0];
+}
+
+function calculateAccountAgeYears(createdAt?: string): number | undefined {
+  if (!createdAt) return undefined;
+  const created = Date.parse(createdAt);
+  if (!Number.isFinite(created)) return undefined;
+  return Math.max(0, (Date.now() - created) / (365.2425 * 24 * 60 * 60 * 1000));
+}
+
+function normalizeStatKey(value: string): string {
+  return value.toLowerCase().replaceAll("-", "_");
+}
+
+function clamp(value: number, min: number, max: number): number {
+  if (!Number.isFinite(value)) return min;
+  return Math.max(min, Math.min(max, Math.round(value)));
 }
 
 function escapeXml(value: string): string {

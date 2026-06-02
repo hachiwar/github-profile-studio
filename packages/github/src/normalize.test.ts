@@ -11,12 +11,15 @@ describe("GitHub normalizers", () => {
       followers: 10,
       following: 2,
       public_repos: 3,
-      public_gists: 4
+      public_gists: 4,
+      created_at: "2020-01-01T00:00:00.000Z"
     });
 
     expect(user.githubUsername).toBe("octocat");
     expect(user.blog).toBe("https://github.blog");
     expect(user.publicRepos).toBe(3);
+    expect(user.accountAgeDays).toBeGreaterThan(2000);
+    expect(user.accountAgeYears).toBeGreaterThan(5);
   });
 
   it("normalizes repository payloads and distinguishes subscribers", () => {
@@ -42,4 +45,3 @@ describe("GitHub normalizers", () => {
     expect(repo.hasPages).toBe(true);
   });
 });
-

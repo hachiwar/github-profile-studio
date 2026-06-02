@@ -100,6 +100,8 @@ export const userProfileSchema = z.object({
   publicRepos: z.number().default(0),
   publicGists: z.number().default(0),
   createdAt: z.string().optional(),
+  accountAgeDays: z.number().optional(),
+  accountAgeYears: z.number().optional(),
   lastFetchedAt: z.string().optional()
 });
 
@@ -269,6 +271,20 @@ export type CardRequest = {
   format: "svg" | "png" | "json";
   repo?: string;
   period?: "7d" | "30d" | "90d" | "365d" | "all";
+  layout?: "default" | "compact" | "wide" | "grid";
+  hideBorder?: boolean;
+  borderRadius?: number;
+  bgColor?: string;
+  titleColor?: string;
+  textColor?: string;
+  iconColor?: string;
+  width?: number;
+  height?: number;
+  showIcons?: boolean;
+  hide?: string[];
+  include?: string[];
+  cacheSeconds?: number;
+  animation?: "none" | "subtle" | "pulse";
 };
 
 export type AchievementRule = {

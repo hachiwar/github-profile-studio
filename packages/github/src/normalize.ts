@@ -4,6 +4,8 @@ type GitHubUserResponse = Record<string, unknown>;
 type GitHubRepoResponse = Record<string, unknown>;
 
 export function normalizeUser(payload: GitHubUserResponse): UserProfile {
+  const createdAt = stringOrUndefined(payload.created_at);
+  const accountAge = calculateAccountAge(createdAt);
   return {
     githubUsername: String(payload.login ?? ""),
     githubId: typeof payload.id === "number" ? payload.id : undefined,
@@ -18,7 +20,9 @@ export function normalizeUser(payload: GitHubUserResponse): UserProfile {
     following: numberOrZero(payload.following),
     publicRepos: numberOrZero(payload.public_repos),
     publicGists: numberOrZero(payload.public_gists),
-    createdAt: stringOrUndefined(payload.created_at),
+    createdAt,
+    accountAgeDays: accountAge.days,
+    accountAgeYears: accountAge.years,
     lastFetchedAt: new Date().toISOString()
   };
 }
@@ -73,4 +77,15 @@ function normalizeUrl(value: string | undefined): string | undefined {
   if (!value) return undefined;
   if (value.startsWith("http://") || value.startsWith("https://")) return value;
   return `https://${value}`;
+}
+
+function calculateAccountAge(createdAt: string | undefined): { days?: number; years?: number } {
+  if (!createdAt) return {};
+  const created = Date.parse(createdAt);
+  if (!Number.isFinite(created)) return {};
+  const days = Math.max(0, Math.floor((Date.now() - created) / (24 * 60 * 60 * 1000)));
+  return {
+    days,
+    years: Number((days / 365.2425).toFixed(2))
+  };
 }
