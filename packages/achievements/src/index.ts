@@ -103,6 +103,21 @@ export function achievementCategories(rules: AchievementRule[] = defaultAchievem
   return [...new Set(rules.map((item) => item.category))].sort();
 }
 
+export function buildAchievementEmbeds(username: string, locale: StudioLocale = "en-US", baseUrl = "https://github-profile-studio.vercel.app") {
+  const encodedUser = encodeURIComponent(username);
+  const encodedLocale = encodeURIComponent(locale);
+  const cardUrl = `${baseUrl.replace(/\/$/, "")}/api/cards/achievements?user=${encodedUser}&locale=${encodedLocale}&format=svg`;
+  const jsonUrl = `${baseUrl.replace(/\/$/, "")}/api/achievements/calculate?username=${encodedUser}&locale=${encodedLocale}`;
+  const shareUrl = `${baseUrl.replace(/\/$/, "")}/achievements?username=${encodedUser}&locale=${encodedLocale}`;
+  return {
+    readmeMarkdown: `![${username} achievements](${cardUrl})`,
+    pagesHtml: `<img src="${cardUrl}" alt="${username} GitHub achievements" />`,
+    svgUrl: cardUrl,
+    jsonUrl,
+    shareUrl
+  };
+}
+
 function rule(input: RuleInput & { hidden?: boolean }): AchievementRule {
   return {
     key: input.key,

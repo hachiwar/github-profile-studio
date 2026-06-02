@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { demoGitHubDataset } from "@gps/core";
-import { achievementCategories, calculateAchievements, defaultAchievementRules } from "./index";
+import { achievementCategories, buildAchievementEmbeds, calculateAchievements, defaultAchievementRules } from "./index";
 
 describe("calculateAchievements", () => {
   it("calculates unlock state and progress", () => {
@@ -21,5 +21,13 @@ describe("calculateAchievements", () => {
     for (const required of ["contribution", "star", "fork", "pull-request", "issue", "language", "repository", "continuous-activity", "community-collaboration", "time-tenure", "growth-trend", "hidden", "quarterly", "annual"]) {
       expect(categories).toContain(required);
     }
+  });
+
+  it("builds share and embed outputs", () => {
+    const embeds = buildAchievementEmbeds("octocat", "en-US", "https://studio.example");
+    expect(embeds.readmeMarkdown).toContain("/api/cards/achievements");
+    expect(embeds.pagesHtml).toContain("<img");
+    expect(embeds.shareUrl).toContain("/achievements?username=octocat");
+    expect(embeds.jsonUrl).toContain("/api/achievements/calculate");
   });
 });

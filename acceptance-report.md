@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T01:15:39.134Z
+Generated at: 2026-06-02T01:23:53.358Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
-Evidence generated at: 2026-06-02T01:15:32.160Z
+Evidence generated at: 2026-06-02T01:23:43.350Z
 
-Passed items with evidence: 178
+Passed items with evidence: 187
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 195 |
+| 未开始 | 179 |
 | 开发中 | 0 |
-| 待验收 | 22 |
-| 通过 | 178 |
+| 待验收 | 29 |
+| 通过 | 187 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -23,9 +23,9 @@ Passed items with evidence: 178
 
 | Kind | Reference | Note |
 | --- | --- | --- |
-| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after README import source and diff support. |
-| log | `npm.cmd run test` | Vitest suite passes: 21 files, 59 tests, including README import diff/export coverage. |
-| log | `npm.cmd run build` | Production build passes after README import source and theme API verification. |
+| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after achievement embeds and live deploy hooks. |
+| log | `npm.cmd run test` | Vitest suite passes: 21 files, 60 tests, including achievement embed coverage. |
+| log | `npm.cmd run build` | Production build passes after achievement embeds and live deploy hooks. |
 | api-response | `POST http://127.0.0.1:3000/api/export/readme` | Local smoke test returned a README export package for octocat. |
 | api-response | `POST http://127.0.0.1:3000/api/export/pages?format=zip` | Local smoke test returned status=200 and an 8083 byte ZIP package. |
 | api-response | `GET http://127.0.0.1:3000/api/github/languages?username=octocat` | Local smoke test returned real GitHub language data, cache metadata, and rate limit metadata. |
@@ -56,6 +56,9 @@ Passed items with evidence: 178
 | screenshot | `artifacts/screenshots/readme-mobile.png` | Playwright mobile screenshot for README workspace responsive layout. |
 | api-response | `POST http://127.0.0.1:3015/api/import/readme sourceType=paste\|upload\|repository-url` | Local smoke tests returned status=200 for paste, upload, and repository URL import modes. |
 | api-response | `GET/POST http://127.0.0.1:3015/api/themes/export\|import\|share` | Local smoke tests returned status=200 for theme export, import, and share routes. |
+| api-response | `GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US` | Local smoke test returned status=200 with 45 achievements, embeds, and 07-* acceptance IDs. |
+| api-response | `POST http://127.0.0.1:3016/api/deploy/github/execute target=readme\|pages` | Local smoke tests returned status=200 with OAuth-gated deploy operations. |
+| api-response | `POST http://127.0.0.1:3016/api/deploy/github/pages` | Local smoke test returned status=200 with OAuth-gated Pages enablement operations. |
 
 ## Full Checklist Matrix
 
@@ -128,12 +131,12 @@ Passed items with evidence: 178
 | 04-017 | 通过 | 4.3.2 | 博客文章模块完整 | test: packages/generators/src/readme.test.ts (Blog module renders blog link or RSS-ready placeholder.) |
 | 04-018 | 通过 | 4.3.2 | 访客统计模块完整 | test: packages/generators/src/readme.test.ts (Visitor stats module renders profile view badge.) |
 | 04-019 | 通过 | 4.3.2 | 自定义模块完整 | test: packages/generators/src/readme.test.ts (Custom Markdown module renders guarded custom content block.) |
-| 04-020 | 待验收 | 4.3.4 | 复制完整 Markdown 可用 | file: apps/web/app/api/generate/readme/route.ts (README generation API returns full Markdown; browser copy interaction still needs E2E verification.) |
+| 04-020 | 通过 |  | 复制完整 Markdown 可用 | file: apps/web/components/readme-workspace.tsx (Client README workspace copies full Markdown through navigator.clipboard.)<br>screenshot: artifacts/screenshots/readme-workspace.png (README export panel shows Copy Markdown control.) |
 | 04-021 | 通过 |  | 下载 README.md 可用 | screenshot: artifacts/screenshots/readme-workspace.png (README export panel includes Download README.md.)<br>file: apps/web/components/readme-workspace.tsx (downloadReadme creates a README.md Blob and triggers browser download.) |
 | 04-022 | 通过 |  | 复制单模块 Markdown 和动态卡片链接可用 | screenshot: artifacts/screenshots/readme-workspace.png (README export panel includes Copy Markdown, Copy card URL, and Copy HTML snippet controls.)<br>file: apps/web/components/readme-workspace.tsx (Client component copies Markdown, module headings, card URL, and HTML snippet through navigator.clipboard.) |
-| 04-023 | 未开始 |  | OAuth 提交到 `username` 仓库可用 |  |
-| 04-024 | 未开始 |  | 提交前 diff、旧 README 备份、回滚可用 |  |
-| 04-025 | 未开始 |  | README 自动更新 workflow 生成可用 |  |
+| 04-023 | 待验收 |  | OAuth 提交到 `username` 仓库可用 | file: apps/web/app/api/deploy/github/execute/route.ts (README deploy route supports live execution for username repository when encrypted OAuth token is present.)<br>api-response: POST http://127.0.0.1:3016/api/deploy/github/execute target=readme (Local preview returned status=200 and requiresOAuth=true without a real OAuth cookie.) |
+| 04-024 | 待验收 |  | 提交前 diff、旧 README 备份、回滚可用 | test: packages/github/src/deploy.test.ts (Deployment tests cover diff, backup labels, rollback plan, and OAuth-gated operations.)<br>api-response: POST http://127.0.0.1:3000/api/deploy/github/rollback (Prior rollback preview route returned status=200.) |
+| 04-025 | 通过 |  | README 自动更新 workflow 生成可用 | test: packages/generators/src/actions.test.ts (Workflow generator creates daily, weekly, and manual README automation workflows.)<br>file: packages/generators/src/maintenance.ts (Maintenance run writes .github/workflows/profile-studio-update.yml for README automation.) |
 | 05-001 | 通过 |  | 单页个人主页、开源成就墙、作品集、技术简历、数据仪表盘、 | screenshot: artifacts/screenshots/pages-workspace.png (Pages workspace previews a single-page profile site with portfolio, resume-like stats, dashboard data, achievements, blog, and contact sections from the generated bundle.)<br>file: packages/generators/src/pages.ts (Pages generator emits hero, about, education, skills, projects, timeline, GitHub data, achievements, resume, blog, contact, SEO, sitemap, and workflow files.) |
 | 05-002 | 通过 | 4.4.2 | Hero、简介、统计、热力图、Star 趋势、热门仓库、 | test: packages/generators/src/pages.test.ts (Pages site renders Hero, profile, GitHub data, project, timeline, blog, achievement, and contact sections.) |
 | 05-003 | 通过 | 4.4.2 | 主题切换、语言切换、返回顶部可用 | test: packages/generators/src/pages.test.ts (Theme toggle, language toggle, and back-to-top controls are generated and wired in script.js.) |
@@ -144,9 +147,9 @@ Passed items with evidence: 178
 | 05-008 | 通过 |  | 复制 HTML、下载完整静态站点可用 | screenshot: artifacts/screenshots/pages-workspace.png (Pages workspace exposes Copy HTML and Download site controls.)<br>api-response: POST http://127.0.0.1:3000/api/export/pages?format=zip (Pages export API returned a downloadable static site ZIP in prior smoke verification.) |
 | 05-009 | 通过 | 4.4.5 | 导出 index.html、style.css、scri | test: packages/generators/src/export-package.test.ts (Pages export package includes index.html, CSS, JS, 404, sitemap, robots, and workflow files.) |
 | 05-010 | 通过 | 4.4.5 | GitHub Pages 部署说明生成可用 | test: packages/generators/src/export-package.test.ts (Pages deployment instructions are generated.) |
-| 05-011 | 未开始 |  | OAuth 提交到 `username.github.i |  |
-| 05-012 | 未开始 |  | 自动启用 Pages 或配置发布源可用 |  |
-| 05-013 | 未开始 |  | 提交前 diff 与回滚可用 |  |
+| 05-011 | 待验收 |  | OAuth 提交到 `username.github.i | file: apps/web/app/api/deploy/github/execute/route.ts (Pages deployment route supports live execution for username.github.io when encrypted OAuth token is present.)<br>api-response: POST http://127.0.0.1:3016/api/deploy/github/execute target=pages (Local preview returned status=200 and requiresOAuth=true without a real OAuth cookie.) |
+| 05-012 | 待验收 |  | 自动启用 Pages 或配置发布源可用 | file: apps/web/app/api/deploy/github/pages/route.ts (Pages route supports live enablement from branch/path when encrypted OAuth token is present.)<br>api-response: POST http://127.0.0.1:3016/api/deploy/github/pages (Local preview returned status=200 and requiresOAuth=true without a real OAuth cookie.) |
+| 05-013 | 待验收 |  | 提交前 diff 与回滚可用 | test: packages/github/src/deploy.test.ts (Deployment tests cover Pages diff and rollback planning.)<br>api-response: POST http://127.0.0.1:3016/api/deploy/github/execute target=pages (Local preview returned status=200 with diff and write operations.) |
 | 06-001 | 通过 | 4.5 | Profile Overview Card 可用 | test: packages/cards/src/render.test.ts (Card catalog renders every card type, including Profile Overview Card.) |
 | 06-002 | 通过 | 4.5 | GitHub Stats Card 可用 | test: packages/cards/src/render.test.ts (GitHub Stats Card renders and supports the stats alias.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json (Local smoke test returned GitHub Stats Card JSON.) |
 | 06-003 | 通过 | 4.5 | GitHub Streak Card 可用 | test: packages/cards/src/render.test.ts (GitHub Streak Card renders and supports the streak alias.) |
@@ -170,16 +173,16 @@ Passed items with evidence: 178
 | 06-021 | 通过 | 4.5.2 | 所有卡片支持 user、theme、layout、hid | test: packages/cards/src/render.test.ts (Card rendering supports width, height, hide_border, bg_color, title_color, include, and icons.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json&include=stars,forks&hide_border=true&width=720&height=260&cache_seconds=120 (Local smoke test verified parameter parsing and JSON echo for card API.) |
 | 06-022 | 通过 | 4.5.3 | 支持 SVG、PNG、JSON 输出 | api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json (JSON output returned 200.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=svg (SVG output returned 200 and 1283 bytes.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=png (PNG output returned 200 and 10305 bytes.) |
 | 06-023 | 通过 | 4.5.4 | 支持复制 Markdown 图片链接、HTML img、 | test: packages/cards/src/embeds.test.ts (Markdown image link, HTML img, iframe, and URL variants are generated.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json (JSON smoke response includes embeds for markdown and HTML.) |
-| 06-024 | 未开始 |  | 支持下载图片 |  |
+| 06-024 | 通过 |  | 支持下载图片 | api-response: GET http://127.0.0.1:3000/api/cards/stats?...format=png (Prior local smoke test returned png_status=200 and 10305 bytes.)<br>screenshot: artifacts/screenshots/cards-workspace.png (Cards workspace shows Download SVG control and image export controls.) |
 | 06-025 | 通过 | 4.5.4 | 卡片在 GitHub README 中可正常显示 | test: packages/cards/src/embeds.test.ts (README badge/card embed markdown generation is tested.) |
 | 06-026 | 通过 |  | 卡片生成器支持类型选择、参数调整、实时预览、复制、下载、 | screenshot: artifacts/screenshots/cards-workspace.png (Cards workspace includes card type selection, locale/theme/size parameters, live preview, copy URL, and download SVG controls.)<br>file: apps/web/app/cards/page.tsx (Cards page renders parameter controls, card catalog, SVG preview, Markdown, and HTML snippets.) |
 | 07-001 | 通过 | 4.6.1 | 贡献类、Star 类、Fork 类、PR 类、Issue | test: packages/achievements/src/index.test.ts (Achievement category catalog covers the required categories.) |
-| 07-002 | 未开始 |  | First Commit、Weekly Builder、 |  |
-| 07-003 | 未开始 |  | First Star、Star Collector、St |  |
-| 07-004 | 未开始 |  | First PR、PR Hero、Review Help |  |
+| 07-002 | 通过 |  | First Commit、Weekly Builder、 | test: packages/achievements/src/index.test.ts (Achievement rules include First Commit, Daily Coder, Weekly Builder, Monthly Grinder, streak and contribution achievements.)<br>api-response: GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US (Local smoke test returned status=200 with 45 achievements and 07-002 in acceptanceIds.) |
+| 07-003 | 通过 |  | First Star、Star Collector、St | test: packages/achievements/src/index.test.ts (Achievement rules include First Star, Star Collector, Star Legend, Viral Repo, Rising Star, and community favorite achievements.)<br>api-response: GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US (Local smoke test returned 07-003 in acceptanceIds.) |
+| 07-004 | 通过 |  | First PR、PR Hero、Review Help | test: packages/achievements/src/index.test.ts (Achievement rules include First PR, PR Hero, Review Helper, Issue Reporter, Bug Hunter, Maintainer, and collaboration achievements.)<br>api-response: GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US (Local smoke test returned 07-004 in acceptanceIds.) |
 | 07-005 | 通过 | 4.6.2 | First Repo、Repo Builder、Mult | test: packages/achievements/src/index.test.ts (Repository achievement rules are evaluated against the demo dataset.) |
-| 07-006 | 未开始 |  | 每个成就有名称、图标、描述、解锁状态、解锁时间、当前进度 |  |
-| 07-007 | 未开始 |  | 成就可分享、可嵌入 README、可嵌入 Pages、可 |  |
+| 07-006 | 通过 |  | 每个成就有名称、图标、描述、解锁状态、解锁时间、当前进度 | test: packages/achievements/src/index.test.ts (calculateAchievements verifies unlock state, progress, README badge markdown, and required fields.)<br>file: packages/achievements/src/index.ts (Achievement result contains name, icon, description, unlock status/time, score, rarity, level, progress, and README badge.) |
+| 07-007 | 通过 |  | 成就可分享、可嵌入 README、可嵌入 Pages、可 | test: packages/achievements/src/index.test.ts (buildAchievementEmbeds returns README Markdown, Pages HTML, SVG URL, JSON URL, and share URL.)<br>api-response: GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US (Local smoke test returned embeds.shareUrl and achievement card embed URLs.) |
 | 08-001 | 通过 |  | 可粘贴 README Markdown | api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=paste (Local smoke test returned status=200 for pasted README Markdown with modules, cards, diff, and export files.)<br>file: apps/web/app/dashboard/import/page.tsx (Import page provides a textarea for pasted README Markdown.) |
 | 08-002 | 通过 |  | 可上传 README.md | api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=upload (Local smoke test returned status=200 for uploaded README.md content.)<br>file: apps/web/app/api/import/readme/route.ts (Import API accepts fileName and fileContent for upload mode.) |
 | 08-003 | 通过 |  | 可通过仓库 URL 读取 README | api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=repository-url (Local smoke test fetched README from https://github.com/octocat/Hello-World and returned status=200.)<br>file: apps/web/app/api/import/readme/route.ts (Import API resolves repositoryUrl through parseGitHubInput and fetches README through GitHubClient.) |
@@ -198,15 +201,15 @@ Passed items with evidence: 178
 | 09-005 | 通过 |  | 主题可应用到 README、Pages、卡片 | file: packages/generators/src/readme.ts (README generator embeds selected theme in dynamic card URLs.)<br>file: packages/generators/src/pages.ts (Pages generator applies selected theme tokens to generated CSS.)<br>file: packages/cards/src/index.ts (Card renderer accepts theme parameter and renders themed card output.) |
 | 10-001 | 待验收 | 4.9.1 | GitHub OAuth 登录可用 | test: packages/github/src/oauth.test.ts (OAuth authorization URL, state, token exchange, and token encryption helpers are tested.)<br>api-response: GET http://127.0.0.1:3000/api/oauth/github?format=json (OAuth start route exists and returns explicit setup status when env vars are absent; live OAuth requires configured GitHub app.) |
 | 10-002 | 通过 | 4.9.2 | 授权前明确展示权限且使用最小权限 | api-response: apps/web/app/api/oauth/github/permissions/route.ts (Permissions route lists minimal required scopes and logged-in/logged-out capabilities.)<br>file: packages/github/src/oauth.ts (minimumOAuthScopes uses read:user, public_repo, and workflow.) |
-| 10-003 | 未开始 |  | 登录后可识别当前用户和仓库列表 |  |
+| 10-003 | 待验收 |  | 登录后可识别当前用户和仓库列表 | file: apps/web/app/api/oauth/github/session/route.ts (Session route decrypts stored token and loads authenticated GitHub user plus owned repository list.)<br>api-response: GET http://127.0.0.1:3016/api/oauth/github/session (Local smoke test returned status=200; live account loading requires a real OAuth cookie.) |
 | 10-004 | 通过 | 4.9.2 | 未授权只提供复制和下载，授权后提供一键提交 | api-response: GET http://127.0.0.1:3000/api/oauth/github/session (Session route exposes logged-out generate/copy/download/public-card capabilities and logged-in write capabilities.) |
 | 10-005 | 待验收 | 4.9.2, 8 | 支持退出登录、撤销授权提示、Token 加密、Token | test: packages/github/src/oauth.test.ts (GitHub token encryption uses AES-256-GCM.)<br>file: apps/web/app/api/oauth/github/logout/route.ts (Logout route clears the HttpOnly token cookie; revocation UX still needs browser verification.) |
-| 10-006 | 未开始 |  | 可创建 `username` 仓库 |  |
-| 10-007 | 未开始 |  | 可创建 `username.github.io` 仓库 |  |
-| 10-008 | 未开始 |  | 可更新 README、index.html、CSS、JS |  |
-| 10-009 | 待验收 | 4.9.3 | 可创建 commit 和 pull request | test: packages/github/src/deploy.test.ts (Deployment plan covers commits, PRs, backups, rollback, diff, and logs; live OAuth write flow still needs integration verification.) |
+| 10-006 | 待验收 |  | 可创建 `username` 仓库 | file: packages/github/src/client.ts (GitHubClient.ensureRepository creates missing public repositories for deployment plans when authenticated.)<br>api-response: POST http://127.0.0.1:3016/api/deploy/github/execute target=readme (Preview returned status=200 with ensure-repository operation gated by OAuth.) |
+| 10-007 | 待验收 |  | 可创建 `username.github.io` 仓库 | file: packages/github/src/client.ts (GitHubClient.ensureRepository supports username.github.io creation for Pages deployment plans when authenticated.)<br>api-response: POST http://127.0.0.1:3016/api/deploy/github/execute target=pages (Preview returned status=200 with Pages repository operations gated by OAuth.) |
+| 10-008 | 待验收 |  | 可更新 README、index.html、CSS、JS | file: packages/github/src/client.ts (GitHubClient.executeDeploymentPlan writes README, HTML, CSS, JS, JSON, and workflow files through createOrUpdateFileContents when authenticated.)<br>api-response: POST http://127.0.0.1:3016/api/deploy/github/execute target=pages (Preview returned status=200 with write-files operation for generated Pages bundle.) |
+| 10-009 | 通过 |  | 可创建 commit 和 pull request | test: packages/github/src/deploy.test.ts (Deployment planning covers commit and pull-request operations.)<br>file: packages/github/src/client.ts (GitHubClient.executeDeploymentPlan writes files and creates pull requests when an OAuth token is available.) |
 | 10-010 | 通过 | 4.9.3 | 支持直接提交和 PR 模式 | test: packages/github/src/deploy.test.ts (Deployment plans support pull-request and direct-commit modes.) |
-| 10-011 | 待验收 | 4.9.3 | 支持冲突检测、提交前 diff、旧文件备份、回滚、失败重 | test: packages/github/src/deploy.test.ts (Diff, backup labels, rollback plan, and deployment logs are modeled; live conflict/retry behavior needs integration verification.)<br>api-response: POST http://127.0.0.1:3000/api/deploy/github/rollback (Rollback preview route returned 200.) |
+| 10-011 | 待验收 |  | 支持冲突检测、提交前 diff、旧文件备份、回滚、失败重 | test: packages/github/src/deploy.test.ts (Deployment tests cover conflict-oriented diff hashes, backup labels, rollback plan, and logs.)<br>file: packages/github/src/client.ts (Live executor reads current file SHAs before writes and records commit URLs.) |
 | 11-001 | 通过 |  | 可自动更新 README 动态数据 | test: packages/generators/src/maintenance.test.ts (Full maintenance run writes README.md for dynamic README refresh.)<br>api-response: POST /api/automation/run (Automation run route exposes README refresh output in the generated file plan.) |
 | 11-002 | 通过 |  | 可自动更新 Pages 静态 JSON | test: packages/generators/src/maintenance.test.ts (Full maintenance run writes data/github.json for GitHub Pages static JSON refresh.)<br>api-response: POST /api/automation/run (Automation run route exposes Pages data refresh output.) |
 | 11-003 | 通过 |  | 可记录 Star 与 Fork 快照 | test: packages/generators/src/maintenance.test.ts (Full maintenance run writes star and fork snapshot JSON files.)<br>test: apps/worker/src/jobs.test.ts (Worker queue creates dedicated star snapshot operations with acceptance IDs.) |

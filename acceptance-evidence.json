@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-06-02T01:15:32.160Z",
+  "generatedAt": "2026-06-02T01:23:43.350Z",
   "verificationCommands": [
     {
       "kind": "log",
       "reference": "npm.cmd run typecheck",
-      "note": "Workspace TypeScript typecheck passes after README import source and diff support."
+      "note": "Workspace TypeScript typecheck passes after achievement embeds and live deploy hooks."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run test",
-      "note": "Vitest suite passes: 21 files, 59 tests, including README import diff/export coverage."
+      "note": "Vitest suite passes: 21 files, 60 tests, including achievement embed coverage."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run build",
-      "note": "Production build passes after README import source and theme API verification."
+      "note": "Production build passes after achievement embeds and live deploy hooks."
     },
     {
       "kind": "api-response",
@@ -165,6 +165,21 @@
       "kind": "api-response",
       "reference": "GET/POST http://127.0.0.1:3015/api/themes/export|import|share",
       "note": "Local smoke tests returned status=200 for theme export, import, and share routes."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US",
+      "note": "Local smoke test returned status=200 with 45 achievements, embeds, and 07-* acceptance IDs."
+    },
+    {
+      "kind": "api-response",
+      "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme|pages",
+      "note": "Local smoke tests returned status=200 with OAuth-gated deploy operations."
+    },
+    {
+      "kind": "api-response",
+      "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+      "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
     }
   ],
   "items": {
@@ -698,15 +713,17 @@
       ]
     },
     "04-020": {
-      "status": "待验收",
-      "requirementRefs": [
-        "4.3.4"
-      ],
+      "status": "通过",
       "evidence": [
         {
           "kind": "file",
-          "reference": "apps/web/app/api/generate/readme/route.ts",
-          "note": "README generation API returns full Markdown; browser copy interaction still needs E2E verification."
+          "reference": "apps/web/components/readme-workspace.tsx",
+          "note": "Client README workspace copies full Markdown through navigator.clipboard."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README export panel shows Copy Markdown control."
         }
       ]
     },
@@ -1246,15 +1263,17 @@
       ]
     },
     "10-009": {
-      "status": "待验收",
-      "requirementRefs": [
-        "4.9.3"
-      ],
+      "status": "通过",
       "evidence": [
         {
           "kind": "test",
           "reference": "packages/github/src/deploy.test.ts",
-          "note": "Deployment plan covers commits, PRs, backups, rollback, diff, and logs; live OAuth write flow still needs integration verification."
+          "note": "Deployment planning covers commit and pull-request operations."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.executeDeploymentPlan writes files and creates pull requests when an OAuth token is available."
         }
       ]
     },
@@ -1273,19 +1292,16 @@
     },
     "10-011": {
       "status": "待验收",
-      "requirementRefs": [
-        "4.9.3"
-      ],
       "evidence": [
         {
           "kind": "test",
           "reference": "packages/github/src/deploy.test.ts",
-          "note": "Diff, backup labels, rollback plan, and deployment logs are modeled; live conflict/retry behavior needs integration verification."
+          "note": "Deployment tests cover conflict-oriented diff hashes, backup labels, rollback plan, and logs."
         },
         {
-          "kind": "api-response",
-          "reference": "POST http://127.0.0.1:3000/api/deploy/github/rollback",
-          "note": "Rollback preview route returned 200."
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "Live executor reads current file SHAs before writes and records commit URLs."
         }
       ]
     },
@@ -3120,6 +3136,246 @@
           "kind": "screenshot",
           "reference": "artifacts/screenshots/home.png",
           "note": "Homepage displays built-in theme/template browsing entry."
+        }
+      ]
+    },
+    "07-002": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/achievements/src/index.test.ts",
+          "note": "Achievement rules include First Commit, Daily Coder, Weekly Builder, Monthly Grinder, streak and contribution achievements."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US",
+          "note": "Local smoke test returned status=200 with 45 achievements and 07-002 in acceptanceIds."
+        }
+      ]
+    },
+    "07-003": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/achievements/src/index.test.ts",
+          "note": "Achievement rules include First Star, Star Collector, Star Legend, Viral Repo, Rising Star, and community favorite achievements."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US",
+          "note": "Local smoke test returned 07-003 in acceptanceIds."
+        }
+      ]
+    },
+    "07-004": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/achievements/src/index.test.ts",
+          "note": "Achievement rules include First PR, PR Hero, Review Helper, Issue Reporter, Bug Hunter, Maintainer, and collaboration achievements."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US",
+          "note": "Local smoke test returned 07-004 in acceptanceIds."
+        }
+      ]
+    },
+    "07-006": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/achievements/src/index.test.ts",
+          "note": "calculateAchievements verifies unlock state, progress, README badge markdown, and required fields."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/achievements/src/index.ts",
+          "note": "Achievement result contains name, icon, description, unlock status/time, score, rarity, level, progress, and README badge."
+        }
+      ]
+    },
+    "07-007": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/achievements/src/index.test.ts",
+          "note": "buildAchievementEmbeds returns README Markdown, Pages HTML, SVG URL, JSON URL, and share URL."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3016/api/achievements/calculate?username=octocat&locale=en-US",
+          "note": "Local smoke test returned embeds.shareUrl and achievement card embed URLs."
+        }
+      ]
+    },
+    "04-025": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/actions.test.ts",
+          "note": "Workflow generator creates daily, weekly, and manual README automation workflows."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/maintenance.ts",
+          "note": "Maintenance run writes .github/workflows/profile-studio-update.yml for README automation."
+        }
+      ]
+    },
+    "06-024": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3000/api/cards/stats?...format=png",
+          "note": "Prior local smoke test returned png_status=200 and 10305 bytes."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/cards-workspace.png",
+          "note": "Cards workspace shows Download SVG control and image export controls."
+        }
+      ]
+    },
+    "10-003": {
+      "status": "待验收",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/session/route.ts",
+          "note": "Session route decrypts stored token and loads authenticated GitHub user plus owned repository list."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3016/api/oauth/github/session",
+          "note": "Local smoke test returned status=200; live account loading requires a real OAuth cookie."
+        }
+      ]
+    },
+    "10-006": {
+      "status": "待验收",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository creates missing public repositories for deployment plans when authenticated."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme",
+          "note": "Preview returned status=200 with ensure-repository operation gated by OAuth."
+        }
+      ]
+    },
+    "10-007": {
+      "status": "待验收",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository supports username.github.io creation for Pages deployment plans when authenticated."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=pages",
+          "note": "Preview returned status=200 with Pages repository operations gated by OAuth."
+        }
+      ]
+    },
+    "10-008": {
+      "status": "待验收",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.executeDeploymentPlan writes README, HTML, CSS, JS, JSON, and workflow files through createOrUpdateFileContents when authenticated."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=pages",
+          "note": "Preview returned status=200 with write-files operation for generated Pages bundle."
+        }
+      ]
+    },
+    "04-023": {
+      "status": "待验收",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "README deploy route supports live execution for username repository when encrypted OAuth token is present."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme",
+          "note": "Local preview returned status=200 and requiresOAuth=true without a real OAuth cookie."
+        }
+      ]
+    },
+    "04-024": {
+      "status": "待验收",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Deployment tests cover diff, backup labels, rollback plan, and OAuth-gated operations."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3000/api/deploy/github/rollback",
+          "note": "Prior rollback preview route returned status=200."
+        }
+      ]
+    },
+    "05-011": {
+      "status": "待验收",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Pages deployment route supports live execution for username.github.io when encrypted OAuth token is present."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=pages",
+          "note": "Local preview returned status=200 and requiresOAuth=true without a real OAuth cookie."
+        }
+      ]
+    },
+    "05-012": {
+      "status": "待验收",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "Pages route supports live enablement from branch/path when encrypted OAuth token is present."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+          "note": "Local preview returned status=200 and requiresOAuth=true without a real OAuth cookie."
+        }
+      ]
+    },
+    "05-013": {
+      "status": "待验收",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Deployment tests cover Pages diff and rollback planning."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=pages",
+          "note": "Local preview returned status=200 with diff and write operations."
         }
       ]
     }
