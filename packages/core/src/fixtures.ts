@@ -159,10 +159,42 @@ export function demoProfileConfig(username: string, locale: StudioLocale): Profi
     themeKey: "github-native",
     readmeTemplateKey: "student-developer",
     pageTemplateKey: "student-portfolio",
-    enabledReadmeModules: ["intro", "education", "skills", "learning-plan", "projects", "github-growth", "contact"],
-    enabledPageSections: ["hero", "about", "education", "skills", "projects", "timeline", "github", "contact"],
+    enabledReadmeModules: [
+      "intro",
+      "education",
+      "skills",
+      "learning-plan",
+      "projects",
+      "github-overview",
+      "streak",
+      "contribution-calendar",
+      "languages",
+      "star-growth",
+      "pr-issue",
+      "achievements",
+      "contact",
+      "blog",
+      "visitors",
+      "custom"
+    ],
+    enabledPageSections: [
+      "hero",
+      "about",
+      "education",
+      "skills",
+      "learning-directions",
+      "learning-plan",
+      "projects",
+      "timeline",
+      "growth-roadmap",
+      "github",
+      "future-goals",
+      "achievements",
+      "resume",
+      "blog",
+      "contact"
+    ],
     privacy: defaultPrivacySettings,
     github
   };
 }
-

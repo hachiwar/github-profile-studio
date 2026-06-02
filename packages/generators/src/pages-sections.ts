@@ -20,8 +20,8 @@ export const pageSectionCatalog: PageSectionDefinition[] = [
   { id: "growth-roadmap", label: { en: "Growth roadmap", zh: "成长路线" }, requiredForNewUser: true, emptyDataBehavior: "replace-with-copy", acceptanceIds: ["N-PAGE-011"] },
   { id: "github", label: { en: "GitHub overview", zh: "GitHub 数据概览" }, requiredForNewUser: false, emptyDataBehavior: "hide", acceptanceIds: ["N-PAGE-012"] },
   { id: "future-goals", label: { en: "Future goals", zh: "未来目标" }, requiredForNewUser: true, emptyDataBehavior: "replace-with-copy", acceptanceIds: ["N-PAGE-013"] },
+  { id: "achievements", label: { en: "Achievement wall", zh: "成就墙" }, requiredForNewUser: false, emptyDataBehavior: "replace-with-copy", acceptanceIds: ["04-015", "05-002"] },
   { id: "contact", label: { en: "Contact", zh: "联系方式" }, requiredForNewUser: true, emptyDataBehavior: "show", acceptanceIds: ["N-PAGE-014"] },
   { id: "resume", label: { en: "Resume", zh: "简历入口" }, requiredForNewUser: false, emptyDataBehavior: "hide", acceptanceIds: ["N-PAGE-015"] },
   { id: "blog", label: { en: "Blog", zh: "博客入口" }, requiredForNewUser: false, emptyDataBehavior: "hide", acceptanceIds: ["N-PAGE-016"] }
 ];
-

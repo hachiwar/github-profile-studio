@@ -24,5 +24,20 @@ describe("generateReadme", () => {
     expect(readme.markdown).toContain("Hi, I'm");
     expect(readme.markdown).toContain("你好");
   });
-});
 
+  it("renders the complete README module set", () => {
+    const readme = generateReadme(demoProfileConfig("alex", "en-US"));
+
+    expect(readme.markdown).toContain("GitHub overview");
+    expect(readme.markdown).toContain("GitHub streak");
+    expect(readme.markdown).toContain("Contribution calendar");
+    expect(readme.markdown).toContain("Language stats");
+    expect(readme.markdown).toContain("Star growth");
+    expect(readme.markdown).toContain("PR / Issue collaboration");
+    expect(readme.markdown).toContain("Achievement wall");
+    expect(readme.markdown).toContain("Visitor stats");
+    expect(readme.markdown).toContain("Custom Markdown");
+    expect(readme.markdown).toContain("/api/cards/streak");
+    expect(readme.markdown).not.toContain("undefined");
+  });
+});

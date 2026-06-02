@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T00:05:59.183Z
+Generated at: 2026-06-02T00:17:32.388Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
 Evidence generated at: 2026-06-02T00:00:00.000Z
 
-Passed items with evidence: 60
+Passed items with evidence: 110
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 315 |
+| 未开始 | 265 |
 | 开发中 | 0 |
 | 待验收 | 20 |
-| 通过 | 60 |
+| 通过 | 110 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -91,20 +91,20 @@ Passed items with evidence: 60
 | 04-003 | 未开始 |  | 每个模块可配置参数，整体主题可配置 |  |
 | 04-004 | 未开始 |  | GitHub 风格预览、深色/浅色预览可用 |  |
 | 04-005 | 未开始 |  | 导入现有 README、Markdown 格式化、兼容性 |  |
-| 04-006 | 未开始 |  | 个人介绍模块完整 |  |
-| 04-007 | 未开始 |  | GitHub 总览模块完整 |  |
-| 04-008 | 未开始 |  | Streak 模块完整 |  |
-| 04-009 | 未开始 |  | 贡献热力图模块完整 |  |
-| 04-010 | 未开始 |  | 语言统计模块完整 |  |
-| 04-011 | 未开始 |  | 热门仓库模块完整 |  |
-| 04-012 | 未开始 |  | Star 增长模块完整 |  |
-| 04-013 | 未开始 |  | PR / Issue 模块完整 |  |
-| 04-014 | 未开始 |  | 技术栈模块完整 |  |
-| 04-015 | 未开始 |  | 成就墙模块完整 |  |
-| 04-016 | 未开始 |  | 社交与联系模块完整 |  |
-| 04-017 | 未开始 |  | 博客文章模块完整 |  |
-| 04-018 | 未开始 |  | 访客统计模块完整 |  |
-| 04-019 | 未开始 |  | 自定义模块完整 |  |
+| 04-006 | 通过 | 4.3.2 | 个人介绍模块完整 | test: packages/generators/src/readme.test.ts (README intro module renders welcome, role, status, and GitHub link.) |
+| 04-007 | 通过 | 4.3.2 | GitHub 总览模块完整 | test: packages/generators/src/readme.test.ts (GitHub overview module renders contributions, commits, PRs, issues, stars, forks, followers, account age, and impact score.) |
+| 04-008 | 通过 | 4.3.2 | Streak 模块完整 | test: packages/generators/src/readme.test.ts (GitHub streak module renders streak card and current/longest streak metrics.) |
+| 04-009 | 通过 | 4.3.2 | 贡献热力图模块完整 | test: packages/generators/src/readme.test.ts (Contribution calendar module renders dynamic card link and level summary.) |
+| 04-010 | 通过 | 4.3.2 | 语言统计模块完整 | test: packages/generators/src/readme.test.ts (Language stats module renders top language card and byte percentages.) |
+| 04-011 | 通过 | 4.3.2 | 热门仓库模块完整 | test: packages/generators/src/readme.test.ts (Projects module renders manual projects and top public repositories.) |
+| 04-012 | 通过 | 4.3.2 | Star 增长模块完整 | test: packages/generators/src/readme.test.ts (Star growth module renders star-growth card and top starred repositories.) |
+| 04-013 | 通过 | 4.3.2 | PR / Issue 模块完整 | test: packages/generators/src/readme.test.ts (PR / Issue collaboration module renders PR, review, issue, close-rate, and external repository stats.) |
+| 04-014 | 通过 | 4.3.2 | 技术栈模块完整 | test: packages/generators/src/readme.test.ts (Tech stack module renders badges and primary skill status.) |
+| 04-015 | 通过 | 4.3.2, 4.4.2 | 成就墙模块完整 | test: packages/generators/src/readme.test.ts (Achievement wall module renders achievement card embed.)<br>test: packages/generators/src/pages.test.ts (Pages site includes achievement wall section.) |
+| 04-016 | 通过 | 4.3.2 | 社交与联系模块完整 | test: packages/generators/src/readme.test.ts (Social/contact module renders visible social links.) |
+| 04-017 | 通过 | 4.3.2 | 博客文章模块完整 | test: packages/generators/src/readme.test.ts (Blog module renders blog link or RSS-ready placeholder.) |
+| 04-018 | 通过 | 4.3.2 | 访客统计模块完整 | test: packages/generators/src/readme.test.ts (Visitor stats module renders profile view badge.) |
+| 04-019 | 通过 | 4.3.2 | 自定义模块完整 | test: packages/generators/src/readme.test.ts (Custom Markdown module renders guarded custom content block.) |
 | 04-020 | 待验收 | 4.3.4 | 复制完整 Markdown 可用 | file: apps/web/app/api/generate/readme/route.ts (README generation API returns full Markdown; browser copy interaction still needs E2E verification.) |
 | 04-021 | 未开始 |  | 下载 README.md 可用 |  |
 | 04-022 | 未开始 |  | 复制单模块 Markdown 和动态卡片链接可用 |  |
@@ -112,10 +112,10 @@ Passed items with evidence: 60
 | 04-024 | 未开始 |  | 提交前 diff、旧 README 备份、回滚可用 |  |
 | 04-025 | 未开始 |  | README 自动更新 workflow 生成可用 |  |
 | 05-001 | 未开始 |  | 单页个人主页、开源成就墙、作品集、技术简历、数据仪表盘、 |  |
-| 05-002 | 未开始 |  | Hero、简介、统计、热力图、Star 趋势、热门仓库、 |  |
-| 05-003 | 未开始 |  | 主题切换、语言切换、返回顶部可用 |  |
+| 05-002 | 通过 | 4.4.2 | Hero、简介、统计、热力图、Star 趋势、热门仓库、 | test: packages/generators/src/pages.test.ts (Pages site renders Hero, profile, GitHub data, project, timeline, blog, achievement, and contact sections.) |
+| 05-003 | 通过 | 4.4.2 | 主题切换、语言切换、返回顶部可用 | test: packages/generators/src/pages.test.ts (Theme toggle, language toggle, and back-to-top controls are generated and wired in script.js.) |
 | 05-004 | 未开始 |  | 响应式设计通过手机、平板、桌面测试 |  |
-| 05-005 | 未开始 |  | 深色、浅色、系统主题跟随可用 |  |
+| 05-005 | 通过 | 4.4.3 | 深色、浅色、系统主题跟随可用 | test: packages/generators/src/pages.test.ts (Generated CSS and script support light/dark theme switching.) |
 | 05-006 | 未开始 |  | 自定义主色、字体、背景、动画可用 |  |
 | 05-007 | 未开始 |  | 内置 15 套页面模板可用 |  |
 | 05-008 | 未开始 |  | 复制 HTML、下载完整静态站点可用 |  |
@@ -240,22 +240,22 @@ Passed items with evidence: 60
 | N-FORM-014 | 未开始 |  | 表单分步骤 |  |
 | N-FORM-015 | 未开始 |  | 表单保存 |  |
 | N-README-001 | 通过 | 13A.5 | 零贡献可生成 | test: packages/generators/src/readme.test.ts (New-user config generates a complete README without relying on live contribution data.) |
-| N-README-002 | 未开始 |  | 零仓库可生成 |  |
-| N-README-003 | 未开始 |  | 顶部欢迎区 |  |
-| N-README-004 | 未开始 |  | 当前身份展示 |  |
-| N-README-005 | 未开始 |  | 教育背景展示 |  |
-| N-README-006 | 未开始 |  | 学习方向展示 |  |
-| N-README-007 | 未开始 |  | 主要语言展示 |  |
-| N-README-008 | 未开始 |  | 技能栈展示 |  |
-| N-README-009 | 未开始 |  | 学习计划展示 |  |
-| N-README-010 | 未开始 |  | 项目作品展示 |  |
-| N-README-011 | 未开始 |  | 未来计划展示 |  |
-| N-README-012 | 未开始 |  | 联系方式展示 |  |
+| N-README-002 | 通过 | 13A.5 | 零仓库可生成 | test: packages/generators/src/readme.test.ts (Zero-repository config still generates project and GitHub overview sections with replacement copy.) |
+| N-README-003 | 通过 | 13A.5.1 | 顶部欢迎区 | test: packages/generators/src/readme.test.ts (README intro contains the top welcome area.) |
+| N-README-004 | 通过 | 13A.5.1 | 当前身份展示 | test: packages/generators/src/readme.test.ts (README intro contains current role and status.) |
+| N-README-005 | 通过 | 13A.5.1 | 教育背景展示 | test: packages/generators/src/readme.test.ts (Education module renders visible education records.) |
+| N-README-006 | 通过 | 13A.5.1 | 学习方向展示 | test: packages/generators/src/readme.test.ts (Learning plan module renders current focus as learning direction.) |
+| N-README-007 | 通过 | 13A.5.1 | 主要语言展示 | test: packages/generators/src/readme.test.ts (Languages module renders primary language information from GitHub or manual skills.) |
+| N-README-008 | 通过 | 13A.5.1 | 技能栈展示 | test: packages/generators/src/readme.test.ts (Tech stack module renders skill badges and skill status.) |
+| N-README-009 | 通过 | 13A.5.1 | 学习计划展示 | test: packages/generators/src/readme.test.ts (Learning plan module renders current focus and goals.) |
+| N-README-010 | 通过 | 13A.5.1 | 项目作品展示 | test: packages/generators/src/readme.test.ts (Projects module renders manual projects and GitHub repositories.) |
+| N-README-011 | 通过 | 13A.5.1 | 未来计划展示 | test: packages/generators/src/readme.test.ts (Learning plan module renders long-term direction and open-source plan.) |
+| N-README-012 | 通过 | 13A.5.1 | 联系方式展示 | test: packages/generators/src/readme.test.ts (Contact module renders visible social/contact links.) |
 | N-README-013 | 通过 | 13A.5.4 | 空数据替代 | test: packages/core/src/new-user.test.ts (New-user recommendations provide empty-data substitutes.) |
-| N-README-014 | 未开始 |  | 隐藏空模块 |  |
-| N-README-015 | 未开始 |  | 可选 GitHub 统计 |  |
-| N-README-016 | 未开始 |  | 可选贡献热力图 |  |
-| N-README-017 | 未开始 |  | 可选访客统计 |  |
+| N-README-014 | 通过 | 13A.5.4 | 隐藏空模块 | test: packages/generators/src/readme.test.ts (Zero-data README avoids undefined and uses replacement copy instead of empty modules.) |
+| N-README-015 | 通过 | 13A.5.5 | 可选 GitHub 统计 | test: packages/generators/src/readme.test.ts (GitHub overview module is optional through enabledReadmeModules and renders when enabled.) |
+| N-README-016 | 通过 | 13A.5.5 | 可选贡献热力图 | test: packages/generators/src/readme.test.ts (Contribution calendar module is optional through enabledReadmeModules and renders when enabled.) |
+| N-README-017 | 通过 | 13A.5.5 | 可选访客统计 | test: packages/generators/src/readme.test.ts (Visitor stats module renders profile view badge when enabled.) |
 | N-README-018 | 未开始 |  | 可选打字机动画 |  |
 | N-README-019 | 未开始 |  | 实时预览 |  |
 | N-README-020 | 未开始 |  | 复制 Markdown |  |
@@ -292,24 +292,24 @@ Passed items with evidence: 60
 | N-TEXT-014 | 未开始 |  | 锁定文案 |  |
 | N-TEXT-015 | 未开始 |  | 中英文互译 |  |
 | N-TEXT-016 | 未开始 |  | 保留人工修改 |  |
-| N-PAGE-001 | 未开始 |  | 零仓库可生成网站 |  |
-| N-PAGE-002 | 未开始 |  | 首页 Hero |  |
-| N-PAGE-003 | 未开始 |  | 个人简介区 |  |
-| N-PAGE-004 | 未开始 |  | 教育背景区 |  |
-| N-PAGE-005 | 未开始 |  | 技能栈区 |  |
-| N-PAGE-006 | 未开始 |  | 编程语言区 |  |
-| N-PAGE-007 | 未开始 |  | 学习方向区 |  |
-| N-PAGE-008 | 未开始 |  | 学习计划区 |  |
-| N-PAGE-009 | 未开始 |  | 项目作品区 |  |
-| N-PAGE-010 | 未开始 |  | 时间线 |  |
-| N-PAGE-011 | 未开始 |  | 成长路线 |  |
-| N-PAGE-012 | 未开始 |  | GitHub 数据概览 |  |
-| N-PAGE-013 | 未开始 |  | 未来目标 |  |
-| N-PAGE-014 | 未开始 |  | 联系方式 |  |
-| N-PAGE-015 | 未开始 |  | 简历下载入口 |  |
-| N-PAGE-016 | 未开始 |  | 博客入口 |  |
-| N-PAGE-017 | 未开始 |  | 深浅色切换 |  |
-| N-PAGE-018 | 未开始 |  | 响应式导航 |  |
+| N-PAGE-001 | 通过 | 13A.6 | 零仓库可生成网站 | test: packages/generators/src/pages.test.ts (Zero-repository users still receive a non-empty generated website.) |
+| N-PAGE-002 | 通过 | 13A.6.1 | 首页 Hero | test: packages/generators/src/pages.test.ts (Generated site contains Hero section.) |
+| N-PAGE-003 | 通过 | 13A.6.1 | 个人简介区 | test: packages/generators/src/pages.test.ts (Generated site contains About section.) |
+| N-PAGE-004 | 通过 | 13A.6.1 | 教育背景区 | test: packages/generators/src/pages.test.ts (Generated site contains Education section.) |
+| N-PAGE-005 | 通过 | 13A.6.1 | 技能栈区 | test: packages/generators/src/pages.test.ts (Generated site contains Skills section.) |
+| N-PAGE-006 | 通过 | 13A.6.1 | 编程语言区 | test: packages/generators/src/pages.test.ts (Skills section displays programming languages and proficiencies.) |
+| N-PAGE-007 | 通过 | 13A.6.1 | 学习方向区 | test: packages/generators/src/pages.test.ts (Generated site contains Learning Directions section.) |
+| N-PAGE-008 | 通过 | 13A.6.1 | 学习计划区 | test: packages/generators/src/pages.test.ts (Generated site contains Learning Plan section.) |
+| N-PAGE-009 | 通过 | 13A.6.1 | 项目作品区 | test: packages/generators/src/pages.test.ts (Generated site contains manual and GitHub project cards.) |
+| N-PAGE-010 | 通过 | 13A.6.1 | 时间线 | test: packages/generators/src/pages.test.ts (Generated site contains Timeline section.) |
+| N-PAGE-011 | 通过 | 13A.6.1 | 成长路线 | test: packages/generators/src/pages.test.ts (Generated site contains Growth Roadmap section.) |
+| N-PAGE-012 | 通过 | 13A.6.1 | GitHub 数据概览 | test: packages/generators/src/pages.test.ts (Generated site contains GitHub data overview section.) |
+| N-PAGE-013 | 通过 | 13A.6.1 | 未来目标 | test: packages/generators/src/pages.test.ts (Generated site contains Future Goals section.) |
+| N-PAGE-014 | 通过 | 13A.6.1 | 联系方式 | test: packages/generators/src/pages.test.ts (Generated site contains Contact section.) |
+| N-PAGE-015 | 通过 | 13A.6.1 | 简历下载入口 | test: packages/generators/src/pages.test.ts (Generated site contains Resume entry section.) |
+| N-PAGE-016 | 通过 | 13A.6.1 | 博客入口 | test: packages/generators/src/pages.test.ts (Generated site contains Blog entry section.) |
+| N-PAGE-017 | 通过 | 13A.6.1 | 深浅色切换 | test: packages/generators/src/pages.test.ts (Generated site includes dark/light theme toggle.) |
+| N-PAGE-018 | 通过 | 13A.6.1 | 响应式导航 | test: packages/generators/src/pages.test.ts (Generated CSS includes responsive navigation behavior.) |
 | N-PT-001 | 未开始 |  | 学生作品集模板 |  |
 | N-PT-002 | 未开始 |  | 求职简历模板 |  |
 | N-PT-003 | 未开始 |  | 学习成长主页模板 |  |

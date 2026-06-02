@@ -221,6 +221,105 @@
         { "kind": "test", "reference": "packages/github/src/stats.test.ts", "note": "Star-weighted and fork-weighted language distributions are tested." }
       ]
     },
+    "04-006": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "README intro module renders welcome, role, status, and GitHub link." }
+      ]
+    },
+    "04-007": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "GitHub overview module renders contributions, commits, PRs, issues, stars, forks, followers, account age, and impact score." }
+      ]
+    },
+    "04-008": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "GitHub streak module renders streak card and current/longest streak metrics." }
+      ]
+    },
+    "04-009": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Contribution calendar module renders dynamic card link and level summary." }
+      ]
+    },
+    "04-010": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Language stats module renders top language card and byte percentages." }
+      ]
+    },
+    "04-011": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Projects module renders manual projects and top public repositories." }
+      ]
+    },
+    "04-012": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Star growth module renders star-growth card and top starred repositories." }
+      ]
+    },
+    "04-013": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "PR / Issue collaboration module renders PR, review, issue, close-rate, and external repository stats." }
+      ]
+    },
+    "04-014": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Tech stack module renders badges and primary skill status." }
+      ]
+    },
+    "04-015": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2", "4.4.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Achievement wall module renders achievement card embed." },
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Pages site includes achievement wall section." }
+      ]
+    },
+    "04-016": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Social/contact module renders visible social links." }
+      ]
+    },
+    "04-017": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Blog module renders blog link or RSS-ready placeholder." }
+      ]
+    },
+    "04-018": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Visitor stats module renders profile view badge." }
+      ]
+    },
+    "04-019": {
+      "status": "通过",
+      "requirementRefs": ["4.3.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Custom Markdown module renders guarded custom content block." }
+      ]
+    },
     "04-020": {
       "status": "待验收",
       "requirementRefs": ["4.3.4"],
@@ -233,6 +332,27 @@
       "requirementRefs": ["4.4.5"],
       "evidence": [
         { "kind": "test", "reference": "packages/generators/src/export-package.test.ts", "note": "Pages export package includes index.html, CSS, JS, 404, sitemap, robots, and workflow files." }
+      ]
+    },
+    "05-002": {
+      "status": "通过",
+      "requirementRefs": ["4.4.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Pages site renders Hero, profile, GitHub data, project, timeline, blog, achievement, and contact sections." }
+      ]
+    },
+    "05-003": {
+      "status": "通过",
+      "requirementRefs": ["4.4.2"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Theme toggle, language toggle, and back-to-top controls are generated and wired in script.js." }
+      ]
+    },
+    "05-005": {
+      "status": "通过",
+      "requirementRefs": ["4.4.3"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated CSS and script support light/dark theme switching." }
       ]
     },
     "05-010": {
@@ -546,11 +666,242 @@
         { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "New-user config generates a complete README without relying on live contribution data." }
       ]
     },
+    "N-README-002": {
+      "status": "通过",
+      "requirementRefs": ["13A.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Zero-repository config still generates project and GitHub overview sections with replacement copy." }
+      ]
+    },
+    "N-README-003": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "README intro contains the top welcome area." }
+      ]
+    },
+    "N-README-004": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "README intro contains current role and status." }
+      ]
+    },
+    "N-README-005": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Education module renders visible education records." }
+      ]
+    },
+    "N-README-006": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Learning plan module renders current focus as learning direction." }
+      ]
+    },
+    "N-README-007": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Languages module renders primary language information from GitHub or manual skills." }
+      ]
+    },
+    "N-README-008": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Tech stack module renders skill badges and skill status." }
+      ]
+    },
+    "N-README-009": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Learning plan module renders current focus and goals." }
+      ]
+    },
+    "N-README-010": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Projects module renders manual projects and GitHub repositories." }
+      ]
+    },
+    "N-README-011": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Learning plan module renders long-term direction and open-source plan." }
+      ]
+    },
+    "N-README-012": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Contact module renders visible social/contact links." }
+      ]
+    },
     "N-README-013": {
       "status": "通过",
       "requirementRefs": ["13A.5.4"],
       "evidence": [
         { "kind": "test", "reference": "packages/core/src/new-user.test.ts", "note": "New-user recommendations provide empty-data substitutes." }
+      ]
+    },
+    "N-README-014": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.4"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Zero-data README avoids undefined and uses replacement copy instead of empty modules." }
+      ]
+    },
+    "N-README-015": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "GitHub overview module is optional through enabledReadmeModules and renders when enabled." }
+      ]
+    },
+    "N-README-016": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Contribution calendar module is optional through enabledReadmeModules and renders when enabled." }
+      ]
+    },
+    "N-README-017": {
+      "status": "通过",
+      "requirementRefs": ["13A.5.5"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/readme.test.ts", "note": "Visitor stats module renders profile view badge when enabled." }
+      ]
+    },
+    "N-PAGE-001": {
+      "status": "通过",
+      "requirementRefs": ["13A.6"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Zero-repository users still receive a non-empty generated website." }
+      ]
+    },
+    "N-PAGE-002": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Hero section." }
+      ]
+    },
+    "N-PAGE-003": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains About section." }
+      ]
+    },
+    "N-PAGE-004": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Education section." }
+      ]
+    },
+    "N-PAGE-005": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Skills section." }
+      ]
+    },
+    "N-PAGE-006": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Skills section displays programming languages and proficiencies." }
+      ]
+    },
+    "N-PAGE-007": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Learning Directions section." }
+      ]
+    },
+    "N-PAGE-008": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Learning Plan section." }
+      ]
+    },
+    "N-PAGE-009": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains manual and GitHub project cards." }
+      ]
+    },
+    "N-PAGE-010": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Timeline section." }
+      ]
+    },
+    "N-PAGE-011": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Growth Roadmap section." }
+      ]
+    },
+    "N-PAGE-012": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains GitHub data overview section." }
+      ]
+    },
+    "N-PAGE-013": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Future Goals section." }
+      ]
+    },
+    "N-PAGE-014": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Contact section." }
+      ]
+    },
+    "N-PAGE-015": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Resume entry section." }
+      ]
+    },
+    "N-PAGE-016": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site contains Blog entry section." }
+      ]
+    },
+    "N-PAGE-017": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated site includes dark/light theme toggle." }
+      ]
+    },
+    "N-PAGE-018": {
+      "status": "通过",
+      "requirementRefs": ["13A.6.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/generators/src/pages.test.ts", "note": "Generated CSS includes responsive navigation behavior." }
       ]
     },
     "N-POUT-001": {
