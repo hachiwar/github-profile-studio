@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T02:35:11.035Z",
+  "generatedAt": "2026-06-02T07:09:32.001Z",
   "verificationCommands": [
     {
       "kind": "log",
@@ -270,6 +270,51 @@
       "kind": "log",
       "reference": "npm.cmd run build",
       "note": "Production build passes with 68 app routes; /dashboard/new-user builds at 32.7 kB route size and 135 kB first-load JS."
+    },
+    {
+      "kind": "log",
+      "reference": "git push origin v1",
+      "note": "Verified first version was preserved and pushed to the v1 branch from commit 3284380."
+    },
+    {
+      "kind": "log",
+      "reference": "git remote show origin",
+      "note": "Remote HEAD branch is main; main and v1 are both tracked and pushed."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run lint",
+      "note": "Final-version lint gate passes across web, worker, and all packages with ESLint v9 flat config."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run test",
+      "note": "Final-version Vitest suite passes: 39 files and 104 tests."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run typecheck",
+      "note": "Final-version TypeScript typecheck passes across all workspaces."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run build",
+      "note": "Final-version production build passes with 68 Next.js app routes."
+    },
+    {
+      "kind": "api-response",
+      "reference": "HTTP smoke http://127.0.0.1:3000",
+      "note": "Production server smoke test passed for home, new-user workspace, health, README generation, Pages ZIP export, SVG card API, and expected OAuth env-missing response."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/final-home.png",
+      "note": "Final-version homepage screenshot captured from production server."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/final-new-user.png",
+      "note": "Final-version new-user automation screenshot captured from production server."
     }
   ],
   "items": {

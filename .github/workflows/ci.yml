@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, v1]
 
 jobs:
   quality:
@@ -19,4 +19,5 @@ jobs:
       - run: npm run typecheck
       - run: npm run lint
       - run: npm run test
-
+      - run: npm run build
+      - run: npm run acceptance:report

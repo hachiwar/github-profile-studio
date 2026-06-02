@@ -29,4 +29,3 @@ const items: ChecklistItem[] = rows.map((cells) => ({
 
 writeFileSync(outputPath, JSON.stringify({ generatedAt: new Date().toISOString(), items }, null, 2));
 console.log(`Generated ${items.length} acceptance items at ${outputPath}`);
-

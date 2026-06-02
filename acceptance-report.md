@@ -1,10 +1,10 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T02:35:22.659Z
+Generated at: 2026-06-02T07:11:28.871Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
-Evidence generated at: 2026-06-02T02:35:11.035Z
+Evidence generated at: 2026-06-02T07:09:32.001Z
 
 Passed items with evidence: 395
 
@@ -77,6 +77,15 @@ Passed items with evidence: 395
 | log | `npm.cmd run test` | Vitest suite passes: 39 files, 104 tests, covering detection cards, OAuth/deploy planning, security, UI i18n, performance budgets, typewriter README module, Pages custom-domain output, and new-user E2E flows. |
 | log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after UI i18n, performance budget, detection, security, and deployment evidence updates. |
 | log | `npm.cmd run build` | Production build passes with 68 app routes; /dashboard/new-user builds at 32.7 kB route size and 135 kB first-load JS. |
+| log | `git push origin v1` | Verified first version was preserved and pushed to the v1 branch from commit 3284380. |
+| log | `git remote show origin` | Remote HEAD branch is main; main and v1 are both tracked and pushed. |
+| log | `npm.cmd run lint` | Final-version lint gate passes across web, worker, and all packages with ESLint v9 flat config. |
+| log | `npm.cmd run test` | Final-version Vitest suite passes: 39 files and 104 tests. |
+| log | `npm.cmd run typecheck` | Final-version TypeScript typecheck passes across all workspaces. |
+| log | `npm.cmd run build` | Final-version production build passes with 68 Next.js app routes. |
+| api-response | `HTTP smoke http://127.0.0.1:3000` | Production server smoke test passed for home, new-user workspace, health, README generation, Pages ZIP export, SVG card API, and expected OAuth env-missing response. |
+| screenshot | `artifacts/screenshots/final-home.png` | Final-version homepage screenshot captured from production server. |
+| screenshot | `artifacts/screenshots/final-new-user.png` | Final-version new-user automation screenshot captured from production server. |
 
 ## Full Checklist Matrix
 
