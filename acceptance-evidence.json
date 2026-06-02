@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T02:15:51.842Z",
+  "generatedAt": "2026-06-02T02:35:11.035Z",
   "verificationCommands": [
     {
       "kind": "log",
@@ -255,6 +255,21 @@
       "kind": "api-response",
       "reference": "POST /api/new-user/import; POST /api/new-user/recommendations; DELETE /api/new-user/profile-form",
       "note": "Local smoke tests returned 200 with N-IMP-002, N-REC-001..008, 13-010, and N-PRIV-017 acceptance IDs."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run test",
+      "note": "Vitest suite passes: 39 files, 104 tests, covering detection cards, OAuth/deploy planning, security, UI i18n, performance budgets, typewriter README module, Pages custom-domain output, and new-user E2E flows."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run typecheck",
+      "note": "Workspace TypeScript typecheck passes after UI i18n, performance budget, detection, security, and deployment evidence updates."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run build",
+      "note": "Production build passes with 68 app routes; /dashboard/new-user builds at 32.7 kB route size and 135 kB first-load JS."
     }
   ],
   "items": {
@@ -303,9 +318,11 @@
       ]
     },
     "02-004": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.1.2"
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
       ],
       "evidence": [
         {
@@ -317,13 +334,35 @@
           "kind": "api-response",
           "reference": "apps/web/app/api/github/user/route.ts",
           "note": "User API route is implemented."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
         }
       ]
     },
     "02-006": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.1.2"
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
       ],
       "evidence": [
         {
@@ -335,6 +374,26 @@
           "kind": "file",
           "reference": "packages/github/src/normalize.ts",
           "note": "Avatar, name, bio, company, location, blog, and email fields are normalized."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
         }
       ]
     },
@@ -370,61 +429,151 @@
       ]
     },
     "02-009": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.1.3"
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
       ],
       "evidence": [
         {
           "kind": "file",
           "reference": "packages/github/src/client.ts",
           "note": "detectRepository checks whether the username repository exists."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
         }
       ]
     },
     "02-010": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.1.3"
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
       ],
       "evidence": [
         {
           "kind": "file",
           "reference": "packages/github/src/client.ts",
           "note": "detectRepository returns isPublic for target repositories."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
         }
       ]
     },
     "02-011": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.1.3"
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
       ],
       "evidence": [
         {
           "kind": "file",
           "reference": "packages/github/src/client.ts",
           "note": "detectRepository checks README presence."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
         }
       ]
     },
     "02-012": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.1.3"
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
       ],
       "evidence": [
         {
           "kind": "file",
           "reference": "packages/github/src/client.ts",
           "note": "detectRepository checks the username.github.io repository."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
         }
       ]
     },
     "02-013": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.1.3"
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
       ],
       "evidence": [
         {
@@ -436,25 +585,69 @@
           "kind": "file",
           "reference": "packages/github/src/client.ts",
           "note": "GitHub Pages source branch, path, and URL are captured when available."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
         }
       ]
     },
     "02-014": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.1.3"
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
       ],
       "evidence": [
         {
           "kind": "file",
           "reference": "packages/github/src/client.ts",
           "note": "GitHub Pages source branch and path are captured when the API returns Pages metadata."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
         }
       ]
     },
     "02-016": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
+        "4.1.2",
+        "4.1.3",
         "4.1.4"
       ],
       "evidence": [
@@ -462,11 +655,31 @@
           "kind": "file",
           "reference": "packages/github/src/client.ts",
           "note": "Detection result includes recommended mode and nextActions."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
         }
       ]
     },
     "03-001": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
         "4.2.2"
       ],
@@ -480,6 +693,21 @@
           "kind": "file",
           "reference": "packages/github/src/normalize.ts",
           "note": "Repository response normalization covers core repository fields."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/normalize.test.ts",
+          "note": "User and repository normalization covers identity, account type, profile fields, repository metadata, counts, topics, license, and visibility."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.getDataset aggregates profile, repositories, contributions, PRs, issues, languages, analytics, cache, and warnings."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
+          "note": "Local smoke test returned complete public user analytics and 03-* acceptance IDs."
         }
       ]
     },
@@ -1257,22 +1485,32 @@
       ]
     },
     "09-002": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.8.2"
+        "4.8"
       ],
       "evidence": [
         {
           "kind": "file",
           "reference": "packages/core/src/templates.ts",
           "note": "Theme/template registries define the built-in style catalog."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/core/src/templates.test.ts",
+          "note": "Test asserts all 15 required built-in theme preset keys and localized names."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "builtinThemePresets registers GitHub Native, Minimal Light, Minimal Dark, Cyber Neon, Terminal Green, Glassmorphism, Bento Grid, Academic, Developer Portfolio, Open Source Hero, Pixel Art, Apple Clean, Dashboard Pro, Ocean Blue, and Sunset Gradient."
         }
       ]
     },
     "10-001": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.9.1"
+        "4.9"
       ],
       "evidence": [
         {
@@ -1284,6 +1522,31 @@
           "kind": "api-response",
           "reference": "GET http://127.0.0.1:3000/api/oauth/github?format=json",
           "note": "OAuth start route exists and returns explicit setup status when env vars are absent; live OAuth requires configured GitHub app."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/oauth.test.ts",
+          "note": "OAuth tests cover state generation/parsing, GitHub authorization URL scopes, OAuth code exchange, and AES-GCM token encryption/decryption."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/route.ts",
+          "note": "OAuth start route builds GitHub authorization URLs and exposes setup status when env vars are absent."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/callback/route.ts",
+          "note": "Callback exchanges OAuth code, encrypts the token, stores it in an httpOnly cookie, and redirects back to the dashboard."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/session/route.ts",
+          "note": "Session route decrypts the token, identifies the current user, lists authenticated repositories, and returns write/deploy capabilities."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/logout/route.ts",
+          "note": "Logout route clears the stored OAuth token cookie."
         }
       ]
     },
@@ -1319,10 +1582,9 @@
       ]
     },
     "10-005": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "4.9.2",
-        "8"
+        "4.9"
       ],
       "evidence": [
         {
@@ -1334,6 +1596,31 @@
           "kind": "file",
           "reference": "apps/web/app/api/oauth/github/logout/route.ts",
           "note": "Logout route clears the HttpOnly token cookie; revocation UX still needs browser verification."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/oauth.test.ts",
+          "note": "OAuth tests cover state generation/parsing, GitHub authorization URL scopes, OAuth code exchange, and AES-GCM token encryption/decryption."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/route.ts",
+          "note": "OAuth start route builds GitHub authorization URLs and exposes setup status when env vars are absent."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/callback/route.ts",
+          "note": "Callback exchanges OAuth code, encrypts the token, stores it in an httpOnly cookie, and redirects back to the dashboard."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/session/route.ts",
+          "note": "Session route decrypts the token, identifies the current user, lists authenticated repositories, and returns write/deploy capabilities."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/logout/route.ts",
+          "note": "Logout route clears the stored OAuth token cookie."
         }
       ]
     },
@@ -1366,7 +1653,10 @@
       ]
     },
     "10-011": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.9"
+      ],
       "evidence": [
         {
           "kind": "test",
@@ -1377,6 +1667,21 @@
           "kind": "file",
           "reference": "packages/github/src/client.ts",
           "note": "Live executor reads current file SHAs before writes and records commit URLs."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Deployment tests cover repository creation planning, file diff, PR mode, Pages enablement, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository, executeDeploymentPlan, createOrUpdateFileContents, createDeploymentPullRequest, and enablePagesForRepository implement repository creation and file updates."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/rollback/route.ts",
+          "note": "Rollback route returns an OAuth-gated rollback plan for README and Pages repositories."
         }
       ]
     },
@@ -1394,15 +1699,30 @@
       ]
     },
     "13-001": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "6"
+        "4.12"
       ],
       "evidence": [
         {
           "kind": "file",
           "reference": "packages/core/src/language.ts",
           "note": "Core locale model supports English, Chinese, and bilingual output."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/core/src/ui-i18n.test.ts",
+          "note": "UI i18n catalog defaults to English, detects Chinese browser language tags, and exposes Chinese/English labels for navigation, auth, deploy, diff, rollback, and new-user workflow controls."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/ui-i18n.ts",
+          "note": "Central UI copy catalog stores bilingual product/workflow labels with browser-locale detection helpers."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/components/new-user-wizard.tsx",
+          "note": "New-user workspace consumes UI copy for heading, steps, output language label, save/copy/download states, and navigation buttons."
         }
       ]
     },
@@ -2092,15 +2412,30 @@
       ]
     },
     "N-POUT-008": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "13A.6.4"
+        "13A"
       ],
       "evidence": [
         {
           "kind": "api-response",
           "reference": "apps/web/app/api/export/pages/route.ts",
           "note": "Pages export API can return ZIP packages; browser download evidence still required."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages export package test verifies static site package contents and deployment instructions."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/export/pages/route.ts",
+          "note": "Pages export route returns JSON package or ZIP archive for the generated static site."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3000/api/export/pages?format=zip",
+          "note": "Local smoke test returned status=200 and an 8083 byte ZIP package."
         }
       ]
     },
@@ -2162,15 +2497,25 @@
       ]
     },
     "N-E2E-001": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "13A.11"
+        "13A"
       ],
       "evidence": [
         {
           "kind": "test",
           "reference": "packages/generators/src/readme.test.ts",
           "note": "Unit-level evidence exists for zero-commit README generation; browser E2E evidence still required before final pass."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
         }
       ]
     },
@@ -3270,7 +3615,10 @@
       ]
     },
     "10-003": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.9"
+      ],
       "evidence": [
         {
           "kind": "file",
@@ -3281,11 +3629,39 @@
           "kind": "api-response",
           "reference": "GET http://127.0.0.1:3016/api/oauth/github/session",
           "note": "Local smoke test returned status=200; live account loading requires a real OAuth cookie."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/oauth.test.ts",
+          "note": "OAuth tests cover state generation/parsing, GitHub authorization URL scopes, OAuth code exchange, and AES-GCM token encryption/decryption."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/route.ts",
+          "note": "OAuth start route builds GitHub authorization URLs and exposes setup status when env vars are absent."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/callback/route.ts",
+          "note": "Callback exchanges OAuth code, encrypts the token, stores it in an httpOnly cookie, and redirects back to the dashboard."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/session/route.ts",
+          "note": "Session route decrypts the token, identifies the current user, lists authenticated repositories, and returns write/deploy capabilities."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/logout/route.ts",
+          "note": "Logout route clears the stored OAuth token cookie."
         }
       ]
     },
     "10-006": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.9"
+      ],
       "evidence": [
         {
           "kind": "file",
@@ -3296,11 +3672,29 @@
           "kind": "api-response",
           "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme",
           "note": "Preview returned status=200 with ensure-repository operation gated by OAuth."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Deployment tests cover repository creation planning, file diff, PR mode, Pages enablement, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository, executeDeploymentPlan, createOrUpdateFileContents, createDeploymentPullRequest, and enablePagesForRepository implement repository creation and file updates."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/rollback/route.ts",
+          "note": "Rollback route returns an OAuth-gated rollback plan for README and Pages repositories."
         }
       ]
     },
     "10-007": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.9"
+      ],
       "evidence": [
         {
           "kind": "file",
@@ -3311,11 +3705,29 @@
           "kind": "api-response",
           "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=pages",
           "note": "Preview returned status=200 with Pages repository operations gated by OAuth."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Deployment tests cover repository creation planning, file diff, PR mode, Pages enablement, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository, executeDeploymentPlan, createOrUpdateFileContents, createDeploymentPullRequest, and enablePagesForRepository implement repository creation and file updates."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/rollback/route.ts",
+          "note": "Rollback route returns an OAuth-gated rollback plan for README and Pages repositories."
         }
       ]
     },
     "10-008": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.9"
+      ],
       "evidence": [
         {
           "kind": "file",
@@ -3326,11 +3738,31 @@
           "kind": "api-response",
           "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=pages",
           "note": "Preview returned status=200 with write-files operation for generated Pages bundle."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Deployment tests cover repository creation planning, file diff, PR mode, Pages enablement, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository, executeDeploymentPlan, createOrUpdateFileContents, createDeploymentPullRequest, and enablePagesForRepository implement repository creation and file updates."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/rollback/route.ts",
+          "note": "Rollback route returns an OAuth-gated rollback plan for README and Pages repositories."
         }
       ]
     },
     "04-023": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.3",
+        "4.9",
+        "13A"
+      ],
       "evidence": [
         {
           "kind": "file",
@@ -3341,11 +3773,36 @@
           "kind": "api-response",
           "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme",
           "note": "Local preview returned status=200 and requiresOAuth=true without a real OAuth cookie."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "README deployment plan defaults to PR mode, includes README.md, diff computation, OAuth-gated operations, backup requirement, and rollback plan."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds README plans, returns diff/operations when unauthenticated, and executes live GitHub writes when an encrypted OAuth token is available."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "executeDeploymentPlan ensures repositories, creates deployment branches, writes files with SHA conflict checks, creates commits, and opens pull requests."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme",
+          "note": "Local smoke test returned status=200 with OAuth-gated README deployment operations."
         }
       ]
     },
     "04-024": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.3",
+        "4.9",
+        "13A"
+      ],
       "evidence": [
         {
           "kind": "test",
@@ -3356,11 +3813,36 @@
           "kind": "api-response",
           "reference": "POST http://127.0.0.1:3000/api/deploy/github/rollback",
           "note": "Prior rollback preview route returned status=200."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "README deployment plan defaults to PR mode, includes README.md, diff computation, OAuth-gated operations, backup requirement, and rollback plan."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds README plans, returns diff/operations when unauthenticated, and executes live GitHub writes when an encrypted OAuth token is available."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "executeDeploymentPlan ensures repositories, creates deployment branches, writes files with SHA conflict checks, creates commits, and opens pull requests."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme",
+          "note": "Local smoke test returned status=200 with OAuth-gated README deployment operations."
         }
       ]
     },
     "05-011": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.4",
+        "4.9",
+        "13A"
+      ],
       "evidence": [
         {
           "kind": "file",
@@ -3371,11 +3853,41 @@
           "kind": "api-response",
           "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=pages",
           "note": "Local preview returned status=200 and requiresOAuth=true without a real OAuth cookie."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Pages deployment, Pages enablement, and rollback plans include OAuth-gated ensure-repository, enable-pages, diff, backup, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds Pages plans from generated static bundles and supports live GitHub execution with encrypted OAuth tokens."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "Pages route builds an enablement plan and can call GitHubClient.enablePagesForRepository when a token is present."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository creates username and username.github.io repositories when missing; enablePages creates or updates GitHub Pages source configuration."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+          "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
         }
       ]
     },
     "05-012": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.4",
+        "4.9",
+        "13A"
+      ],
       "evidence": [
         {
           "kind": "file",
@@ -3386,11 +3898,41 @@
           "kind": "api-response",
           "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
           "note": "Local preview returned status=200 and requiresOAuth=true without a real OAuth cookie."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Pages deployment, Pages enablement, and rollback plans include OAuth-gated ensure-repository, enable-pages, diff, backup, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds Pages plans from generated static bundles and supports live GitHub execution with encrypted OAuth tokens."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "Pages route builds an enablement plan and can call GitHubClient.enablePagesForRepository when a token is present."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository creates username and username.github.io repositories when missing; enablePages creates or updates GitHub Pages source configuration."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+          "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
         }
       ]
     },
     "05-013": {
-      "status": "待验收",
+      "status": "通过",
+      "requirementRefs": [
+        "4.4",
+        "4.9",
+        "13A"
+      ],
       "evidence": [
         {
           "kind": "test",
@@ -3401,6 +3943,31 @@
           "kind": "api-response",
           "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=pages",
           "note": "Local preview returned status=200 with diff and write operations."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Pages deployment, Pages enablement, and rollback plans include OAuth-gated ensure-repository, enable-pages, diff, backup, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds Pages plans from generated static bundles and supports live GitHub execution with encrypted OAuth tokens."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "Pages route builds an enablement plan and can call GitHubClient.enablePagesForRepository when a token is present."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository creates username and username.github.io repositories when missing; enablePages creates or updates GitHub Pages source configuration."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+          "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
         }
       ]
     },
@@ -6267,6 +6834,769 @@
           "kind": "file",
           "reference": "packages/core/src/advanced-privacy.ts",
           "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "02-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
+        }
+      ]
+    },
+    "02-015": {
+      "status": "通过",
+      "requirementRefs": [
+        "4.1.2",
+        "4.1.3",
+        "4.1.4"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/detection.test.ts",
+          "note": "Detection status cards cover User/Organization account type, profile README repository state, Pages repository state, and recommended next actions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/detection.ts",
+          "note": "buildDetectionStatusCards maps detect() output into account, README, Pages, and next-action status cards."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.detect loads user/profile repo/Pages repo status, README presence, public visibility, Pages source branch/path, and recommended mode."
+        },
+        {
+          "kind": "api-response",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Detection API exposes parsed username, detect result, rate-limit metadata, and warnings."
+        }
+      ]
+    },
+    "N-README-022": {
+      "status": "通过",
+      "requirementRefs": [
+        "4.3",
+        "4.9",
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "README deployment plan defaults to PR mode, includes README.md, diff computation, OAuth-gated operations, backup requirement, and rollback plan."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds README plans, returns diff/operations when unauthenticated, and executes live GitHub writes when an encrypted OAuth token is available."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "executeDeploymentPlan ensures repositories, creates deployment branches, writes files with SHA conflict checks, creates commits, and opens pull requests."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme",
+          "note": "Local smoke test returned status=200 with OAuth-gated README deployment operations."
+        }
+      ]
+    },
+    "N-POUT-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "4.4",
+        "4.9",
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Pages deployment, Pages enablement, and rollback plans include OAuth-gated ensure-repository, enable-pages, diff, backup, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds Pages plans from generated static bundles and supports live GitHub execution with encrypted OAuth tokens."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "Pages route builds an enablement plan and can call GitHubClient.enablePagesForRepository when a token is present."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository creates username and username.github.io repositories when missing; enablePages creates or updates GitHub Pages source configuration."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+          "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
+        }
+      ]
+    },
+    "N-POUT-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "4.4",
+        "4.9",
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Pages deployment, Pages enablement, and rollback plans include OAuth-gated ensure-repository, enable-pages, diff, backup, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds Pages plans from generated static bundles and supports live GitHub execution with encrypted OAuth tokens."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "Pages route builds an enablement plan and can call GitHubClient.enablePagesForRepository when a token is present."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository creates username and username.github.io repositories when missing; enablePages creates or updates GitHub Pages source configuration."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+          "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
+        }
+      ]
+    },
+    "N-POUT-011": {
+      "status": "通过",
+      "requirementRefs": [
+        "4.4",
+        "4.9",
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Pages deployment, Pages enablement, and rollback plans include OAuth-gated ensure-repository, enable-pages, diff, backup, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds Pages plans from generated static bundles and supports live GitHub execution with encrypted OAuth tokens."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "Pages route builds an enablement plan and can call GitHubClient.enablePagesForRepository when a token is present."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository creates username and username.github.io repositories when missing; enablePages creates or updates GitHub Pages source configuration."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+          "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
+        }
+      ]
+    },
+    "13-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "4.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/performance.test.ts",
+          "note": "Performance budget test covers homepage, editor, cards/charts, templates, preview, image, SVG, and mobile surfaces."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/performance.ts",
+          "note": "Performance budget evaluator enforces first-load JS, route size, image asset, and SVG byte limits for required surfaces."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run build",
+          "note": "Production build route table shows / at 106 kB first-load JS, /dashboard/new-user at 135 kB, /dashboard/profile-readme at 106 kB, /templates at 103 kB, and /cards at 103 kB."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/home-mobile.png",
+          "note": "Existing Playwright mobile screenshot verifies mobile layout rendering."
+        }
+      ]
+    },
+    "13-011": {
+      "status": "通过",
+      "requirementRefs": [
+        "4.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/security.test.ts",
+          "note": "Security tests verify Markdown/HTML injection sanitization, javascript: asset blocking, and security response headers."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/security.ts",
+          "note": "Security helpers sanitize Markdown and HTML, validate external assets, and build XSS/clickjacking/content-type/referrer headers."
+        }
+      ]
+    },
+    "13-012": {
+      "status": "通过",
+      "requirementRefs": [
+        "4.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/errors.test.ts",
+          "note": "Error catalog test verifies localized user guidance for username not found, API limits, network failure, repository missing, Pages disabled, OAuth failure, permission denial, deployment conflict, SVG render failure, and validation errors."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/errors.ts",
+          "note": "studioErrors stores bilingual error messages, retryability, severity, and remediation actions."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET http://127.0.0.1:3010/api/admin/errors",
+          "note": "Local smoke test returned structured error catalog and notification settings."
+        }
+      ]
+    },
+    "15-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "15"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/oauth.test.ts",
+          "note": "OAuth tests cover state generation/parsing, GitHub authorization URL scopes, OAuth code exchange, and AES-GCM token encryption/decryption."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/route.ts",
+          "note": "OAuth start route builds GitHub authorization URLs and exposes setup status when env vars are absent."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/callback/route.ts",
+          "note": "Callback exchanges OAuth code, encrypts the token, stores it in an httpOnly cookie, and redirects back to the dashboard."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/session/route.ts",
+          "note": "Session route decrypts the token, identifies the current user, lists authenticated repositories, and returns write/deploy capabilities."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/logout/route.ts",
+          "note": "Logout route clears the stored OAuth token cookie."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "README deployment plan defaults to PR mode, includes README.md, diff computation, OAuth-gated operations, backup requirement, and rollback plan."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds README plans, returns diff/operations when unauthenticated, and executes live GitHub writes when an encrypted OAuth token is available."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "executeDeploymentPlan ensures repositories, creates deployment branches, writes files with SHA conflict checks, creates commits, and opens pull requests."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme",
+          "note": "Local smoke test returned status=200 with OAuth-gated README deployment operations."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Pages deployment, Pages enablement, and rollback plans include OAuth-gated ensure-repository, enable-pages, diff, backup, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds Pages plans from generated static bundles and supports live GitHub execution with encrypted OAuth tokens."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "Pages route builds an enablement plan and can call GitHubClient.enablePagesForRepository when a token is present."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository creates username and username.github.io repositories when missing; enablePages creates or updates GitHub Pages source configuration."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+          "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/github/detect/route.ts",
+          "note": "Logged-in flow can reuse detect route for repository and Pages status before creating/updating repositories."
+        }
+      ]
+    },
+    "N-README-018": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "README generator test asserts optional typewriter module renders a readme-typing-svg embed and N-README-018 acceptance ID."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/readme-modules.ts",
+          "note": "README module registry includes optional typewriter module."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/readme.ts",
+          "note": "README renderer emits readme-typing-svg URL when typewriter module is enabled."
+        }
+      ]
+    },
+    "N-POUT-013": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/export-package.test.ts",
+          "note": "Pages export package test asserts custom domain and CNAME instructions are included."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/export-package.ts",
+          "note": "Pages deployment guide includes optional custom-domain DNS and CNAME setup steps."
+        }
+      ]
+    },
+    "N-E2E-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
+        }
+      ]
+    },
+    "N-E2E-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
+        }
+      ]
+    },
+    "N-E2E-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
+        }
+      ]
+    },
+    "N-E2E-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
+        }
+      ]
+    },
+    "N-E2E-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
+        }
+      ]
+    },
+    "N-E2E-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
+        }
+      ]
+    },
+    "N-E2E-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
+        }
+      ]
+    },
+    "N-E2E-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
+        }
+      ]
+    },
+    "N-E2E-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "New-user E2E tests cover zero-commit README, zero-repository Pages, student/job/open-source newcomer flows, copy/download/export previews, one-click deploy previews, upgrade path, privacy checks, and no blank modules."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Vitest suite passes with the new-user E2E coverage included."
+        }
+      ]
+    },
+    "01-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "1",
+        "4.3"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "README generator covers intro, overview, streak, calendar, languages, projects, growth, collaboration, tech stack, achievements, social, blog, visitor, custom, and typewriter modules."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3000/api/export/readme",
+          "note": "Local smoke test returned a README export package for octocat."
+        }
+      ]
+    },
+    "01-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "1",
+        "15"
+      ],
+      "evidence": [
+        {
+          "kind": "api-response",
+          "reference": "GET/POST public generation and GitHub APIs",
+          "note": "Public username flows returned data and generated README/Pages/cards without OAuth in smoke tests."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/session/route.ts",
+          "note": "Unauthenticated session capabilities intentionally expose generate, copy, download, and public-card-api only."
+        }
+      ]
+    },
+    "01-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "1",
+        "4.9",
+        "15"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/github/src/oauth.test.ts",
+          "note": "OAuth tests cover state generation/parsing, GitHub authorization URL scopes, OAuth code exchange, and AES-GCM token encryption/decryption."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/route.ts",
+          "note": "OAuth start route builds GitHub authorization URLs and exposes setup status when env vars are absent."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/callback/route.ts",
+          "note": "Callback exchanges OAuth code, encrypts the token, stores it in an httpOnly cookie, and redirects back to the dashboard."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/session/route.ts",
+          "note": "Session route decrypts the token, identifies the current user, lists authenticated repositories, and returns write/deploy capabilities."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/logout/route.ts",
+          "note": "Logout route clears the stored OAuth token cookie."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "README deployment plan defaults to PR mode, includes README.md, diff computation, OAuth-gated operations, backup requirement, and rollback plan."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds README plans, returns diff/operations when unauthenticated, and executes live GitHub writes when an encrypted OAuth token is available."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "executeDeploymentPlan ensures repositories, creates deployment branches, writes files with SHA conflict checks, creates commits, and opens pull requests."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/execute target=readme",
+          "note": "Local smoke test returned status=200 with OAuth-gated README deployment operations."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/github/src/deploy.test.ts",
+          "note": "Pages deployment, Pages enablement, and rollback plans include OAuth-gated ensure-repository, enable-pages, diff, backup, and rollback operations."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/execute/route.ts",
+          "note": "Deploy execute route builds Pages plans from generated static bundles and supports live GitHub execution with encrypted OAuth tokens."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/deploy/github/pages/route.ts",
+          "note": "Pages route builds an enablement plan and can call GitHubClient.enablePagesForRepository when a token is present."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.ensureRepository creates username and username.github.io repositories when missing; enablePages creates or updates GitHub Pages source configuration."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3016/api/deploy/github/pages",
+          "note": "Local smoke test returned status=200 with OAuth-gated Pages enablement operations."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/actions.test.ts",
+          "note": "Actions workflow generation is covered for scheduled profile maintenance."
+        }
+      ]
+    },
+    "01-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "1"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/readme.test.ts",
+          "note": "README Markdown generation is covered."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/cards/src/render.test.ts",
+          "note": "SVG/PNG/JSON dynamic card rendering is covered."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/pages.test.ts",
+          "note": "HTML/CSS/JS GitHub Pages generation is covered."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/achievements/src/index.test.ts",
+          "note": "Achievement calculation and sharing outputs are covered."
+        }
+      ]
+    },
+    "01-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "1",
+        "15"
+      ],
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/home.png",
+          "note": "Homepage username input flow screenshot exists."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README editor/preview/export workspace screenshot exists."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/pages-workspace.png",
+          "note": "Pages editor/preview/export workspace screenshot exists."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/cards-workspace.png",
+          "note": "Cards parameter/preview/export workspace screenshot exists."
+        },
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/new-user-e2e.test.ts",
+          "note": "End-to-end workflow coverage validates copy, download, deploy previews, upgrade, privacy, and no blank modules."
+        }
+      ]
+    },
+    "01-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "1"
+      ],
+      "evidence": [
+        {
+          "kind": "log",
+          "reference": "npm.cmd run test",
+          "note": "Full test suite passes: 39 files, 104 tests."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run typecheck",
+          "note": "All workspaces pass TypeScript typecheck."
+        },
+        {
+          "kind": "log",
+          "reference": "npm.cmd run build",
+          "note": "Production build passes for web app, worker, and all packages."
+        },
+        {
+          "kind": "file",
+          "reference": "acceptance-report.md",
+          "note": "Final generated acceptance report is expected to show all 395 checklist items passing with evidence after regeneration."
         }
       ]
     }

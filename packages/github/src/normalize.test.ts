@@ -6,6 +6,7 @@ describe("GitHub normalizers", () => {
     const user = normalizeUser({
       login: "octocat",
       id: 1,
+      type: "Organization",
       name: "Octocat",
       blog: "github.blog",
       followers: 10,
@@ -16,6 +17,7 @@ describe("GitHub normalizers", () => {
     });
 
     expect(user.githubUsername).toBe("octocat");
+    expect(user.accountType).toBe("Organization");
     expect(user.blog).toBe("https://github.blog");
     expect(user.publicRepos).toBe(3);
     expect(user.accountAgeDays).toBeGreaterThan(2000);

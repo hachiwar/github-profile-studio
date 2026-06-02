@@ -15,4 +15,7 @@ export * from "./new-user-import";
 export * from "./new-user-recommendations";
 export * from "./new-user-upgrade";
 export * from "./advanced-privacy";
+export * from "./security";
 export * from "./theme-io";
+export * from "./ui-i18n";
+export * from "./performance";

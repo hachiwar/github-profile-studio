@@ -217,7 +217,7 @@ export class GitHubClient {
       return {
         username,
         userExists: true,
-        userType: "User",
+        userType: profile.accountType ?? "User",
         profile,
         profileReadmeRepository: profileRepo,
         pagesRepository: pagesRepo,

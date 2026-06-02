@@ -23,10 +23,10 @@ export const readmeModuleCatalog: ReadmeModuleDefinition[] = [
   { id: "contact", label: { en: "Social and contact", zh: "社交与联系" }, category: "identity", defaultEnabled: true, emptyDataBehavior: "show", acceptanceIds: ["04-016"] },
   { id: "blog", label: { en: "Blog posts", zh: "博客文章" }, category: "content", defaultEnabled: false, emptyDataBehavior: "hide", acceptanceIds: ["04-017"] },
   { id: "visitors", label: { en: "Visitor stats", zh: "访客统计" }, category: "github-data", defaultEnabled: false, emptyDataBehavior: "hide", acceptanceIds: ["04-018"] },
+  { id: "typewriter", label: { en: "Typewriter animation", zh: "打字机动画" }, category: "identity", defaultEnabled: false, emptyDataBehavior: "show", acceptanceIds: ["N-README-018"] },
   { id: "custom", label: { en: "Custom Markdown", zh: "自定义模块" }, category: "custom", defaultEnabled: false, emptyDataBehavior: "show", acceptanceIds: ["04-019"] }
 ];
 
 export function getDefaultReadmeModules() {
   return readmeModuleCatalog.filter((module) => module.defaultEnabled).map((module) => module.id);
 }
-

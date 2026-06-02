@@ -6,3 +6,4 @@ export * from "./deploy";
 export * from "./cache";
 export * from "./stats";
 export * from "./analytics";
+export * from "./detection";

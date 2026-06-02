@@ -85,6 +85,7 @@ export type LearningPlan = z.infer<typeof learningPlanSchema>;
 export const userProfileSchema = z.object({
   githubUsername: z.string().min(1),
   githubId: z.number().optional(),
+  accountType: z.enum(["User", "Organization"]).optional(),
   displayName: z.string().optional(),
   nickname: z.string().optional(),
   avatarUrl: z.string().url().optional(),

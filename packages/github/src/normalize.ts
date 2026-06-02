@@ -9,6 +9,7 @@ export function normalizeUser(payload: GitHubUserResponse): UserProfile {
   return {
     githubUsername: String(payload.login ?? ""),
     githubId: typeof payload.id === "number" ? payload.id : undefined,
+    accountType: payload.type === "Organization" ? "Organization" : payload.type === "User" ? "User" : undefined,
     displayName: stringOrUndefined(payload.name),
     avatarUrl: stringOrUndefined(payload.avatar_url),
     bio: stringOrUndefined(payload.bio),

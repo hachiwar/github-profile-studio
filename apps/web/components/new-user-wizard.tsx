@@ -12,17 +12,23 @@ import {
   splitList,
   summarizeNewUserConfig,
   summarizeNewUserFormDraft,
+  detectUiLocale,
+  getUiCopy,
+  toUiLocale,
   type NewUserFormDraft
 } from "@gps/core";
 import { generateReadme } from "@gps/generators/readme";
 
-const steps = ["Basics", "Education", "Skills", "Projects", "Plan", "Privacy", "Preview"];
+const stepKeys = ["stepBasics", "stepEducation", "stepSkills", "stepProjects", "stepPlan", "stepPrivacy", "stepPreview"] as const;
 const localStorageKey = "gps:new-user-form";
 
 export function NewUserWizard() {
   const [step, setStep] = useState(0);
-  const [draft, setDraft] = useState<NewUserFormDraft>(() => defaultNewUserFormDraft("new-developer", browserLocale()));
-  const [saveState, setSaveState] = useState("Draft not saved");
+  const [draft, setDraft] = useState<NewUserFormDraft>(() => defaultNewUserFormDraft("new-developer", browserOutputLocale()));
+  const uiLocale = toUiLocale(draft.locale);
+  const copy = useMemo(() => getUiCopy(uiLocale), [uiLocale]);
+  const steps = useMemo(() => stepKeys.map((key) => copy[key]), [copy]);
+  const [saveState, setSaveState] = useState(() => getUiCopy(browserUiLocale()).draftNotSaved);
   const config = useMemo(() => buildNewUserConfigFromDraft(draft), [draft]);
   const summary = useMemo(() => summarizeNewUserConfig(config), [config]);
   const formSummary = useMemo(() => summarizeNewUserFormDraft(draft), [draft]);
@@ -81,14 +87,14 @@ export function NewUserWizard() {
   async function saveDraft() {
     const parsed = newUserFormDraftSchema.parse(draft);
     window.localStorage.setItem(localStorageKey, JSON.stringify(parsed));
-    setSaveState("Saving...");
+    setSaveState(copy.saving);
     const response = await fetch("/api/new-user/profile-form", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(parsed)
     });
     const result = await response.json();
-    setSaveState(result.saved ? `Saved at ${new Date(result.savedAt).toLocaleTimeString()}` : "Save failed");
+    setSaveState(result.saved ? `${copy.savedAt} ${new Date(result.savedAt).toLocaleTimeString()}` : copy.saveFailed);
   }
 
   async function copyMarkdown() {
@@ -101,7 +107,7 @@ export function NewUserWizard() {
     } else {
       fallbackCopy(readme.markdown);
     }
-    setSaveState("Markdown copied");
+    setSaveState(copy.copied);
   }
 
   function downloadReadme() {
@@ -112,14 +118,14 @@ export function NewUserWizard() {
     link.download = "README.md";
     link.click();
     URL.revokeObjectURL(url);
-    setSaveState("README downloaded");
+    setSaveState(copy.downloaded);
   }
 
   return (
     <div className="grid gap-5 lg:grid-cols-[280px_1fr]">
       <aside className="rounded-lg border bg-white p-4">
-        <h2 className="font-semibold">New-user automation</h2>
-        <p className="mt-2 text-sm text-slate-600">English is the default output. Chinese and bilingual output stay available.</p>
+        <h2 className="font-semibold">{copy.newUserAutomation}</h2>
+        <p className="mt-2 text-sm text-slate-600">{copy.newUserDescription}</p>
         <ol className="mt-4 space-y-2">
           {steps.map((label, index) => (
             <li key={label}>
@@ -135,7 +141,7 @@ export function NewUserWizard() {
         </ol>
         <button type="button" onClick={saveDraft} className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white">
           <Save className="h-4 w-4" />
-          Save draft
+          {copy.saveDraft}
         </button>
         <p className="mt-2 text-xs text-slate-500">{saveState}</p>
       </aside>
@@ -149,11 +155,11 @@ export function NewUserWizard() {
           <div className="flex gap-2">
             <button type="button" onClick={copyMarkdown} className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm">
               <Copy className="h-4 w-4" />
-              Copy
+              {copy.copy}
             </button>
             <button type="button" onClick={downloadReadme} className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm">
               <Download className="h-4 w-4" />
-              Download
+              {copy.download}
             </button>
           </div>
         </header>
@@ -164,7 +170,7 @@ export function NewUserWizard() {
               <FormPanel title="Basic profile">
                 <div className="grid gap-3 md:grid-cols-2">
                   <TextField label="GitHub username" value={draft.username} onChange={setUsername} />
-                  <SelectField label="Output language" value={draft.locale} onChange={(value) => setDraft((current) => ({ ...current, locale: value as NewUserFormDraft["locale"] }))} options={["en-US", "zh-CN", "bilingual"]} />
+                  <SelectField label={copy.outputLanguage} value={draft.locale} onChange={(value) => setDraft((current) => ({ ...current, locale: value as NewUserFormDraft["locale"] }))} options={["en-US", "zh-CN", "bilingual"]} />
                   <TextField label="Display name" value={draft.basics.displayName} onChange={(value) => updateBasics("displayName", value)} />
                   <TextField label="Nickname" value={draft.basics.nickname} onChange={(value) => updateBasics("nickname", value)} />
                   <TextField label="Avatar URL" value={draft.basics.avatarUrl} onChange={(value) => updateBasics("avatarUrl", value || undefined)} />
@@ -333,7 +339,7 @@ export function NewUserWizard() {
 
         <footer className="flex flex-wrap justify-between gap-2 border-t p-4">
           <button type="button" onClick={() => setStep(Math.max(0, step - 1))} className="rounded-md border px-3 py-2 text-sm">
-            Back
+            {copy.previous}
           </button>
           <div className="flex gap-2">
             <button type="button" onClick={() => setDraft((current) => ({ ...current, manualProjects: [...current.manualProjects, defaultNewUserFormDraft(current.username, current.locale).manualProjects[0]] }))} className="inline-flex items-center gap-2 rounded-md border px-3 py-2 text-sm">
@@ -345,7 +351,7 @@ export function NewUserWizard() {
               Project
             </button>
             <button type="button" onClick={() => setStep(Math.min(steps.length - 1, step + 1))} className="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white">
-              Next
+              {copy.next}
             </button>
           </div>
         </footer>
@@ -449,8 +455,13 @@ function labelize(value: string): string {
   return value.replace(/([A-Z])/g, " $1").replace(/^./, (char) => char.toUpperCase());
 }
 
-function browserLocale(): NewUserFormDraft["locale"] {
-  if (typeof navigator !== "undefined" && navigator.language.toLowerCase().startsWith("zh")) return "zh-CN";
+function browserOutputLocale(): NewUserFormDraft["locale"] {
+  if (browserUiLocale() === "zh-CN") return "zh-CN";
+  return "en-US";
+}
+
+function browserUiLocale() {
+  if (typeof navigator !== "undefined") return detectUiLocale([navigator.language, ...Array.from(navigator.languages ?? [])]);
   return "en-US";
 }
 

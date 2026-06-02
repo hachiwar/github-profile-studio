@@ -60,6 +60,8 @@ function renderModule(module: string, config: ProfileStudioConfig): string | nul
       return renderBlog(config);
     case "visitors":
       return renderVisitors(config);
+    case "typewriter":
+      return renderTypewriter(config);
     case "custom":
       return renderCustom(config);
     default:
@@ -195,6 +197,16 @@ function renderVisitors(config: ProfileStudioConfig): string {
   return `## ${heading("visitors", config)}\n\n![Profile views](https://komarev.com/ghpvc/?username=${encodeURIComponent(config.targetUsername)}&style=flat-square)`;
 }
 
+function renderTypewriter(config: ProfileStudioConfig): string {
+  const lines = [
+    config.profile.currentRole ?? "Developer",
+    config.profile.status ?? "Learning in public",
+    config.learningPlan.currentFocus.slice(0, 3).join(" + ") || "Building projects"
+  ];
+  const text = encodeURIComponent(lines.filter(Boolean).join(";"));
+  return `## ${heading("typewriter", config)}\n\n![Typewriter animation](https://readme-typing-svg.demolab.com?font=Inter&pause=1000&width=720&lines=${text})`;
+}
+
 function renderCustom(config: ProfileStudioConfig): string {
   return `## ${heading("custom", config)}\n\n<!-- profile-studio:custom:start -->\nAdd custom Markdown, HTML-compatible snippets, images, badges, or third-party cards here.\n<!-- profile-studio:custom:end -->`;
 }
@@ -225,6 +237,7 @@ function mapReadmeAcceptance(id: string): string[] {
     contact: ["04-016", "N-README-012"],
     blog: ["04-017"],
     visitors: ["04-018", "N-README-017"],
+    typewriter: ["N-README-018"],
     custom: ["04-019"]
   };
   return map[id] ?? [];

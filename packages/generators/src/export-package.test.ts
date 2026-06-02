@@ -34,6 +34,8 @@ describe("export packages", () => {
     expect(paths).toContain(".github/workflows/update-pages.yml");
     expect(paths).toContain("profile-studio.manifest.json");
     expect(pkg.instructions).toContain("Enable GitHub Pages");
+    expect(pkg.instructions).toContain("Optional custom domain");
+    expect(pkg.instructions).toContain("CNAME");
     const dataFile = pkg.files.find((file) => file.path === "data/github.json");
     expect(dataFile?.content).toContain("\"profile\"");
     expect(dataFile?.content).toContain("\"projects\"");
