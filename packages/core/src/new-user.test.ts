@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildNewUserConfig, learningDirectionCatalog, programmingLanguageCatalog, recommendNewUserMode, skillCatalog, summarizeNewUserConfig } from "./new-user";
+import { generationModes } from "./templates";
 
 describe("new-user automation", () => {
   it("recommends new-user mode for a zero-data account", () => {
@@ -31,5 +32,33 @@ describe("new-user automation", () => {
     expect(skillCatalog.backend).toContain("FastAPI");
     expect(skillCatalog.database).toContain("PostgreSQL");
     expect(skillCatalog.devops).toContain("GitHub Actions");
+  });
+
+  it("supports manual, hybrid, and data-enhanced entry modes", () => {
+    expect(generationModes.map((mode) => mode.key)).toEqual(expect.arrayContaining(["manual", "hybrid", "data-enhanced"]));
+
+    expect(
+      recommendNewUserMode({
+        username: "hybrid",
+        publicRepos: 1,
+        totalContributions: 12,
+        totalStars: 0,
+        pullRequests: 0,
+        issues: 0,
+        hasContributionGraph: true
+      }).recommendedMode
+    ).toBe("hybrid");
+
+    expect(
+      recommendNewUserMode({
+        username: "strong",
+        publicRepos: 8,
+        totalContributions: 300,
+        totalStars: 40,
+        pullRequests: 12,
+        issues: 10,
+        hasContributionGraph: true
+      }).recommendedMode
+    ).toBe("data-enhanced");
   });
 });

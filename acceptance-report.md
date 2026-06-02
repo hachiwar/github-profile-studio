@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T02:04:22.608Z
+Generated at: 2026-06-02T02:15:53.072Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
-Evidence generated at: 2026-06-02T02:04:21.478Z
+Evidence generated at: 2026-06-02T02:15:51.842Z
 
-Passed items with evidence: 285
+Passed items with evidence: 342
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 83 |
+| 未开始 | 27 |
 | 开发中 | 0 |
-| 待验收 | 27 |
-| 通过 | 285 |
+| 待验收 | 26 |
+| 通过 | 342 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -70,6 +70,10 @@ Passed items with evidence: 285
 | log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after new-user copy, layout, and page visual engines. |
 | log | `npm.cmd run test` | Vitest suite passes: 28 files, 77 tests, including N-TEXT, N-LAYOUT, and N-PVIS coverage. |
 | log | `npm.cmd run build` | Production build passes after new-user copy, layout, and page visual engines. |
+| log | `npm.cmd run test` | Vitest suite passes: 33 files, 89 tests, including persistence, import, recommendations, upgrade, and advanced privacy coverage. |
+| log | `npm.cmd run build` | Production build passes with 68 static/dynamic routes, including /api/new-user/import. |
+| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after build completed; earlier parallel typecheck/build race was resolved by rerun. |
+| api-response | `POST /api/new-user/import; POST /api/new-user/recommendations; DELETE /api/new-user/profile-form` | Local smoke tests returned 200 with N-IMP-002, N-REC-001..008, 13-010, and N-PRIV-017 acceptance IDs. |
 
 ## Full Checklist Matrix
 
@@ -235,13 +239,13 @@ Passed items with evidence: 285
 | 13-001 | 待验收 | 6 | 支持中文和英文界面 | file: packages/core/src/language.ts (Core locale model supports English, Chinese, and bilingual output.) |
 | 13-002 | 通过 | 13 | README、卡片、成就可选择语言 | test: packages/core/src/language.test.ts (Locale helpers cover English, Chinese, and bilingual text selection.)<br>file: packages/generators/src/readme.ts (README generation reads config.locale for headings, numbers, and card URLs.)<br>api-response: GET /api/achievements/calculate?username=octocat&locale=en-US (Achievement API accepts locale and returns localized achievement results and embeds.)<br>screenshot: artifacts/screenshots/cards-workspace.png (Cards workspace exposes locale parameters for card preview and embeds.) |
 | 13-003 | 通过 | 13 | 日期、数字、时区可本地化 | test: packages/core/src/language.test.ts (Date and number formatting defaults to en-US and switches to zh-CN in Chinese mode.)<br>file: packages/core/src/language.ts (localeDate and localeNumber centralize date/number localization.) |
-| 13-004 | 未开始 |  | 用户可自定义模板文案 |  |
+| 13-004 | 通过 | 13 | 用户可自定义模板文案 | test: packages/core/src/new-user-copy.test.ts (Manual copy edits override generated template copy, locked blocks survive regeneration, and tone can be switched.)<br>file: packages/core/src/new-user-copy.ts (applyManualCopyEdits and regenerateCopyBlocks support user-customized template copy.) |
 | 13-005 | 通过 | 7 | GitHub API、SVG 卡片、仓库统计、贡献数据均 | test: packages/github/src/cache.test.ts (GitHub API data cache hit, stale cache, and fallback behavior are tested.)<br>file: packages/github/src/cache.ts (In-memory TTL cache includes stale windows and degraded metadata.) |
 | 13-006 | 通过 | 7 | 支持手动刷新、缓存过期、队列、rate limit 提示 | test: packages/github/src/cache.test.ts (Manual refresh and stale fallback paths are represented by force refresh and stale cache behavior.)<br>api-response: apps/web/app/api/github/_shared.ts (GitHub dataset routes support refresh=true and return cache/rateLimit metadata.) |
 | 13-007 | 未开始 |  | 首页、编辑器、图表、模板、预览、图片、SVG、移动端性能 |  |
 | 13-008 | 通过 | 13 | 默认只读公开数据，私有数据不默认展示 | test: packages/core/src/privacy.test.ts (Privacy checks flag sensitive fields and hideSensitiveSettings removes sensitive README/Pages exposure.)<br>file: packages/core/src/privacy.ts (Default privacy settings keep GPA/email hidden from README by default and define sensitive-field visibility.)<br>file: packages/core/src/new-user-form.ts (New-user draft defaults to public-only GitHub data and hides email/GPA unless the user enables them.) |
 | 13-009 | 通过 | 8 | Token 加密，前端不暴露敏感 token | test: packages/github/src/oauth.test.ts (OAuth token encryption/decryption is tested with AES-GCM.)<br>file: apps/web/app/api/oauth/github/callback/route.ts (Callback route encrypts the GitHub access token before HttpOnly cookie storage and never returns the raw token.) |
-| 13-010 | 未开始 |  | 用户可删除保存配置并撤销授权 |  |
+| 13-010 | 通过 | 13 | 用户可删除保存配置并撤销授权 | file: apps/web/app/api/new-user/profile-form/route.ts (DELETE removes saved local draft/history and returns OAuth revoke/logout URL.)<br>file: apps/web/app/api/oauth/github/logout/route.ts (OAuth logout route clears the stored GitHub token cookie.)<br>api-response: DELETE http://127.0.0.1:3019/api/new-user/profile-form?username=alex (Smoke test returned status=200 with 13-010 and N-PRIV-017 acceptance IDs.) |
 | 13-011 | 未开始 |  | 具备 XSS、Markdown 注入、HTML 注入、自 |  |
 | 13-012 | 未开始 |  | username 不存在、API 限制、网络失败、仓库不 |  |
 | 14-001 | 通过 | 14 | UserProfile、Repository、Contr | file: packages/core/src/domain.ts (Core domain models define UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedProfile, and Theme-related config types.)<br>log: npm.cmd run typecheck (All workspace type definitions compile successfully.) |
@@ -250,16 +254,16 @@ Passed items with evidence: 285
 | 14-004 | 通过 | 14 | GitHub、cards、generate、import | log: npm.cmd run build (Build route table includes GitHub, cards, generate, import, oauth, deploy, automation, admin, themes, and new-user API routes.)<br>api-response: GET/POST smoke tests across github/cards/generate/import/oauth/deploy/new-user/achievements APIs (Local smoke tests returned 200/expected OAuth-gated responses for the implemented API route groups.) |
 | 14-005 | 通过 | 13.1 | README 导出包包含 README.md、asset | test: packages/generators/src/export-package.test.ts (README export package includes README.md, update workflow, and profile-studio.config.json.) |
 | 14-006 | 通过 | 13.2 | Pages 导出包包含 index.html、style | test: packages/generators/src/export-package.test.ts (Pages export package includes index.html, style.css, script.js, data/github.json, README.md, 404.html, robots.txt, sitemap.xml, and update-pages workflow.) |
-| 14-007 | 未开始 |  | 配置导出包含模块配置、主题配置、卡片配置、成就配置、数据 |  |
+| 14-007 | 通过 | 14 | 配置导出包含模块配置、主题配置、卡片配置、成就配置、数据 | test: packages/core/src/new-user-persistence.test.ts (Saved profile snapshot exports form draft, templates/theme, visual config, and version metadata.)<br>file: packages/core/src/new-user-persistence.ts (exportNewUserConfiguration serializes the saved configuration snapshot for import/export.) |
 | 15-001 | 通过 | 15 | 未登录用户输入 username 后可查看公开数据、生成 | screenshot: artifacts/screenshots/home.png (Unauthenticated homepage supports username-first public workflow.)<br>api-response: GET /api/github/languages?username=octocat (Unauthenticated public GitHub data lookup returned real public language data.)<br>api-response: POST /api/export/readme (Unauthenticated README export smoke test returned a package for octocat.)<br>api-response: GET /api/cards/stats?user=octocat&format=json\|svg\|png (Card API smoke tests returned JSON, SVG, and PNG outputs.)<br>api-response: POST /api/export/pages?format=zip (Pages export smoke test returned a downloadable ZIP package.)<br>screenshot: artifacts/screenshots/readme-workspace.png (README workspace provides live preview, copy, and download controls.) |
 | 15-002 | 未开始 |  | 登录用户可 GitHub OAuth 登录、检测仓库、创 |  |
 | 15-003 | 通过 | 15 | 用户可导入旧 README、识别模块、获得优化建议、统一 | test: packages/generators/src/import-readme.test.ts (README import parser identifies sections, recommendations, preserved custom blocks, diff, and export files.)<br>api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=paste\|upload\|repository-url (Import API smoke tests returned status=200 for paste, upload, and repository URL import modes.)<br>api-response: GET/POST http://127.0.0.1:3015/api/themes/export\|import\|share (Theme import/export/share smoke tests returned status=200 for unified theme flow.) |
 | 15-004 | 通过 | 15 | 系统可根据真实 GitHub 数据计算成就、展示已解锁和 | test: packages/achievements/src/index.test.ts (Achievement tests cover unlocked and locked progress, categories, localized output, and embed generation.)<br>file: apps/web/app/api/achievements/calculate/route.ts (Achievement API loads GitHubClient dataset first and falls back with warnings when live GitHub calls are limited.)<br>api-response: GET http://127.0.0.1:3018/api/achievements/calculate?username=octocat&locale=en-US (Smoke test returned 45 achievements, unlocked count, progress, README/Pages/SVG embeds, and 07-* acceptance IDs.) |
 | N-ENTRY-001 | 通过 | 13A.1 | 新用户模式识别 | test: packages/core/src/new-user.test.ts (Zero-data accounts are detected and recommended for new-user mode.)<br>file: packages/core/src/new-user.ts (recommendNewUserMode evaluates public repos, contributions, stars, PRs, issues, and contribution graph availability.) |
 | N-ENTRY-002 | 通过 | 13A.2 | 新用户模式推荐 | test: packages/core/src/new-user.test.ts (Low GitHub data triggers new-user mode recommendation.) |
-| N-ENTRY-003 | 未开始 |  | 手动选择模式 |  |
-| N-ENTRY-004 | 未开始 |  | 混合模式 |  |
-| N-ENTRY-005 | 未开始 |  | 数据增强模式切换 |  |
+| N-ENTRY-003 | 通过 | 13A.1 | 手动选择模式 | test: packages/core/src/new-user.test.ts (generationModes includes manual selection mode.)<br>file: packages/core/src/templates.ts (Manual mode is registered as a generation mode.) |
+| N-ENTRY-004 | 通过 | 13A.1 | 混合模式 | test: packages/core/src/new-user.test.ts (recommendNewUserMode returns hybrid mode when a sparse account has some repositories or contributions.)<br>file: packages/core/src/new-user.ts (Hybrid recommendation keeps manual profile data while allowing available GitHub data.) |
+| N-ENTRY-005 | 通过 | 13A.1 | 数据增强模式切换 | test: packages/core/src/new-user.test.ts (recommendNewUserMode returns data-enhanced mode for strong GitHub activity.)<br>file: packages/core/src/new-user.ts (Data-enhanced recommendation is selected when repos, contributions, stars, PRs, issues, and graph data are sufficient.) |
 | N-ENTRY-006 | 通过 | 13A.1 | 空数据友好提示 | test: packages/core/src/new-user.test.ts (New-user recommendations hide empty contribution-heavy modules and provide growth actions.)<br>test: packages/generators/src/readme.test.ts (Zero-data README avoids undefined/empty modules and replaces sparse data with growth-oriented copy.) |
 | N-FORM-001 | 通过 | 13A.3 | 基础信息 | test: packages/core/src/new-user-form.test.ts (Basics include display name, nickname, avatar, one-line intro, role, location, email, website, blog, resume, and social links.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
 | N-FORM-002 | 通过 | 13A.3 | 教育背景 | test: packages/core/src/new-user-form.test.ts (Education form captures school, department, major, degree, years, grade, GPA, courses, honors, and visibility.)<br>file: packages/core/src/new-user-form.ts (Zod schema validates this section and maps it into ProfileStudioConfig.)<br>screenshot: artifacts/screenshots/new-user-wizard.png (New-user wizard renders the multi-step form and generated-plan evidence.) |
@@ -398,15 +402,15 @@ Passed items with evidence: 285
 | N-POUT-012 | 通过 | 13A.6.4 | 手动部署教程 | test: packages/generators/src/export-package.test.ts (Pages package includes a manual deployment guide.) |
 | N-POUT-013 | 未开始 |  | 自定义域名说明 |  |
 | N-POUT-014 | 通过 | 13A.6.4 | 自动更新配置 | test: packages/generators/src/export-package.test.ts (Pages package includes GitHub Actions update workflow.) |
-| N-SAVE-001 | 未开始 |  | 保存基础信息 |  |
-| N-SAVE-002 | 未开始 |  | 保存教育背景 |  |
-| N-SAVE-003 | 未开始 |  | 保存技能栈 |  |
-| N-SAVE-004 | 未开始 |  | 保存学习方向 |  |
-| N-SAVE-005 | 未开始 |  | 保存项目信息 |  |
-| N-SAVE-006 | 未开始 |  | 保存学习计划 |  |
-| N-SAVE-007 | 未开始 |  | 保存联系方式 |  |
-| N-SAVE-008 | 未开始 |  | 保存模板主题 |  |
-| N-SAVE-009 | 未开始 |  | 历史版本 |  |
+| N-SAVE-001 | 通过 | 13A.9 | 保存基础信息 | test: packages/core/src/new-user-persistence.test.ts (Saved snapshot includes basics.)<br>file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API stores snapshot history and returns history on GET.) |
+| N-SAVE-002 | 通过 | 13A.9 | 保存教育背景 | test: packages/core/src/new-user-persistence.test.ts (Saved snapshot includes education.)<br>file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API stores snapshot history and returns history on GET.) |
+| N-SAVE-003 | 通过 | 13A.9 | 保存技能栈 | test: packages/core/src/new-user-persistence.test.ts (Saved snapshot includes skills and languages.)<br>file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API stores snapshot history and returns history on GET.) |
+| N-SAVE-004 | 通过 | 13A.9 | 保存学习方向 | test: packages/core/src/new-user-persistence.test.ts (Saved snapshot includes learning directions.)<br>file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API stores snapshot history and returns history on GET.) |
+| N-SAVE-005 | 通过 | 13A.9 | 保存项目信息 | test: packages/core/src/new-user-persistence.test.ts (Saved snapshot includes manual projects.)<br>file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API stores snapshot history and returns history on GET.) |
+| N-SAVE-006 | 通过 | 13A.9 | 保存学习计划 | test: packages/core/src/new-user-persistence.test.ts (Saved snapshot includes learning plan.)<br>file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API stores snapshot history and returns history on GET.) |
+| N-SAVE-007 | 通过 | 13A.9 | 保存联系方式 | test: packages/core/src/new-user-persistence.test.ts (Saved snapshot includes contact settings.)<br>file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API stores snapshot history and returns history on GET.) |
+| N-SAVE-008 | 通过 | 13A.9 | 保存模板主题 | test: packages/core/src/new-user-persistence.test.ts (Saved snapshot includes template and theme/visual settings.)<br>file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API stores snapshot history and returns history on GET.) |
+| N-SAVE-009 | 通过 | 13A.9 | 历史版本 | test: packages/core/src/new-user-persistence.test.ts (Version history appends and restores saved snapshots.)<br>file: apps/web/app/api/new-user/profile-form/route.ts (Profile form API stores snapshot history and returns history on GET.) |
 | N-GROW-001 | 通过 |  | 新仓库推荐 | test: packages/generators/src/maintenance.test.ts (New repository recommendation generated with evidence and actions.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
 | N-GROW-002 | 通过 |  | commit 增长推荐 | test: packages/generators/src/maintenance.test.ts (Commit growth recommendation generated from contribution totals and deltas.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
 | N-GROW-003 | 通过 |  | star 增长推荐 | test: packages/generators/src/maintenance.test.ts (Star growth recommendation generated from repo ranking and star deltas.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
@@ -417,49 +421,49 @@ Passed items with evidence: 285
 | N-GROW-008 | 通过 |  | 月度成长总结 | test: packages/generators/src/maintenance.test.ts (Monthly growth summary generated with contributions, stars, forks, and active repos.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
 | N-GROW-009 | 通过 |  | 年度总结 | test: packages/generators/src/maintenance.test.ts (Annual summary generated with year-in-review markdown and JSON.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
 | N-GROW-010 | 通过 |  | 自动优化建议 | test: packages/generators/src/maintenance.test.ts (Automatic optimization recommendation generated for module priority, privacy, and compatibility.)<br>api-response: GET /api/growth/recommendations (Growth recommendation API returns all N-GROW acceptance IDs and localized recommendations.) |
-| N-IMP-001 | 未开始 |  | 从 README 导入 |  |
-| N-IMP-002 | 未开始 |  | 从简历文本导入 |  |
-| N-IMP-003 | 未开始 |  | 从项目 README 导入 |  |
-| N-IMP-004 | 未开始 |  | 批量导入项目 |  |
-| N-IMP-005 | 未开始 |  | 批量导入技能 |  |
-| N-IMP-006 | 未开始 |  | 导出个人配置 |  |
-| N-IMP-007 | 未开始 |  | 导入个人配置 |  |
-| N-REC-001 | 未开始 |  | README 模板推荐 |  |
-| N-REC-002 | 未开始 |  | README 模块推荐 |  |
-| N-REC-003 | 未开始 |  | 技能排序推荐 |  |
-| N-REC-004 | 未开始 |  | 项目排序推荐 |  |
-| N-REC-005 | 未开始 |  | Pages 模板推荐 |  |
-| N-REC-006 | 未开始 |  | 首页区块顺序推荐 |  |
-| N-REC-007 | 未开始 |  | SEO 推荐 |  |
-| N-REC-008 | 未开始 |  | 主题色推荐 |  |
+| N-IMP-001 | 通过 | 13A.10 | 从 README 导入 | test: packages/core/src/new-user-import.test.ts (README Markdown import detects headings, links, badges, and maps them into a draft.)<br>file: apps/web/app/api/new-user/import/route.ts (New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources.) |
+| N-IMP-002 | 通过 | 13A.10 | 从简历文本导入 | test: packages/core/src/new-user-import.test.ts (Resume text import detects education, skills, email, and links.)<br>file: apps/web/app/api/new-user/import/route.ts (New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources.) |
+| N-IMP-003 | 通过 | 13A.10 | 从项目 README 导入 | test: packages/core/src/new-user-import.test.ts (Single project README import creates a manual project with summary, tech stack, and highlights.)<br>file: apps/web/app/api/new-user/import/route.ts (New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources.) |
+| N-IMP-004 | 通过 | 13A.10 | 批量导入项目 | test: packages/core/src/new-user-import.test.ts (Batch project README import creates multiple manual projects.)<br>file: apps/web/app/api/new-user/import/route.ts (New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources.) |
+| N-IMP-005 | 通过 | 13A.10 | 批量导入技能 | test: packages/core/src/new-user-import.test.ts (Bulk skill import extracts known skills into draft skill rows.)<br>file: apps/web/app/api/new-user/import/route.ts (New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources.) |
+| N-IMP-006 | 通过 | 13A.10 | 导出个人配置 | test: packages/core/src/new-user-import.test.ts (Configuration export serializes a saved new-user profile snapshot.)<br>file: apps/web/app/api/new-user/import/route.ts (New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources.) |
+| N-IMP-007 | 通过 | 13A.10 | 导入个人配置 | test: packages/core/src/new-user-import.test.ts (Configuration import restores a saved draft and recommends templates.)<br>file: apps/web/app/api/new-user/import/route.ts (New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources.) |
+| N-REC-001 | 通过 | 13A.11 | README 模板推荐 | test: packages/core/src/new-user-recommendations.test.ts (README template recommendation selects student, resume, or bilingual templates.)<br>api-response: POST http://127.0.0.1:3019/api/new-user/recommendations (Smoke test returned N-REC-001 through N-REC-008 acceptance IDs.) |
+| N-REC-002 | 通过 | 13A.11 | README 模块推荐 | test: packages/core/src/new-user-recommendations.test.ts (README module recommendation adapts modules to sparse or strong GitHub data.)<br>api-response: POST http://127.0.0.1:3019/api/new-user/recommendations (Smoke test returned N-REC-001 through N-REC-008 acceptance IDs.) |
+| N-REC-003 | 通过 | 13A.11 | 技能排序推荐 | test: packages/core/src/new-user-recommendations.test.ts (Skill ordering recommendation ranks primary and daily-use skills first.)<br>api-response: POST http://127.0.0.1:3019/api/new-user/recommendations (Smoke test returned N-REC-001 through N-REC-008 acceptance IDs.) |
+| N-REC-004 | 通过 | 13A.11 | 项目排序推荐 | test: packages/core/src/new-user-recommendations.test.ts (Project ordering recommendation prioritizes featured and richer projects.)<br>api-response: POST http://127.0.0.1:3019/api/new-user/recommendations (Smoke test returned N-REC-001 through N-REC-008 acceptance IDs.) |
+| N-REC-005 | 通过 | 13A.11 | Pages 模板推荐 | test: packages/core/src/new-user-recommendations.test.ts (Pages template recommendation selects portfolio, resume, or personal brand templates.)<br>api-response: POST http://127.0.0.1:3019/api/new-user/recommendations (Smoke test returned N-REC-001 through N-REC-008 acceptance IDs.) |
+| N-REC-006 | 通过 | 13A.11 | 首页区块顺序推荐 | test: packages/core/src/new-user-recommendations.test.ts (Home section order recommendation adapts section order to data strength.)<br>api-response: POST http://127.0.0.1:3019/api/new-user/recommendations (Smoke test returned N-REC-001 through N-REC-008 acceptance IDs.) |
+| N-REC-007 | 通过 | 13A.11 | SEO 推荐 | test: packages/core/src/new-user-recommendations.test.ts (SEO recommendation uses profile name, focus, keywords, and languages.)<br>api-response: POST http://127.0.0.1:3019/api/new-user/recommendations (Smoke test returned N-REC-001 through N-REC-008 acceptance IDs.) |
+| N-REC-008 | 通过 | 13A.11 | 主题色推荐 | test: packages/core/src/new-user-recommendations.test.ts (Theme recommendation selects built-in themes by goal and data strength.)<br>api-response: POST http://127.0.0.1:3019/api/new-user/recommendations (Smoke test returned N-REC-001 through N-REC-008 acceptance IDs.) |
 | N-REC-009 | 通过 | 13A.8.3 | 成长建议 | test: packages/core/src/new-user.test.ts (Recommendation engine returns project, skill, learning, open-source, and profile improvement suggestions.) |
-| N-UP-001 | 未开始 |  | 仓库数阈值 |  |
-| N-UP-002 | 未开始 |  | commit 阈值 |  |
-| N-UP-003 | 待验收 | 13A.9 | 贡献数阈值 | file: packages/core/src/new-user.ts (Upgrade recommendation logic includes contribution growth thresholds.) |
-| N-UP-004 | 未开始 |  | Star 阈值 |  |
-| N-UP-005 | 未开始 |  | PR / issue 阈值 |  |
-| N-UP-006 | 未开始 |  | 保留个人信息 |  |
-| N-UP-007 | 未开始 |  | 手动项目合并 |  |
-| N-UP-008 | 未开始 |  | diff 预览 |  |
-| N-UP-009 | 未开始 |  | 回滚新用户模式 |  |
-| N-UP-010 | 未开始 |  | 长期混合模式 |  |
-| N-PRIV-001 | 未开始 |  | 真实姓名控制 |  |
-| N-PRIV-002 | 未开始 |  | 学校控制 |  |
-| N-PRIV-003 | 未开始 |  | 专业控制 |  |
-| N-PRIV-004 | 未开始 |  | 学历控制 |  |
-| N-PRIV-005 | 未开始 |  | GPA 控制 |  |
-| N-PRIV-006 | 未开始 |  | 毕业年份控制 |  |
-| N-PRIV-007 | 未开始 |  | 邮箱控制 |  |
-| N-PRIV-008 | 未开始 |  | 简历链接控制 |  |
-| N-PRIV-009 | 未开始 |  | 城市控制 |  |
-| N-PRIV-010 | 未开始 |  | 社交账号控制 |  |
-| N-PRIV-011 | 未开始 |  | 求职状态控制 |  |
-| N-PRIV-012 | 未开始 |  | README / Pages 分别控制 |  |
-| N-PRIV-013 | 未开始 |  | 提交前隐私检查 |  |
-| N-PRIV-014 | 未开始 |  | 一键隐藏敏感信息 |  |
-| N-PRIV-015 | 未开始 |  | 模糊化文案 |  |
-| N-PRIV-016 | 未开始 |  | 邮箱保护 |  |
-| N-PRIV-017 | 未开始 |  | 删除个人信息 |  |
+| N-UP-001 | 通过 | 13A.12 | 仓库数阈值 | test: packages/core/src/new-user-upgrade.test.ts (Repository count threshold is evaluated.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-UP-002 | 通过 | 13A.12 | commit 阈值 | test: packages/core/src/new-user-upgrade.test.ts (Commit count threshold is evaluated.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-UP-003 | 通过 | 13A.12 | 贡献数阈值 | test: packages/core/src/new-user-upgrade.test.ts (Contribution count threshold is evaluated.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-UP-004 | 通过 | 13A.12 | Star 阈值 | test: packages/core/src/new-user-upgrade.test.ts (Star threshold is evaluated.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-UP-005 | 通过 | 13A.12 | PR / issue 阈值 | test: packages/core/src/new-user-upgrade.test.ts (PR/issue threshold is evaluated.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-UP-006 | 通过 | 13A.12 | 保留个人信息 | test: packages/core/src/new-user-upgrade.test.ts (Personal information is preserved during upgrade.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-UP-007 | 通过 | 13A.12 | 手动项目合并 | test: packages/core/src/new-user-upgrade.test.ts (Manual projects are merged with public GitHub repositories.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-UP-008 | 通过 | 13A.12 | diff 预览 | test: packages/core/src/new-user-upgrade.test.ts (Upgrade diff preview shows mode, project, and GitHub stats changes.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-UP-009 | 通过 | 13A.12 | 回滚新用户模式 | test: packages/core/src/new-user-upgrade.test.ts (Rollback plan restores the pre-upgrade new-user draft.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-UP-010 | 通过 | 13A.12 | 长期混合模式 | test: packages/core/src/new-user-upgrade.test.ts (Long-term mode supports hybrid when data is partially strong.)<br>file: packages/core/src/new-user-upgrade.ts (Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions.) |
+| N-PRIV-001 | 通过 | 13A.13 | 真实姓名控制 | test: packages/core/src/advanced-privacy.test.ts (Real name visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-002 | 通过 | 13A.13 | 学校控制 | test: packages/core/src/advanced-privacy.test.ts (School visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-003 | 通过 | 13A.13 | 专业控制 | test: packages/core/src/advanced-privacy.test.ts (Major visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-004 | 通过 | 13A.13 | 学历控制 | test: packages/core/src/advanced-privacy.test.ts (Degree visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-005 | 通过 | 13A.13 | GPA 控制 | test: packages/core/src/advanced-privacy.test.ts (GPA visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-006 | 通过 | 13A.13 | 毕业年份控制 | test: packages/core/src/advanced-privacy.test.ts (Graduation year visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-007 | 通过 | 13A.13 | 邮箱控制 | test: packages/core/src/advanced-privacy.test.ts (Email visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-008 | 通过 | 13A.13 | 简历链接控制 | test: packages/core/src/advanced-privacy.test.ts (Resume link visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-009 | 通过 | 13A.13 | 城市控制 | test: packages/core/src/advanced-privacy.test.ts (City visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-010 | 通过 | 13A.13 | 社交账号控制 | test: packages/core/src/advanced-privacy.test.ts (Social account visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-011 | 通过 | 13A.13 | 求职状态控制 | test: packages/core/src/advanced-privacy.test.ts (Job-seeking status visibility can be controlled.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-012 | 通过 | 13A.13 | README / Pages 分别控制 | test: packages/core/src/advanced-privacy.test.ts (README and Pages visibility are controlled separately.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-013 | 通过 | 13A.13 | 提交前隐私检查 | test: packages/core/src/advanced-privacy.test.ts (Pre-submit privacy checks flag risky fields.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-014 | 通过 | 13A.13 | 一键隐藏敏感信息 | test: packages/core/src/advanced-privacy.test.ts (One-click hide sensitive data is implemented.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-015 | 通过 | 13A.13 | 模糊化文案 | test: packages/core/src/advanced-privacy.test.ts (Obfuscation replaces sensitive text with safe fallback labels.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-016 | 通过 | 13A.13 | 邮箱保护 | test: packages/core/src/advanced-privacy.test.ts (Email protection masks local-part and dots.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
+| N-PRIV-017 | 通过 | 13A.13 | 删除个人信息 | test: packages/core/src/advanced-privacy.test.ts (Personal information deletion removes sensitive fields and saved draft state.)<br>file: packages/core/src/advanced-privacy.ts (Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion.) |
 | N-E2E-001 | 待验收 | 13A.11 | 零 commit 用户生成 README | test: packages/generators/src/readme.test.ts (Unit-level evidence exists for zero-commit README generation; browser E2E evidence still required before final pass.) |
 | N-E2E-002 | 未开始 |  | 零仓库用户生成 Pages |  |
 | N-E2E-003 | 未开始 |  | 学生用户链路 |  |

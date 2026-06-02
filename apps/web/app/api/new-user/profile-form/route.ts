@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import type { NewUserFormDraft } from "@gps/core";
-import { defaultNewUserFormDraft, newUserFormDraftSchema, summarizeNewUserFormDraft } from "@gps/core";
+import { appendNewUserVersion, createNewUserSavedSnapshot, defaultNewUserFormDraft, newUserFormDraftSchema, summarizeNewUserFormDraft } from "@gps/core";
 
 type StoredDraft = {
   draft: NewUserFormDraft;
@@ -9,8 +9,11 @@ type StoredDraft = {
 };
 
 const globalStore = globalThis as unknown as { gpsNewUserDrafts?: Map<string, StoredDraft> };
+const globalHistory = globalThis as unknown as { gpsNewUserDraftHistory?: Map<string, ReturnType<typeof createNewUserSavedSnapshot>[]> };
 const draftStore = globalStore.gpsNewUserDrafts ?? new Map<string, StoredDraft>();
+const draftHistory = globalHistory.gpsNewUserDraftHistory ?? new Map<string, ReturnType<typeof createNewUserSavedSnapshot>[]>();
 globalStore.gpsNewUserDrafts = draftStore;
+globalHistory.gpsNewUserDraftHistory = draftHistory;
 
 export async function GET(request: NextRequest) {
   const username = request.nextUrl.searchParams.get("username") ?? "new-developer";
@@ -24,6 +27,7 @@ export async function GET(request: NextRequest) {
     persistence: stored?.persistence ?? "memory",
     savedAt: stored?.savedAt,
     draft: stored?.draft ?? defaultNewUserFormDraft(username, locale),
+    history: draftHistory.get(storageKey(request, username)) ?? [],
     summary: summarizeNewUserFormDraft(stored?.draft ?? defaultNewUserFormDraft(username, locale)),
     acceptanceIds: ["N-FORM-001", "N-FORM-002", "N-FORM-003", "N-FORM-004", "N-FORM-005", "N-FORM-006", "N-FORM-007", "N-FORM-008", "N-FORM-009", "N-FORM-010", "N-FORM-011", "N-FORM-012", "N-FORM-013", "N-FORM-014", "N-FORM-015"]
   });
@@ -46,21 +50,39 @@ export async function POST(request: NextRequest) {
 
   const authenticated = Boolean(request.cookies.get("gps_github_token")?.value);
   const savedAt = new Date().toISOString();
+  const key = storageKey(request, parsed.data.username);
+  const snapshot = createNewUserSavedSnapshot(parsed.data, savedAt);
   const dbResult = process.env.DATABASE_URL ? await persistToDatabase(parsed.data).catch((error) => ({ error: error instanceof Error ? error.message : "DATABASE_SAVE_FAILED" })) : undefined;
   const persistence: StoredDraft["persistence"] = dbResult && !("error" in dbResult) ? "postgresql" : "memory";
-  draftStore.set(storageKey(request, parsed.data.username), { draft: parsed.data, savedAt, persistence });
+  draftStore.set(key, { draft: parsed.data, savedAt, persistence });
+  draftHistory.set(key, appendNewUserVersion(draftHistory.get(key) ?? [], snapshot));
 
   return NextResponse.json({
     saved: true,
     authenticated,
     savedAt,
     persistence,
+    snapshot,
+    historyCount: draftHistory.get(key)?.length ?? 0,
     database: dbResult,
     summary: summarizeNewUserFormDraft(parsed.data),
     nextActions: authenticated
       ? ["Continue editing the saved profile form.", "Generate README and Pages from the saved draft.", "Deploy when the OAuth permissions are ready."]
       : ["Draft saved for this local session.", "Connect GitHub OAuth to persist the draft across sessions.", "Generate README and Pages locally while unauthenticated."],
     acceptanceIds: ["N-FORM-015"]
+  });
+}
+
+export async function DELETE(request: NextRequest) {
+  const username = request.nextUrl.searchParams.get("username") ?? "new-developer";
+  const key = storageKey(request, username);
+  draftStore.delete(key);
+  draftHistory.delete(key);
+  return NextResponse.json({
+    deleted: true,
+    username,
+    revokeOAuthUrl: "/api/oauth/github/logout",
+    acceptanceIds: ["13-010", "N-PRIV-017"]
   });
 }
 

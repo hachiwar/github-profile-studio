@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T02:04:21.478Z",
+  "generatedAt": "2026-06-02T02:15:51.842Z",
   "verificationCommands": [
     {
       "kind": "log",
@@ -235,6 +235,26 @@
       "kind": "log",
       "reference": "npm.cmd run build",
       "note": "Production build passes after new-user copy, layout, and page visual engines."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run test",
+      "note": "Vitest suite passes: 33 files, 89 tests, including persistence, import, recommendations, upgrade, and advanced privacy coverage."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run build",
+      "note": "Production build passes with 68 static/dynamic routes, including /api/new-user/import."
+    },
+    {
+      "kind": "log",
+      "reference": "npm.cmd run typecheck",
+      "note": "Workspace TypeScript typecheck passes after build completed; earlier parallel typecheck/build race was resolved by rerun."
+    },
+    {
+      "kind": "api-response",
+      "reference": "POST /api/new-user/import; POST /api/new-user/recommendations; DELETE /api/new-user/profile-form",
+      "note": "Local smoke tests returned 200 with N-IMP-002, N-REC-001..008, 13-010, and N-PRIV-017 acceptance IDs."
     }
   ],
   "items": {
@@ -2124,15 +2144,20 @@
       ]
     },
     "N-UP-003": {
-      "status": "待验收",
+      "status": "通过",
       "requirementRefs": [
-        "13A.9"
+        "13A.12"
       ],
       "evidence": [
         {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "Contribution count threshold is evaluated."
+        },
+        {
           "kind": "file",
-          "reference": "packages/core/src/new-user.ts",
-          "note": "Upgrade recommendation logic includes contribution growth thresholds."
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
         }
       ]
     },
@@ -5229,6 +5254,1019 @@
           "kind": "file",
           "reference": "packages/core/src/page-visual.ts",
           "note": "buildPageVisualExport returns static asset entries for Pages export packaging."
+        }
+      ]
+    },
+    "13-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-copy.test.ts",
+          "note": "Manual copy edits override generated template copy, locked blocks survive regeneration, and tone can be switched."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-copy.ts",
+          "note": "applyManualCopyEdits and regenerateCopyBlocks support user-customized template copy."
+        }
+      ]
+    },
+    "13-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13"
+      ],
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "DELETE removes saved local draft/history and returns OAuth revoke/logout URL."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/oauth/github/logout/route.ts",
+          "note": "OAuth logout route clears the stored GitHub token cookie."
+        },
+        {
+          "kind": "api-response",
+          "reference": "DELETE http://127.0.0.1:3019/api/new-user/profile-form?username=alex",
+          "note": "Smoke test returned status=200 with 13-010 and N-PRIV-017 acceptance IDs."
+        }
+      ]
+    },
+    "14-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "14"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Saved profile snapshot exports form draft, templates/theme, visual config, and version metadata."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-persistence.ts",
+          "note": "exportNewUserConfiguration serializes the saved configuration snapshot for import/export."
+        }
+      ]
+    },
+    "N-ENTRY-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.1"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user.test.ts",
+          "note": "generationModes includes manual selection mode."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Manual mode is registered as a generation mode."
+        }
+      ]
+    },
+    "N-ENTRY-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.1"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user.test.ts",
+          "note": "recommendNewUserMode returns hybrid mode when a sparse account has some repositories or contributions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user.ts",
+          "note": "Hybrid recommendation keeps manual profile data while allowing available GitHub data."
+        }
+      ]
+    },
+    "N-ENTRY-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.1"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user.test.ts",
+          "note": "recommendNewUserMode returns data-enhanced mode for strong GitHub activity."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user.ts",
+          "note": "Data-enhanced recommendation is selected when repos, contributions, stars, PRs, issues, and graph data are sufficient."
+        }
+      ]
+    },
+    "N-SAVE-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.9"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Saved snapshot includes basics."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API stores snapshot history and returns history on GET."
+        }
+      ]
+    },
+    "N-SAVE-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.9"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Saved snapshot includes education."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API stores snapshot history and returns history on GET."
+        }
+      ]
+    },
+    "N-SAVE-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.9"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Saved snapshot includes skills and languages."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API stores snapshot history and returns history on GET."
+        }
+      ]
+    },
+    "N-SAVE-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.9"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Saved snapshot includes learning directions."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API stores snapshot history and returns history on GET."
+        }
+      ]
+    },
+    "N-SAVE-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.9"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Saved snapshot includes manual projects."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API stores snapshot history and returns history on GET."
+        }
+      ]
+    },
+    "N-SAVE-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.9"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Saved snapshot includes learning plan."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API stores snapshot history and returns history on GET."
+        }
+      ]
+    },
+    "N-SAVE-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.9"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Saved snapshot includes contact settings."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API stores snapshot history and returns history on GET."
+        }
+      ]
+    },
+    "N-SAVE-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.9"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Saved snapshot includes template and theme/visual settings."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API stores snapshot history and returns history on GET."
+        }
+      ]
+    },
+    "N-SAVE-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.9"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-persistence.test.ts",
+          "note": "Version history appends and restores saved snapshots."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/profile-form/route.ts",
+          "note": "Profile form API stores snapshot history and returns history on GET."
+        }
+      ]
+    },
+    "N-IMP-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.10"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-import.test.ts",
+          "note": "README Markdown import detects headings, links, badges, and maps them into a draft."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/import/route.ts",
+          "note": "New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources."
+        }
+      ]
+    },
+    "N-IMP-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.10"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-import.test.ts",
+          "note": "Resume text import detects education, skills, email, and links."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/import/route.ts",
+          "note": "New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources."
+        }
+      ]
+    },
+    "N-IMP-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.10"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-import.test.ts",
+          "note": "Single project README import creates a manual project with summary, tech stack, and highlights."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/import/route.ts",
+          "note": "New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources."
+        }
+      ]
+    },
+    "N-IMP-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.10"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-import.test.ts",
+          "note": "Batch project README import creates multiple manual projects."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/import/route.ts",
+          "note": "New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources."
+        }
+      ]
+    },
+    "N-IMP-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.10"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-import.test.ts",
+          "note": "Bulk skill import extracts known skills into draft skill rows."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/import/route.ts",
+          "note": "New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources."
+        }
+      ]
+    },
+    "N-IMP-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.10"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-import.test.ts",
+          "note": "Configuration export serializes a saved new-user profile snapshot."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/import/route.ts",
+          "note": "New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources."
+        }
+      ]
+    },
+    "N-IMP-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.10"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-import.test.ts",
+          "note": "Configuration import restores a saved draft and recommends templates."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/new-user/import/route.ts",
+          "note": "New-user import API supports README, resume text, project README, bulk projects, bulk skills, and config JSON sources."
+        }
+      ]
+    },
+    "N-REC-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.11"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-recommendations.test.ts",
+          "note": "README template recommendation selects student, resume, or bilingual templates."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3019/api/new-user/recommendations",
+          "note": "Smoke test returned N-REC-001 through N-REC-008 acceptance IDs."
+        }
+      ]
+    },
+    "N-REC-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.11"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-recommendations.test.ts",
+          "note": "README module recommendation adapts modules to sparse or strong GitHub data."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3019/api/new-user/recommendations",
+          "note": "Smoke test returned N-REC-001 through N-REC-008 acceptance IDs."
+        }
+      ]
+    },
+    "N-REC-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.11"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-recommendations.test.ts",
+          "note": "Skill ordering recommendation ranks primary and daily-use skills first."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3019/api/new-user/recommendations",
+          "note": "Smoke test returned N-REC-001 through N-REC-008 acceptance IDs."
+        }
+      ]
+    },
+    "N-REC-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.11"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-recommendations.test.ts",
+          "note": "Project ordering recommendation prioritizes featured and richer projects."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3019/api/new-user/recommendations",
+          "note": "Smoke test returned N-REC-001 through N-REC-008 acceptance IDs."
+        }
+      ]
+    },
+    "N-REC-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.11"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-recommendations.test.ts",
+          "note": "Pages template recommendation selects portfolio, resume, or personal brand templates."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3019/api/new-user/recommendations",
+          "note": "Smoke test returned N-REC-001 through N-REC-008 acceptance IDs."
+        }
+      ]
+    },
+    "N-REC-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.11"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-recommendations.test.ts",
+          "note": "Home section order recommendation adapts section order to data strength."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3019/api/new-user/recommendations",
+          "note": "Smoke test returned N-REC-001 through N-REC-008 acceptance IDs."
+        }
+      ]
+    },
+    "N-REC-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.11"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-recommendations.test.ts",
+          "note": "SEO recommendation uses profile name, focus, keywords, and languages."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3019/api/new-user/recommendations",
+          "note": "Smoke test returned N-REC-001 through N-REC-008 acceptance IDs."
+        }
+      ]
+    },
+    "N-REC-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.11"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-recommendations.test.ts",
+          "note": "Theme recommendation selects built-in themes by goal and data strength."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3019/api/new-user/recommendations",
+          "note": "Smoke test returned N-REC-001 through N-REC-008 acceptance IDs."
+        }
+      ]
+    },
+    "N-UP-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "Repository count threshold is evaluated."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
+        }
+      ]
+    },
+    "N-UP-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "Commit count threshold is evaluated."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
+        }
+      ]
+    },
+    "N-UP-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "Star threshold is evaluated."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
+        }
+      ]
+    },
+    "N-UP-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "PR/issue threshold is evaluated."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
+        }
+      ]
+    },
+    "N-UP-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "Personal information is preserved during upgrade."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
+        }
+      ]
+    },
+    "N-UP-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "Manual projects are merged with public GitHub repositories."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
+        }
+      ]
+    },
+    "N-UP-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "Upgrade diff preview shows mode, project, and GitHub stats changes."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
+        }
+      ]
+    },
+    "N-UP-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "Rollback plan restores the pre-upgrade new-user draft."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
+        }
+      ]
+    },
+    "N-UP-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.12"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/new-user-upgrade.test.ts",
+          "note": "Long-term mode supports hybrid when data is partially strong."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/new-user-upgrade.ts",
+          "note": "Upgrade evaluator exposes thresholds, merge, diff, rollback, and long-term mode decisions."
+        }
+      ]
+    },
+    "N-PRIV-001": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Real name visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-002": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "School visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-003": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Major visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-004": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Degree visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-005": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "GPA visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-006": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Graduation year visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-007": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Email visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-008": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Resume link visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-009": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "City visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-010": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Social account visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-011": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Job-seeking status visibility can be controlled."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-012": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "README and Pages visibility are controlled separately."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-013": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Pre-submit privacy checks flag risky fields."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-014": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "One-click hide sensitive data is implemented."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-015": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Obfuscation replaces sensitive text with safe fallback labels."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-016": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Email protection masks local-part and dots."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
+        }
+      ]
+    },
+    "N-PRIV-017": {
+      "status": "通过",
+      "requirementRefs": [
+        "13A.13"
+      ],
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/advanced-privacy.test.ts",
+          "note": "Personal information deletion removes sensitive fields and saved draft state."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/advanced-privacy.ts",
+          "note": "Advanced privacy controls cover field-level visibility, pre-submit checks, hiding, obfuscation, protection, and deletion."
         }
       ]
     }
