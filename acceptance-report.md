@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T00:17:32.388Z
+Generated at: 2026-06-02T00:23:36.883Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
 Evidence generated at: 2026-06-02T00:00:00.000Z
 
-Passed items with evidence: 110
+Passed items with evidence: 114
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 265 |
+| 未开始 | 258 |
 | 开发中 | 0 |
-| 待验收 | 20 |
-| 通过 | 110 |
+| 待验收 | 23 |
+| 通过 | 114 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -33,6 +33,11 @@ Passed items with evidence: 110
 | api-response | `GET http://127.0.0.1:3000/api/cards/stats?...format=svg` | Local smoke test returned svg_status=200 and 1283 bytes. |
 | api-response | `GET http://127.0.0.1:3000/api/cards/stats?...format=png` | Local smoke test returned png_status=200 and 10305 bytes. |
 | api-response | `GET http://127.0.0.1:3000/pricing` | Local smoke test returned pricing_status=200. |
+| api-response | `GET http://127.0.0.1:3000/api/oauth/github?format=json` | Local smoke test returned OAuth setup status with a clear 501 when GitHub OAuth env vars are absent. |
+| api-response | `GET http://127.0.0.1:3000/api/oauth/github/session` | Local smoke test returned oauth_session_status=200. |
+| api-response | `POST http://127.0.0.1:3000/api/deploy/github/execute` | Local smoke test returned deploy_execute_status=200 with OAuth-gated deployment operations. |
+| api-response | `POST http://127.0.0.1:3000/api/deploy/github/pages` | Local smoke test returned pages_enable_status=200. |
+| api-response | `POST http://127.0.0.1:3000/api/deploy/github/rollback` | Local smoke test returned rollback_status=200. |
 
 ## Full Checklist Matrix
 
@@ -173,17 +178,17 @@ Passed items with evidence: 110
 | 09-003 | 未开始 |  | 可自定义主色、辅色、背景、文本、边框、图标、字体、圆角、 |  |
 | 09-004 | 未开始 |  | 可保存主题、导入主题 JSON、导出主题 JSON、分享 |  |
 | 09-005 | 未开始 |  | 主题可应用到 README、Pages、卡片 |  |
-| 10-001 | 未开始 |  | GitHub OAuth 登录可用 |  |
-| 10-002 | 未开始 |  | 授权前明确展示权限且使用最小权限 |  |
+| 10-001 | 待验收 | 4.9.1 | GitHub OAuth 登录可用 | test: packages/github/src/oauth.test.ts (OAuth authorization URL, state, token exchange, and token encryption helpers are tested.)<br>api-response: GET http://127.0.0.1:3000/api/oauth/github?format=json (OAuth start route exists and returns explicit setup status when env vars are absent; live OAuth requires configured GitHub app.) |
+| 10-002 | 通过 | 4.9.2 | 授权前明确展示权限且使用最小权限 | api-response: apps/web/app/api/oauth/github/permissions/route.ts (Permissions route lists minimal required scopes and logged-in/logged-out capabilities.)<br>file: packages/github/src/oauth.ts (minimumOAuthScopes uses read:user, public_repo, and workflow.) |
 | 10-003 | 未开始 |  | 登录后可识别当前用户和仓库列表 |  |
-| 10-004 | 未开始 |  | 未授权只提供复制和下载，授权后提供一键提交 |  |
-| 10-005 | 未开始 |  | 支持退出登录、撤销授权提示、Token 加密、Token |  |
+| 10-004 | 通过 | 4.9.2 | 未授权只提供复制和下载，授权后提供一键提交 | api-response: GET http://127.0.0.1:3000/api/oauth/github/session (Session route exposes logged-out generate/copy/download/public-card capabilities and logged-in write capabilities.) |
+| 10-005 | 待验收 | 4.9.2, 8 | 支持退出登录、撤销授权提示、Token 加密、Token | test: packages/github/src/oauth.test.ts (GitHub token encryption uses AES-256-GCM.)<br>file: apps/web/app/api/oauth/github/logout/route.ts (Logout route clears the HttpOnly token cookie; revocation UX still needs browser verification.) |
 | 10-006 | 未开始 |  | 可创建 `username` 仓库 |  |
 | 10-007 | 未开始 |  | 可创建 `username.github.io` 仓库 |  |
 | 10-008 | 未开始 |  | 可更新 README、index.html、CSS、JS |  |
 | 10-009 | 待验收 | 4.9.3 | 可创建 commit 和 pull request | test: packages/github/src/deploy.test.ts (Deployment plan covers commits, PRs, backups, rollback, diff, and logs; live OAuth write flow still needs integration verification.) |
-| 10-010 | 未开始 |  | 支持直接提交和 PR 模式 |  |
-| 10-011 | 未开始 |  | 支持冲突检测、提交前 diff、旧文件备份、回滚、失败重 |  |
+| 10-010 | 通过 | 4.9.3 | 支持直接提交和 PR 模式 | test: packages/github/src/deploy.test.ts (Deployment plans support pull-request and direct-commit modes.) |
+| 10-011 | 待验收 | 4.9.3 | 支持冲突检测、提交前 diff、旧文件备份、回滚、失败重 | test: packages/github/src/deploy.test.ts (Diff, backup labels, rollback plan, and deployment logs are modeled; live conflict/retry behavior needs integration verification.)<br>api-response: POST http://127.0.0.1:3000/api/deploy/github/rollback (Rollback preview route returned 200.) |
 | 11-001 | 未开始 |  | 可自动更新 README 动态数据 |  |
 | 11-002 | 未开始 |  | 可自动更新 Pages 静态 JSON |  |
 | 11-003 | 未开始 |  | 可记录 Star 与 Fork 快照 |  |
@@ -203,14 +208,14 @@ Passed items with evidence: 110
 | 13-006 | 通过 | 7 | 支持手动刷新、缓存过期、队列、rate limit 提示 | test: packages/github/src/cache.test.ts (Manual refresh and stale fallback paths are represented by force refresh and stale cache behavior.)<br>api-response: apps/web/app/api/github/_shared.ts (GitHub dataset routes support refresh=true and return cache/rateLimit metadata.) |
 | 13-007 | 未开始 |  | 首页、编辑器、图表、模板、预览、图片、SVG、移动端性能 |  |
 | 13-008 | 未开始 |  | 默认只读公开数据，私有数据不默认展示 |  |
-| 13-009 | 未开始 |  | Token 加密，前端不暴露敏感 token |  |
+| 13-009 | 通过 | 8 | Token 加密，前端不暴露敏感 token | test: packages/github/src/oauth.test.ts (OAuth token encryption/decryption is tested with AES-GCM.)<br>file: apps/web/app/api/oauth/github/callback/route.ts (Callback route encrypts the GitHub access token before HttpOnly cookie storage and never returns the raw token.) |
 | 13-010 | 未开始 |  | 用户可删除保存配置并撤销授权 |  |
 | 13-011 | 未开始 |  | 具备 XSS、Markdown 注入、HTML 注入、自 |  |
 | 13-012 | 未开始 |  | username 不存在、API 限制、网络失败、仓库不 |  |
 | 14-001 | 待验收 | 9 | UserProfile、Repository、Contr | file: packages/core/src/domain.ts (UserProfile, Repository, ContributionStats, RepositoryTrend, Achievement, GeneratedReadme, Theme-related config, and PageSiteBundle models exist.)<br>test: packages/github/src/stats.test.ts (Public dataset construction exercises the data model.) |
 | 14-002 | 通过 | 10.1 | 公共页面路由 `/`、`/generate`、`/tem | file: apps/web/app/pricing/page.tsx (Pricing public page has been added.)<br>api-response: GET http://127.0.0.1:3000/pricing (Local smoke test returned pricing_status=200.)<br>log: npm.cmd run build (Build output includes /, /generate, /templates, /cards, /achievements, /docs, /examples, /pricing, /login, /privacy, and /terms.) |
 | 14-003 | 未开始 |  | 工作台路由 `/dashboard`、`/dashboa |  |
-| 14-004 | 待验收 | 10.3 | GitHub、cards、generate、import | file: apps/web/app/api/github/contributions/route.ts (GitHub contributions API route exists.)<br>file: apps/web/app/api/github/stars/route.ts (GitHub stars API route exists.)<br>file: apps/web/app/api/github/forks/route.ts (GitHub forks API route exists.)<br>file: apps/web/app/api/github/issues/route.ts (GitHub issues API route exists.)<br>file: apps/web/app/api/github/pulls/route.ts (GitHub pulls API route exists.)<br>file: apps/web/app/api/github/languages/route.ts (GitHub languages API route exists.)<br>file: apps/web/app/api/export/readme/route.ts (README export API route exists.)<br>file: apps/web/app/api/export/pages/route.ts (Pages export API route exists.) |
+| 14-004 | 待验收 | 10.3 | GitHub、cards、generate、import | file: apps/web/app/api/github/contributions/route.ts (GitHub contributions API route exists.)<br>file: apps/web/app/api/github/stars/route.ts (GitHub stars API route exists.)<br>file: apps/web/app/api/github/forks/route.ts (GitHub forks API route exists.)<br>file: apps/web/app/api/github/issues/route.ts (GitHub issues API route exists.)<br>file: apps/web/app/api/github/pulls/route.ts (GitHub pulls API route exists.)<br>file: apps/web/app/api/github/languages/route.ts (GitHub languages API route exists.)<br>file: apps/web/app/api/export/readme/route.ts (README export API route exists.)<br>file: apps/web/app/api/export/pages/route.ts (Pages export API route exists.)<br>file: apps/web/app/api/oauth/github/route.ts (GitHub OAuth start API route exists.)<br>file: apps/web/app/api/oauth/github/callback/route.ts (GitHub OAuth callback API route exists.)<br>file: apps/web/app/api/deploy/github/execute/route.ts (GitHub deploy execute API route exists.)<br>file: apps/web/app/api/deploy/github/pages/route.ts (GitHub Pages enablement API route exists.)<br>file: apps/web/app/api/deploy/github/rollback/route.ts (GitHub rollback API route exists.) |
 | 14-005 | 通过 | 13.1 | README 导出包包含 README.md、asset | test: packages/generators/src/export-package.test.ts (README export package includes README.md, update workflow, and profile-studio.config.json.) |
 | 14-006 | 通过 | 13.2 | Pages 导出包包含 index.html、style | test: packages/generators/src/export-package.test.ts (Pages export package includes index.html, style.css, script.js, data/github.json, README.md, 404.html, robots.txt, sitemap.xml, and update-pages workflow.) |
 | 14-007 | 未开始 |  | 配置导出包含模块配置、主题配置、卡片配置、成就配置、数据 |  |

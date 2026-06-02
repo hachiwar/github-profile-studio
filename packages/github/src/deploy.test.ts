@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { createReadmeDeploymentPlan, buildDiff } from "./deploy";
+import { buildDiff, createDeploymentExecutionPreview, createPagesEnablementPlan, createReadmeDeploymentPlan, createRollbackPlan } from "./deploy";
 
 describe("deployment planning", () => {
   it("creates a README deployment plan with backup and PR defaults", () => {
@@ -17,5 +17,18 @@ describe("deployment planning", () => {
     expect(first[0].status).toBe("added");
     expect(second[0].status).toBe("unchanged");
   });
-});
 
+  it("creates execution previews with OAuth-gated operations", () => {
+    const plan = createReadmeDeploymentPlan({ username: "octocat", markdown: "# Hello" });
+    const preview = createDeploymentExecutionPreview({ plan, diff: buildDiff(plan.files), authenticated: false });
+    expect(preview.requiresOAuth).toBe(true);
+    expect(preview.operations.some((item) => item.action === "create-pull-request" && item.status === "requires-oauth")).toBe(true);
+  });
+
+  it("creates Pages enablement and rollback plans", () => {
+    const pages = createPagesEnablementPlan({ username: "octocat", authenticated: true });
+    const rollback = createRollbackPlan({ username: "octocat", repository: "octocat", rollbackLabel: "readme-backup", authenticated: true });
+    expect(pages.operations.some((item) => item.action === "enable-pages")).toBe(true);
+    expect(rollback.operations.some((item) => item.action === "rollback")).toBe(true);
+  });
+});

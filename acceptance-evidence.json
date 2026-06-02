@@ -50,6 +50,31 @@
       "kind": "api-response",
       "reference": "GET http://127.0.0.1:3000/pricing",
       "note": "Local smoke test returned pricing_status=200."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3000/api/oauth/github?format=json",
+      "note": "Local smoke test returned OAuth setup status with a clear 501 when GitHub OAuth env vars are absent."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET http://127.0.0.1:3000/api/oauth/github/session",
+      "note": "Local smoke test returned oauth_session_status=200."
+    },
+    {
+      "kind": "api-response",
+      "reference": "POST http://127.0.0.1:3000/api/deploy/github/execute",
+      "note": "Local smoke test returned deploy_execute_status=200 with OAuth-gated deployment operations."
+    },
+    {
+      "kind": "api-response",
+      "reference": "POST http://127.0.0.1:3000/api/deploy/github/pages",
+      "note": "Local smoke test returned pages_enable_status=200."
+    },
+    {
+      "kind": "api-response",
+      "reference": "POST http://127.0.0.1:3000/api/deploy/github/rollback",
+      "note": "Local smoke test returned rollback_status=200."
     }
   ],
   "items": {
@@ -570,11 +595,57 @@
         { "kind": "file", "reference": "packages/core/src/templates.ts", "note": "Theme/template registries define the built-in style catalog." }
       ]
     },
+    "10-001": {
+      "status": "待验收",
+      "requirementRefs": ["4.9.1"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/github/src/oauth.test.ts", "note": "OAuth authorization URL, state, token exchange, and token encryption helpers are tested." },
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/oauth/github?format=json", "note": "OAuth start route exists and returns explicit setup status when env vars are absent; live OAuth requires configured GitHub app." }
+      ]
+    },
+    "10-002": {
+      "status": "通过",
+      "requirementRefs": ["4.9.2"],
+      "evidence": [
+        { "kind": "api-response", "reference": "apps/web/app/api/oauth/github/permissions/route.ts", "note": "Permissions route lists minimal required scopes and logged-in/logged-out capabilities." },
+        { "kind": "file", "reference": "packages/github/src/oauth.ts", "note": "minimumOAuthScopes uses read:user, public_repo, and workflow." }
+      ]
+    },
+    "10-004": {
+      "status": "通过",
+      "requirementRefs": ["4.9.2"],
+      "evidence": [
+        { "kind": "api-response", "reference": "GET http://127.0.0.1:3000/api/oauth/github/session", "note": "Session route exposes logged-out generate/copy/download/public-card capabilities and logged-in write capabilities." }
+      ]
+    },
+    "10-005": {
+      "status": "待验收",
+      "requirementRefs": ["4.9.2", "8"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/github/src/oauth.test.ts", "note": "GitHub token encryption uses AES-256-GCM." },
+        { "kind": "file", "reference": "apps/web/app/api/oauth/github/logout/route.ts", "note": "Logout route clears the HttpOnly token cookie; revocation UX still needs browser verification." }
+      ]
+    },
     "10-009": {
       "status": "待验收",
       "requirementRefs": ["4.9.3"],
       "evidence": [
         { "kind": "test", "reference": "packages/github/src/deploy.test.ts", "note": "Deployment plan covers commits, PRs, backups, rollback, diff, and logs; live OAuth write flow still needs integration verification." }
+      ]
+    },
+    "10-010": {
+      "status": "通过",
+      "requirementRefs": ["4.9.3"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/github/src/deploy.test.ts", "note": "Deployment plans support pull-request and direct-commit modes." }
+      ]
+    },
+    "10-011": {
+      "status": "待验收",
+      "requirementRefs": ["4.9.3"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/github/src/deploy.test.ts", "note": "Diff, backup labels, rollback plan, and deployment logs are modeled; live conflict/retry behavior needs integration verification." },
+        { "kind": "api-response", "reference": "POST http://127.0.0.1:3000/api/deploy/github/rollback", "note": "Rollback preview route returned 200." }
       ]
     },
     "11-006": {
@@ -607,6 +678,14 @@
         { "kind": "api-response", "reference": "apps/web/app/api/github/_shared.ts", "note": "GitHub dataset routes support refresh=true and return cache/rateLimit metadata." }
       ]
     },
+    "13-009": {
+      "status": "通过",
+      "requirementRefs": ["8"],
+      "evidence": [
+        { "kind": "test", "reference": "packages/github/src/oauth.test.ts", "note": "OAuth token encryption/decryption is tested with AES-GCM." },
+        { "kind": "file", "reference": "apps/web/app/api/oauth/github/callback/route.ts", "note": "Callback route encrypts the GitHub access token before HttpOnly cookie storage and never returns the raw token." }
+      ]
+    },
     "14-001": {
       "status": "待验收",
       "requirementRefs": ["9"],
@@ -635,7 +714,12 @@
         { "kind": "file", "reference": "apps/web/app/api/github/pulls/route.ts", "note": "GitHub pulls API route exists." },
         { "kind": "file", "reference": "apps/web/app/api/github/languages/route.ts", "note": "GitHub languages API route exists." },
         { "kind": "file", "reference": "apps/web/app/api/export/readme/route.ts", "note": "README export API route exists." },
-        { "kind": "file", "reference": "apps/web/app/api/export/pages/route.ts", "note": "Pages export API route exists." }
+        { "kind": "file", "reference": "apps/web/app/api/export/pages/route.ts", "note": "Pages export API route exists." },
+        { "kind": "file", "reference": "apps/web/app/api/oauth/github/route.ts", "note": "GitHub OAuth start API route exists." },
+        { "kind": "file", "reference": "apps/web/app/api/oauth/github/callback/route.ts", "note": "GitHub OAuth callback API route exists." },
+        { "kind": "file", "reference": "apps/web/app/api/deploy/github/execute/route.ts", "note": "GitHub deploy execute API route exists." },
+        { "kind": "file", "reference": "apps/web/app/api/deploy/github/pages/route.ts", "note": "GitHub Pages enablement API route exists." },
+        { "kind": "file", "reference": "apps/web/app/api/deploy/github/rollback/route.ts", "note": "GitHub rollback API route exists." }
       ]
     },
     "14-005": {
