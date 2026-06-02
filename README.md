@@ -20,12 +20,35 @@ The implementation follows the uploaded complete requirements and acceptance che
 ```bash
 npm install
 npm run dev
+npm run start
 npm run build
+npm run typecheck
 npm run test
 npm run lint
 npm run acceptance:matrix
 npm run acceptance:report
 ```
+
+## Website Setup
+
+1. Copy `.env.example` to `.env.local` for local development or configure the same variables in the hosting provider.
+2. Generate `TOKEN_ENCRYPTION_KEY` with a 32-byte base64 value, for example:
+
+   ```bash
+   node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
+   ```
+
+3. For public GitHub data, `GITHUB_TOKEN` is optional but recommended to reduce rate-limit fallback behavior.
+4. For OAuth deployment features, configure `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `TOKEN_ENCRYPTION_KEY`, `NEXTAUTH_URL`, and `NEXT_PUBLIC_APP_URL`.
+5. Build and run the website:
+
+   ```bash
+   npm install
+   npm run build
+   npm run start
+   ```
+
+The default local URL is `http://localhost:3000`. Vercel is the intended hosted target; configure PostgreSQL with `DATABASE_URL` and Redis with `REDIS_URL` when enabling persisted drafts, queues, and scheduled workers.
 
 ## Acceptance Policy
 

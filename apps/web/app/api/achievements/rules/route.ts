@@ -4,7 +4,6 @@ import { achievementCategories, defaultAchievementRules } from "@gps/achievement
 export function GET() {
   return NextResponse.json({
     categories: achievementCategories(defaultAchievementRules),
-    rules: defaultAchievementRules.map(({ evaluate, ...rule }) => rule)
+    rules: defaultAchievementRules.map(({ evaluate: _evaluate, ...rule }) => rule)
   });
 }
-

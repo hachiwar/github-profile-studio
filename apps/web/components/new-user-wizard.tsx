@@ -8,7 +8,6 @@ import {
   learningDirectionCatalog,
   newUserFormDraftSchema,
   programmingLanguageCatalog,
-  skillCatalog,
   splitList,
   summarizeNewUserConfig,
   summarizeNewUserFormDraft,

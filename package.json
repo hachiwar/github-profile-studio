@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "dev": "npm run dev --workspace @github-profile-studio/web",
+    "start": "npm run start --workspace @github-profile-studio/web",
     "build": "npm run build --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "test": "vitest run",
@@ -26,7 +27,6 @@
     "@octokit/rest": "^21.0.2",
     "@prisma/client": "^6.1.0",
     "@resvg/resvg-js": "^2.6.2",
-    "satori": "^0.10.14",
     "archiver": "^7.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -38,6 +38,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "recharts": "^2.15.0",
+    "satori": "^0.10.14",
     "sharp": "^0.33.5",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
@@ -60,6 +61,7 @@
     "tailwindcss": "^3.4.17",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
+    "typescript-eslint": "^8.60.1",
     "vitest": "^2.1.8"
   }
 }
