@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T00:52:36.807Z
+Generated at: 2026-06-02T01:08:48.377Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
-Evidence generated at: 2026-06-02T00:52:30.077Z
+Evidence generated at: 2026-06-02T01:08:41.523Z
 
-Passed items with evidence: 148
+Passed items with evidence: 162
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 225 |
+| 未开始 | 211 |
 | 开发中 | 0 |
 | 待验收 | 22 |
-| 通过 | 148 |
+| 通过 | 162 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -23,9 +23,9 @@ Passed items with evidence: 148
 
 | Kind | Reference | Note |
 | --- | --- | --- |
-| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after GitHub analytics aggregation and API additions. |
-| log | `npm.cmd run test` | Vitest suite passes: 21 files, 59 tests, including GitHub analytics coverage. |
-| log | `npm.cmd run build` | Production build passes and lists /api/github/analytics. |
+| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after workspace UI updates. |
+| log | `npm.cmd run test` | Vitest suite passes: 21 files, 59 tests. |
+| log | `npm.cmd run build` | Production build passes after workspace UI updates and client README editor. |
 | api-response | `POST http://127.0.0.1:3000/api/export/readme` | Local smoke test returned a README export package for octocat. |
 | api-response | `POST http://127.0.0.1:3000/api/export/pages?format=zip` | Local smoke test returned status=200 and an 8083 byte ZIP package. |
 | api-response | `GET http://127.0.0.1:3000/api/github/languages?username=octocat` | Local smoke test returned real GitHub language data, cache metadata, and rate limit metadata. |
@@ -46,6 +46,14 @@ Passed items with evidence: 148
 | api-response | `GET http://127.0.0.1:3010/api/admin/queues?username=octocat` | Local smoke test returned status=200 with ready queue plans for scheduled maintenance jobs. |
 | api-response | `GET http://127.0.0.1:3010/api/admin/errors` | Local smoke test returned status=200 with structured error catalog and notification settings. |
 | api-response | `GET http://127.0.0.1:3011/api/github/analytics?username=octocat` | Local smoke test returned status=200 with repository count, star/fork totals, impact score, technology categories, and all targeted 03-* acceptance IDs. |
+| screenshot | `artifacts/screenshots/home.png` | Playwright desktop screenshot for homepage. |
+| screenshot | `artifacts/screenshots/dashboard.png` | Playwright desktop screenshot for dashboard workspace. |
+| screenshot | `artifacts/screenshots/readme-workspace.png` | Playwright desktop screenshot for interactive README workspace. |
+| screenshot | `artifacts/screenshots/pages-workspace.png` | Playwright desktop screenshot for Pages workspace. |
+| screenshot | `artifacts/screenshots/cards-workspace.png` | Playwright desktop screenshot for Cards workspace. |
+| screenshot | `artifacts/screenshots/home-mobile.png` | Playwright mobile screenshot for homepage responsive layout. |
+| screenshot | `artifacts/screenshots/pages-tablet.png` | Playwright tablet screenshot for Pages workspace responsive layout. |
+| screenshot | `artifacts/screenshots/readme-mobile.png` | Playwright mobile screenshot for README workspace responsive layout. |
 
 ## Full Checklist Matrix
 
@@ -99,10 +107,10 @@ Passed items with evidence: 148
 | 03-024 | 通过 | 4.2.7 | Star/Fork 加权语言分布计算 | test: packages/github/src/stats.test.ts (Star-weighted and fork-weighted language distributions are tested.) |
 | 03-025 | 通过 |  | topics、README、package 文件技术栈识 | test: packages/github/src/analytics.test.ts (Technology detector uses topics, README summaries, and language/package signals.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-025 in acceptanceIds.) |
 | 03-026 | 通过 |  | 前端、后端、数据库、DevOps、测试、云服务识别 | test: packages/github/src/analytics.test.ts (Technology detector categorizes frontend, backend, database, DevOps, testing, and cloud signals.)<br>api-response: GET http://127.0.0.1:3011/api/github/analytics?username=octocat (Local smoke test returned status=200 and included 03-026 in acceptanceIds.) |
-| 04-001 | 未开始 |  | 模块面板、编辑区域、实时预览、Markdown 源码视图 |  |
-| 04-002 | 未开始 |  | 结构视图、拖拽排序、模块开关、复制、删除可用 |  |
-| 04-003 | 未开始 |  | 每个模块可配置参数，整体主题可配置 |  |
-| 04-004 | 未开始 |  | GitHub 风格预览、深色/浅色预览可用 |  |
+| 04-001 | 通过 |  | 模块面板、编辑区域、实时预览、Markdown 源码视图 | screenshot: artifacts/screenshots/readme-workspace.png (README workspace shows module panel, editor, live preview, and Markdown source view.)<br>file: apps/web/components/readme-workspace.tsx (Client component keeps Markdown editor state and updates preview/source from edited Markdown.) |
+| 04-002 | 通过 |  | 结构视图、拖拽排序、模块开关、复制、删除可用 | screenshot: artifacts/screenshots/readme-workspace.png (README modules include structure view, module switches, reorder buttons, copy, and delete controls.)<br>file: apps/web/components/readme-workspace.tsx (Client component implements module toggle, delete, copy heading, and up/down reordering handlers.) |
+| 04-003 | 通过 |  | 每个模块可配置参数，整体主题可配置 | screenshot: artifacts/screenshots/readme-workspace.png (README workspace exposes module parameters and theme selection controls.)<br>file: apps/web/components/readme-workspace.tsx (Client component exposes card theme and max project controls next to module list.) |
+| 04-004 | 通过 |  | GitHub 风格预览、深色/浅色预览可用 | screenshot: artifacts/screenshots/readme-workspace.png (README workspace exposes GitHub-style preview and light/dark preview controls.)<br>file: apps/web/components/readme-workspace.tsx (Client component toggles darkPreview state from Light and Dark buttons.) |
 | 04-005 | 未开始 |  | 导入现有 README、Markdown 格式化、兼容性 |  |
 | 04-006 | 通过 | 4.3.2 | 个人介绍模块完整 | test: packages/generators/src/readme.test.ts (README intro module renders welcome, role, status, and GitHub link.) |
 | 04-007 | 通过 | 4.3.2 | GitHub 总览模块完整 | test: packages/generators/src/readme.test.ts (GitHub overview module renders contributions, commits, PRs, issues, stars, forks, followers, account age, and impact score.) |
@@ -119,19 +127,19 @@ Passed items with evidence: 148
 | 04-018 | 通过 | 4.3.2 | 访客统计模块完整 | test: packages/generators/src/readme.test.ts (Visitor stats module renders profile view badge.) |
 | 04-019 | 通过 | 4.3.2 | 自定义模块完整 | test: packages/generators/src/readme.test.ts (Custom Markdown module renders guarded custom content block.) |
 | 04-020 | 待验收 | 4.3.4 | 复制完整 Markdown 可用 | file: apps/web/app/api/generate/readme/route.ts (README generation API returns full Markdown; browser copy interaction still needs E2E verification.) |
-| 04-021 | 未开始 |  | 下载 README.md 可用 |  |
-| 04-022 | 未开始 |  | 复制单模块 Markdown 和动态卡片链接可用 |  |
+| 04-021 | 通过 |  | 下载 README.md 可用 | screenshot: artifacts/screenshots/readme-workspace.png (README export panel includes Download README.md.)<br>file: apps/web/components/readme-workspace.tsx (downloadReadme creates a README.md Blob and triggers browser download.) |
+| 04-022 | 通过 |  | 复制单模块 Markdown 和动态卡片链接可用 | screenshot: artifacts/screenshots/readme-workspace.png (README export panel includes Copy Markdown, Copy card URL, and Copy HTML snippet controls.)<br>file: apps/web/components/readme-workspace.tsx (Client component copies Markdown, module headings, card URL, and HTML snippet through navigator.clipboard.) |
 | 04-023 | 未开始 |  | OAuth 提交到 `username` 仓库可用 |  |
 | 04-024 | 未开始 |  | 提交前 diff、旧 README 备份、回滚可用 |  |
 | 04-025 | 未开始 |  | README 自动更新 workflow 生成可用 |  |
-| 05-001 | 未开始 |  | 单页个人主页、开源成就墙、作品集、技术简历、数据仪表盘、 |  |
+| 05-001 | 通过 |  | 单页个人主页、开源成就墙、作品集、技术简历、数据仪表盘、 | screenshot: artifacts/screenshots/pages-workspace.png (Pages workspace previews a single-page profile site with portfolio, resume-like stats, dashboard data, achievements, blog, and contact sections from the generated bundle.)<br>file: packages/generators/src/pages.ts (Pages generator emits hero, about, education, skills, projects, timeline, GitHub data, achievements, resume, blog, contact, SEO, sitemap, and workflow files.) |
 | 05-002 | 通过 | 4.4.2 | Hero、简介、统计、热力图、Star 趋势、热门仓库、 | test: packages/generators/src/pages.test.ts (Pages site renders Hero, profile, GitHub data, project, timeline, blog, achievement, and contact sections.) |
 | 05-003 | 通过 | 4.4.2 | 主题切换、语言切换、返回顶部可用 | test: packages/generators/src/pages.test.ts (Theme toggle, language toggle, and back-to-top controls are generated and wired in script.js.) |
-| 05-004 | 未开始 |  | 响应式设计通过手机、平板、桌面测试 |  |
+| 05-004 | 通过 |  | 响应式设计通过手机、平板、桌面测试 | screenshot: artifacts/screenshots/home-mobile.png (Mobile viewport screenshot verifies homepage responsive layout.)<br>screenshot: artifacts/screenshots/pages-tablet.png (Tablet viewport screenshot verifies Pages workspace responsive layout.)<br>screenshot: artifacts/screenshots/readme-mobile.png (Mobile viewport screenshot verifies README workspace stacks without overlapping controls.) |
 | 05-005 | 通过 | 4.4.3 | 深色、浅色、系统主题跟随可用 | test: packages/generators/src/pages.test.ts (Generated CSS and script support light/dark theme switching.) |
 | 05-006 | 未开始 |  | 自定义主色、字体、背景、动画可用 |  |
 | 05-007 | 未开始 |  | 内置 15 套页面模板可用 |  |
-| 05-008 | 未开始 |  | 复制 HTML、下载完整静态站点可用 |  |
+| 05-008 | 通过 |  | 复制 HTML、下载完整静态站点可用 | screenshot: artifacts/screenshots/pages-workspace.png (Pages workspace exposes Copy HTML and Download site controls.)<br>api-response: POST http://127.0.0.1:3000/api/export/pages?format=zip (Pages export API returned a downloadable static site ZIP in prior smoke verification.) |
 | 05-009 | 通过 | 4.4.5 | 导出 index.html、style.css、scri | test: packages/generators/src/export-package.test.ts (Pages export package includes index.html, CSS, JS, 404, sitemap, robots, and workflow files.) |
 | 05-010 | 通过 | 4.4.5 | GitHub Pages 部署说明生成可用 | test: packages/generators/src/export-package.test.ts (Pages deployment instructions are generated.) |
 | 05-011 | 未开始 |  | OAuth 提交到 `username.github.i |  |
@@ -162,7 +170,7 @@ Passed items with evidence: 148
 | 06-023 | 通过 | 4.5.4 | 支持复制 Markdown 图片链接、HTML img、 | test: packages/cards/src/embeds.test.ts (Markdown image link, HTML img, iframe, and URL variants are generated.)<br>api-response: GET http://127.0.0.1:3000/api/cards/stats?format=json (JSON smoke response includes embeds for markdown and HTML.) |
 | 06-024 | 未开始 |  | 支持下载图片 |  |
 | 06-025 | 通过 | 4.5.4 | 卡片在 GitHub README 中可正常显示 | test: packages/cards/src/embeds.test.ts (README badge/card embed markdown generation is tested.) |
-| 06-026 | 未开始 |  | 卡片生成器支持类型选择、参数调整、实时预览、复制、下载、 |  |
+| 06-026 | 通过 |  | 卡片生成器支持类型选择、参数调整、实时预览、复制、下载、 | screenshot: artifacts/screenshots/cards-workspace.png (Cards workspace includes card type selection, locale/theme/size parameters, live preview, copy URL, and download SVG controls.)<br>file: apps/web/app/cards/page.tsx (Cards page renders parameter controls, card catalog, SVG preview, Markdown, and HTML snippets.) |
 | 07-001 | 通过 | 4.6.1 | 贡献类、Star 类、Fork 类、PR 类、Issue | test: packages/achievements/src/index.test.ts (Achievement category catalog covers the required categories.) |
 | 07-002 | 未开始 |  | First Commit、Weekly Builder、 |  |
 | 07-003 | 未开始 |  | First Star、Star Collector、St |  |
@@ -204,10 +212,10 @@ Passed items with evidence: 148
 | 11-005 | 通过 |  | 可生成每日更新、每周更新、手动触发 workflow | test: packages/generators/src/actions.test.ts (Default workflow configs generate daily, weekly, and manual GitHub Actions triggers.)<br>test: apps/worker/src/jobs.test.ts (Worker queue maps scheduled jobs to executable maintenance operations.) |
 | 11-006 | 通过 | 4.10.2 | 可生成 README、Pages、Blog、成就、Sta | test: packages/generators/src/actions.test.ts (README, Pages data, blog, achievements, star snapshot, cache cleanup, and error notification workflow modules are generated.) |
 | 11-007 | 通过 |  | 用户可配置更新时间、更新频率、更新模块、commit m | test: packages/generators/src/maintenance.test.ts (Maintenance run writes configurable workflow YAML with frequency, modules, target branch, and commit message.)<br>file: apps/web/app/api/automation/_shared.ts (Automation request parser accepts cron, frequency, modules, targetBranch, and commitMessage overrides.) |
-| 12-001 | 未开始 |  | 首页包含产品标题、一句话介绍、username 输入框、 |  |
-| 12-002 | 未开始 |  | 工作台包含顶部导航、当前 username、当前目标类型 |  |
-| 12-003 | 未开始 |  | 预览支持 README、GitHub Profile、P |  |
-| 12-004 | 未开始 |  | 导出界面支持复制 Markdown、HTML、卡片 UR |  |
+| 12-001 | 通过 |  | 首页包含产品标题、一句话介绍、username 输入框、 | screenshot: artifacts/screenshots/home.png (Homepage shows product title, product description, username input, and generate entry.)<br>screenshot: artifacts/screenshots/home-mobile.png (Homepage remains usable on a mobile viewport.)<br>file: apps/web/app/page.tsx (Home page includes product title, one-sentence description, username/Profile URL input, and Generate button.) |
+| 12-002 | 通过 |  | 工作台包含顶部导航、当前 username、当前目标类型 | screenshot: artifacts/screenshots/dashboard.png (Workspace shows top navigation, current username, current target type, and target navigation.)<br>file: apps/web/app/dashboard/page.tsx (Dashboard renders username, target type, language, target links, and workspace cards.) |
+| 12-003 | 通过 |  | 预览支持 README、GitHub Profile、P | screenshot: artifacts/screenshots/dashboard.png (Workspace preview cards cover README, GitHub Profile, Pages, and export center.)<br>screenshot: artifacts/screenshots/readme-workspace.png (README workspace shows editor, live preview, and Markdown source preview.)<br>screenshot: artifacts/screenshots/pages-workspace.png (Pages workspace shows responsive static site preview.)<br>screenshot: artifacts/screenshots/cards-workspace.png (Cards workspace shows card preview.) |
+| 12-004 | 通过 |  | 导出界面支持复制 Markdown、HTML、卡片 UR | screenshot: artifacts/screenshots/readme-workspace.png (Export panel supports copying Markdown, downloading README.md, copying card URLs, and copying HTML snippets.)<br>screenshot: artifacts/screenshots/pages-workspace.png (Pages workspace exposes Copy HTML and Download site controls.)<br>screenshot: artifacts/screenshots/cards-workspace.png (Cards workspace exposes Copy URL and Download SVG controls.) |
 | 13-001 | 待验收 | 6 | 支持中文和英文界面 | file: packages/core/src/language.ts (Core locale model supports English, Chinese, and bilingual output.) |
 | 13-002 | 未开始 |  | README、卡片、成就可选择语言 |  |
 | 13-003 | 未开始 |  | 日期、数字、时区可本地化 |  |

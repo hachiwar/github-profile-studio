@@ -1,27 +1,26 @@
 import { generateReadme } from "@gps/generators";
 import { demoProfileConfig } from "@gps/core";
+import { ReadmeWorkspace } from "../../../components/readme-workspace";
 
 export default function ProfileReadmePage() {
-  const generated = generateReadme(demoProfileConfig("new-developer", "en-US"));
+  const config = demoProfileConfig("new-developer", "en-US");
+  const generated = generateReadme(config);
+  const cardUrl = `https://github-profile-studio.vercel.app/api/cards/stats?user=${config.targetUsername}&locale=en-US&theme=${config.themeKey}`;
+  const htmlSnippet = `<img src="${cardUrl}&format=svg" alt="${config.targetUsername} GitHub stats" />`;
   return (
-    <main className="mx-auto grid max-w-7xl gap-4 px-4 py-8 lg:grid-cols-[280px_1fr_420px]">
-      <aside className="rounded-lg border bg-white p-4">
-        <h1 className="font-semibold">README modules</h1>
-        <ul className="mt-4 space-y-2 text-sm text-slate-600">
-          {generated.modules.map((module) => (
-            <li key={module.id} className="rounded-md border px-3 py-2">{module.label.en}</li>
-          ))}
-        </ul>
-      </aside>
-      <section className="rounded-lg border bg-white p-4">
-        <h2 className="font-semibold">Markdown source</h2>
-        <pre className="mt-4 max-h-[640px] overflow-auto text-sm leading-6">{generated.markdown}</pre>
-      </section>
-      <aside className="rounded-lg border bg-white p-4">
-        <h2 className="font-semibold">Export</h2>
-        <p className="mt-3 text-sm leading-6 text-slate-600">Copy, download, diff, submit, create PR, backup, and rollback actions are modeled here.</p>
-      </aside>
-    </main>
+    <ReadmeWorkspace
+      username={config.targetUsername}
+      themeKey={config.themeKey}
+      initialMarkdown={generated.markdown}
+      modules={generated.modules.map((module) => ({ id: module.id, label: module.label.en }))}
+      stats={{
+        contributions: config.github?.contributions.totalContributions ?? 0,
+        stars: config.github?.totalStars ?? 0,
+        forks: config.github?.totalForks ?? 0
+      }}
+      bio={config.profile.bio ?? "Building in public."}
+      cardUrl={cardUrl}
+      htmlSnippet={htmlSnippet}
+    />
   );
 }
-

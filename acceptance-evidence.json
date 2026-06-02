@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-06-02T00:52:30.077Z",
+  "generatedAt": "2026-06-02T01:08:41.523Z",
   "verificationCommands": [
     {
       "kind": "log",
       "reference": "npm.cmd run typecheck",
-      "note": "Workspace TypeScript typecheck passes after GitHub analytics aggregation and API additions."
+      "note": "Workspace TypeScript typecheck passes after workspace UI updates."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run test",
-      "note": "Vitest suite passes: 21 files, 59 tests, including GitHub analytics coverage."
+      "note": "Vitest suite passes: 21 files, 59 tests."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run build",
-      "note": "Production build passes and lists /api/github/analytics."
+      "note": "Production build passes after workspace UI updates and client README editor."
     },
     {
       "kind": "api-response",
@@ -115,6 +115,46 @@
       "kind": "api-response",
       "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
       "note": "Local smoke test returned status=200 with repository count, star/fork totals, impact score, technology categories, and all targeted 03-* acceptance IDs."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/home.png",
+      "note": "Playwright desktop screenshot for homepage."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/dashboard.png",
+      "note": "Playwright desktop screenshot for dashboard workspace."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/readme-workspace.png",
+      "note": "Playwright desktop screenshot for interactive README workspace."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/pages-workspace.png",
+      "note": "Playwright desktop screenshot for Pages workspace."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/cards-workspace.png",
+      "note": "Playwright desktop screenshot for Cards workspace."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/home-mobile.png",
+      "note": "Playwright mobile screenshot for homepage responsive layout."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/pages-tablet.png",
+      "note": "Playwright tablet screenshot for Pages workspace responsive layout."
+    },
+    {
+      "kind": "screenshot",
+      "reference": "artifacts/screenshots/readme-mobile.png",
+      "note": "Playwright mobile screenshot for README workspace responsive layout."
     }
   ],
   "items": {
@@ -2595,6 +2635,241 @@
           "kind": "api-response",
           "reference": "GET http://127.0.0.1:3011/api/github/analytics?username=octocat",
           "note": "Local smoke test returned status=200 and included 03-026 in acceptanceIds."
+        }
+      ]
+    },
+    "12-001": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/home.png",
+          "note": "Homepage shows product title, product description, username input, and generate entry."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/home-mobile.png",
+          "note": "Homepage remains usable on a mobile viewport."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/page.tsx",
+          "note": "Home page includes product title, one-sentence description, username/Profile URL input, and Generate button."
+        }
+      ]
+    },
+    "12-002": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/dashboard.png",
+          "note": "Workspace shows top navigation, current username, current target type, and target navigation."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/dashboard/page.tsx",
+          "note": "Dashboard renders username, target type, language, target links, and workspace cards."
+        }
+      ]
+    },
+    "12-003": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/dashboard.png",
+          "note": "Workspace preview cards cover README, GitHub Profile, Pages, and export center."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README workspace shows editor, live preview, and Markdown source preview."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/pages-workspace.png",
+          "note": "Pages workspace shows responsive static site preview."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/cards-workspace.png",
+          "note": "Cards workspace shows card preview."
+        }
+      ]
+    },
+    "12-004": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "Export panel supports copying Markdown, downloading README.md, copying card URLs, and copying HTML snippets."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/pages-workspace.png",
+          "note": "Pages workspace exposes Copy HTML and Download site controls."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/cards-workspace.png",
+          "note": "Cards workspace exposes Copy URL and Download SVG controls."
+        }
+      ]
+    },
+    "04-001": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README workspace shows module panel, editor, live preview, and Markdown source view."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/components/readme-workspace.tsx",
+          "note": "Client component keeps Markdown editor state and updates preview/source from edited Markdown."
+        }
+      ]
+    },
+    "04-002": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README modules include structure view, module switches, reorder buttons, copy, and delete controls."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/components/readme-workspace.tsx",
+          "note": "Client component implements module toggle, delete, copy heading, and up/down reordering handlers."
+        }
+      ]
+    },
+    "04-003": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README workspace exposes module parameters and theme selection controls."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/components/readme-workspace.tsx",
+          "note": "Client component exposes card theme and max project controls next to module list."
+        }
+      ]
+    },
+    "04-004": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README workspace exposes GitHub-style preview and light/dark preview controls."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/components/readme-workspace.tsx",
+          "note": "Client component toggles darkPreview state from Light and Dark buttons."
+        }
+      ]
+    },
+    "04-021": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README export panel includes Download README.md."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/components/readme-workspace.tsx",
+          "note": "downloadReadme creates a README.md Blob and triggers browser download."
+        }
+      ]
+    },
+    "04-022": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-workspace.png",
+          "note": "README export panel includes Copy Markdown, Copy card URL, and Copy HTML snippet controls."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/components/readme-workspace.tsx",
+          "note": "Client component copies Markdown, module headings, card URL, and HTML snippet through navigator.clipboard."
+        }
+      ]
+    },
+    "05-001": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/pages-workspace.png",
+          "note": "Pages workspace previews a single-page profile site with portfolio, resume-like stats, dashboard data, achievements, blog, and contact sections from the generated bundle."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/pages.ts",
+          "note": "Pages generator emits hero, about, education, skills, projects, timeline, GitHub data, achievements, resume, blog, contact, SEO, sitemap, and workflow files."
+        }
+      ]
+    },
+    "05-004": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/home-mobile.png",
+          "note": "Mobile viewport screenshot verifies homepage responsive layout."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/pages-tablet.png",
+          "note": "Tablet viewport screenshot verifies Pages workspace responsive layout."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/readme-mobile.png",
+          "note": "Mobile viewport screenshot verifies README workspace stacks without overlapping controls."
+        }
+      ]
+    },
+    "05-008": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/pages-workspace.png",
+          "note": "Pages workspace exposes Copy HTML and Download site controls."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3000/api/export/pages?format=zip",
+          "note": "Pages export API returned a downloadable static site ZIP in prior smoke verification."
+        }
+      ]
+    },
+    "06-026": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/cards-workspace.png",
+          "note": "Cards workspace includes card type selection, locale/theme/size parameters, live preview, copy URL, and download SVG controls."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/cards/page.tsx",
+          "note": "Cards page renders parameter controls, card catalog, SVG preview, Markdown, and HTML snippets."
         }
       ]
     }
