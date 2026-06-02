@@ -1,20 +1,20 @@
 {
-  "generatedAt": "2026-06-02T01:08:41.523Z",
+  "generatedAt": "2026-06-02T01:15:32.160Z",
   "verificationCommands": [
     {
       "kind": "log",
       "reference": "npm.cmd run typecheck",
-      "note": "Workspace TypeScript typecheck passes after workspace UI updates."
+      "note": "Workspace TypeScript typecheck passes after README import source and diff support."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run test",
-      "note": "Vitest suite passes: 21 files, 59 tests."
+      "note": "Vitest suite passes: 21 files, 59 tests, including README import diff/export coverage."
     },
     {
       "kind": "log",
       "reference": "npm.cmd run build",
-      "note": "Production build passes after workspace UI updates and client README editor."
+      "note": "Production build passes after README import source and theme API verification."
     },
     {
       "kind": "api-response",
@@ -155,6 +155,16 @@
       "kind": "screenshot",
       "reference": "artifacts/screenshots/readme-mobile.png",
       "note": "Playwright mobile screenshot for README workspace responsive layout."
+    },
+    {
+      "kind": "api-response",
+      "reference": "POST http://127.0.0.1:3015/api/import/readme sourceType=paste|upload|repository-url",
+      "note": "Local smoke tests returned status=200 for paste, upload, and repository URL import modes."
+    },
+    {
+      "kind": "api-response",
+      "reference": "GET/POST http://127.0.0.1:3015/api/themes/export|import|share",
+      "note": "Local smoke tests returned status=200 for theme export, import, and share routes."
     }
   ],
   "items": {
@@ -2870,6 +2880,246 @@
           "kind": "file",
           "reference": "apps/web/app/cards/page.tsx",
           "note": "Cards page renders parameter controls, card catalog, SVG preview, Markdown, and HTML snippets."
+        }
+      ]
+    },
+    "08-001": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3015/api/import/readme sourceType=paste",
+          "note": "Local smoke test returned status=200 for pasted README Markdown with modules, cards, diff, and export files."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/dashboard/import/page.tsx",
+          "note": "Import page provides a textarea for pasted README Markdown."
+        }
+      ]
+    },
+    "08-002": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3015/api/import/readme sourceType=upload",
+          "note": "Local smoke test returned status=200 for uploaded README.md content."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/import/readme/route.ts",
+          "note": "Import API accepts fileName and fileContent for upload mode."
+        }
+      ]
+    },
+    "08-003": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3015/api/import/readme sourceType=repository-url",
+          "note": "Local smoke test fetched README from https://github.com/octocat/Hello-World and returned status=200."
+        },
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/import/readme/route.ts",
+          "note": "Import API resolves repositoryUrl through parseGitHubInput and fetches README through GitHubClient."
+        }
+      ]
+    },
+    "08-004": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/import/readme/route.ts",
+          "note": "OAuth import mode accepts accessToken and reads the authenticated user README repository."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.getReadmeMarkdown supports token-authenticated README retrieval."
+        }
+      ]
+    },
+    "08-005": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "apps/web/app/api/import/readme/route.ts",
+          "note": "username-repo import mode maps username to owner=username and repo=username."
+        }
+      ]
+    },
+    "08-006": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3015/api/import/readme sourceType=repository-url",
+          "note": "Local smoke test read an arbitrary public repository README."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/github/src/client.ts",
+          "note": "GitHubClient.getReadmeMarkdown reads public repository README content with owner/repo/ref."
+        }
+      ]
+    },
+    "08-009": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/import-readme.test.ts",
+          "note": "README import parser provides theme unification, duplicate module, broken link, image/card, and style suggestions."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/import-readme.ts",
+          "note": "buildImportSuggestions reports style unification, duplicate modules, invalid links/images, card conversion, and custom HTML preservation."
+        }
+      ]
+    },
+    "08-010": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/import-readme.test.ts",
+          "note": "README import parser preserves custom HTML content."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/import-readme.ts",
+          "note": "preservedCustomContent and optimizedMarkdown keep user custom content after optimization notes."
+        }
+      ]
+    },
+    "08-011": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/import-readme.test.ts",
+          "note": "README import result includes diff rows and README.optimized.md export file."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/import-readme.ts",
+          "note": "diffMarkdown and exportFiles provide old/new diff and optimized README export."
+        }
+      ]
+    },
+    "04-005": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/generators/src/import-readme.test.ts",
+          "note": "README import detects existing modules, formats Markdown, and returns compatibility/style suggestions."
+        },
+        {
+          "kind": "api-response",
+          "reference": "POST http://127.0.0.1:3015/api/import/readme sourceType=paste",
+          "note": "Local smoke test returned formattedMarkdown, optimizedMarkdown, diff, modules, suggestions, and export files."
+        }
+      ]
+    },
+    "09-001": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "Template registry covers README, Pages, cards, achievements, portfolio, resume, dashboard, social-card, year-in-review, and custom template types."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/dashboard.png",
+          "note": "Workspace exposes README, Pages, Cards, Achievements, Import, Settings, and History targets."
+        }
+      ]
+    },
+    "09-003": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/theme-io.test.ts",
+          "note": "Theme import/export schema validates custom primary, accent, background, foreground, border, font, radius, shadow, density, and animation tokens."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/core/src/theme-io.ts",
+          "note": "Theme schema stores custom color, font, radius, shadow, density, and animation settings."
+        }
+      ]
+    },
+    "09-004": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/theme-io.test.ts",
+          "note": "Theme JSON export/import and stable share links are tested."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET/POST http://127.0.0.1:3015/api/themes/export|import|share",
+          "note": "Local smoke tests returned status=200 for theme export, import, and share link routes."
+        }
+      ]
+    },
+    "09-005": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/readme.ts",
+          "note": "README generator embeds selected theme in dynamic card URLs."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/generators/src/pages.ts",
+          "note": "Pages generator applies selected theme tokens to generated CSS."
+        },
+        {
+          "kind": "file",
+          "reference": "packages/cards/src/index.ts",
+          "note": "Card renderer accepts theme parameter and renders themed card output."
+        }
+      ]
+    },
+    "05-006": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "test",
+          "reference": "packages/core/src/theme-io.test.ts",
+          "note": "Theme schema supports custom primary color, font, background, radius, and animation tokens."
+        },
+        {
+          "kind": "api-response",
+          "reference": "GET/POST http://127.0.0.1:3015/api/themes/export|import",
+          "note": "Theme export/import smoke tests returned status=200."
+        }
+      ]
+    },
+    "05-007": {
+      "status": "通过",
+      "evidence": [
+        {
+          "kind": "file",
+          "reference": "packages/core/src/templates.ts",
+          "note": "builtinPageTemplates contains 15 GitHub Pages templates."
+        },
+        {
+          "kind": "screenshot",
+          "reference": "artifacts/screenshots/home.png",
+          "note": "Homepage displays built-in theme/template browsing entry."
         }
       ]
     }

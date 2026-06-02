@@ -69,6 +69,9 @@ export type ReadmeImportResult = {
   suggestions: ImportSuggestion[];
   preservedCustomContent: string[];
   optimizedMarkdown: string;
+  formattedMarkdown: string;
+  diff: Array<{ type: "unchanged" | "added" | "removed"; line: string; lineNumber?: number }>;
+  exportFiles: Array<{ path: string; content: string; contentType: "markdown" | "json" }>;
 };
 
 const providerPatterns: Array<{ provider: ThirdPartyCardProvider; pattern: RegExp; convertible: boolean }> = [
@@ -105,7 +108,13 @@ export function importReadmeMarkdown(markdown: string, sourceType: ReadmeImportS
     thirdPartyCards,
     suggestions,
     preservedCustomContent,
-    optimizedMarkdown: buildOptimizedMarkdown(markdown, suggestions)
+    optimizedMarkdown: buildOptimizedMarkdown(markdown, suggestions),
+    formattedMarkdown: formatMarkdown(markdown),
+    diff: diffMarkdown(markdown, buildOptimizedMarkdown(markdown, suggestions)),
+    exportFiles: [
+      { path: "README.optimized.md", content: buildOptimizedMarkdown(markdown, suggestions), contentType: "markdown" },
+      { path: "profile-studio-import.json", content: `${JSON.stringify({ sourceType, modules, thirdPartyCards, suggestions }, null, 2)}\n`, contentType: "json" }
+    ]
   };
 }
 
@@ -250,6 +259,35 @@ function buildOptimizedMarkdown(markdown: string, suggestions: ImportSuggestion[
   return `${banner}\n\n${markdown.trim()}\n`;
 }
 
+export function formatMarkdown(markdown: string): string {
+  return markdown
+    .replace(/\r\n/g, "\n")
+    .split("\n")
+    .map((line) => line.trimEnd())
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim()
+    .concat("\n");
+}
+
+export function diffMarkdown(original: string, optimized: string): ReadmeImportResult["diff"] {
+  const originalLines = formatMarkdown(original).split("\n");
+  const optimizedLines = formatMarkdown(optimized).split("\n");
+  const diff: ReadmeImportResult["diff"] = [];
+  const max = Math.max(originalLines.length, optimizedLines.length);
+  for (let index = 0; index < max; index += 1) {
+    const before = originalLines[index];
+    const after = optimizedLines[index];
+    if (before === after) {
+      if (before !== undefined) diff.push({ type: "unchanged", line: before, lineNumber: index + 1 });
+    } else {
+      if (before !== undefined) diff.push({ type: "removed", line: before, lineNumber: index + 1 });
+      if (after !== undefined) diff.push({ type: "added", line: after, lineNumber: index + 1 });
+    }
+  }
+  return diff;
+}
+
 function classifyHeading(line: string): DetectedReadmeModuleType {
   const text = stripHeading(line).toLowerCase();
   if (/about|intro|profile|hello|hi|关于|介绍/.test(text)) return "introduction";
@@ -312,4 +350,3 @@ function mergeAdjacentDuplicates(modules: DetectedReadmeModule[]): DetectedReadm
     return !(previous && previous.type === item.type && previous.startLine === item.startLine);
   });
 }
-

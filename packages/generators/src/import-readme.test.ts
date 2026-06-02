@@ -19,6 +19,9 @@ describe("README import parser", () => {
     expect(result.thirdPartyCards.some((card) => card.provider === "komarev-profile-views")).toBe(true);
     expect(result.preservedCustomContent.length).toBeGreaterThan(0);
     expect(result.suggestions.some((item) => item.code === "CARD_CONVERSION_AVAILABLE")).toBe(true);
+    expect(result.formattedMarkdown).toContain("# Hi");
+    expect(result.diff.some((item) => item.type === "added")).toBe(true);
+    expect(result.exportFiles.some((file) => file.path === "README.optimized.md")).toBe(true);
   });
 
   it("recognizes supported third-party card providers", () => {
@@ -34,4 +37,3 @@ describe("README import parser", () => {
     ]);
   });
 });
-

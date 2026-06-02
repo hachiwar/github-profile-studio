@@ -65,6 +65,16 @@ export type GitHubDetectionResult = {
   rateLimit?: GitHubRateLimitInfo;
 };
 
+export type GitHubReadmeFile = {
+  owner: string;
+  repo: string;
+  path: string;
+  sha?: string;
+  htmlUrl?: string;
+  downloadUrl?: string;
+  markdown: string;
+};
+
 type ContributionGraphQLResponse = {
   user?: {
     contributionsCollection?: {
@@ -237,6 +247,22 @@ export class GitHubClient {
       if (isGitHubNotFound(error)) return emptyRepositoryStatus();
       throw error;
     }
+  }
+
+  async getReadmeMarkdown(owner: string, repo: string, ref?: string): Promise<GitHubReadmeFile> {
+    const response = await this.rest.repos.getReadme({ owner, repo, ref });
+    this.rememberRateLimit(response.headers);
+    const data = response.data;
+    if (!("content" in data) || typeof data.content !== "string") throw new Error("README_NOT_FOUND");
+    return {
+      owner,
+      repo,
+      path: data.path,
+      sha: data.sha,
+      htmlUrl: data.html_url ?? undefined,
+      downloadUrl: data.download_url ?? undefined,
+      markdown: decodeBase64Content(data.content)
+    };
   }
 
   async getContributionDataset(username: string): Promise<GitHubDataset> {

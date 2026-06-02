@@ -1,21 +1,21 @@
 # GitHub Profile Studio Acceptance Report
 
-Generated at: 2026-06-02T01:08:48.377Z
+Generated at: 2026-06-02T01:15:39.134Z
 
 Matrix generated at: 2026-06-01T14:16:30.958Z
 
-Evidence generated at: 2026-06-02T01:08:41.523Z
+Evidence generated at: 2026-06-02T01:15:32.160Z
 
-Passed items with evidence: 162
+Passed items with evidence: 178
 
 ## Status Summary
 
 | Status | Count |
 | --- | ---: |
-| 未开始 | 211 |
+| 未开始 | 195 |
 | 开发中 | 0 |
 | 待验收 | 22 |
-| 通过 | 162 |
+| 通过 | 178 |
 | 不通过 | 0 |
 | 阻塞 | 0 |
 
@@ -23,9 +23,9 @@ Passed items with evidence: 162
 
 | Kind | Reference | Note |
 | --- | --- | --- |
-| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after workspace UI updates. |
-| log | `npm.cmd run test` | Vitest suite passes: 21 files, 59 tests. |
-| log | `npm.cmd run build` | Production build passes after workspace UI updates and client README editor. |
+| log | `npm.cmd run typecheck` | Workspace TypeScript typecheck passes after README import source and diff support. |
+| log | `npm.cmd run test` | Vitest suite passes: 21 files, 59 tests, including README import diff/export coverage. |
+| log | `npm.cmd run build` | Production build passes after README import source and theme API verification. |
 | api-response | `POST http://127.0.0.1:3000/api/export/readme` | Local smoke test returned a README export package for octocat. |
 | api-response | `POST http://127.0.0.1:3000/api/export/pages?format=zip` | Local smoke test returned status=200 and an 8083 byte ZIP package. |
 | api-response | `GET http://127.0.0.1:3000/api/github/languages?username=octocat` | Local smoke test returned real GitHub language data, cache metadata, and rate limit metadata. |
@@ -54,6 +54,8 @@ Passed items with evidence: 162
 | screenshot | `artifacts/screenshots/home-mobile.png` | Playwright mobile screenshot for homepage responsive layout. |
 | screenshot | `artifacts/screenshots/pages-tablet.png` | Playwright tablet screenshot for Pages workspace responsive layout. |
 | screenshot | `artifacts/screenshots/readme-mobile.png` | Playwright mobile screenshot for README workspace responsive layout. |
+| api-response | `POST http://127.0.0.1:3015/api/import/readme sourceType=paste\|upload\|repository-url` | Local smoke tests returned status=200 for paste, upload, and repository URL import modes. |
+| api-response | `GET/POST http://127.0.0.1:3015/api/themes/export\|import\|share` | Local smoke tests returned status=200 for theme export, import, and share routes. |
 
 ## Full Checklist Matrix
 
@@ -111,7 +113,7 @@ Passed items with evidence: 162
 | 04-002 | 通过 |  | 结构视图、拖拽排序、模块开关、复制、删除可用 | screenshot: artifacts/screenshots/readme-workspace.png (README modules include structure view, module switches, reorder buttons, copy, and delete controls.)<br>file: apps/web/components/readme-workspace.tsx (Client component implements module toggle, delete, copy heading, and up/down reordering handlers.) |
 | 04-003 | 通过 |  | 每个模块可配置参数，整体主题可配置 | screenshot: artifacts/screenshots/readme-workspace.png (README workspace exposes module parameters and theme selection controls.)<br>file: apps/web/components/readme-workspace.tsx (Client component exposes card theme and max project controls next to module list.) |
 | 04-004 | 通过 |  | GitHub 风格预览、深色/浅色预览可用 | screenshot: artifacts/screenshots/readme-workspace.png (README workspace exposes GitHub-style preview and light/dark preview controls.)<br>file: apps/web/components/readme-workspace.tsx (Client component toggles darkPreview state from Light and Dark buttons.) |
-| 04-005 | 未开始 |  | 导入现有 README、Markdown 格式化、兼容性 |  |
+| 04-005 | 通过 |  | 导入现有 README、Markdown 格式化、兼容性 | test: packages/generators/src/import-readme.test.ts (README import detects existing modules, formats Markdown, and returns compatibility/style suggestions.)<br>api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=paste (Local smoke test returned formattedMarkdown, optimizedMarkdown, diff, modules, suggestions, and export files.) |
 | 04-006 | 通过 | 4.3.2 | 个人介绍模块完整 | test: packages/generators/src/readme.test.ts (README intro module renders welcome, role, status, and GitHub link.) |
 | 04-007 | 通过 | 4.3.2 | GitHub 总览模块完整 | test: packages/generators/src/readme.test.ts (GitHub overview module renders contributions, commits, PRs, issues, stars, forks, followers, account age, and impact score.) |
 | 04-008 | 通过 | 4.3.2 | Streak 模块完整 | test: packages/generators/src/readme.test.ts (GitHub streak module renders streak card and current/longest streak metrics.) |
@@ -137,8 +139,8 @@ Passed items with evidence: 162
 | 05-003 | 通过 | 4.4.2 | 主题切换、语言切换、返回顶部可用 | test: packages/generators/src/pages.test.ts (Theme toggle, language toggle, and back-to-top controls are generated and wired in script.js.) |
 | 05-004 | 通过 |  | 响应式设计通过手机、平板、桌面测试 | screenshot: artifacts/screenshots/home-mobile.png (Mobile viewport screenshot verifies homepage responsive layout.)<br>screenshot: artifacts/screenshots/pages-tablet.png (Tablet viewport screenshot verifies Pages workspace responsive layout.)<br>screenshot: artifacts/screenshots/readme-mobile.png (Mobile viewport screenshot verifies README workspace stacks without overlapping controls.) |
 | 05-005 | 通过 | 4.4.3 | 深色、浅色、系统主题跟随可用 | test: packages/generators/src/pages.test.ts (Generated CSS and script support light/dark theme switching.) |
-| 05-006 | 未开始 |  | 自定义主色、字体、背景、动画可用 |  |
-| 05-007 | 未开始 |  | 内置 15 套页面模板可用 |  |
+| 05-006 | 通过 |  | 自定义主色、字体、背景、动画可用 | test: packages/core/src/theme-io.test.ts (Theme schema supports custom primary color, font, background, radius, and animation tokens.)<br>api-response: GET/POST http://127.0.0.1:3015/api/themes/export\|import (Theme export/import smoke tests returned status=200.) |
+| 05-007 | 通过 |  | 内置 15 套页面模板可用 | file: packages/core/src/templates.ts (builtinPageTemplates contains 15 GitHub Pages templates.)<br>screenshot: artifacts/screenshots/home.png (Homepage displays built-in theme/template browsing entry.) |
 | 05-008 | 通过 |  | 复制 HTML、下载完整静态站点可用 | screenshot: artifacts/screenshots/pages-workspace.png (Pages workspace exposes Copy HTML and Download site controls.)<br>api-response: POST http://127.0.0.1:3000/api/export/pages?format=zip (Pages export API returned a downloadable static site ZIP in prior smoke verification.) |
 | 05-009 | 通过 | 4.4.5 | 导出 index.html、style.css、scri | test: packages/generators/src/export-package.test.ts (Pages export package includes index.html, CSS, JS, 404, sitemap, robots, and workflow files.) |
 | 05-010 | 通过 | 4.4.5 | GitHub Pages 部署说明生成可用 | test: packages/generators/src/export-package.test.ts (Pages deployment instructions are generated.) |
@@ -178,22 +180,22 @@ Passed items with evidence: 162
 | 07-005 | 通过 | 4.6.2 | First Repo、Repo Builder、Mult | test: packages/achievements/src/index.test.ts (Repository achievement rules are evaluated against the demo dataset.) |
 | 07-006 | 未开始 |  | 每个成就有名称、图标、描述、解锁状态、解锁时间、当前进度 |  |
 | 07-007 | 未开始 |  | 成就可分享、可嵌入 README、可嵌入 Pages、可 |  |
-| 08-001 | 未开始 |  | 可粘贴 README Markdown |  |
-| 08-002 | 未开始 |  | 可上传 README.md |  |
-| 08-003 | 未开始 |  | 可通过仓库 URL 读取 README |  |
-| 08-004 | 未开始 |  | 可通过 OAuth 读取自己的 README |  |
-| 08-005 | 未开始 |  | 可读取 `username` 仓库 README |  |
-| 08-006 | 未开始 |  | 可读取任意公开仓库 README |  |
+| 08-001 | 通过 |  | 可粘贴 README Markdown | api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=paste (Local smoke test returned status=200 for pasted README Markdown with modules, cards, diff, and export files.)<br>file: apps/web/app/dashboard/import/page.tsx (Import page provides a textarea for pasted README Markdown.) |
+| 08-002 | 通过 |  | 可上传 README.md | api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=upload (Local smoke test returned status=200 for uploaded README.md content.)<br>file: apps/web/app/api/import/readme/route.ts (Import API accepts fileName and fileContent for upload mode.) |
+| 08-003 | 通过 |  | 可通过仓库 URL 读取 README | api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=repository-url (Local smoke test fetched README from https://github.com/octocat/Hello-World and returned status=200.)<br>file: apps/web/app/api/import/readme/route.ts (Import API resolves repositoryUrl through parseGitHubInput and fetches README through GitHubClient.) |
+| 08-004 | 通过 |  | 可通过 OAuth 读取自己的 README | file: apps/web/app/api/import/readme/route.ts (OAuth import mode accepts accessToken and reads the authenticated user README repository.)<br>file: packages/github/src/client.ts (GitHubClient.getReadmeMarkdown supports token-authenticated README retrieval.) |
+| 08-005 | 通过 |  | 可读取 `username` 仓库 README | file: apps/web/app/api/import/readme/route.ts (username-repo import mode maps username to owner=username and repo=username.) |
+| 08-006 | 通过 |  | 可读取任意公开仓库 README | api-response: POST http://127.0.0.1:3015/api/import/readme sourceType=repository-url (Local smoke test read an arbitrary public repository README.)<br>file: packages/github/src/client.ts (GitHubClient.getReadmeMarkdown reads public repository README content with owner/repo/ref.) |
 | 08-007 | 通过 | 4.7.2 | 可识别标题、个人介绍、badge、stats、strea | test: packages/generators/src/import-readme.test.ts (README import recognizes headings, badges, stats, streaks, languages, trophy, activity graph, images, tables, comments, and workflow markers.) |
 | 08-008 | 通过 | 4.7.3 | 可解析 GitHub Readme Stats、GitH | test: packages/generators/src/import-readme.test.ts (Third-party card provider parsing is covered.) |
-| 08-009 | 未开始 |  | 可提供样式统一建议、重复模块提示、失效链接检测、图片加载 |  |
-| 08-010 | 未开始 |  | 优化后保留用户自定义内容 |  |
-| 08-011 | 未开始 |  | 可展示新旧版本差异并导出新版 README |  |
-| 09-001 | 未开始 |  | README、Pages、卡片、成就墙、项目展示、简历、 |  |
+| 08-009 | 通过 |  | 可提供样式统一建议、重复模块提示、失效链接检测、图片加载 | test: packages/generators/src/import-readme.test.ts (README import parser provides theme unification, duplicate module, broken link, image/card, and style suggestions.)<br>file: packages/generators/src/import-readme.ts (buildImportSuggestions reports style unification, duplicate modules, invalid links/images, card conversion, and custom HTML preservation.) |
+| 08-010 | 通过 |  | 优化后保留用户自定义内容 | test: packages/generators/src/import-readme.test.ts (README import parser preserves custom HTML content.)<br>file: packages/generators/src/import-readme.ts (preservedCustomContent and optimizedMarkdown keep user custom content after optimization notes.) |
+| 08-011 | 通过 |  | 可展示新旧版本差异并导出新版 README | test: packages/generators/src/import-readme.test.ts (README import result includes diff rows and README.optimized.md export file.)<br>file: packages/generators/src/import-readme.ts (diffMarkdown and exportFiles provide old/new diff and optimized README export.) |
+| 09-001 | 通过 |  | README、Pages、卡片、成就墙、项目展示、简历、 | file: packages/core/src/templates.ts (Template registry covers README, Pages, cards, achievements, portfolio, resume, dashboard, social-card, year-in-review, and custom template types.)<br>screenshot: artifacts/screenshots/dashboard.png (Workspace exposes README, Pages, Cards, Achievements, Import, Settings, and History targets.) |
 | 09-002 | 待验收 | 4.8.2 | 内置 GitHub Native、Minimal Lig | file: packages/core/src/templates.ts (Theme/template registries define the built-in style catalog.) |
-| 09-003 | 未开始 |  | 可自定义主色、辅色、背景、文本、边框、图标、字体、圆角、 |  |
-| 09-004 | 未开始 |  | 可保存主题、导入主题 JSON、导出主题 JSON、分享 |  |
-| 09-005 | 未开始 |  | 主题可应用到 README、Pages、卡片 |  |
+| 09-003 | 通过 |  | 可自定义主色、辅色、背景、文本、边框、图标、字体、圆角、 | test: packages/core/src/theme-io.test.ts (Theme import/export schema validates custom primary, accent, background, foreground, border, font, radius, shadow, density, and animation tokens.)<br>file: packages/core/src/theme-io.ts (Theme schema stores custom color, font, radius, shadow, density, and animation settings.) |
+| 09-004 | 通过 |  | 可保存主题、导入主题 JSON、导出主题 JSON、分享 | test: packages/core/src/theme-io.test.ts (Theme JSON export/import and stable share links are tested.)<br>api-response: GET/POST http://127.0.0.1:3015/api/themes/export\|import\|share (Local smoke tests returned status=200 for theme export, import, and share link routes.) |
+| 09-005 | 通过 |  | 主题可应用到 README、Pages、卡片 | file: packages/generators/src/readme.ts (README generator embeds selected theme in dynamic card URLs.)<br>file: packages/generators/src/pages.ts (Pages generator applies selected theme tokens to generated CSS.)<br>file: packages/cards/src/index.ts (Card renderer accepts theme parameter and renders themed card output.) |
 | 10-001 | 待验收 | 4.9.1 | GitHub OAuth 登录可用 | test: packages/github/src/oauth.test.ts (OAuth authorization URL, state, token exchange, and token encryption helpers are tested.)<br>api-response: GET http://127.0.0.1:3000/api/oauth/github?format=json (OAuth start route exists and returns explicit setup status when env vars are absent; live OAuth requires configured GitHub app.) |
 | 10-002 | 通过 | 4.9.2 | 授权前明确展示权限且使用最小权限 | api-response: apps/web/app/api/oauth/github/permissions/route.ts (Permissions route lists minimal required scopes and logged-in/logged-out capabilities.)<br>file: packages/github/src/oauth.ts (minimumOAuthScopes uses read:user, public_repo, and workflow.) |
 | 10-003 | 未开始 |  | 登录后可识别当前用户和仓库列表 |  |
